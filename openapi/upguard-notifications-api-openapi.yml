@@ -1,0 +1,103 @@
+swagger: '2.0'
+info:
+  description: 'Access information from the CyberRisk platform programmatically using this API.
+
+
+    You can find or generate an API key to access this API in your CyberRisk Account Settings.
+
+    Please authorize all requests by setting the "Authorization" header to your api key.
+
+
+    The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
+  title: UpGuard CyberRisk breaches notifications API
+  version: 1.13.2
+host: cyber-risk.upguard.com
+basePath: /api/public
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- API key in header: []
+tags:
+- name: notifications
+paths:
+  /notifications:
+    get:
+      description: 'Returns a list of notifications ordered by their ID. By default, only notifications from the
+
+        last 7 days are returned.
+
+
+        Required API key permissions: `Admin` (select when creating API key in Account Settings)'
+      tags:
+      - notifications
+      summary: Get a list of notifications for your organization.
+      operationId: get_notifications
+      responses:
+        '200':
+          description: List of notifications
+          schema:
+            $ref: '#/definitions/GetNotificationsV1ResponsePayloadBody'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+definitions:
+  endpointError:
+    description: Error details coming from an endpoint
+    type: object
+    properties:
+      error:
+        description: A description of the error
+        type: string
+  GetNotificationsV1ResponsePayloadBody:
+    type: object
+    properties:
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. The field will be missing if there are no results.
+        type: string
+      notifications:
+        description: The list of notifications.
+        type: array
+        items:
+          $ref: '#/definitions/Notification'
+  Notification:
+    type: object
+    properties:
+      context:
+        description: The context metadata for the notification.
+        type: object
+        additionalProperties: {}
+      description:
+        description: Description for the notification.
+        type: string
+        example: User published a new risk assessment for vendor 'UpGuard'
+      notification_id:
+        description: The ID of the notification.
+        type: string
+        example: '20'
+      occurred_at:
+        description: The time the notification was fired.
+        type: string
+        format: date-time
+        example: '2023-10-13T02:40:00Z'
+      type:
+        description: The type of the notification.
+        type: string
+        example: RiskAssessmentPublished
+securityDefinitions:
+  API key in header:
+    type: apiKey
+    in: header
+    name: Authorization

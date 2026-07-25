@@ -1,0 +1,295 @@
+swagger: '2.0'
+info:
+  description: 'Access information from the CyberRisk platform programmatically using this API.
+
+
+    You can find or generate an API key to access this API in your CyberRisk Account Settings.
+
+    Please authorize all requests by setting the "Authorization" header to your api key.
+
+
+    The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
+  title: UpGuard CyberRisk breaches reports API
+  version: 1.13.2
+host: cyber-risk.upguard.com
+basePath: /api/public
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- API key in header: []
+tags:
+- name: reports
+paths:
+  /reports/custom:
+    get:
+      description: 'Use this endpoint to retrieve the list of custom report templates defined for your account.
+
+
+        Required API key permissions: `Platform` (select when creating API key in Account Settings)'
+      tags:
+      - reports
+      summary: Get the list of custom report templates defined for the account
+      operationId: custom_reports_list
+      responses:
+        '200':
+          description: List of custom report definitions
+          schema:
+            $ref: '#/definitions/CustomReportsListResponsePayloadBody'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /reports/queue:
+    post:
+      description: 'Asynchronously queues a report for exporting. To use this API, first call this endpoint with the type of report you wish to
+
+        generate and any other filtering parameters. You can optionally specify a list of email addresses or a URL
+
+        that will receive a POST request when the export completes.
+
+
+        When a report is queued, you will receive a unique queued_report_id. Use this ID to check the status of the export using the
+
+        `/reports/status` endpoint.
+
+
+        Required API key permissions: `Platform` (select when creating API key in Account Settings)'
+      tags:
+      - reports
+      summary: Queue a report export
+      operationId: queue_report
+      parameters:
+      - enum:
+        - BoardSummaryPDF
+        - BoardSummaryPPTX
+        - BreachSightSummaryPDF
+        - BreachSightDetailedPDF
+        - VendorRiskExecutiveSummaryPDF
+        - VendorSummaryPDF
+        - VendorDetailedPDF
+        - VendorRiskAssessmentPDF
+        - CustomPDF
+        - VendorRiskProfileXLSX
+        - VendorVulnsOverviewXLSX
+        - VendorDomainListPDF
+        - QuestionnaireDetailsPDF
+        - QuestionnaireDetailsXLSX
+        type: string
+        description: 'The type of report to export. Note that each report type may require different parameters to be specified in the request.
+
+
+          When *VendorRiskAssessmentPDF* is selected the latest published risk assessment will be used, if no published risk assessment is available for the selected vendor a 422 error will be returned.'
+        name: report_type
+        in: query
+        required: true
+      - type: string
+        description: For an export of type 'CustomPDF', specify the UUID of the custom report to generate. This is a required field for the custom report type.
+        name: custom_report_uuid
+        in: query
+      - maxItems: 5
+        type: array
+        items:
+          type: string
+          format: email
+        description: Optionally email the generated report to the specified addresses when it is ready.
+        name: email_addresses
+        in: query
+      - type: string
+        format: uri
+        description: 'Optionally specify a URL that will receive a POST request when the report is ready.
+
+          The request will contain a JSON body containing a URL to download the report, in the following format:
+
+          ```json
+
+          {
+
+          "queued_report_id": "string",
+
+          "download_url": "url"
+
+          "download_url_expires": "string"
+
+          }
+
+          ```'
+        name: post_webhook_url
+        in: query
+      - type: array
+        items:
+          type: string
+        description: Filter by asset portfolio names. Case-sensitive. Optional. Applicable only when *report_type* is *BreachSightSummaryPDF* or *BreachSightDetailedPDF*.
+        name: asset_portfolio_names
+        in: query
+      - type: array
+        items:
+          type: string
+        description: Filter by vendor portfolio names. Case-sensitive. Optional. Applicable only when *report_type* is *BoardSummaryPDF*, *BoardSummaryPPTX*, or *VendorRiskExecutiveSummaryPDF*.
+        name: vendor_portfolio_names
+        in: query
+      - type: integer
+        format: int64
+        description: ID of the vendor to generate the report for. Either this, *vendor_primary_hostname* or *filter_by_vendor_hostnames* are required when *report_type* is *VendorSummaryPDF*, *VendorDetailedPDF*, *VendorRiskAssessmentPDF*, *CustomPDF*, *VendorRiskProfileXLSX*, *VendorVulnsOverviewXLSX*, *VendorDomainListPDF*, *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*.
+        name: vendor_id
+        in: query
+      - type: string
+        description: Primary hostname of the vendor to generate the report for. Either this, *vendor_id* or *filter_by_vendor_hostnames* are required when *report_type* is *VendorSummaryPDF*, *VendorDetailedPDF*, *VendorRiskAssessmentPDF*, *CustomPDF*, *VendorRiskProfileXLSX*, *VendorVulnsOverviewXLSX*, *VendorDomainListPDF*, *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*.
+        name: vendor_primary_hostname
+        in: query
+      - type: string
+        description: List of hostnames from a single vendor to generate the report for. Either this, *vendor_id* or *vendor_primary_hostname* are required when *report_type* is *VendorSummaryPDF*, *VendorDetailedPDF*, *CustomPDF*, *VendorRiskProfileXLSX*, *VendorVulnsOverviewXLSX* or *VendorDomainListPDF*.
+        name: filter_by_vendor_hostnames
+        in: query
+      - type: string
+        description: 'String to use as the first part of the report filename. For vendor reports this will precede the vendor name, and for others the account name.
+
+          A maximum of the first 20 characters (runes) of the supplied string will be used'
+        name: filename_prefix
+        in: query
+      - type: boolean
+        description: 'When requesting a vendor report, determine if the report should wait for the appropriate data to become available. This is typical of
+
+          reports where the vendor may have only just become known by the system, or the vendor only just been watched by the account. Typically, the report
+
+          generation and delivery is delayed by up to 72 hours to allow for the data to become available. This parameter is only valid when *report_type* is
+
+          VendorSummaryPDF*, *VendorDetailedPDF*, *CustomPDF*, *VendorRiskProfileXLSX*, *VendorVulnsOverviewXLSX*, or *VendorDomainListPDF*.'
+        name: wait_for_data
+        in: query
+      - type: integer
+        format: int64
+        description: The ID of the questionnaire to generate the report for. Required when *report_type* is *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*.
+        name: questionnaire_id
+        in: query
+      - type: boolean
+        description: Whether to include correspondence messages in the questionnaire details report. Optional. Applicable only when *report_type* is *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*.
+        name: include_messages
+        in: query
+      - type: boolean
+        description: Whether to include private/internal messages in the questionnaire details report. Only available to the questionnaire author organization. Optional. Applicable only when *report_type* is *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*.
+        name: include_private_messages
+        in: query
+      responses:
+        '200':
+          description: Report queued for export
+          schema:
+            $ref: '#/definitions/QueueReportResponsePayloadBody'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /reports/status:
+    get:
+      description: 'Poll this endpoint for the status of a report export you have queued. When complete, you will receive a download URL.
+
+
+        Required API key permissions: `Platform` (select when creating API key in Account Settings)'
+      tags:
+      - reports
+      summary: Get the status of an exported report
+      operationId: report_status
+      parameters:
+      - type: string
+        description: The queued_report_id returned from the /reports/queue endpoint.
+        name: queued_report_id
+        in: query
+        required: true
+      responses:
+        '200':
+          description: Queued report status
+          schema:
+            $ref: '#/definitions/ReportStatusResponsePayloadBody'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+definitions:
+  CustomReportsListResponsePayloadBody:
+    type: object
+    required:
+    - custom_reports
+    properties:
+      custom_reports:
+        description: List of custom reports defined for the account
+        type: array
+        items:
+          $ref: '#/definitions/CustomReportData'
+  CustomReportData:
+    type: object
+    properties:
+      name:
+        type: string
+      uuid:
+        type: string
+  endpointError:
+    description: Error details coming from an endpoint
+    type: object
+    properties:
+      error:
+        description: A description of the error
+        type: string
+  ReportStatusResponsePayloadBody:
+    type: object
+    required:
+    - status
+    properties:
+      download_url:
+        description: URL to download the completed report. Only included if status is "completed"
+        type: string
+      download_url_expires:
+        description: Expiration timestamp for the download URL. Only included if status is "completed"
+        type: string
+      status:
+        description: Report status
+        type: string
+        enum:
+        - completed
+        - pending
+        - failed
+  QueueReportResponsePayloadBody:
+    type: object
+    properties:
+      queued_report_id:
+        description: The ID of the queued report. Use this when polling the /reports/status endpoint for a download URL.
+        type: string
+securityDefinitions:
+  API key in header:
+    type: apiKey
+    in: header
+    name: Authorization

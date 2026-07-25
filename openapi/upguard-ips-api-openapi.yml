@@ -1,0 +1,590 @@
+swagger: '2.0'
+info:
+  description: 'Access information from the CyberRisk platform programmatically using this API.
+
+
+    You can find or generate an API key to access this API in your CyberRisk Account Settings.
+
+    Please authorize all requests by setting the "Authorization" header to your api key.
+
+
+    The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
+  title: UpGuard CyberRisk breaches ips API
+  version: 1.13.2
+host: cyber-risk.upguard.com
+basePath: /api/public
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- API key in header: []
+tags:
+- name: ips
+paths:
+  /ip:
+    get:
+      description: 'Returns the details of the IP address. It will return 422 when requesting details of an inactive IP address.
+
+
+        Required API key permissions: `BreachRisk` (select when creating API key in Account Settings)'
+      tags:
+      - ips
+      summary: Retrieve details for an IP address
+      operationId: ip_details
+      parameters:
+      - type: string
+        description: The IP address to get details for
+        name: ip
+        in: query
+        required: true
+      responses:
+        '200':
+          description: IP details
+          schema:
+            $ref: '#/definitions/GetIpDetailsV1RespBody'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /ip/labels:
+    put:
+      description: 'Assign labels to an IP. To remove all labels pass an empty list.
+
+
+        Required API key permissions: `BreachRisk` (select when creating API key in Account Settings)'
+      tags:
+      - ips
+      summary: Assign labels to an IP
+      operationId: ip_update_labels
+      parameters:
+      - type: integer
+        format: int64
+        description: The IP to update labels for
+        name: ip
+        in: query
+        required: true
+      - type: array
+        items:
+          type: string
+        description: The labels to assign to the IP. You can pass an empty array to remove all labels.
+        name: labels
+        in: query
+        required: true
+      responses:
+        '204':
+          description: ' Successful response is empty'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /ips:
+    get:
+      description: 'Returns a list of ips for your account.
+
+
+        Required API key permissions: `BreachRisk` (select when creating API key in Account Settings)'
+      tags:
+      - ips
+      summary: Get a list of ips
+      operationId: ips
+      parameters:
+      - type: array
+        items:
+          type: string
+        description: Filter result by the provided labels
+        name: labels
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - maximum: 2000
+        minimum: 10
+        type: integer
+        format: int64
+        default: 1000
+        description: The number of results to return per page.
+        name: page_size
+        in: query
+      - enum:
+        - ip
+        - owner
+        - country
+        - asn
+        - as_name
+        - automated_score
+        type: string
+        default: ip
+        description: 'The value to sort the IPs by
+
+
+          If not specified will default to `ip` and set `sort_desc` to `true`'
+        name: sort_by
+        in: query
+      - type: boolean
+        default: false
+        description: Whether or not to sort the results in descending order
+        name: sort_desc
+        in: query
+      responses:
+        '200':
+          description: A list of ips
+          schema:
+            $ref: '#/definitions/GetIPsV1RespBody'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+    put:
+      description: 'Add a list of custom ips to your account.
+
+
+        Required API key permissions: `BreachRisk` (select when creating API key in Account Settings)'
+      tags:
+      - ips
+      summary: Add custom ips
+      operationId: add_custom_ips
+      parameters:
+      - type: array
+        items:
+          type: string
+        description: The list of ips to add
+        name: ips
+        in: query
+        required: true
+      - type: array
+        items:
+          type: string
+        description: The labels to assign to the ips when added.
+        name: labels
+        in: query
+      responses:
+        '204':
+          description: ' Successful response is empty'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+    delete:
+      description: 'Remove custom ips from your account.
+
+
+        Required API key permissions: `BreachRisk` (select when creating API key in Account Settings)'
+      tags:
+      - ips
+      summary: Remove custom ips
+      operationId: remove_custom_ips
+      parameters:
+      - type: array
+        items:
+          type: string
+        description: A comma separated list of ips to remove. Only ips or labels can be specified not both
+        name: ips
+        in: query
+      - type: array
+        items:
+          type: string
+        description: A list of labels whose domains will be removed. All custom IPs with at least one of the provided labels will be removed. Only ips or labels can be specified not both
+        name: labels
+        in: query
+      responses:
+        '204':
+          description: ' Successful response is empty'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /ranges:
+    get:
+      description: 'Returns a list of ip ranges for your account.
+
+
+        Required API key permissions: `BreachRisk` (select when creating API key in Account Settings)'
+      tags:
+      - ips
+      summary: Get a list of ip ranges
+      operationId: ranges
+      parameters:
+      - type: array
+        items:
+          type: string
+        description: Filter result by the provided labels
+        name: labels
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - maximum: 2000
+        minimum: 10
+        type: integer
+        format: int64
+        default: 1000
+        description: The number of results to return per page.
+        name: page_size
+        in: query
+      - enum:
+        - start
+        - end
+        - num_ips
+        - owner
+        - country
+        - asn
+        - as_name
+        type: string
+        default: num_ips
+        description: 'The value to sort the IP ranges by
+
+
+          If not specified will default to `num_ips` and set `sort_desc` to `true`'
+        name: sort_by
+        in: query
+      - type: boolean
+        default: false
+        description: Whether or not to sort the results in descending order
+        name: sort_desc
+        in: query
+      responses:
+        '200':
+          description: A list of ranges
+          schema:
+            $ref: '#/definitions/GetRangesV1RespBody'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+definitions:
+  Category:
+    description: Category values cannot be changed after first use, as they're referenced in storage.
+    type: string
+    title: Category values represent risk categories.
+  DomainScore:
+    type: object
+    properties:
+      automated_score:
+        description: The score of the domain
+        type: integer
+        format: int64
+      hostname:
+        description: The hostname of the domain
+        type: string
+  Severity:
+    type: integer
+    format: int64
+  GetRangesV1RespBody:
+    type: object
+    properties:
+      next_page_token:
+        description: 'The token to be used to retrieve the next page of results.
+
+          Will not be returned if there are no more results.'
+        type: string
+      ranges:
+        description: The list of ranges
+        type: array
+        items:
+          $ref: '#/definitions/ApiRange'
+      total_results:
+        description: The total number of ranges found.
+        type: integer
+        format: int64
+  endpointError:
+    description: Error details coming from an endpoint
+    type: object
+    properties:
+      error:
+        description: A description of the error
+        type: string
+  GetIPsV1RespBody:
+    type: object
+    properties:
+      ips:
+        description: The list of ips
+        type: array
+        items:
+          $ref: '#/definitions/IP'
+      next_page_token:
+        description: 'The token to be used to retrieve the next page of results.
+
+          Will not be returned if there are no more results.'
+        type: string
+      total_results:
+        description: The total number of ips found.
+        type: integer
+        format: int64
+  ApiRange:
+    type: object
+    properties:
+      as_name:
+        description: The name of the AS the range belongs to. If no AS is available for a range this field will be omitted.
+        type: string
+      asn:
+        description: The ASN the range belongs to. If no ASN is available for a range this field will be omitted.
+        type: integer
+        format: int64
+      country:
+        description: The country the range belongs to. If no country is available for a range this field will be omitted.
+        type: string
+      end:
+        description: The range end.
+        type: string
+      labels:
+        description: The labels associated with the range.
+        type: array
+        items:
+          type: string
+      num_ips:
+        description: The number of IPs in this range
+        type: integer
+        format: int64
+      owner:
+        description: The owner of the range.
+        type: string
+      sources:
+        description: The sources of the range.
+        type: array
+        items:
+          $ref: '#/definitions/IPSource'
+      start:
+        description: The range start.
+        type: string
+  GetIpDetailsV1RespBody:
+    type: object
+    properties:
+      as_name:
+        description: The name of the AS the IP belongs to. If no AS is available for an IP this field will be omitted.
+        type: string
+      asn:
+        description: The ASN the IP belongs to. If no ASN is available for an IP this field will be omitted.
+        type: integer
+        format: int64
+      automated_score:
+        description: The score of the ip. If the ip is inactive or hasn't been scanned yet this field will be absent
+        type: integer
+        format: int64
+      check_results:
+        description: The results of the IP scan. This field will be omitted if the IP has not been scanned or no results are available, e.g. DNS source IP.
+        type: array
+        items:
+          $ref: '#/definitions/CheckResult'
+      country:
+        description: The country the IP belongs to. If no country is available for an IP this field will be omitted.
+        type: string
+      domains:
+        description: The list of domains associated with this IP. This field will be omitted if no domains are associated with the IP.
+        type: array
+        items:
+          $ref: '#/definitions/DomainScore'
+      ip:
+        description: The IP.
+        type: string
+      labels:
+        description: The labels associated with the IP.
+        type: array
+        items:
+          type: string
+      owner:
+        description: The owner of the IP.
+        type: string
+      services:
+        description: The list of discovered services IP. If no services were detected for the IP this field will be omitted.
+        type: array
+        items:
+          type: string
+      sources:
+        description: The sources of the IP.
+        type: array
+        items:
+          $ref: '#/definitions/IPSource'
+      waived_check_results:
+        description: The waived risks for this IP. This field will be omitted if no waived risks are present.
+        type: array
+        items:
+          $ref: '#/definitions/CheckResult'
+  IP:
+    type: object
+    properties:
+      as_name:
+        description: The name of the AS the IP belongs to. If no AS is available for an IP this field will be omitted.
+        type: string
+      asn:
+        description: The ASN the IP belongs to. If no ASN is available for an IP this field will be omitted.
+        type: integer
+        format: int64
+      automated_score:
+        description: The score of the ip. If the ip is inactive or hasn't been scanned yet this field will be absent
+        type: integer
+        format: int64
+      country:
+        description: The country the IP belongs to. If no country is available for an IP this field will be omitted.
+        type: string
+      ip:
+        description: The IP.
+        type: string
+      labels:
+        description: The labels associated with the IP.
+        type: array
+        items:
+          type: string
+      owner:
+        description: The owner of the IP.
+        type: string
+      services:
+        description: The list of discovered services IP. If no services were detected for the IP this field will be omitted.
+        type: array
+        items:
+          type: string
+      sources:
+        description: The sources of the IP.
+        type: array
+        items:
+          $ref: '#/definitions/IPSource'
+  CheckResult:
+    type: object
+    properties:
+      actual:
+        description: The found properties of the check
+        type: array
+        items:
+          $ref: '#/definitions/Property'
+      category:
+        $ref: '#/definitions/Category'
+      checked_at:
+        description: The time the check was performed in RFC3339 format
+        type: string
+        format: date-time
+      description:
+        description: The description of the check performed
+        type: string
+      expected:
+        description: The expected properties of the check
+        type: array
+        items:
+          $ref: '#/definitions/Property'
+      id:
+        description: The ID of the check
+        type: string
+      pass:
+        description: Flag indicating whether the check passed or not
+        type: boolean
+      riskSubtype:
+        description: The subtype of the risk, e.g. the subtype of the verified_vuln:CVE-2021-34473 is CVE-2021-34473. This field will be empty if the risk has no subtype, e.g. for wp_version_exposed, or for generic risks like verified_vuln:* where the subtype is only determined when the full risk is specified.
+        type: string
+        example: CVE-2021-34473
+      riskType:
+        description: The type of the risk, e.g. the type of the verified_vuln:CVE-2021-34473 is verified_vuln
+        type: string
+        example: verified_vuln
+      severity:
+        $ref: '#/definitions/Severity'
+      severityName:
+        description: The severity fo the risk in human-readable form
+        type: string
+        enum:
+        - pass
+        - info
+        - low
+        - medium
+        - high
+        - critical
+      sources:
+        description: 'Sources contains information about the source of a check
+
+          e.g. the IP addresses it was found on, or a domain name'
+        type: array
+        items:
+          type: string
+      title:
+        description: The title of the check
+        type: string
+  Property:
+    type: object
+    properties:
+      property:
+        description: The name of the property
+        type: string
+      value:
+        description: The value of the property
+        type: string
+  IPSource:
+    type: string
+securityDefinitions:
+  API key in header:
+    type: apiKey
+    in: header
+    name: Authorization

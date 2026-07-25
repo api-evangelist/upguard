@@ -1,0 +1,212 @@
+swagger: '2.0'
+info:
+  description: 'Access information from the CyberRisk platform programmatically using this API.
+
+
+    You can find or generate an API key to access this API in your CyberRisk Account Settings.
+
+    Please authorize all requests by setting the "Authorization" header to your api key.
+
+
+    The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
+  title: UpGuard CyberRisk breaches typosquat API
+  version: 1.13.2
+host: cyber-risk.upguard.com
+basePath: /api/public
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- API key in header: []
+tags:
+- name: typosquat
+paths:
+  /typosquat:
+    get:
+      description: 'Returns the list of enabled typosquatting domains.
+
+
+        Required API key permissions: `BreachRisk` (select when creating API key in Account Settings)'
+      tags:
+      - typosquat
+      summary: List typosquat domains
+      operationId: listTyposquatDomains
+      responses:
+        '200':
+          description: A list of typosquat domains
+          schema:
+            $ref: '#/definitions/GetTyposquatResponsePayloadBody'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /typosquat/details:
+    get:
+      description: 'If the requested domain is not enabled a 404 will be returned.
+
+        Use the /typosquat to retrieve the list of enabled domains first.
+
+
+        Required API key permissions: `BreachRisk` (select when creating API key in Account Settings)'
+      tags:
+      - typosquat
+      summary: Retrieve typosquat details for a domain.
+      operationId: typosquat_details
+      parameters:
+      - type: string
+        description: The domain for which to return typosquat details. e.g. "upguard.com"
+        name: domain
+        in: query
+        required: true
+      responses:
+        '200':
+          description: A list of typosquat domains
+          schema:
+            $ref: '#/definitions/GetTyposquatDetailsResponsePayloadBody'
+        '404':
+          description: The requested domain is not enabled.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+definitions:
+  TyposquatHostnameDNSBlocklists:
+    type: object
+    properties:
+      dns_blocklists:
+        description: The list of DNS blocklists the hostname was found on
+        type: array
+        items:
+          $ref: '#/definitions/TyposquatDNSBlocklist'
+      hostname:
+        description: The hostname associated with the permutation
+        type: string
+  TyposquatDomain:
+    type: object
+    properties:
+      added_at:
+        description: The date the domain was added to typosquatting in RFC3339 format.
+        type: string
+        format: date-time
+        example: '2006-01-02T15:04:05.999999Z'
+      domain:
+        description: The typosquat domain
+        type: string
+      last_scanned_at:
+        description: The date of last scan for this domain in RFC3339 format. Absent if the domain has never been scanned.
+        type: string
+        format: date-time
+        example: '2006-01-02T15:04:05.999999Z'
+      num_registered:
+        description: The number of registered permutations for this domain
+        type: integer
+        format: int64
+      num_unregistered:
+        description: The number of unregistered permutations for this domain
+        type: integer
+        format: int64
+      primary_domain:
+        description: Flag indicating whether the domain is the primary domain for the account
+        type: boolean
+  GetTyposquatDetailsResponsePayloadBody:
+    type: object
+    properties:
+      ignored:
+        description: The list of ignored permutations
+        type: array
+        items:
+          $ref: '#/definitions/TyposquatPermutationDetail'
+      registered:
+        description: The list of registered permutations
+        type: array
+        items:
+          $ref: '#/definitions/TyposquatPermutationDetail'
+      unregistered:
+        description: The list of unregistered permutations
+        type: array
+        items:
+          $ref: '#/definitions/TyposquatPermutationDetail'
+  GetTyposquatResponsePayloadBody:
+    type: object
+    properties:
+      domains:
+        description: The list of enabled typosquat domains
+        type: array
+        items:
+          $ref: '#/definitions/TyposquatDomain'
+  endpointError:
+    description: Error details coming from an endpoint
+    type: object
+    properties:
+      error:
+        description: A description of the error
+        type: string
+  TyposquatDNSBlocklist:
+    type: object
+    properties:
+      activity:
+        description: The suspected malicious activity associated with the DNS blocklist
+        type: string
+      name:
+        description: The name of the DNS blocklist
+        type: string
+  TyposquatPermutationDetail:
+    type: object
+    properties:
+      a_records:
+        description: The list of A records associated with the permutation. If no A records are associated with the permutation this field will be omitted.
+        type: array
+        items:
+          type: string
+      country:
+        description: The country where the permutation is registered. If missing the field will be omitted.
+        type: string
+      date_detected:
+        description: The date the registered permutation was detected in RFC3339 format. If missing this field will be omitted.
+        type: string
+        format: date-time
+        example: '2006-01-02T15:04:05.999999Z'
+      hostname:
+        description: The hostname of the permutation
+        type: string
+      hostname_dns_blocklists:
+        description: The list of associated hostnames found on DNS blocklists and the blocklists they were found on. If no DNS blocklists are associated with the permutation this field will be omitted.
+        type: array
+        items:
+          $ref: '#/definitions/TyposquatHostnameDNSBlocklists'
+      mx_records:
+        description: The list of MX records associated with the permutation. If no MX records are associated with the permutation this field will be omitted.
+        type: array
+        items:
+          type: string
+      ns_records:
+        description: The list of NS records associated with the permutation. If no NS records are associated with the permutation this field will be omitted.
+        type: array
+        items:
+          type: string
+      permutation_type:
+        $ref: '#/definitions/PermutationType'
+  PermutationType:
+    type: string
+securityDefinitions:
+  API key in header:
+    type: apiKey
+    in: header
+    name: Authorization

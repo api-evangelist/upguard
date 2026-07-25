@@ -1,0 +1,1465 @@
+swagger: '2.0'
+info:
+  description: 'Access information from the CyberRisk platform programmatically using this API.
+
+
+    You can find or generate an API key to access this API in your CyberRisk Account Settings.
+
+    Please authorize all requests by setting the "Authorization" header to your api key.
+
+
+    The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
+  title: UpGuard CyberRisk breaches trust_exchange API
+  version: 1.13.2
+host: cyber-risk.upguard.com
+basePath: /api/public
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- API key in header: []
+tags:
+- name: trust_exchange
+paths:
+  /trust_exchange/content_library/document:
+    get:
+      description: 'Returns a single document from the organization''s content library by UUID.
+
+
+        Required API key permissions: `TrustExchange` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: Get content library document
+      operationId: getContentLibraryDocument
+      parameters:
+      - type: string
+        description: The UUID of the document.
+        name: uuid
+        in: query
+        required: true
+      responses:
+        '200':
+          description: A single content library document.
+          schema:
+            $ref: '#/definitions/contentLibraryDocument'
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+    post:
+      description: 'Creates a new document in the organization''s content library via multipart file upload.
+
+
+        Required API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)'
+      consumes:
+      - multipart/form-data
+      tags:
+      - trust_exchange
+      summary: Create content library document
+      operationId: createContentLibraryDocument
+      parameters:
+      - maxLength: 500
+        minLength: 2
+        type: string
+        description: The name of the document.
+        name: document_name
+        in: query
+        required: true
+      - maxLength: 1000
+        minLength: 2
+        type: string
+        description: 'The document type (e.g. SOC 2 Report, ISO 27001, etc.).
+
+          This must match an exist document type available for your organization.'
+        name: document_type
+        in: query
+        required: true
+      - maxLength: 5000
+        type: string
+        description: A description of the document.
+        name: document_description
+        in: query
+      - type: string
+        description: 'Set whether this document should be accessible without access requests if it is added to a published trust page.
+
+          Leave this param unset to use your organization''s default access protection setting.'
+        name: public_trust_page_access
+        in: query
+      - type: file
+        description: The file to upload.
+        name: file
+        in: formData
+        required: true
+      responses:
+        '200':
+          description: A single content library document.
+          schema:
+            $ref: '#/definitions/contentLibraryDocument'
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/content_library/document/archive:
+    post:
+      description: 'Archives or unarchives a document in the organization''s content library. If the document is
+
+        included in any trust pages, it will be removed from those trust pages before being archived.
+
+
+        Required API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: Archive content library document
+      operationId: archiveContentLibraryDocument
+      parameters:
+      - type: string
+        description: The UUID of the document to archive or unarchive.
+        name: uuid
+        in: query
+        required: true
+      - type: boolean
+        description: Set to true to archive the document, or false to unarchive it.
+        name: set_archived
+        in: query
+        required: true
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/content_library/document/delete:
+    post:
+      description: 'Deletes a document from the organization''s content library.
+
+        The document must not be in use by any questionnaires or trust pages.
+
+
+        Required API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: Delete content library document
+      operationId: deleteContentLibraryDocument
+      parameters:
+      - type: string
+        description: The UUID of the document.
+        name: uuid
+        in: query
+        required: true
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/content_library/document/download_version:
+    get:
+      description: 'Downloads the file content of a specific version (or the latest version) of a content library document.
+
+
+        Required API key permissions: `TrustExchange` (select when creating API key in Account Settings)'
+      produces:
+      - application/octet-stream
+      tags:
+      - trust_exchange
+      summary: Download content library document version
+      operationId: downloadContentLibraryDocument
+      parameters:
+      - type: string
+        description: The UUID of the document.
+        name: uuid
+        in: query
+        required: true
+      - type: integer
+        format: int64
+        description: The version number to download. If omitted, the latest version is returned.
+        name: version
+        in: query
+      responses:
+        '200':
+          description: Binary file response
+          schema: {}
+          headers:
+            Content-Disposition:
+              type: string
+              description: 'in: header
+
+                name: Content-Disposition'
+            Content-Type:
+              type: string
+              description: 'in: header
+
+                name: Content-Type'
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/content_library/document/history:
+    get:
+      description: 'Returns the history of changes for a content library document.
+
+
+        Required API key permissions: `TrustExchange` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: Get content library document history
+      operationId: getContentLibraryDocumentHistory
+      parameters:
+      - type: string
+        description: The UUID of the document.
+        name: uuid
+        in: query
+        required: true
+      - type: integer
+        format: int64
+        example: 100
+        description: 'The number of results to return per page.
+
+          Valid values range from 1 to 100.
+
+          Defaults to 50 if not specified.'
+        name: page_size
+        in: query
+      - type: string
+        example: eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ==
+        description: 'Token to retrieve a specific page of results.
+
+          Omit to retrieve the first page.
+
+          Use the `next_page_token` from the previous response to get the next page.'
+        name: page_token
+        in: query
+      responses:
+        '200':
+          description: Content library document history response.
+          schema:
+            $ref: '#/definitions/contentLibraryDocumentHistoryResponse'
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/content_library/document/list:
+    get:
+      description: 'Returns a paginated list of documents in the organization''s content library.
+
+
+        Results are paginated. Use the `page_size` parameter to control how many results are returned per page.
+
+        Use the `next_page_token` from the response to retrieve subsequent pages.
+
+
+        Required API key permissions: `TrustExchange` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: List content library documents
+      operationId: listContentLibraryDocuments
+      parameters:
+      - type: integer
+        format: int64
+        example: 10
+        description: 'The number of results to return per page.
+
+          Valid values range from 1 to 100.
+
+          Defaults to 10 if not specified.'
+        name: page_size
+        in: query
+      - type: string
+        example: eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ==
+        description: 'Token to retrieve a specific page of results.
+
+          Omit to retrieve the first page.
+
+          Use the `next_page_token` from the previous response to get the next page.'
+        name: page_token
+        in: query
+      - type: string
+        example: SOC
+        description: Filter documents by name (substring match, case-insensitive).
+        name: filter_name
+        in: query
+      - type: array
+        items:
+          type: string
+        collectionFormat: multi
+        example: SOC 2 Report
+        description: Filter documents by document type names (set this param multiple times to specify multiple types).
+        name: filter_document_types
+        in: query
+      - type: boolean
+        example: true
+        description: Filter to only documents added to any trust center.
+        name: filter_added_to_any_trust_center
+        in: query
+      - type: boolean
+        example: false
+        description: Set to true to retrieve archived documents. By default, only non-archived documents are returned.
+        name: archived
+        in: query
+      responses:
+        '200':
+          description: List of content library documents.
+          schema:
+            $ref: '#/definitions/contentLibraryDocumentListResponse'
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/content_library/document/update:
+    post:
+      description: 'Updates the properties of a document in the organization''s content library.
+
+        Only fields that are provided in the request body are updated; omitted fields are left unchanged.
+
+
+        Required API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: Update content library document
+      operationId: updateContentLibraryDocument
+      parameters:
+      - name: UpdateContentLibraryDocumentBody
+        in: body
+        schema:
+          $ref: '#/definitions/UpdateContentLibraryDocumentBody'
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/content_library/document/upload_version:
+    post:
+      description: 'Uploads a new version of an existing document in the organization''s content library via multipart file upload.
+
+
+        Required API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)'
+      consumes:
+      - multipart/form-data
+      tags:
+      - trust_exchange
+      summary: Upload new version of content library document
+      operationId: uploadVersionContentLibraryDocument
+      parameters:
+      - type: string
+        description: The UUID of the document to upload a new version for.
+        name: uuid
+        in: query
+        required: true
+      - type: file
+        description: The new version file to upload.
+        name: file
+        in: formData
+        required: true
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/content_library/type/list:
+    get:
+      description: 'Returns a list of document types available for the organization''s content library.
+
+
+        Required API key permissions: `TrustExchange` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: List content library document types
+      operationId: getContentLibraryTypes
+      responses:
+        '200':
+          description: List of content library document types.
+          schema:
+            $ref: '#/definitions/getContentLibraryTypesResponse'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/questionnaire/list:
+    get:
+      description: 'Returns a list of inbound security questionnaires that are available to all users in the organisation.
+
+        This includes all questionnaires where the "Allow others in my account to reuse answers" setting is enabled.
+
+
+        Required API key permissions: `TrustExchange` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: List inbound questionnaires
+      operationId: listQuestionnaires
+      parameters:
+      - type: integer
+        format: int64
+        description: Number of items per page (1-200, default 50)
+        name: page_size
+        in: query
+      - type: string
+        description: Pagination token for the next page of results
+        name: page_token
+        in: query
+      - type: string
+        default: date_created
+        name: sort_by
+        in: query
+      - type: string
+        default: desc
+        name: sort_dir
+        in: query
+      - type: string
+        description: Filter by text (searches name, sender org, questionnaire type)
+        name: filter_text
+        in: query
+      responses:
+        '200':
+          description: List of inbound questionnaires.
+          schema:
+            $ref: '#/definitions/questionnaireListResponse'
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/trust_center:
+    get:
+      description: 'Returns detailed information about a single trust center by UUID.
+
+
+        Required API key permissions: `TrustExchange` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: Get trust center
+      operationId: getTrustCenter
+      parameters:
+      - type: string
+        description: The UUID of the trust center.
+        name: uuid
+        in: query
+        required: true
+      responses:
+        '200':
+          description: Trust center detail.
+          schema:
+            $ref: '#/definitions/trustCenterDetail'
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/trust_center/access:
+    get:
+      description: 'Returns information about who has access to trust centers, including users and
+
+        organizations with access, pending access requests, and invited emails.
+
+
+        NOTE: This endpoint is not specific to a single trust center, as access is not specific to a single trust center.
+
+
+        Required API key permissions: `TrustExchange` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: Get trust center access
+      operationId: getTrustCenterAccess
+      responses:
+        '200':
+          description: Trust center access detail.
+          schema:
+            $ref: '#/definitions/trustCenterAccessResponse'
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/trust_center/access_log:
+    get:
+      description: 'Returns the access log for all trust centers, showing who has viewed them or downloaded documents.
+
+
+        Results are paginated. Use the `page_size` parameter to control how many results are returned per page.
+
+        Use the `next_page_token` from the response to retrieve subsequent pages.
+
+
+        NOTE: This endpoint is not specific to a single trust center, as access is not specific to a single trust center.
+
+
+        Required API key permissions: `TrustExchange` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: Get trust center access log
+      operationId: getTrustCenterAccessLog
+      parameters:
+      - type: integer
+        format: int64
+        example: 100
+        description: 'The number of results to return per page.
+
+          Valid values range from 1 to 100.
+
+          Defaults to 50 if not specified.'
+        name: page_size
+        in: query
+      - type: string
+        example: eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ==
+        description: 'Token to retrieve a specific page of results.
+
+          Omit to retrieve the first page.
+
+          Use the `next_page_token` from the previous response to get the next page.'
+        name: page_token
+        in: query
+      responses:
+        '200':
+          description: Trust center access log.
+          schema:
+            $ref: '#/definitions/trustCenterAccessLogResponse'
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/trust_center/list:
+    get:
+      description: 'Returns a list of trust centers for the authenticated organization.
+
+
+        Required API key permissions: `TrustExchange` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: List trust centers
+      operationId: listTrustCenters
+      responses:
+        '200':
+          description: List of trust centers.
+          schema:
+            $ref: '#/definitions/ListTrustCentersResponseBody'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /trust_exchange/trust_center/subscription/list:
+    get:
+      description: 'Returns email subscriptions for trust center updates.
+
+
+        Results are paginated. Use the `page_size` parameter to control how many results are returned per page.
+
+        Use the `next_page_token` from the response to retrieve subsequent pages.
+
+
+        Required API key permissions: `TrustExchange` (select when creating API key in Account Settings)'
+      tags:
+      - trust_exchange
+      summary: Get trust center subscriptions
+      operationId: getTrustCenterSubscriptions
+      parameters:
+      - type: integer
+        format: int64
+        example: 100
+        description: 'The number of results to return per page.
+
+          Valid values range from 1 to 100.
+
+          Defaults to 100 if not specified.'
+        name: page_size
+        in: query
+      - type: string
+        example: eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ==
+        description: 'Token to retrieve a specific page of results.
+
+          Omit to retrieve the first page.
+
+          Use the `next_page_token` from the previous response to get the next page.'
+        name: page_token
+        in: query
+      responses:
+        '200':
+          description: Trust center subscriptions.
+          schema:
+            $ref: '#/definitions/trustCenterSubscriptionsResponse'
+        '403':
+          description: Account does not have access to requested entities
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+definitions:
+  trustCenterDetail:
+    type: object
+    properties:
+      asset_count:
+        description: The number of assets on the trust center.
+        type: integer
+        format: int64
+        example: 5
+      company_description:
+        description: A description of the company.
+        type: string
+        example: We are a security company.
+      compliance_badges:
+        description: The compliance badges displayed on the trust center.
+        type: array
+        items:
+          type: string
+      contact_email:
+        description: The email of the trust center contact.
+        type: string
+        example: jane@example.com
+      contact_full_name:
+        description: The full name of the trust center contact.
+        type: string
+        example: Jane Smith
+      contact_role:
+        description: The role of the trust center contact.
+        type: string
+        example: Security Manager
+      documents:
+        description: The documents on the trust center.
+        type: array
+        items:
+          $ref: '#/definitions/trustCenterDocument'
+      include_industry_average:
+        description: Whether the industry average is included on the trust center.
+        type: boolean
+        example: true
+      include_risk_rating:
+        description: Whether the risk rating is included on the trust center.
+        type: boolean
+        example: true
+      last_updated_at:
+        description: The date the trust center was last updated.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      name:
+        description: The name of the trust center.
+        type: string
+        example: My Trust Center
+      public_url:
+        description: The public URL of the trust center.
+        type: string
+        example: https://trust.example.com
+      published:
+        description: Whether the trust center is published.
+        type: boolean
+        example: true
+      questionnaires:
+        description: The questionnaires on the trust center.
+        type: array
+        items:
+          $ref: '#/definitions/trustCenterQuestionnaire'
+      updates:
+        description: The updates on the trust center.
+        type: array
+        items:
+          $ref: '#/definitions/trustCenterUpdate'
+      uuid:
+        description: The unique identifier for the trust center.
+        type: string
+        example: 550e8400-e29b-41d4-a716-446655440000
+  trustCenterQuestionnaire:
+    type: object
+    properties:
+      access_protection:
+        description: 'Whether access protection is enabled for this questionnaire.
+
+          When true, users must request access to view this questionnaire.'
+        type: boolean
+        example: true
+      id:
+        description: The unique ID of the trust center questionnaire.
+        type: integer
+        format: int64
+        example: 1234
+      name:
+        description: The name of the questionnaire.
+        type: string
+        example: SOC 2 Type II
+      type:
+        description: The type of the questionnaire.
+        type: string
+        example: SOC 2 Type II
+  trustCenterUpdate:
+    type: object
+    properties:
+      body:
+        description: The body of the update.
+        type: string
+        example: We have published our latest SOC 2 report.
+      category:
+        description: The category of the update.
+        type: string
+        example: Security
+      created_at:
+        description: The date the update was created.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      headline:
+        description: The headline of the update.
+        type: string
+        example: New SOC 2 Report Available
+  contentLibraryDocumentHistoryResponse:
+    type: object
+    properties:
+      history:
+        description: The list of history items for the document.
+        type: array
+        items:
+          $ref: '#/definitions/contentLibraryHistoryItem'
+      next_page_token:
+        description: The token used to fetch the next page of results, if there are more results.
+        type: string
+  endpointError:
+    description: Error details coming from an endpoint
+    type: object
+    properties:
+      error:
+        description: A description of the error
+        type: string
+  trustCenterAccessResponse:
+    type: object
+    properties:
+      access_requests:
+        description: The pending access requests for the trust center.
+        type: array
+        items:
+          $ref: '#/definitions/trustCenterAccessRequest'
+      invited_emails:
+        description: The email addresses that have been invited to access the trust center.
+        type: array
+        items:
+          type: string
+      users_and_orgs_with_access:
+        description: The users and organizations with access to the trust center.
+        type: array
+        items:
+          $ref: '#/definitions/trustCenterAccessItem'
+  trustCenterAccessRequests:
+    type: object
+    properties:
+      documents:
+        description: Content Library document access requests
+        type: array
+        items:
+          $ref: '#/definitions/trustCenterAccessDocumentRequest'
+      questionnaires:
+        description: Public questionnaire access requests
+        type: array
+        items:
+          $ref: '#/definitions/trustCenterAccessQuestionnaireRequest'
+  trustCenterAccessLogEntry:
+    type: object
+    properties:
+      action_data:
+        description: Additional data about the action. The shape depends on the action_type.
+      action_type:
+        $ref: '#/definitions/ActionType'
+      created_at:
+        description: The time the action was performed.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      trust_page_uuid:
+        description: The UUID of the trust page the action was performed on, if applicable.
+        type: string
+        example: 550e8400-e29b-41d4-a716-446655440000
+      user_email:
+        description: The email of the user who performed the action.
+        type: string
+        example: jane@example.com
+      user_name:
+        description: The name of the user who performed the action.
+        type: string
+        example: Jane Smith
+  trustCenterAccessRequest:
+    type: object
+    properties:
+      created_at:
+        description: The date the access request was created.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      has_signed_nda:
+        description: Whether the user has a current signed NDA.
+        type: boolean
+        example: false
+      id:
+        description: The ID of the access request.
+        type: integer
+        format: int64
+        example: 456
+      message:
+        description: The message included with the access request.
+        type: string
+        example: Please grant me access to your security documents.
+      nda_pending_countersign:
+        description: Whether the user has signed the NDA but it is pending admin countersign.
+        type: boolean
+        example: false
+      org_name:
+        description: The name of the user's organization.
+        type: string
+        example: Acme Corp
+      requested_resources:
+        $ref: '#/definitions/trustCenterAccessRequests'
+      updated_at:
+        description: The date the access request was last updated.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      user_email:
+        description: The email of the user who requested access.
+        type: string
+        example: john@example.com
+      user_name:
+        description: The name of the user who requested access.
+        type: string
+        example: John Doe
+  trustCenterAccessDocumentRequest:
+    type: object
+    properties:
+      uuid:
+        description: UUID of the Content Library document.
+        type: string
+  UpdateContentLibraryDocumentBody:
+    type: object
+    required:
+    - uuid
+    properties:
+      clear_expires_at:
+        description: Set to true to clear the expiry date. If true, `expires_at` is ignored.
+        type: boolean
+      description:
+        description: The new description of the document. If omitted, the description is not changed.
+        type: string
+        maxLength: 5000
+      document_type:
+        description: The new document type (e.g. SOC 2 Report, ISO 27001). If omitted, the type is not changed.
+        type: string
+      expires_at:
+        description: The new expiry date for the document in YYYY-MM-DD format. If omitted, the expiry date is not changed.
+        type: string
+        example: '2025-12-31'
+      internal_notes:
+        description: The new internal notes for the document. If omitted, internal notes are not changed.
+        type: string
+        maxLength: 5000
+      name:
+        description: The new name of the document. If omitted, the name is not changed.
+        type: string
+        maxLength: 500
+        minLength: 2
+      uuid:
+        description: The UUID of the document to update.
+        type: string
+  ListTrustCentersResponseBody:
+    type: object
+    title: ListTrustCentersResponseBody is the response body for listing trust centers.
+    properties:
+      trust_centers:
+        description: The list of trust centers for this organization.
+        type: array
+        items:
+          $ref: '#/definitions/trustCenterSummary'
+  questionnaireListResponse:
+    type: object
+    properties:
+      next_page_token:
+        description: Pagination token for fetching the next page. Empty when there are no more results.
+        type: string
+      questionnaires:
+        description: The list of inbound questionnaires shared with the organization.
+        type: array
+        items:
+          $ref: '#/definitions/inboundQuestionnaire'
+  contentLibraryDocumentListResponse:
+    type: object
+    properties:
+      documents:
+        description: The list of documents in the content library.
+        type: array
+        items:
+          $ref: '#/definitions/contentLibraryDocument'
+      next_page_token:
+        description: The token used to fetch the next page of results, if there are more results.
+        type: string
+  trustCenterAccessDocumentResource:
+    type: object
+    properties:
+      expired:
+        description: If access to the document has expired or not.
+        type: boolean
+      expires:
+        description: Access expiry date (null if it will never expire).
+        type: string
+        format: date-time
+      uuid:
+        description: UUID of the Content Library document.
+        type: string
+  trustCenterSubscription:
+    type: object
+    properties:
+      created_at:
+        description: The time the subscription was created.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      email_address:
+        description: The email address of the subscriber.
+        type: string
+        example: jane@example.com
+  ActionType:
+    type: string
+  contentLibraryType:
+    type: object
+    properties:
+      is_custom:
+        description: Whether the document type is a custom type created by the organization.
+        type: boolean
+        example: false
+      name:
+        description: The name of the document type.
+        type: string
+        example: SOC 2 Report
+      num_documents:
+        description: The number of documents of this type.
+        type: integer
+        format: int64
+        example: 3
+  trustCenterAccessQuestionnaireResource:
+    type: object
+    properties:
+      expired:
+        description: If access to the questionnaire has expired or not.
+        type: boolean
+      expires:
+        description: Access expiry date (null if it will never expire).
+        type: string
+        format: date-time
+      id:
+        description: ID of the questionnaire.
+        type: integer
+        format: int64
+  trustCenterAccessQuestionnaireRequest:
+    type: object
+    properties:
+      id:
+        description: ID of the questionnaire.
+        type: integer
+        format: int64
+  trustCenterAccessResources:
+    type: object
+    properties:
+      documents:
+        description: Content Library documents
+        type: array
+        items:
+          $ref: '#/definitions/trustCenterAccessDocumentResource'
+      questionnaires:
+        description: Public questionnaires
+        type: array
+        items:
+          $ref: '#/definitions/trustCenterAccessQuestionnaireResource'
+  inboundQuestionnaireRecipient:
+    type: object
+    properties:
+      email:
+        description: The email address of the recipient.
+        type: string
+        example: alice@example.com
+      name:
+        description: The name of the recipient.
+        type: string
+        example: Alice Smith
+  trustCenterSubscriptionsResponse:
+    type: object
+    properties:
+      next_page_token:
+        description: The token used to fetch the next page of results, if there are more results.
+        type: string
+      subscriptions:
+        description: The email subscriptions for the trust center.
+        type: array
+        items:
+          $ref: '#/definitions/trustCenterSubscription'
+      total_results:
+        description: The total number of subscriptions.
+        type: integer
+        format: int64
+  contentLibraryDocument:
+    type: object
+    properties:
+      archived:
+        description: Whether the document is archived.
+        type: boolean
+        example: false
+      created_at:
+        description: When the document was created.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      created_by_email:
+        description: The email of the user who created this document.
+        type: string
+        example: jane@example.com
+      created_by_name:
+        description: The name of the user who created this document.
+        type: string
+        example: Jane Smith
+      description:
+        description: The description of the document.
+        type: string
+        example: Our latest SOC 2 Type II report covering the period...
+      document_type:
+        description: The document type.
+        type: string
+        example: SOC 2 Report
+      expires_at:
+        description: The expiration date of the document, if set.
+        type: string
+        format: date-time
+      internal_notes:
+        description: Internal notes only visible to your organization.
+        type: string
+        example: Document awaiting update...
+      name:
+        description: The name of the document.
+        type: string
+        example: Q4 2024 SOC 2 Report
+      published_trust_center_uuids:
+        description: UUIDs of published trust centers where this document is included.
+        type: array
+        items:
+          type: string
+      unpublished_trust_center_uuids:
+        description: UUIDs of unpublished trust centers where this document is included.
+        type: array
+        items:
+          type: string
+      updated_at:
+        description: When the document was last updated.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      updated_by_email:
+        description: The email of the user who last updated this document.
+        type: string
+        example: john@example.com
+      updated_by_name:
+        description: The name of the user who last updated this document.
+        type: string
+        example: John Doe
+      usage_count:
+        description: The number of times this document has been used. For example, added to a trust center, or used in a questionnaire.
+        type: integer
+        format: int64
+        example: 5
+      uuid:
+        description: The unique identifier for the document.
+        type: string
+        example: 550e8400-e29b-41d4-a716-446655440000
+      versions:
+        description: Versions of the document.
+        type: array
+        items:
+          $ref: '#/definitions/contentLibraryDocumentVersion'
+  inboundQuestionnaire:
+    type: object
+    properties:
+      date_completed:
+        description: The date the questionnaire was completed.
+        type: string
+        format: date-time
+        example: '2025-01-25T00:00:00Z'
+      date_created:
+        description: The date the questionnaire was created.
+        type: string
+        format: date-time
+        example: '2025-01-15T00:00:00Z'
+      date_due:
+        description: The due date for the questionnaire.
+        type: string
+        format: date-time
+        example: '2025-02-15T00:00:00Z'
+      date_submitted:
+        description: The date the questionnaire was submitted.
+        type: string
+        format: date-time
+        example: '2025-01-20T00:00:00Z'
+      id:
+        description: The unique identifier of the questionnaire.
+        type: integer
+        format: int64
+        example: 123
+      name:
+        description: The name of the questionnaire.
+        type: string
+        example: Security Assessment 2025
+      num_answers:
+        description: The number of questions that have been answered.
+        type: integer
+        format: int64
+        example: 25
+      num_questions:
+        description: The total number of questions in the questionnaire.
+        type: integer
+        format: int64
+        example: 50
+      questionnaire_type_name:
+        description: The name of the questionnaire type.
+        type: string
+        example: VSAQ
+      recipients:
+        description: The list of recipients assigned to the questionnaire.
+        type: array
+        items:
+          $ref: '#/definitions/inboundQuestionnaireRecipient'
+      sender_org_name:
+        description: The name of the organization that sent the questionnaire.
+        type: string
+        example: Acme Corp
+      status:
+        description: The current status of the questionnaire.
+        type: string
+        example: In Progress
+  trustCenterAccessLogResponse:
+    type: object
+    properties:
+      access_log:
+        description: The access log entries for the trust center.
+        type: array
+        items:
+          $ref: '#/definitions/trustCenterAccessLogEntry'
+      next_page_token:
+        description: The token used to fetch the next page of results, if there are more results.
+        type: string
+  trustCenterDocument:
+    type: object
+    properties:
+      access_protection:
+        description: 'Whether access protection is enabled for this document.
+
+          When true, users must request access to view this document.'
+        type: boolean
+        example: true
+      document_type:
+        description: The type of the document.
+        type: string
+        example: SOC 2
+      filename:
+        description: The filename of the document.
+        type: string
+        example: soc2-report.pdf
+      name:
+        description: The name of the document.
+        type: string
+        example: SOC 2 Report
+      uuid:
+        description: The unique identifier for the document.
+        type: string
+        example: 550e8400-e29b-41d4-a716-446655440000
+  contentLibraryDocumentVersion:
+    type: object
+    properties:
+      created_at:
+        description: When this version was created.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      filename:
+        description: The filename of this version.
+        type: string
+        example: soc2_report_q4_2024.pdf
+      version:
+        description: The version number.
+        type: integer
+        format: int64
+        example: 3
+      virus_safe:
+        description: 'Whether this version has been scanned and verified virus safe.
+
+          After uploading a document version, it may take a few minutes for it to be initially scanned.
+
+          Document versions cannot be retrieved until this is true.'
+        type: boolean
+        example: true
+  contentLibraryHistoryItem:
+    type: object
+    properties:
+      created_at:
+        description: When the history event occurred.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      created_by_email:
+        description: The email of the user who performed the action.
+        type: string
+        example: jane@example.com
+      created_by_name:
+        description: The name of the user who performed the action.
+        type: string
+        example: Jane Smith
+      history_data:
+        description: Additional data specific to the history type. The structure varies based on the history_type.
+      history_type:
+        description: The type of history event.
+        type: string
+        example: document_created
+  trustCenterAccessItem:
+    type: object
+    properties:
+      created_at:
+        description: The date the access was created.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      has_signed_nda:
+        description: Whether the org/user has a current signed NDA.
+        type: boolean
+        example: true
+      nda_exempt:
+        description: Whether the org/user is exempt from NDA requirements.
+        type: boolean
+        example: false
+      nda_manually_approved:
+        description: Whether the NDA was manually approved for this org/user.
+        type: boolean
+        example: false
+      nda_pending_countersign:
+        description: Whether the org/user has signed the NDA but it is pending admin countersign.
+        type: boolean
+        example: false
+      org_name:
+        description: The name of the organization with access. Empty if user-only access.
+        type: string
+        example: Acme Corp
+      org_primary_hostname:
+        description: The primary hostname of the organization with access. Empty if user-only access.
+        type: string
+        example: acme.com
+      resources:
+        $ref: '#/definitions/trustCenterAccessResources'
+      updated_at:
+        description: The date the access was last updated.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      user_email:
+        description: The email of the user with access. Empty if org-only access.
+        type: string
+        example: jane@example.com
+      user_name:
+        description: The name of the user with access. Empty if org-only access.
+        type: string
+        example: Jane Smith
+  getContentLibraryTypesResponse:
+    type: object
+    title: Response body for listing content library document types.
+    properties:
+      types:
+        description: The list of document types for this organization.
+        type: array
+        items:
+          $ref: '#/definitions/contentLibraryType'
+  trustCenterSummary:
+    type: object
+    properties:
+      asset_count:
+        description: The number of assets on the trust center.
+        type: integer
+        format: int64
+        example: 5
+      created_at:
+        description: The date the trust center was created.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      last_updated_at:
+        description: The date the trust center was last updated.
+        type: string
+        format: date-time
+        example: '2024-03-20T15:30:00Z'
+      name:
+        description: The name of the trust center.
+        type: string
+        example: My Trust Center
+      public_url:
+        description: The public URL of the trust center.
+        type: string
+        example: https://trust.example.com
+      published:
+        description: Whether the trust center is published.
+        type: boolean
+        example: true
+      uuid:
+        description: The unique identifier for the trust center.
+        type: string
+        example: 550e8400-e29b-41d4-a716-446655440000
+securityDefinitions:
+  API key in header:
+    type: apiKey
+    in: header
+    name: Authorization

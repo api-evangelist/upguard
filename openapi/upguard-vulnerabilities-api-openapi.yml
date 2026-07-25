@@ -1,0 +1,199 @@
+swagger: '2.0'
+info:
+  description: 'Access information from the CyberRisk platform programmatically using this API.
+
+
+    You can find or generate an API key to access this API in your CyberRisk Account Settings.
+
+    Please authorize all requests by setting the "Authorization" header to your api key.
+
+
+    The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
+  title: UpGuard CyberRisk breaches vulnerabilities API
+  version: 1.13.2
+host: cyber-risk.upguard.com
+basePath: /api/public
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- API key in header: []
+tags:
+- name: vulnerabilities
+paths:
+  /vulnerabilities:
+    get:
+      description: 'Returns a list of potential vulnerabilities that have been detected for your account.
+
+
+        Required API key permissions: `BreachRisk` (select when creating API key in Account Settings)'
+      tags:
+      - vulnerabilities
+      summary: List potential vulnerabilities of your domains & IPs
+      operationId: org_vulnerabilities
+      parameters:
+      - type: array
+        items:
+          type: string
+        description: A case-insensitive comma separated list of website labels to filter results by
+        name: labels
+        in: query
+      - type: string
+        description: The `next_page_token` from a previous response, use this to get the next page of results.
+        name: page_token
+        in: query
+      - maximum: 2000
+        minimum: 10
+        type: integer
+        format: int64
+        default: 1000
+        description: The number of results to return per page.
+        name: page_size
+        in: query
+      responses:
+        '200':
+          description: A list of detected potential vulnerabilities for your domains & IPs
+          schema:
+            $ref: '#/definitions/GetOrgVulnerabilitiesV1RespBody'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /vulnerabilities/vendor:
+    get:
+      description: 'Returns a list of potential vulnerabilities that have been detected for a particular vendor.
+
+
+        Required API key permissions: `VendorRisk` (select when creating API key in Account Settings)'
+      tags:
+      - vulnerabilities
+      summary: List potential vulnerabilities of a vendor
+      operationId: vendor_vulnerabilities
+      parameters:
+      - type: string
+        example: upguard.com
+        description: The primary hostname of the vendor to return vulnerabilities for
+        name: primary_hostname
+        in: query
+        required: true
+      responses:
+        '200':
+          description: A list of detected potential vendor vulnerabilities
+          schema:
+            $ref: '#/definitions/GetVendorVulnerabilitiesV1RespBody'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+definitions:
+  Vulnerability:
+    type: object
+    properties:
+      cpes:
+        description: The CPEs (Common Platform Enumeration) of the vulnerability
+        type: array
+        items:
+          type: string
+        example:
+        - cpe:/a:wordpress:wordpress:4.9.6
+      created_at:
+        description: The date the potential vulnerability was detected (ISO 3339 format)
+        type: string
+        format: date-time
+        example: '2019-07-11T23:43:35.141491Z'
+      cve:
+        $ref: '#/definitions/cve'
+      hostname:
+        description: The hostname where the potential vulnerability was detected
+        type: string
+        example: subdomain.example.com
+      ip_addresses:
+        description: The IP addresses where the potential vulnerability was detected
+        type: array
+        items:
+          type: string
+        example:
+        - 1.2.3.4
+        - 5.6.7.8
+      known_exploited_vulnerability:
+        description: Indicates whether the vulnerability is known to be actively exploited
+        type: boolean
+        example: true
+      verified:
+        description: Indicates if the vulnerability has been tested and verified as part of an automated scan
+        type: boolean
+        example: false
+  endpointError:
+    description: Error details coming from an endpoint
+    type: object
+    properties:
+      error:
+        description: A description of the error
+        type: string
+  GetOrgVulnerabilitiesV1RespBody:
+    type: object
+    properties:
+      next_page_token:
+        description: 'The token to be used to retrieve the next page of results.
+
+          Will not be returned if there are no more results.'
+        type: string
+      vulnerabilities:
+        description: The list of potential vulnerabilities that have been detected
+        type: array
+        items:
+          $ref: '#/definitions/Vulnerability'
+  GetVendorVulnerabilitiesV1RespBody:
+    type: object
+    properties:
+      vulnerabilities:
+        description: The list of potential vendor vulnerabilities that have been detected.
+        type: array
+        items:
+          $ref: '#/definitions/Vulnerability'
+  cve:
+    description: Information about a CVE (Common Vulnerabilities and Exposures) Entry
+    type: object
+    properties:
+      description:
+        description: The technical description for the vulnerability
+        type: string
+        example: An issue was discovered in the EXIF component in PHP before 7.1.27, 7.2.x before 7.2.16, and 7.3.x
+      epss:
+        description: The EPSS (Exploit Prediction Scoring System) score.
+        type: number
+        format: double
+        example: 0.75431
+      id:
+        description: The CVE ID
+        type: string
+        example: CVE-2019-9641
+      severity:
+        description: The CVSS (Common Vulnerability Scoring System)
+        type: number
+        format: double
+        example: 7.5
+securityDefinitions:
+  API key in header:
+    type: apiKey
+    in: header
+    name: Authorization

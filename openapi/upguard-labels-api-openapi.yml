@@ -1,0 +1,70 @@
+swagger: '2.0'
+info:
+  description: 'Access information from the CyberRisk platform programmatically using this API.
+
+
+    You can find or generate an API key to access this API in your CyberRisk Account Settings.
+
+    Please authorize all requests by setting the "Authorization" header to your api key.
+
+
+    The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
+  title: UpGuard CyberRisk breaches labels API
+  version: 1.13.2
+host: cyber-risk.upguard.com
+basePath: /api/public
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- API key in header: []
+tags:
+- name: labels
+paths:
+  /labels:
+    get:
+      description: 'Returns the list of labels for your account.
+
+
+        Required API key permissions: `Platform` (select when creating API key in Account Settings)'
+      tags:
+      - labels
+      summary: Get the list of registered labels
+      operationId: labels
+      responses:
+        '200':
+          description: A list of labels
+          schema:
+            $ref: '#/definitions/GetLabelsV1RespBody'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+definitions:
+  endpointError:
+    description: Error details coming from an endpoint
+    type: object
+    properties:
+      error:
+        description: A description of the error
+        type: string
+  GetLabelsV1RespBody:
+    type: object
+    properties:
+      labels:
+        description: The list of available labels
+        type: array
+        items:
+          type: string
+securityDefinitions:
+  API key in header:
+    type: apiKey
+    in: header
+    name: Authorization

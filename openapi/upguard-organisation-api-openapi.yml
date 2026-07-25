@@ -1,0 +1,137 @@
+swagger: '2.0'
+info:
+  description: 'Access information from the CyberRisk platform programmatically using this API.
+
+
+    You can find or generate an API key to access this API in your CyberRisk Account Settings.
+
+    Please authorize all requests by setting the "Authorization" header to your api key.
+
+
+    The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
+  title: UpGuard CyberRisk breaches organisation API
+  version: 1.13.2
+host: cyber-risk.upguard.com
+basePath: /api/public
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- API key in header: []
+tags:
+- name: organisation
+paths:
+  /organisation:
+    get:
+      description: 'Returns the information of the organisation associated with the API key used for the request.
+
+
+        Required API key permissions: `Platform` (select when creating API key in Account Settings)'
+      tags:
+      - organisation
+      summary: Get the current organisation
+      operationId: getOrganisationV1
+      responses:
+        '200':
+          description: Information about the current organisation
+          schema:
+            $ref: '#/definitions/GetOrganisationV1RespBody'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+definitions:
+  endpointError:
+    description: Error details coming from an endpoint
+    type: object
+    properties:
+      error:
+        description: A description of the error
+        type: string
+  GetOrganisationV1RespBody:
+    type: object
+    properties:
+      automatedScore:
+        description: The automated score of the organisation. Omitted if no current scanning score.
+        type: integer
+        format: int64
+      categoryScores:
+        $ref: '#/definitions/CategoryScores'
+      id:
+        description: The id of the organisation
+        type: integer
+        format: int64
+        example: 12345678
+      name:
+        description: The name of the organisation
+        type: string
+        example: UpGuard
+      primary_hostname:
+        description: The primary hostname of the organisation
+        type: string
+        example: upguard.com
+  CategoryScores:
+    description: A collection of category scores for a vendor
+    type: object
+    properties:
+      attackSurface:
+        type: integer
+        format: int64
+      brandProtection:
+        description: 'DEPRECATED: Use operationalRisk'
+        type: integer
+        format: int64
+      brandReputation:
+        description: 'DEPRECATED: Use operationalRisk'
+        type: integer
+        format: int64
+      dataLeakage:
+        type: integer
+        format: int64
+      dns:
+        type: integer
+        format: int64
+      emailSecurity:
+        type: integer
+        format: int64
+      encryption:
+        type: integer
+        format: int64
+      ipDomainReputation:
+        type: integer
+        format: int64
+      networkSecurity:
+        type: integer
+        format: int64
+      operationalRisk:
+        type: integer
+        format: int64
+      phishing:
+        description: 'DEPRECATED: Use ipDomainReputation'
+        type: integer
+        format: int64
+      questionnaires:
+        type: integer
+        format: int64
+      vulnerabilityManagement:
+        type: integer
+        format: int64
+      websiteSecurity:
+        type: integer
+        format: int64
+securityDefinitions:
+  API key in header:
+    type: apiKey
+    in: header
+    name: Authorization

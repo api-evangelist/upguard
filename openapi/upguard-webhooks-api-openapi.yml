@@ -1,0 +1,334 @@
+swagger: '2.0'
+info:
+  description: 'Access information from the CyberRisk platform programmatically using this API.
+
+
+    You can find or generate an API key to access this API in your CyberRisk Account Settings.
+
+    Please authorize all requests by setting the "Authorization" header to your api key.
+
+
+    The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
+  title: UpGuard CyberRisk breaches webhooks API
+  version: 1.13.2
+host: cyber-risk.upguard.com
+basePath: /api/public
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- API key in header: []
+tags:
+- name: webhooks
+paths:
+  /webhooks:
+    get:
+      description: 'List all registered webhooks.
+
+
+        Required API key permissions: `Admin` (select when creating API key in Account Settings)'
+      tags:
+      - webhooks
+      summary: List webhooks
+      operationId: list_webhooks
+      responses:
+        '200':
+          description: List of registered webhooks
+          schema:
+            $ref: '#/definitions/ListWebhookResponsePayload'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+    post:
+      description: 'Create a new webhook subscribing to the provided list of notifications.
+
+
+        Required API key permissions: `Admin` (select when creating API key in Account Settings)'
+      tags:
+      - webhooks
+      summary: Create a new webhook
+      operationId: create_webhook
+      parameters:
+      - type: string
+        description: The name given to the webhook
+        name: name
+        in: query
+        required: true
+      - type: string
+        description: The URL used for sending notifications
+        name: hook_url
+        in: query
+        required: true
+      - type: array
+        items:
+          type: string
+        description: 'The list of notifications to subscribe to. For a list of supported notification
+
+          types and their IDs use the /api/public/webhooks/notification_types endpoint.'
+        name: notification_type_ids
+        in: query
+        required: true
+      - enum:
+        - webhook
+        - workflow_webhook
+        type: string
+        default: webhook
+        description: The type of webhook to create
+        name: webhook_type
+        in: query
+      responses:
+        '201':
+          description: Information about the created webhook
+          schema:
+            $ref: '#/definitions/CreateWebhookResponsePayload'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+    delete:
+      description: 'Delete a webhook by ID.
+
+
+        Required API key permissions: `Admin` (select when creating API key in Account Settings)'
+      tags:
+      - webhooks
+      summary: Delete a webhook
+      operationId: delete_webhook
+      parameters:
+      - type: string
+        description: The id of the webhook to delete
+        name: id
+        in: query
+        required: true
+      responses:
+        '204':
+          description: Empty response
+          schema:
+            $ref: '#/definitions/DeleteWebhookResponsePayload'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '404':
+          description: The vendor was not found.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /webhooks/notification_types:
+    get:
+      description: 'Get a list of available webhook notification types and their descriptions for your organisation.
+
+
+        Required API key permissions: `Admin` (select when creating API key in Account Settings)'
+      tags:
+      - webhooks
+      summary: Webhook notification types
+      operationId: webhooks_notification_types
+      responses:
+        '200':
+          description: List of supported notification types for your organisation
+          schema:
+            $ref: '#/definitions/GetWebhookNotificationTypesResponsePayload'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /webhooks/sample:
+    get:
+      description: 'Get the example data for one or more notification types.
+
+
+        Required API key permissions: `Admin` (select when creating API key in Account Settings)'
+      tags:
+      - webhooks
+      summary: Webhook example data
+      operationId: sample_webhook
+      parameters:
+      - type: string
+        description: 'The ID of a webhook. If specified sample data for all the
+
+          notification types registered for that webhook will be returned.'
+        name: id
+        in: query
+      - type: array
+        items:
+          type: string
+        description: 'A list of notification type IDs you need sample data for.
+
+          If a webhook ID is provided this parameter is ignored.'
+        name: notification_type_ids
+        in: query
+      responses:
+        '200':
+          description: List of example data
+          schema:
+            $ref: '#/definitions/ExampleDataWebhookResponsePayload'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+definitions:
+  CreateWebhookResponsePayload:
+    type: object
+    properties:
+      id:
+        description: The ID of the created webhook
+        type: string
+        example: ABCD1234
+      signing_secret:
+        description: 'The HMAC signing secret for webhook authentication (hex-encoded, 64 characters).
+
+          This is only returned once on creation. Webhooks will include an X-UpGuard-Signature header
+
+          using this secret for authentication.'
+        type: string
+        example: a1b2c3d4e5f67890123456789012345678901234567890123456789012345678
+  DeleteWebhookResponsePayload:
+    type: object
+  NotificationType:
+    type: object
+    properties:
+      description:
+        description: Description for this notification type
+        type: string
+        example: When a new data leak is published
+      id:
+        description: ID of this notification type
+        type: string
+        example: 10-0000-0000-0000000000000000
+      is_zapier:
+        description: Flag indicating whether the notification type is a zapier notification type
+        type: boolean
+        example: true
+  endpointError:
+    description: Error details coming from an endpoint
+    type: object
+    properties:
+      error:
+        description: A description of the error
+        type: string
+  GetWebhookNotificationTypesResponsePayload:
+    type: object
+    properties:
+      notification_types:
+        type: array
+        items:
+          $ref: '#/definitions/NotificationType'
+  ExampleDataWebhookResponsePayload:
+    type: array
+    items:
+      $ref: '#/definitions/WebhookSampleData'
+  ListWebhookResponsePayload:
+    type: object
+    properties:
+      webhooks:
+        description: The list of registered webhooks
+        type: array
+        items:
+          $ref: '#/definitions/Webhook'
+  WebhookSampleData:
+    type: object
+    properties:
+      context:
+        description: Extra metadata available for the notifications
+        type: object
+        additionalProperties: {}
+      description:
+        description: Description of the notifications
+        type: string
+        example: Jane Doe replied to a message by John Smith on questionnaire 'SOC2'
+      occurredAt:
+        description: Timestamp for the event occurrence
+        type: string
+        format: date-time
+        example: '2021-08-17T23:04:02Z'
+      type:
+        description: Human readable type of notification
+        type: string
+        example: QuestionnaireCorrespondence
+  Webhook:
+    type: object
+    properties:
+      enabled:
+        description: Flag indicating whether the webhook is enabled or disabled
+        type: boolean
+        example: true
+      id:
+        description: The ID of the webhook
+        type: string
+        example: ABCD1234
+      name:
+        description: The name of the webhook
+        type: string
+        example: webhook
+      notification_type_ids:
+        description: The list of notifications IDs registered for this webhook
+        type: array
+        items:
+          type: string
+        example:
+        - 10-0000-0000-0000000000000000
+      url:
+        description: The URL used by the webhook to send notifications to
+        type: string
+        example: https://example.com/
+      webhook_type:
+        description: The type of webhook
+        type: string
+        enum:
+        - zapier
+        - webhook
+        - workflow_webhook
+        example: zapier
+securityDefinitions:
+  API key in header:
+    type: apiKey
+    in: header
+    name: Authorization

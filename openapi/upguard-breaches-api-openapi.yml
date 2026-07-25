@@ -1,0 +1,471 @@
+swagger: '2.0'
+info:
+  description: 'Access information from the CyberRisk platform programmatically using this API.
+
+
+    You can find or generate an API key to access this API in your CyberRisk Account Settings.
+
+    Please authorize all requests by setting the "Authorization" header to your api key.
+
+
+    The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
+  title: UpGuard CyberRisk breaches API
+  version: 1.13.2
+host: cyber-risk.upguard.com
+basePath: /api/public
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- API key in header: []
+tags:
+- name: breaches
+paths:
+  /breach:
+    get:
+      description: 'Returns the details of an identity breach.
+
+
+        Required API key permissions: `IdentityBreaches` (select when creating API key in Account Settings)'
+      tags:
+      - breaches
+      summary: Get the details for an identity breach
+      operationId: identity_breach
+      parameters:
+      - type: string
+        description: The ID of the breach to fetch
+        name: id
+        in: query
+      responses:
+        '200':
+          description: Details of an identity breach
+          schema:
+            $ref: '#/definitions/IdentityBreachResponsePayloadBody'
+        '404':
+          description: The vendor was not found.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /breaches:
+    get:
+      description: 'Returns a list of identities ordered by last breached date.
+
+
+        Required API key permissions: `IdentityBreaches` (select when creating API key in Account Settings)'
+      tags:
+      - breaches
+      summary: Get a list of breached identities
+      operationId: breached_identities
+      parameters:
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - maximum: 2000
+        minimum: 10
+        type: integer
+        format: int64
+        default: 1000
+        description: The number of results to return per page.
+        name: page_size
+        in: query
+      - enum:
+        - name
+        - domain
+        - num_breaches
+        - date_last_breach
+        type: string
+        default: date_last_breach
+        description: 'The value to sort the breached identities by
+
+
+          If not specified will default to `date_last_breach` and set `sort_desc` to `true`'
+        name: sort_by
+        in: query
+      - type: boolean
+        default: false
+        description: Whether or not to sort the results in descending order
+        name: sort_desc
+        in: query
+      - type: string
+        description: The breach ID to filter on
+        name: breach_id
+        in: query
+      responses:
+        '200':
+          description: A list of breached identities
+          schema:
+            $ref: '#/definitions/BreachedIdentitiesResponsePayloadBody'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /vips:
+    get:
+      description: 'Returns a list of VIPs for your account.
+
+
+        Required API key permissions: `IdentityBreaches` (select when creating API key in Account Settings)'
+      tags:
+      - breaches
+      summary: Get a list of VIPs
+      operationId: vip_list
+      parameters:
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - maximum: 2000
+        minimum: 10
+        type: integer
+        format: int64
+        default: 1000
+        description: The number of results to return per page.
+        name: page_size
+        in: query
+      - type: string
+        default: name
+        example: sort_by=num_breaches:desc&sort_by=date_last_breach:asc
+        description: 'List of fields to sort VIPs by, with optional :asc or :desc suffix per field.
+
+          Allowed fields: name, domain, num_breaches, date_last_breach.'
+        name: sort_by
+        in: query
+      responses:
+        '200':
+          description: A list of VIPs currently monitored for your account
+          schema:
+            $ref: '#/definitions/GetVIPListRespBody'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /vips/add:
+    post:
+      description: 'Add a VIP to your account.
+
+
+        Required API key permissions: `IdentityBreaches` (select when creating API key in Account Settings)'
+      tags:
+      - breaches
+      summary: Add a VIP
+      operationId: add_vip
+      parameters:
+      - type: string
+        description: The email of the VIP to add. Must be an authorized company domain for your account.
+        name: email
+        in: query
+        required: true
+      responses:
+        '200':
+          description: The VIP that was added
+          schema:
+            $ref: '#/definitions/AddVIPRespBody'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /vips/delete:
+    post:
+      description: 'Remove a VIP from your account.
+
+
+        Required API key permissions: `IdentityBreaches` (select when creating API key in Account Settings)'
+      tags:
+      - breaches
+      summary: Remove a VIP
+      operationId: remove_vip
+      parameters:
+      - type: string
+        description: The email of the VIP to remove.
+        name: email
+        in: query
+        required: true
+      responses:
+        '204':
+          description: ' Successful response is empty'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+definitions:
+  BreachComment:
+    type: object
+    properties:
+      comment:
+        description: The text of the comment
+        type: string
+        example: My comment text
+      created_at:
+        description: The time the comment was added
+        type: string
+        format: date-time
+        example: '2019-11-09T03:48:57Z'
+      created_by_email:
+        description: The email address of the user who added the comment
+        type: string
+        example: viggo@example.com
+  AddVIPRespBody:
+    type: object
+    properties:
+      vip:
+        $ref: '#/definitions/VIP'
+  IdentityBreachResponsePayloadBody:
+    type: object
+    properties:
+      breach:
+        $ref: '#/definitions/Breach'
+      comments:
+        description: Comments associated with the identity breach
+        type: array
+        items:
+          $ref: '#/definitions/BreachComment'
+  GetVIPListRespBody:
+    type: object
+    properties:
+      next_page_token:
+        description: 'The token to be used to retrieve the next page of results.
+
+          Will not be returned if there are no more results.'
+        type: string
+      total_results:
+        description: The total number of VIPs found.
+        type: integer
+        format: int64
+      vips:
+        description: The list of VIPs
+        type: array
+        items:
+          $ref: '#/definitions/VIP'
+  VIP:
+    type: object
+    properties:
+      breach_ids:
+        description: The IDs of the breaches the VIP appears in
+        type: array
+        items:
+          type: integer
+          format: int64
+      date_last_breach:
+        description: The date of the latest breach the VIP appears in (RFC 3339 format).
+        type: string
+      domain:
+        description: The domain of the VIP
+        type: string
+      id:
+        description: The ID of the VIP
+        type: integer
+        format: int64
+      name:
+        description: The account name of the VIP
+        type: string
+      num_breaches:
+        description: The number of breaches the VIP appears in
+        type: integer
+        format: int64
+      severity:
+        description: The highest severity of the breaches the VIP appears in. Will be one of "Critical", "High", "Medium", or "Low".
+        type: string
+  endpointError:
+    description: Error details coming from an endpoint
+    type: object
+    properties:
+      error:
+        description: A description of the error
+        type: string
+  BreachedIdentitiesResponsePayloadBody:
+    type: object
+    properties:
+      breached_identities:
+        description: The list of breached identities
+        type: array
+        items:
+          $ref: '#/definitions/BreachedIdentity'
+      breaches:
+        description: The list of breaches
+        type: array
+        items:
+          $ref: '#/definitions/Breach'
+      next_page_token:
+        description: 'The token to be used to retrieve the next page of results.
+
+          Will not be returned if there are no more results.'
+        type: string
+      total_results:
+        description: The total number of breached identities found.
+        type: integer
+        format: int64
+  BreachedIdentity:
+    type: object
+    properties:
+      breach_ids:
+        description: The IDs of the breaches the identity is associated with
+        type: array
+        items:
+          type: integer
+          format: int64
+        example:
+        - 42
+        - 89
+      domain:
+        description: The breached identity domain
+        type: string
+        example: example.com
+      id:
+        description: The internal id of the identity
+        type: integer
+        format: int64
+        example: 101
+      ignored:
+        description: Flag indicating if the identity has been ignored
+        type: boolean
+        example: false
+      last_breach_date:
+        description: The date of the most recent breach (RFC 3339 format)
+        type: string
+        format: date-time
+        example: '2019-11-09T03:48:57Z'
+      name:
+        description: The breached identity name
+        type: string
+        example: jane.smith
+      num_breaches:
+        description: The total number of breaches the identity has been in
+        type: integer
+        format: int64
+        example: 42
+      severity:
+        description: The highest severity of the breaches the identity appears in. Will be one of "Critical", "High", "Medium", or "Low".
+        type: string
+        example: High
+      vip:
+        description: Flag indicating if the identity is a VIP
+        type: boolean
+        example: false
+  Breach:
+    type: object
+    properties:
+      assignee_user_email:
+        description: The email address of the currently assigned user. Will be blank if unassigned.
+        type: string
+        example: viggo@example.com
+      breach_status:
+        description: The status of the breach. Will be one of "active" or "archived".
+        type: string
+        example: active
+      breach_type:
+        description: The type of the breach. Will be one of "Company", "Infostealer", or "Paste".
+        type: string
+        example: Company
+      date_notified:
+        description: The date the identities were notified of the breach (ISO 3339 format). Will be null if not notified.
+        type: string
+        example: '2019-11-09T03:48:57Z'
+      date_occurred:
+        description: The date the breach occurred (ISO 3339 format)
+        type: string
+        format: date-time
+        example: '2019-11-09T03:48:57Z'
+      date_published:
+        description: The date the breach was published (ISO 3339 format)
+        type: string
+        format: date-time
+        example: '2019-11-09T03:48:57Z'
+      description:
+        description: The description of the breach
+        type: string
+        example: In November 2019, all customer records of Acme Inc. were made publicly available for 13 hours.
+      domain:
+        description: The domain of the breach
+        type: string
+        example: acme.com
+      employee_count:
+        description: The number of employees involved in the breach.
+        type: integer
+        format: int64
+        example: 10
+      exposed_data_classes:
+        description: The classes of data exposed in this breach eg. "Passwords", "Usernames", "Email addresses", "Social security numbers", "Banking PINs", "Credit cards".
+        type: array
+        items:
+          type: string
+        example:
+        - Passwords
+        - Usernames
+        - Email addresses
+        - Social security numbers
+        - Banking PINs
+        - Credit cards
+      id:
+        description: The internal id of the breach
+        type: integer
+        format: int64
+        example: 101
+      name:
+        description: The name of the breach
+        type: string
+        example: AcmeInc
+      severity:
+        description: The severity of the breach. Will be one of "Critical", "High", "Medium", or "Low".
+        type: string
+        example: High
+      title:
+        description: The title of the breach
+        type: string
+        example: Acme Inc.
+      total_exposures:
+        description: The total number of identities in the breach
+        type: integer
+        format: int64
+        example: 9673824
+securityDefinitions:
+  API key in header:
+    type: apiKey
+    in: header
+    name: Authorization

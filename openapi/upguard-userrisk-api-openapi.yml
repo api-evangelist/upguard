@@ -1,0 +1,1996 @@
+swagger: '2.0'
+info:
+  description: 'Access information from the CyberRisk platform programmatically using this API.
+
+
+    You can find or generate an API key to access this API in your CyberRisk Account Settings.
+
+    Please authorize all requests by setting the "Authorization" header to your api key.
+
+
+    The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
+  title: UpGuard CyberRisk breaches userrisk API
+  version: 1.13.2
+host: cyber-risk.upguard.com
+basePath: /api/public
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- API key in header: []
+tags:
+- name: userrisk
+paths:
+  /user_risk/app_categories/list:
+    get:
+      description: 'Retrieve a list of app categories for your organization.
+
+
+        Required API key permissions: `User Risk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List app categories
+      operationId: getUserRiskAppCategoriesList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - name
+        type: string
+        description: The field to sort results by. Default is `name`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      responses:
+        '200':
+          description: A list of app categories for your organization
+          schema:
+            $ref: '#/definitions/GetUserRiskAppCategoriesListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/apps/list:
+    get:
+      description: 'Retrieve a list of apps for your organization.
+
+
+        Required API key permissions: `User Risk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List apps
+      operationId: getUserRiskAppsList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - name
+        - first_detected
+        - num_users
+        - exposure_level
+        type: string
+        description: The field to sort results by. Default is `name`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      - enum:
+        - approve
+        - tolerate
+        - nudge
+        - block
+        type: array
+        items:
+          type: string
+          format: string
+        collectionFormat: multi
+        description: Filter applications by usage policy outcome. Matches the policy base rule or any custom rule.
+        name: usage_policy_outcomes
+        in: query
+      - enum:
+        - org_default
+        - app
+        type: array
+        items:
+          type: string
+          format: string
+        collectionFormat: multi
+        description: Filter applications by where their usage policy is derived from.
+        name: usage_policy_sources
+        in: query
+      - type: array
+        items:
+          type: string
+        collectionFormat: multi
+        description: Filter applications by category.
+        name: categories
+        in: query
+      - enum:
+        - browser
+        - google
+        - microsoft
+        type: array
+        items:
+          type: string
+          format: string
+        collectionFormat: multi
+        description: Filter applications by source.
+        name: sources
+        in: query
+      - type: boolean
+        description: Filter applications by Shadow AI status.
+        name: shadow_ai
+        in: query
+      - type: boolean
+        description: Filter applications by AI usage.
+        name: vendor_using_ai
+        in: query
+      - type: boolean
+        description: Filter applications by vendor monitoring status.
+        name: vendor_monitored
+        in: query
+      - type: string
+        format: date-time
+        description: Filter applications first detected after or at this date-time.
+        name: first_detected_min
+        in: query
+      - type: string
+        format: date-time
+        description: Filter applications first detected before or at this date-time.
+        name: first_detected_max
+        in: query
+      responses:
+        '200':
+          description: The list of apps for your organization
+          schema:
+            $ref: '#/definitions/UserRiskAppsListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/apps/permissions/list:
+    get:
+      description: 'Retrieve a list of permissions granted to a specific application.
+
+
+        Required API key permissions: `User Risk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List app permissions
+      operationId: getUserRiskAppsPermissionsList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - name
+        - exposure_level
+        - num_users
+        type: string
+        description: The field to sort results by. Default is `name`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      - type: string
+        description: The name of the application.
+        name: app_name
+        in: query
+        required: true
+      responses:
+        '200':
+          description: A list of permissions granted to the application
+          schema:
+            $ref: '#/definitions/GetUserRiskAppsPermissionsListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/apps/users/list:
+    get:
+      description: 'Retrieve a list of users using a specific application.
+
+
+        Required API key permissions: `UserRisk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List app users
+      operationId: getUserRiskAppUsersList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - id
+        - email
+        - name
+        - risk_rating
+        type: string
+        description: The field to sort results by. Default is `id`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      - type: string
+        description: The name of the application.
+        name: app_name
+        in: query
+        required: true
+      responses:
+        '200':
+          description: The list of users using the application
+          schema:
+            $ref: '#/definitions/UserRiskAppUsersListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/identity_breaches/list:
+    get:
+      description: 'Retrieve a list of identity breaches for your organization.
+
+
+        Required API key permissions: `User Risk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List identity breaches
+      operationId: getUserRiskIdentityBreachesList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - title
+        - breach_date
+        - published_date
+        type: string
+        description: The field to sort results by. Default is `title`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      - enum:
+        - active
+        - ignored
+        - remediated
+        type: array
+        items:
+          type: string
+          format: string
+        collectionFormat: multi
+        description: Filter identity breaches by status.
+        name: statuses
+        in: query
+      - type: string
+        description: Filter identity breaches that occurred after or at this date-time.
+        name: breach_date_min
+        in: query
+      - type: string
+        description: Filter identity breaches that occurred before or at this date-time.
+        name: breach_date_max
+        in: query
+      - type: string
+        description: Filter identity breaches published after or at this date-time.
+        name: published_date_min
+        in: query
+      - type: string
+        description: Filter identity breaches published before or at this date-time.
+        name: published_date_max
+        in: query
+      - type: array
+        items:
+          type: string
+        collectionFormat: multi
+        description: Filter identity breaches by exposed data classes.
+        name: data_classes
+        in: query
+      responses:
+        '200':
+          description: A list of identity breaches
+          schema:
+            $ref: '#/definitions/IdentityBreachesListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/identity_breaches/users/list:
+    get:
+      description: 'Retrieve a list of users involved in a specific identity breach.
+
+
+        Required API key permissions: `User Risk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List identity breach users
+      operationId: listIdentityBreachUsers
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - id
+        - email
+        - name
+        - risk_rating
+        type: string
+        description: The field to sort results by. Default is `id`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      - type: string
+        description: The unique identifier of the identity breach.
+        name: id
+        in: query
+        required: true
+      responses:
+        '200':
+          description: A list of users involved in the identity breach
+          schema:
+            $ref: '#/definitions/IdentityBreachUsersListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/permissions/apps/list:
+    get:
+      description: 'Retrieve a list of applications that were granted a specific permission.
+
+
+        Required API key permissions: `User Risk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List permission apps
+      operationId: getUserRiskPermissionsAppsList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - name
+        - first_detected
+        - num_users
+        - exposure_level
+        type: string
+        description: The field to sort results by. Default is `name`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      - type: string
+        description: The unique identifier of the permission.
+        name: id
+        in: query
+        required: true
+      responses:
+        '200':
+          description: A list of apps that were granted the permission
+          schema:
+            $ref: '#/definitions/GetUserRiskPermissionsAppsListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/permissions/list:
+    get:
+      description: 'Retrieve a list of permissions for your organization.
+
+
+        Required API key permissions: `User Risk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List permissions
+      operationId: getUserRiskPermissionsList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - id
+        - name
+        - exposure_level
+        - times_granted
+        type: string
+        description: The field to sort results by. Default is `name`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      - type: array
+        items:
+          type: string
+        collectionFormat: multi
+        description: Filter permissions by category.
+        name: categories
+        in: query
+      - enum:
+        - read_only
+        - read_write
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+        description: Filter permissions by access level.
+        name: access_level
+        in: query
+      - enum:
+        - basic
+        - elevated
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+        description: Filter permissions by exposure level.
+        name: exposure_level
+        in: query
+      responses:
+        '200':
+          description: A list of permissions for your organization
+          schema:
+            $ref: '#/definitions/GetUserRiskPermissionsListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/permissions/users/list:
+    get:
+      description: 'Retrieve a list of users who granted a specific permission.
+
+
+        Required API key permissions: `User Risk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List permission users
+      operationId: getUserRiskPermissionsUsersList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - id
+        - email
+        - name
+        - risk_rating
+        type: string
+        description: The field to sort results by. Default is `id`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      - type: string
+        description: The unique identifier of the permission.
+        name: id
+        in: query
+        required: true
+      responses:
+        '200':
+          description: A list of users who granted the permission
+          schema:
+            $ref: '#/definitions/GetUserRiskPermissionsUsersListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/roles/list:
+    get:
+      description: 'Retrieve a list of roles for your organization.
+
+
+        Required API key permissions: `User Risk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List roles
+      operationId: getUserRiskRolesList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - name
+        - user_count
+        type: string
+        description: The field to sort results by. Default is `name`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      responses:
+        '200':
+          description: A list of roles for your organization
+          schema:
+            $ref: '#/definitions/GetUserRiskRolesListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/teams/list:
+    get:
+      description: 'Retrieve a list of teams for your organization.
+
+
+        Required API key permissions: `User Risk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List teams
+      operationId: getUserRiskTeamsList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - name
+        - user_count
+        type: string
+        description: The field to sort results by. Default is `name`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      responses:
+        '200':
+          description: A list of teams for your organization
+          schema:
+            $ref: '#/definitions/GetUserRiskTeamsListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/users/apps/list:
+    get:
+      description: 'Retrieve a list of apps used by a specific user.
+
+
+        Required API key permissions: `UserRisk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List a user apps
+      operationId: getUserRiskUserAppsList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - name
+        - first_detected
+        - exposure_level
+        type: string
+        description: The field to sort results by. Default is `name`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      - type: string
+        description: The ID of the user to retrieve the apps for
+        name: id
+        in: query
+        required: true
+      responses:
+        '200':
+          description: The list of app for a user
+          schema:
+            $ref: '#/definitions/UserRiskUseAppsListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/users/identity_breaches/list:
+    get:
+      description: 'Retrieve a list of identity breaches a user was involved in.
+
+
+        Required API key permissions: `UserRisk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List a user identity breaches
+      operationId: getUserRiskUserIdentityBreachesList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - title
+        - breach_date
+        - published_date
+        type: string
+        description: The field to sort results by. Default is `title`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      - type: string
+        description: The ID of the user to retrieve the identity breaches for
+        name: id
+        in: query
+        required: true
+      responses:
+        '200':
+          description: The list of identity breaches the user was involved in
+          schema:
+            $ref: '#/definitions/UserIdentityBreachesListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/users/list:
+    get:
+      description: 'Retrieve the list of users for your organization.
+
+
+        Required API key permissions: `UserRisk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List users
+      operationId: getUserRiskUsersList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - id
+        - email
+        - name
+        - risk_rating
+        type: string
+        description: The field to sort results by. Default is `id`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      - type: array
+        items:
+          type: string
+        collectionFormat: multi
+        description: Limit the users to the ones belonging to the provided teams.
+        name: teams
+        in: query
+      - type: array
+        items:
+          type: string
+        collectionFormat: multi
+        description: Limit the users to the ones with the provided roles.
+        name: roles
+        in: query
+      - type: array
+        items:
+          type: string
+        collectionFormat: multi
+        description: Limit the users to the ones using the provided apps.
+        name: app_names
+        in: query
+      responses:
+        '200':
+          description: The list of users in your organization
+          schema:
+            $ref: '#/definitions/UserRiskUsersListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+  /user_risk/users/permissions/list:
+    get:
+      description: 'Retrieve the list of permissions granted by a specific user.
+
+
+        Required API key permissions: `UserRisk` (select when creating API key in Account Settings)'
+      tags:
+      - userrisk
+      summary: List a user permissions
+      operationId: getUserRiskUserPermissionsList
+      parameters:
+      - type: integer
+        format: int64
+        description: The page size of results to return. If not supplied, default is 100.
+        name: page_size
+        in: query
+      - type: string
+        description: The `page_token` from a previous request, use this to get the next page of results.
+        name: page_token
+        in: query
+      - enum:
+        - name
+        - exposure_level
+        type: string
+        description: The field to sort results by. Default is `name`.
+        name: sort_by
+        in: query
+      - enum:
+        - asc
+        - desc
+        type: string
+        description: The direction to sort results. Default is `asc`.
+        name: sort_dir
+        in: query
+      - type: string
+        description: The ID of the user to retrieve the permissions for
+        name: id
+        in: query
+        required: true
+      responses:
+        '200':
+          description: The list of permissions granted by a user
+          schema:
+            $ref: '#/definitions/UserRiskUserPermissionsListResponse'
+        '403':
+          description: Your API key does not have permission to perform this action.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '422':
+          description: An invalid parameter was supplied or a mandatory parameter was missing
+          schema:
+            $ref: '#/definitions/endpointError'
+        '429':
+          description: Too many requests have been made to this endpoint.
+          schema:
+            $ref: '#/definitions/endpointError'
+        '500':
+          description: An internal system error occurred
+          schema:
+            $ref: '#/definitions/endpointError'
+definitions:
+  App:
+    type: object
+    required:
+    - name
+    - is_shadow_ai
+    - usage_policy
+    - num_current_users
+    - first_detected
+    - sources
+    - metadata
+    properties:
+      category:
+        description: The category of the application.
+        type: string
+        example: Team Communication
+      description:
+        description: A description of the application.
+        type: string
+        example: Microsoft Teams is a cloud-based communication and collaboration service that combines chat, video conferencing, and meeting recording into a single experience.
+      domain:
+        description: The domain associated with the application.
+        type: string
+        example: teams.microsoft.com
+      exposure_level:
+        description: The risk level associated with the application or permission.
+        type: string
+        format: string
+        enum:
+        - basic
+        - elevated
+        example: elevated
+      first_detected:
+        description: The date and time the application was first detected.
+        type: string
+        format: date-time
+        example: '2025-12-01T00:00:00Z'
+      is_shadow_ai:
+        description: Indicates whether the application is considered Shadow AI.
+        type: boolean
+        example: false
+      metadata:
+        $ref: '#/definitions/AppMetadata'
+      name:
+        description: The name of the application.
+        type: string
+        example: Microsoft Teams
+      num_current_users:
+        description: The number of users currently using the application.
+        type: integer
+        format: int64
+        example: 100
+      sources:
+        description: The sources from which the application was detected.
+        type: array
+        enum:
+        - browser
+        - google
+        - microsoft
+        items:
+          type: string
+          format: string
+        example:
+        - browser
+        - microsoft
+      summary:
+        description: A brief summary of the application.
+        type: string
+        example: Microsoft Teams is a cloud-based communication and collaboration service that combines chat, video conferencing, and meeting recording into a single experience.
+      usage_policy:
+        $ref: '#/definitions/UsagePolicy'
+      vendor_id:
+        description: The unique identifier of the vendor.
+        type: integer
+        format: int64
+        example: 1234567890
+      vendor_monitored:
+        description: Indicates whether the vendor is being monitored.
+        type: boolean
+        example: true
+      vendor_name:
+        description: The name of the vendor associated with the application.
+        type: string
+        example: Microsoft
+      vendor_security_rating:
+        description: The security rating of the vendor (0-950).
+        type: integer
+        format: int64
+        example: 900
+      vendor_security_rating_trend:
+        description: The change in the vendor's security rating in the last 30 days.
+        type: integer
+        format: int64
+        example: 100
+      vendor_using_ai:
+        description: Indicates whether the vendor is known to use AI.
+        type: boolean
+        example: true
+  User:
+    type: object
+    required:
+    - id
+    - name
+    - email
+    - risk_rating_trend
+    - app_stats
+    - breach_stats
+    - metadata
+    properties:
+      app_stats:
+        $ref: '#/definitions/UserAppStats'
+      breach_stats:
+        $ref: '#/definitions/UserIdentityBreachesStats'
+      email:
+        description: The email address of the user.
+        type: string
+        example: john.doe@example.com
+      id:
+        description: The ID of the user.
+        type: string
+        example: e7cfc445-30a6-416c-8a12-0a988f042d08
+      metadata:
+        $ref: '#/definitions/UserMetadata'
+      name:
+        description: The full name of the user.
+        type: string
+        example: John Doe
+      risk_rating:
+        description: Risk rating for the user.
+        type: integer
+        format: int64
+        example: 900
+      risk_rating_trend:
+        description: The user risk rating trend for the last 30 days.
+        type: integer
+        format: int64
+        example: 10
+      role:
+        description: The role assigned to the user.
+        type: string
+        example: developer
+      team:
+        description: The team the user belongs to.
+        type: string
+        example: product
+  AppPermission:
+    type: object
+    required:
+    - id
+    - name
+    - description
+    - exposure_level
+    - access_level
+    - num_users
+    properties:
+      access_level:
+        description: The access level granted by the permission.
+        type: string
+        format: string
+        enum:
+        - read_only
+        - read_write
+        example: read_only
+      category:
+        description: The category of the permission.
+        type: string
+        example: User Management
+      description:
+        description: A description of what the permission allows.
+        type: string
+        example: Read user profiles
+      exposure_level:
+        description: The risk level associated with the application or permission.
+        type: string
+        format: string
+        enum:
+        - basic
+        - elevated
+        example: basic
+      id:
+        description: The unique identifier of the permission.
+        type: string
+        example: https://www.googleapis.com/auth/userinfo.email
+      name:
+        description: The name of the permission.
+        type: string
+        example: https://www.googleapis.com/auth/userinfo.email
+      num_users:
+        description: The number of users who have granted this permission to the application.
+        type: integer
+        format: int64
+        example: 10
+  UserRiskAppsListResponse:
+    type: object
+    required:
+    - apps
+    properties:
+      apps:
+        description: The list of apps.
+        type: array
+        items:
+          $ref: '#/definitions/App'
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+  GetUserRiskPermissionsListResponse:
+    type: object
+    required:
+    - permissions
+    properties:
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+      permissions:
+        description: The list of permissions.
+        type: array
+        items:
+          $ref: '#/definitions/Permission'
+  AppUser:
+    type: object
+    required:
+    - id
+    - name
+    - email
+    - first_detected
+    - usage_policy_outcome
+    properties:
+      email:
+        description: The email address of the user.
+        type: string
+        example: john.doe@example.com
+      exposure_level:
+        description: The risk level associated with the application or permission.
+        type: string
+        format: string
+        enum:
+        - basic
+        - elevated
+        example: basic
+      first_detected:
+        description: The date and time the user was first detected using this application.
+        type: string
+        format: date-time
+        example: '2023-09-24T15:30:00Z'
+      id:
+        description: The unique identifier of the user.
+        type: string
+        example: e7cfc445-30a6-416c-8a12-0a988f042d08
+      name:
+        description: The full name of the user.
+        type: string
+        example: John Doe
+      risk_rating:
+        description: The security risk rating of the user (0-950).
+        type: integer
+        format: int64
+        example: 750
+      role:
+        description: The role assigned to the user.
+        type: string
+        example: developer
+      team:
+        description: The team the user belongs to.
+        type: string
+        example: product
+      usage_policy_outcome:
+        description: The usage policy outcome resolved for this user on this application.
+        type: string
+        format: string
+        enum:
+        - approve
+        - tolerate
+        - nudge
+        - block
+        example: tolerate
+  endpointError:
+    description: Error details coming from an endpoint
+    type: object
+    properties:
+      error:
+        description: A description of the error
+        type: string
+  GetUserRiskTeamsListResponse:
+    type: object
+    required:
+    - teams
+    properties:
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+      teams:
+        description: The list of teams.
+        type: array
+        items:
+          $ref: '#/definitions/Team'
+  GetUserRiskAppsPermissionsListResponse:
+    type: object
+    required:
+    - permissions
+    properties:
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+      permissions:
+        description: The list of permissions granted to the application.
+        type: array
+        items:
+          $ref: '#/definitions/AppPermission'
+  ApprovedReplacementApp:
+    type: object
+    required:
+    - name
+    properties:
+      description:
+        description: A description of the replacement application.
+        type: string
+        example: Lorem ipsum dolor sit amet
+      domain:
+        description: The domain associated with the replacement application.
+        type: string
+        example: atlassian.com
+      name:
+        description: The name of the replacement application.
+        type: string
+        example: Jira
+  GetUserRiskAppCategoriesListResponse:
+    type: object
+    required:
+    - categories
+    properties:
+      categories:
+        description: The list of app categories.
+        type: array
+        items:
+          type: string
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+  AppMetadata:
+    type: object
+    properties:
+      entra_app_id:
+        description: The Microsoft Entra ID (formerly Azure AD) of the application.
+        type: string
+        example: 12345678-9abc-def0-1234-56789abcdef0
+  Team:
+    type: object
+    required:
+    - name
+    - user_count
+    properties:
+      name:
+        description: The name of the team.
+        type: string
+        example: Engineering
+      user_count:
+        description: The number of users assigned to this team.
+        type: integer
+        format: int64
+        example: 50
+  Role:
+    type: object
+    required:
+    - name
+    - user_count
+    properties:
+      name:
+        description: The name of the role.
+        type: string
+        example: Developer
+      user_count:
+        description: The number of users assigned to this role.
+        type: integer
+        format: int64
+        example: 25
+  UsagePolicyRule:
+    type: object
+    title: UsagePolicyRule describes the teams, roles, and users a custom usage policy rule applies to.
+    required:
+    - team_names
+    - role_names
+    - user_emails
+    properties:
+      role_names:
+        description: The names of the roles the rule applies to.
+        type: array
+        items:
+          type: string
+        example:
+        - developer
+      team_names:
+        description: The names of the teams the rule applies to.
+        type: array
+        items:
+          type: string
+        example:
+        - product
+      user_emails:
+        description: The email addresses of the users the rule applies to.
+        type: array
+        items:
+          type: string
+        example:
+        - jane.doe@example.com
+  GetUserRiskPermissionsUsersListResponse:
+    type: object
+    required:
+    - users
+    properties:
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+      users:
+        description: The list of users who granted the permission.
+        type: array
+        items:
+          $ref: '#/definitions/PermissionUser'
+  IdentityBreachesListResponse:
+    type: object
+    required:
+    - identity_breaches
+    properties:
+      identity_breaches:
+        description: The list of identity breaches.
+        type: array
+        items:
+          $ref: '#/definitions/IdentityBreach'
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+  Permission:
+    type: object
+    required:
+    - id
+    - name
+    - description
+    - exposure_level
+    - access_level
+    - times_granted
+    properties:
+      access_level:
+        description: The access level granted by the permission.
+        type: string
+        format: string
+        enum:
+        - read_only
+        - read_write
+        example: read_only
+      category:
+        description: The category of the permission.
+        type: string
+        example: google user
+      description:
+        description: A description of what the permission allows.
+        type: string
+        example: Read user profiles
+      exposure_level:
+        description: The risk level associated with the application or permission.
+        type: string
+        format: string
+        enum:
+        - basic
+        - elevated
+        example: basic
+      id:
+        description: The unique identifier of the permission.
+        type: string
+        example: https://www.googleapis.com/auth/userinfo.email
+      name:
+        description: The name of the permission.
+        type: string
+        example: https://www.googleapis.com/auth/userinfo.email
+      times_granted:
+        description: The number of times this permission has been granted across all users and apps.
+        type: integer
+        format: int64
+        example: 42
+  UserRiskAppUsersListResponse:
+    type: object
+    required:
+    - users
+    properties:
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: e7cfc445-30a6-416c-8a12-0a988f042d08
+      users:
+        description: The list of users using the application.
+        type: array
+        items:
+          $ref: '#/definitions/AppUser'
+  PermissionUser:
+    type: object
+    required:
+    - id
+    - name
+    - email
+    properties:
+      email:
+        description: The email address of the user.
+        type: string
+        example: alex.founder@example.com
+      id:
+        description: The unique identifier of the user.
+        type: string
+        example: 9c22b2c4-9f5b-4547-8e36-64bdbebd7184
+      name:
+        description: The full name of the user.
+        type: string
+        example: Alex Founder
+      risk_rating:
+        description: The security risk rating of the user (0-950).
+        type: integer
+        format: int64
+        example: 750
+      role:
+        description: The role assigned to the user.
+        type: string
+        example: developer
+      team:
+        description: The team the user belongs to.
+        type: string
+        example: product
+  UserAppStats:
+    type: object
+    required:
+    - total_apps
+    properties:
+      total_apps:
+        description: The total number of applications used by the user.
+        type: integer
+        format: int64
+        example: 10
+  UserApp:
+    type: object
+    required:
+    - name
+    - first_detected
+    - usage_policy_outcome
+    - sources
+    properties:
+      approved_replacement_app:
+        $ref: '#/definitions/ApprovedReplacementApp'
+      category:
+        description: The category of the application.
+        type: string
+        example: Project Management
+      description:
+        description: A description of the application.
+        type: string
+        example: Lorem ipsum dolor sit amet
+      domain:
+        description: The domain associated with the application.
+        type: string
+        example: app.asana.com
+      exposure_level:
+        description: The risk level associated with the application.
+        type: string
+        format: string
+        enum:
+        - basic
+        - elevated
+        example: basic
+      first_detected:
+        description: The date and time the application was first detected for this user.
+        type: string
+        format: date-time
+        example: '2023-09-24T15:30:00Z'
+      name:
+        description: The name of the application.
+        type: string
+        example: Asana
+      sources:
+        description: The sources from which the application was detected for this user.
+        type: array
+        items:
+          type: string
+          format: string
+        example:
+        - google
+        - browser
+      usage_policy_outcome:
+        description: The app usage policy outcome that applies to this user for the application.
+        type: string
+        format: string
+        enum:
+        - approve
+        - tolerate
+        - nudge
+        - block
+        example: tolerate
+      vendor_id:
+        description: The unique identifier of the vendor.
+        type: integer
+        format: int64
+        example: 123456789
+      vendor_monitored:
+        description: Indicates whether the vendor is being monitored.
+        type: boolean
+        example: false
+      vendor_name:
+        description: The name of the vendor associated with the application.
+        type: string
+        example: Asana
+      vendor_security_rating:
+        description: The security rating of the vendor (0-950).
+        type: integer
+        format: int64
+        example: 940
+      vendor_security_rating_trend:
+        description: The change in the vendor's security rating in the last 30 days.
+        type: integer
+        format: int64
+        example: 30
+      vendor_using_ai:
+        description: Indicates whether the vendor is known to use AI.
+        type: boolean
+        example: true
+  UserIdentityBreachesStats:
+    type: object
+    required:
+    - active_breaches
+    properties:
+      active_breaches:
+        description: The number of active identity breaches this user was involved in that have not been remediated yet.
+        type: integer
+        format: int64
+        example: 2
+      total_breaches:
+        description: 'The total number of identity breaches this user was involved in.
+
+
+          required: 10'
+        type: integer
+        format: int64
+        example: 5
+  UserRiskUsersListResponse:
+    type: object
+    required:
+    - users
+    properties:
+      next_page_token:
+        description: 'The token to be used to retrieve the next page of results.
+
+          Will not be returned if there are no more results.'
+        type: string
+        example: e7cfc445-30a6-416c-8a12-0a988f042d08
+      users:
+        description: List of users.
+        type: array
+        items:
+          $ref: '#/definitions/User'
+  IdentityBreach:
+    type: object
+    title: IdentityBreach represents a single identity breach in the response.
+    required:
+    - id
+    - title
+    - name
+    - domain
+    - description
+    - breach_type
+    - status
+    - exposed_data_types
+    properties:
+      breach_date:
+        description: The date when the breach occurred.
+        type: string
+        format: date-time
+        example: '2023-09-24T15:30:00Z'
+      breach_type:
+        description: The type of the breach.
+        type: string
+        format: string
+        example: Company
+      description:
+        description: A description of the breach.
+        type: string
+        example: Lorem ipsum dolor sit amet
+      domain:
+        description: The domain associated with the breach.
+        type: string
+        example: example.com
+      exposed_data_types:
+        description: A list of data types exposed in the breach.
+        type: array
+        items:
+          type: string
+        example:
+        - passwords
+        - usernames
+      id:
+        description: The unique identifier of the identity breach.
+        type: string
+        example: 9b89cba1-daa9-4dc7-9ccc-ffdc8027e3ca
+      name:
+        description: The name of the breach.
+        type: string
+        example: Lorem ipsum dolor sit amet
+      published_date:
+        description: The date when the breach was published.
+        type: string
+        format: date-time
+        example: '2023-09-24T15:30:00Z'
+      status:
+        description: The status of the identity breach risk.
+        type: string
+        format: string
+        example: remediated
+      title:
+        description: The title of the breach.
+        type: string
+        example: Lorem ipsum dolor sit amet
+  UserRiskUserPermissionsListResponse:
+    type: object
+    required:
+    - permissions
+    properties:
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+      permissions:
+        description: The list of permissions granted by the user.
+        type: array
+        items:
+          $ref: '#/definitions/UserPermission'
+  UsagePolicy:
+    description: 'UsagePolicy describes the app usage policy applied to an application, including the
+
+      base rule applied by default and any custom rules that override it for specific
+
+      teams, roles, or users.'
+    type: object
+    required:
+    - base_rule
+    - source
+    properties:
+      base_rule:
+        description: The outcome applied to users by default, unless overridden by a custom rule.
+        type: string
+        format: string
+        enum:
+        - approve
+        - tolerate
+        - nudge
+        - block
+        example: tolerate
+      custom_rules:
+        description: 'Custom rules that override the base rule for specific teams, roles, or users,
+
+          keyed by the outcome they apply.'
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/UsagePolicyRule'
+      source:
+        description: Where the application's usage policy is derived from.
+        type: string
+        format: string
+        enum:
+        - org_default
+        - app
+        example: org_default
+  UserIdentityBreachesListResponse:
+    type: object
+    title: UserIdentityBreachesListResponse defines the response structure.
+    required:
+    - identity_breaches
+    properties:
+      identity_breaches:
+        description: The list of identity breaches.
+        type: array
+        items:
+          $ref: '#/definitions/IdentityBreach'
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+  UserMetadata:
+    type: object
+    properties:
+      entra_user_id:
+        description: The Microsoft Entra ID (formerly Azure AD) of the user if any.
+        type: string
+        example: 8fd39fd3-71b2-438e-9709-56fab71ab8d6
+  UserPermission:
+    type: object
+    required:
+    - id
+    - name
+    - description
+    - access_level
+    - app_names
+    properties:
+      access_level:
+        description: The access level granted by the permission.
+        type: string
+        format: string
+        enum:
+        - read_only
+        - read_write
+        example: read_only
+      app_names:
+        description: The list of applications that requested this permission.
+        type: array
+        items:
+          type: string
+        example:
+        - Adobe
+        - Asana
+      category:
+        description: The category of the permission.
+        type: string
+        example: Google User
+      description:
+        description: A description of what the permission allows.
+        type: string
+        example: View your email address
+      exposure_level:
+        description: The risk level associated with the permission.
+        type: string
+        format: string
+        enum:
+        - basic
+        - elevated
+        example: basic
+      id:
+        description: The unique identifier of the permission.
+        type: string
+        example: https://www.googleapis.com/auth/userinfo.email
+      name:
+        description: The name of the permission.
+        type: string
+        example: https://www.googleapis.com/auth/userinfo.email
+  IdentityBreachUsersListResponse:
+    type: object
+    required:
+    - users
+    properties:
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+      users:
+        description: The list of users involved in the identity breach.
+        type: array
+        items:
+          $ref: '#/definitions/IdentityBreachUser'
+  GetUserRiskRolesListResponse:
+    type: object
+    required:
+    - roles
+    properties:
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+      roles:
+        description: The list of roles.
+        type: array
+        items:
+          $ref: '#/definitions/Role'
+  UserRiskUseAppsListResponse:
+    type: object
+    required:
+    - apps
+    properties:
+      apps:
+        description: The list of apps used by the user.
+        type: array
+        items:
+          $ref: '#/definitions/UserApp'
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+  IdentityBreachUser:
+    type: object
+    required:
+    - id
+    - name
+    - email
+    - status
+    properties:
+      email:
+        description: The email address of the user.
+        type: string
+        example: john.doe@example.com
+      id:
+        description: The unique identifier of the user.
+        type: string
+        example: e7cfc445-30a6-416c-8a12-0a988f042d08
+      name:
+        description: The full name of the user.
+        type: string
+        example: John Doe
+      risk_rating:
+        description: The security risk rating of the user (0-950).
+        type: integer
+        format: int64
+        example: 750
+      role:
+        description: The role assigned to the user.
+        type: string
+        example: developer
+      status:
+        description: The status of the user in relation to the breach.
+        type: string
+        format: string
+        example: current
+      team:
+        description: The team the user belongs to.
+        type: string
+        example: product
+  GetUserRiskPermissionsAppsListResponse:
+    type: object
+    required:
+    - apps
+    properties:
+      apps:
+        description: The list of apps that were granted the permission.
+        type: array
+        items:
+          $ref: '#/definitions/App'
+      next_page_token:
+        description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+        type: string
+        example: acbd18db4cc2f85cedef654fccc4a4d8
+securityDefinitions:
+  API key in header:
+    type: apiKey
+    in: header
+    name: Authorization
