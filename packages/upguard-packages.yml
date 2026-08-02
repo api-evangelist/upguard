@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  Registry probes 2026-07-21: npm search "upguard" (no first-party results),
+  PyPI /pypi/upguard/json, RubyGems /api/v1/gems/upguard.json. No first-party
+  client libraries exist for the current CyberRisk API — integrations are raw
+  REST against cyber-risk.upguard.com/api/public.
+packages:
+  - language: python
+    registry: pypi
+    name: upguard
+    url: https://pypi.org/project/upguard/
+    install: pip install upguard
+    official: true
+    version: 0.0.23
+    legacy: true
+    notes: >-
+      "UpGuard SDK for Python" published by UpGuard (homepage upguard.com) for
+      the legacy UpGuard Core appliance API, not the current CyberRisk API.
+  - language: ruby
+    registry: rubygems
+    name: upguard
+    url: https://rubygems.org/gems/upguard
+    install: gem install upguard
+    official: true
+    version: 0.0.18
+    legacy: true
+    notes: >-
+      "UpGuard Core SDK for Ruby" authored by UpGuard Inc (homepage
+      upguard.com) for the legacy UpGuard Core appliance API.
+not_found:
+  - registry: npm
+  - registry: maven-central
+  - registry: nuget
+  - registry: pkg.go.dev
+  - registry: packagist
+  - registry: crates.io

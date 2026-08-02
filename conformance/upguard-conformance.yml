@@ -1,0 +1,48 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/upguard-cyberrisk-openapi-original.json
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: Single securityDefinition of type apiKey (Authorization header); no oauth2 flows.
+  - id: oidc
+    conforms: false
+    evidence: No openIdConnect scheme; /.well-known/openid-configuration is an SPA soft-404.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use a proprietary single-field JSON envelope
+      (#/definitions/endpointError, { "error": string }), not
+      application/problem+json.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Consistent cursor pagination — page_token/page_size request params on 45+
+      list operations with next_page_token in responses.
+  - id: idempotency
+    conforms: false
+    evidence: No idempotency-key mechanism documented for write operations.
+  - id: json:api
+    conforms: false
+    evidence: Plain JSON payloads; no JSON:API media type or document structure.
+  - id: scim
+    conforms: false
+    evidence: No SCIM 2.0 paths or schemas.
+  - id: odata
+    conforms: false
+    evidence: No OData conventions.
+  - id: fhir
+    conforms: false
+    evidence: Not a healthcare API; no FHIR resources.
+  - id: psd2
+    conforms: false
+    evidence: Not a payments API.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: No /.well-known/security.txt on www.upguard.com or cyber-risk.upguard.com (SPA soft-404).
+  - id: soc2-type-ii
+    conforms: true
+    evidence: >-
+      "UpGuard is SOC 2, Type II compliant, and undergoes attestation on an
+      annual basis" — https://www.upguard.com/security; reports shared with
+      customers via the UpGuard Trust Center (https://security.upguard.com/).

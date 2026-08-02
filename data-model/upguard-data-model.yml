@@ -1,0 +1,87 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/upguard-cyberrisk-openapi-original.json
+description: >-
+  Entity-relationship graph of the UpGuard CyberRisk API, derived from the
+  Swagger definitions (271 schemas) and the identifier parameters that link
+  operations (vendor_primary_hostname, subsidiary_primary_hostname, hostname,
+  ip, questionnaire_id, risk_id). The account/organisation is implicit in the
+  API key; vendors are keyed by primary hostname rather than opaque ids.
+entities:
+  - name: Organisation
+    id_field: implicit (API key scope)
+    operations_tag: organisation
+  - name: Vendor
+    id_field: vendor_primary_hostname (also vendor_id)
+    operations_tag: vendors
+  - name: Subsidiary
+    id_field: subsidiary_primary_hostname
+    operations_tag: subsidiaries
+  - name: Domain
+    id_field: hostname
+    operations_tag: domains
+  - name: IP / IPRange
+    id_field: ip
+    operations_tag: ips
+  - name: Risk / AvailableRisk
+    id_field: risk_id
+    operations_tag: risks
+  - name: Vulnerability
+    operations_tag: vulnerabilities
+  - name: IdentityBreach / BreachedIdentity / VIP
+    operations_tag: breaches
+  - name: DataLeaksDisclosure
+    operations_tag: dataleaks
+  - name: TyposquatDomain
+    operations_tag: typosquat
+  - name: Threat
+    operations_tag: threatmonitoring
+  - name: Questionnaire
+    id_field: questionnaire_id
+    operations_tag: vendors (questionnaire ops) / trust_exchange (inbound)
+  - name: TrustCenter / ContentLibraryDocument
+    operations_tag: trust_exchange
+  - name: UserRiskUser / App / Permission / Role / Team
+    operations_tag: userrisk
+  - name: Label
+    operations_tag: labels
+  - name: Notification / Webhook
+    operations_tag: notifications, webhooks
+  - name: Report / CustomReport
+    operations_tag: reports
+  - name: BulkHostname
+    id_field: hostname
+    operations_tag: bulk
+relationships:
+  - subject: Organisation
+    has_many: [Vendor, Subsidiary, Domain, IP, Risk, Vulnerability, Notification, Webhook, Report, Label, BulkHostname, Threat, DataLeaksDisclosure, TyposquatDomain, VIP]
+    via: API key scope
+  - subject: Vendor
+    has_many: [Domain, IP, Risk, Vulnerability, Questionnaire, VendorContact, VendorDocument, AdditionalEvidence, FourthPartyVendor]
+    via: vendor_primary_hostname
+  - subject: Subsidiary
+    has_many: [Domain, IP, IPRange]
+    via: subsidiary_primary_hostname
+  - subject: Domain
+    belongs_to: [Organisation, Vendor, Subsidiary]
+    has_many: [Risk, Vulnerability, Label]
+    via: hostname
+  - subject: IP
+    belongs_to: [Organisation, Vendor, Subsidiary]
+    has_many: [Label]
+    via: ip
+  - subject: Questionnaire
+    belongs_to: [Vendor]
+    has_many: [QuestionnaireAnswer, QuestionnaireComment, QuestionnaireAttachment]
+    via: questionnaire_id
+  - subject: Threat
+    belongs_to: [Organisation]
+    has_many: [ThreatComment, RemediationRequest]
+    via: threat uuid
+  - subject: Webhook
+    belongs_to: [Organisation]
+    has_many: [NotificationType]
+    via: notification_type_ids
+  - subject: UserRiskUser
+    has_many: [App, Permission, IdentityBreach]
+    via: user id / email

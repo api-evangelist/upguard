@@ -1,25 +1,376 @@
 aid: upguard
-name: Upguard
-description: Upguard is a company surfaced as a portfolio company of 500-global and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+name: UpGuard
+description: >-
+  UpGuard is a cybersecurity platform that helps organizations manage and reduce
+  their cyber risk. Its products cover third-party vendor risk management
+  (Vendor Risk), attack surface management and external threat monitoring
+  (Breach Risk), and AI-powered security questionnaire automation and trust
+  center tooling (Trust Exchange). The UpGuard CyberRisk API exposes the
+  platform programmatically — vendors and security ratings, risks and
+  vulnerabilities, domains and IPs, data leak disclosures, identity breaches,
+  typosquatting, questionnaires, subsidiaries, labels, notifications, and
+  webhooks — authenticated with an API key from CyberRisk account settings.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://content.upguard.com/hubfs/open-graph/home.png
 url: https://raw.githubusercontent.com/api-evangelist/upguard/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - 500-global
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: cyberrisk-api-provider
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Cybersecurity
+- Third-Party Risk Management
+- Attack Surface Management
+- Vendor Risk
+- Security Ratings
+- Data Leaks
+- Threat Intelligence
+apis:
+- aid: upguard:upguard-breaches-api
+  name: UpGuard breaches API
+  description: The breaches API from UpGuard — 5 operation(s) for breaches.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - breaches
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-breaches-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-bulk-api
+  name: UpGuard bulk API
+  description: The bulk API from UpGuard — 4 operation(s) for bulk.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - bulk
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-bulk-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-dataleaks-api
+  name: UpGuard dataleaks API
+  description: The dataleaks API from UpGuard — 2 operation(s) for dataleaks.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - dataleaks
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-dataleaks-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-domains-api
+  name: UpGuard domains API
+  description: The domains API from UpGuard — 3 operation(s) for domains.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - domains
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-domains-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-ips-api
+  name: UpGuard ips API
+  description: The ips API from UpGuard — 4 operation(s) for ips.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - ips
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-ips-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-labels-api
+  name: UpGuard labels API
+  description: The labels API from UpGuard — 1 operation(s) for labels.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - labels
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-labels-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-notifications-api
+  name: UpGuard notifications API
+  description: The notifications API from UpGuard — 1 operation(s) for notifications.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-organisation-api
+  name: UpGuard organisation API
+  description: The organisation API from UpGuard — 1 operation(s) for organisation.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - organisation
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-organisation-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-reports-api
+  name: UpGuard reports API
+  description: The reports API from UpGuard — 3 operation(s) for reports.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - reports
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-reports-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-risks-api
+  name: UpGuard risks API
+  description: The risks API from UpGuard — 13 operation(s) for risks.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - risks
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-risks-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-subsidiaries-api
+  name: UpGuard subsidiaries API
+  description: The subsidiaries API from UpGuard — 8 operation(s) for subsidiaries.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - subsidiaries
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-subsidiaries-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-threatmonitoring-api
+  name: UpGuard threatmonitoring API
+  description: The threatmonitoring API from UpGuard — 9 operation(s) for threatmonitoring.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - threatmonitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-threatmonitoring-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-trust-exchange-api
+  name: UpGuard trust_exchange API
+  description: The trust_exchange API from UpGuard — 15 operation(s) for trust_exchange.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - trust_exchange
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-trust-exchange-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-typosquat-api
+  name: UpGuard typosquat API
+  description: The typosquat API from UpGuard — 2 operation(s) for typosquat.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - typosquat
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-typosquat-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-userrisk-api
+  name: UpGuard userrisk API
+  description: The userrisk API from UpGuard — 15 operation(s) for userrisk.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - userrisk
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-userrisk-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-vendors-api
+  name: UpGuard vendors API
+  description: The vendors API from UpGuard — 32 operation(s) for vendors.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - vendors
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-vendors-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-vulnerabilities-api
+  name: UpGuard vulnerabilities API
+  description: The vulnerabilities API from UpGuard — 2 operation(s) for vulnerabilities.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - vulnerabilities
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-vulnerabilities-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
+- aid: upguard:upguard-webhooks-api
+  name: UpGuard webhooks API
+  description: The webhooks API from UpGuard — 3 operation(s) for webhooks.
+  humanURL: https://cyber-risk.upguard.com/api/docs
+  baseURL: https://cyber-risk.upguard.com/api/public
+  tags:
+  - webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/upguard-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://cyber-risk.upguard.com/api/docs
+  - type: APIReference
+    url: https://cyber-risk.upguard.com/api/docs
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: TrustCenter
+  url: security/upguard-trust-center.yml
+- type: DomainSecurity
+  url: security/upguard-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/upguard-agentic-access.yml
+- type: Authentication
+  url: authentication/upguard-authentication.yml
 - type: Website
-  url: https://upguard.com
+  url: https://www.upguard.com
+- type: Documentation
+  url: https://cyber-risk.upguard.com/api/docs
+- type: APIReference
+  url: https://cyber-risk.upguard.com/api/docs
+- type: Support
+  url: https://help.upguard.com
+- type: Blog
+  url: https://www.upguard.com/blog
+- type: Pricing
+  url: https://www.upguard.com/pricing
+- type: SignUp
+  url: https://www.upguard.com/demo
+- type: Login
+  url: https://cyber-risk.upguard.com/login
+- type: TermsOfService
+  url: https://www.upguard.com/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://www.upguard.com/company/privacy
+- type: GitHubOrganization
+  url: https://github.com/ScriptRock
+- type: Integrations
+  url: https://www.upguard.com/integrations
+- type: StatusPage
+  url: https://status.upguard.com
+- type: ChangeLog
+  url: https://www.upguard.com/releases
+- type: ChangeLog
+  url: changelog/upguard-changelog.yml
+- type: LLMsTxt
+  url: llms/upguard-llms.txt
+- type: WellKnown
+  url: well-known/upguard-well-known.yml
+- type: Lifecycle
+  url: lifecycle/upguard-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/upguard-problem-types.yml
+- type: Conventions
+  url: conventions/upguard-conventions.yml
+- type: Conformance
+  url: conformance/upguard-conformance.yml
+- type: Compliance
+  url: https://www.upguard.com/security
+- type: Security
+  url: https://www.upguard.com/security
+- type: VulnerabilityDisclosure
+  url: security/upguard-vulnerability-disclosure.yml
+- type: Packages
+  url: packages/upguard-packages.yml
+- type: SDKs
+  url: packages/upguard-packages.yml
+- type: MCPServer
+  url: mcp/upguard-mcp.yml
+- type: Webhooks
+  url: asyncapi/upguard-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/upguard-data-model.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 23
+  pass: local-v1

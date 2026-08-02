@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: searched
+probe: true
+source: https://www.upguard.com/security
+url: https://security.upguard.com/
+certifications:
+- SOC 2 Type II
+evidence:
+- source: https://www.upguard.com/security
+  kind: security-page
+  quote: >-
+    "UpGuard is SOC 2, Type II compliant, and undergoes attestation on an
+    annual basis. If you're a current customer you can access our reports via
+    UpGuard's shared profile."
+- source: https://security.upguard.com/
+  kind: trust-center
+  note: >-
+    "UpGuard Trust Center" — UpGuard's own public trust page, served by its
+    Trust Exchange product (React app; PUBLIC_TRUST_PAGE_HOSTNAME
+    trust.upguard.com). Security documentation and reports are shared to
+    customers through this profile.
+notes: >-
+  ISO 27001 and other frameworks (NIST, SIG, APRA CPS 230, DORA) appear on
+  upguard.com in the context of compliance frameworks the product helps
+  customers manage — only SOC 2 Type II is explicitly claimed as UpGuard's own
+  attestation, so only it is recorded as a certification here.

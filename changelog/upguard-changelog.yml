@@ -1,0 +1,87 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.upguard.com/releases
+docs: https://www.upguard.com/releases
+description: >-
+  Structured capture of UpGuard's dated release notes. UpGuard ships platform
+  release notes on a roughly biweekly cadence (every second Wednesday) at
+  upguard.com/releases; the CyberRisk API itself carries a semantic version in
+  its Swagger (1.13.2 as captured) but changes are announced through these
+  dated platform releases rather than a versioned API changelog. Recent window
+  only — the live page is the source of truth.
+versioning:
+  scheme: dated platform release notes (biweekly cadence)
+  api_spec_version: 1.13.2
+  detail: lifecycle/upguard-lifecycle.yml
+entries:
+  - date: '2026-07-15'
+    title: Complete questionnaires without closing remediation
+    url: https://www.upguard.com/releases/complete-questionnaires-without-closing-remediation
+    highlights:
+      - Search and filtering for Trust Center access management
+      - IRAP badge for Trust Center
+      - Exclude Entra guest users from monitoring
+      - Multiple approved apps in the browser extension
+      - Severity-first sorting for the Threat Monitoring queue
+  - date: '2026-07-01'
+    title: Company name aliases for smarter detection
+    url: https://www.upguard.com/releases/company-name-aliases-for-smarter-detection
+    highlights:
+      - SharePoint vulnerability detection (CVE-2026-32201)
+  - date: '2026-06-25'
+    title: FortiBleed exposure detection
+    url: https://www.upguard.com/releases/fortibleed-exposure-detection
+  - date: '2026-06-17'
+    title: Updated application usage policy controls
+    url: https://www.upguard.com/releases/updated-application-usage-policy-controls
+    highlights:
+      - Safer web controls with User Risk
+  - date: '2026-06-03'
+    title: New threat signal — published MCP server definitions
+    url: https://www.upguard.com/releases/new-threat-signal-published-mcp-server-definitions
+    highlights:
+      - AI Analyst advice fields in Threat Monitoring exports
+  - date: '2026-05-20'
+    title: Security Profile redesigned for faster vendor reviews
+    url: https://www.upguard.com/releases/security-profile-redesigned-for-faster-vendor-reviews
+    highlights:
+      - Selective social media platform monitoring
+  - date: '2026-05-06'
+    title: Customizable AI prompts for questionnaire responses
+    url: https://www.upguard.com/releases/customizable-ai-prompts-for-questionnaire-responses
+    highlights:
+      - AI confidence ratings for questionnaire responses
+  - date: '2026-04-22'
+    title: Customized AI triage for Threat Monitoring
+    url: https://www.upguard.com/releases/customized-ai-triage-for-threat-monitoring
+    api_changes:
+      - General Availability for Threat Monitoring APIs
+      - Access vendor contact information via API
+    highlights:
+      - Deeper visibility into fourth-party dependencies
+      - Trust Exchange NDA customization and control
+      - Restrict access requests from free email providers
+      - New geopolitical risk indicator — low political freedom
+  - date: '2026-04-08'
+    title: Vendor onboarding portal enhancements
+    url: https://www.upguard.com/releases/vendor-onboarding-portal-enhancements
+    api_changes:
+      - Access fourth-party vendors via API
+  - date: '2026-03-25'
+    title: Expanded API capabilities for greater workflow automation
+    url: https://www.upguard.com/releases/expanded-api-capabilities-for-greater-workflow-automation
+    api_changes:
+      - Expanded API capabilities for greater workflow automation
+    highlights:
+      - Detection for Cisco Catalyst SD-WAN vulnerability (CVE-2026-20127)
+      - Severity filtering for portfolio risk profiles
+  - date: '2026-03-11'
+    title: New geopolitical and trade integrity risk indicators
+    url: https://www.upguard.com/releases/new-geopolitical-and-trade-integrity-risk-indicators
+    highlights:
+      - Risk Automations general availability
+  - date: '2026-02-25'
+    title: Severity filtering for risk profiles
+    url: https://www.upguard.com/releases/severity-filtering-for-risk-profiles
+    highlights:
+      - Extended audit log filtering

@@ -1,0 +1,47 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/upguard-cyberrisk-openapi-original.json
+type: Webhooks
+spec_type: none
+description: >-
+  UpGuard publishes no AsyncAPI document, but the CyberRisk API has a real,
+  documented webhook surface: webhooks are managed via the API itself
+  (/webhooks endpoints), subscribe to platform notification types, and are
+  HMAC-signed. This artifact captures that webhook surface as derived from the
+  published Swagger; the live list of notification types is served by the
+  authenticated /webhooks/notification_types endpoint.
+management:
+  create:
+    operation: create_webhook
+    path: POST /webhooks
+    params:
+      name: The name given to the webhook (required)
+      hook_url: The URL used for sending notifications (required)
+      notification_type_ids: List of notification-type IDs to subscribe to (required)
+      webhook_type: webhook | workflow_webhook (default webhook)
+  list:
+    operation: list_webhooks
+    path: GET /webhooks
+  delete:
+    operation: delete_webhook
+    path: DELETE /webhooks
+  notification_types:
+    operation: webhooks_notification_types
+    path: GET /webhooks/notification_types
+    note: >-
+      Returns the catalog of subscribable notification types with IDs and
+      descriptions (e.g. "When a new data leak is published"); some types are
+      flagged for Zapier availability.
+  sample_payloads:
+    operation: sample_webhook
+    path: GET /webhooks/sample
+    note: Returns example webhook delivery data per notification type.
+security:
+  signing: >-
+    Each webhook receives an HMAC signing secret (hex-encoded, 64 characters)
+    returned once on creation (CreateWebhookResponsePayload.signing_secret) for
+    authenticating deliveries.
+payload:
+  shape: >-
+    Notification deliveries carry the notification description plus a context
+    object of extra metadata (WebhookSampleData: { description, context }).

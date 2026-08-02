@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  Status page probed live (https://status.upguard.com, HTTP 200, "UpGuard
+  CyberRisk Status"); deprecated operations derived from
+  openapi/upguard-cyberrisk-openapi-original.json (deprecated: true flags);
+  release cadence from https://www.upguard.com/releases.
+versioning:
+  scheme: >-
+    Single-track API — the Swagger document carries a semantic version (1.13.2
+    as captured) but endpoints are not URI- or header-versioned; superseded
+    endpoints get /v2 paths (e.g. /available_risks/v2) while the old paths are
+    flagged deprecated in the spec.
+  current: 1.13.2
+  docs: https://cyber-risk.upguard.com/api/docs
+deprecation:
+  policy_url: null
+  published_policy: false
+  sunset_header: false
+  note: >-
+    No public deprecation policy or RFC 8594 Sunset header support found;
+    deprecations are signaled in-spec via deprecated flags and replacement /v2
+    endpoints.
+status_page: https://status.upguard.com
+changelog: https://www.upguard.com/releases
+sla:
+  url: null
+  note: No public API SLA found.
+deprecated_operations:
+  - openapi/upguard-cyberrisk-openapi-original.json#available_risks
+  - openapi/upguard-cyberrisk-openapi-original.json#vendor_questionnaire_risks
+  - openapi/upguard-cyberrisk-openapi-original.json#questionnaires

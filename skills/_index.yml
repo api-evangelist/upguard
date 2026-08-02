@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: generated
+source: >-
+  Packaged Agent Skills generated from the UpGuard CyberRisk API Swagger
+  (openapi/upguard-cyberrisk-openapi-original.json). Every step is grounded in
+  an operationId verified verbatim in the spec; cross-cutting rules cite
+  conventions/, errors/, authentication/ and asyncapi/.
+skills:
+  - file: upguard-monitor-a-vendor.md
+    name: Monitor a vendor and review its risks
+    api: openapi/upguard-cyberrisk-openapi-original.json
+    operations: [monitorvendor, vendor, vendor_update_tier, vendor_risks, vendor_vulnerabilities, unmonitorvendor]
+  - file: upguard-send-vendor-questionnaire.md
+    name: Send and read a vendor security questionnaire
+    api: openapi/upguard-cyberrisk-openapi-original.json
+    operations: [getquestionnairetypes, sendQuestionnaire, questionnairesV2, questionnaireGet, questionnaireAnswers, questionnaireComments, questionnaireAttachmentsGet]
+  - file: upguard-watch-attack-surface.md
+    name: Watch your own attack surface
+    api: openapi/upguard-cyberrisk-openapi-original.json
+    operations: [getOrganisationV1, domains, ips, risks, org_risks_diff, org_vulnerabilities, domain_details]
+  - file: upguard-wire-webhooks.md
+    name: Wire platform notifications to a webhook
+    api: openapi/upguard-cyberrisk-openapi-original.json
+    operations: [webhooks_notification_types, sample_webhook, create_webhook, list_webhooks, delete_webhook]

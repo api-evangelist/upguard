@@ -1,0 +1,38 @@
+# generated: 2026-07-21 | method: generated | source: openapi/upguard-cyberrisk-openapi-original.json
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the UpGuard CyberRisk API
+  version: 1.0.0
+extends: openapi/upguard-cyberrisk-openapi-original.json
+actions:
+  - target: $.info
+    description: Tag the spec with API Evangelist catalog identity and artifact cross-links.
+    update:
+      x-apievangelist:
+        aid: upguard:upguard-cyberrisk-api
+        provider: upguard
+        artifacts:
+          authentication: authentication/upguard-authentication.yml
+          conventions: conventions/upguard-conventions.yml
+          errors: errors/upguard-problem-types.yml
+          lifecycle: lifecycle/upguard-lifecycle.yml
+          data-model: data-model/upguard-data-model.yml
+      contact:
+        name: UpGuard Support
+        url: https://help.upguard.com
+  - target: $.info
+    description: >-
+      Surface the operational links the raw spec omits: status page, release
+      notes, and the help center.
+    update:
+      x-status-page: https://status.upguard.com
+      x-release-notes: https://www.upguard.com/releases
+      x-help-center: https://help.upguard.com
+  - target: $
+    description: >-
+      Record externalDocs pointing at the hosted Redoc reference (the spec is
+      served at /api/swagger.json without externalDocs).
+    update:
+      externalDocs:
+        description: UpGuard CyberRisk API reference (Redoc)
+        url: https://cyber-risk.upguard.com/api/docs

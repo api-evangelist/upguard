@@ -1,0 +1,44 @@
+generated: '2026-07-21'
+method: searched
+note: >-
+  Probed the /.well-known/ discovery surface on both UpGuard hosts.
+  www.upguard.com returns 404 for every probed path.
+  cyber-risk.upguard.com returns HTTP 200 for every path, but the body is the
+  CyberRisk single-page-app HTML shell (catch-all route), not a real well-known
+  document — recorded below as soft_404. No genuine well-known documents are
+  published, so no raw files are saved.
+hosts:
+  - host: https://www.upguard.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://cyber-risk.upguard.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        soft_404: true
+        note: SPA HTML shell, not RFC 9116 security.txt
+      - path: /.well-known/openid-configuration
+        status: 200
+        soft_404: true
+        note: SPA HTML shell, not OIDC discovery JSON
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        soft_404: true
+        note: SPA HTML shell, not RFC 8414 metadata
+      - path: /.well-known/api-catalog
+        status: 200
+        soft_404: true
+        note: SPA HTML shell, not an API catalog
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        soft_404: true
+        note: SPA HTML shell, not a plugin manifest

@@ -1,0 +1,88 @@
+generated: '2026-07-21'
+method: derived
+source: >-
+  openapi/upguard-cyberrisk-openapi-original.json — cross-cutting semantics
+  derived from the published Swagger 2.0 (info.description, shared parameters,
+  shared error envelope); base-URL and auth statements come verbatim from the
+  spec's own description.
+description: >-
+  How the UpGuard CyberRisk API behaves across every operation: API-key
+  authentication, cursor pagination, sorting, label filtering, sparse-response
+  controls, error envelope, and rate-limit signaling.
+
+base_url: https://cyber-risk.upguard.com/api/public
+api_style: REST over HTTPS, query-parameter requests, JSON responses
+
+authentication:
+  scheme: API key passed in the Authorization header (no Bearer prefix declared)
+  source: API keys are found or generated in CyberRisk Account Settings
+  detail: authentication/upguard-authentication.yml
+
+idempotency:
+  supported: false
+  note: >-
+    No idempotency-key header or parameter is documented anywhere in the spec;
+    GET operations dominate the surface (94 of 133 operations) and are
+    inherently idempotent, but writes have no documented replay protection.
+
+pagination:
+  style: cursor
+  request_params:
+    page_token: opaque token for the next page (46 list operations)
+    page_size: results per page (45 operations)
+  response_fields:
+    next_page_token: >-
+      Token to retrieve the next page; the field is missing when there are no
+      more results.
+  sorting:
+    sort_by: field to sort by (29 operations)
+    sort_desc: boolean descending flag (12 operations)
+    sort_dir: sort direction (16 operations)
+
+filtering:
+  labels: >-
+    Many list operations accept a labels query parameter (26 operations);
+    labels are managed via the labels/domain/ip/vendor label-assignment
+    endpoints.
+  identity: >-
+    Vendor-scoped operations key on vendor_primary_hostname /
+    primary_hostname / vendor_id; subsidiary operations on
+    subsidiary_primary_hostname.
+
+sparse_fields:
+  supported: partial
+  mechanism: >-
+    omit_* boolean query parameters (omit_scan_info, omit_vendor, omit_labels)
+    trim heavy sections from responses; include_sources opts additional data
+    in. No general fields/expand parameter.
+
+metadata:
+  supported: false
+  note: No arbitrary key-value metadata mechanism; vendors carry attributes and tiers instead (vendor_update_attributes, vendor_update_tier).
+
+request_tracing:
+  request_id_header: none documented
+
+versioning:
+  scheme: >-
+    Superseded endpoints receive /v2 paths (available_risks_v2,
+    questionnairesV2, vendor_questionnaire_risks_v2) while old paths remain and
+    are flagged deprecated in-spec. Spec document itself is semver'd (1.13.2).
+  detail: lifecycle/upguard-lifecycle.yml
+
+error_envelope:
+  media_type: application/json
+  rfc9457: false
+  shape: '{ "error": "<description of the error>" }'
+  detail: errors/upguard-problem-types.yml
+
+rate_limits:
+  signal_status: 429
+  note: >-
+    Every operation declares a 429 "Too many requests have been made to this
+    endpoint" response; no rate-limit headers or numeric quotas are published
+    in the spec.
+
+webhooks:
+  detail: asyncapi/upguard-webhooks.yml
+  signing: HMAC signing secret (hex, 64 chars) returned once at webhook creation

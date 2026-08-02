@@ -1,0 +1,413 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/upguard-cyberrisk-openapi-original.json
+description: No official UpGuard MCP server was found (official MCP registry search returned zero results;
+  no @upguard npm packages; no MCP mention in the API docs). This is a candidate tool list derived from
+  the CyberRisk API Swagger - one tool per operationId, 133 operations. Notably, UpGuard the product now
+  monitors published MCP server definitions as a threat signal (release 2026-06-03), but ships no MCP
+  server of its own.
+server:
+  name: upguard-cyberrisk
+  transport: http
+  url: null
+tools:
+- name: available_risks
+  description: Get a list of available risks in the platform
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#available_risks
+- name: risk
+  description: Get details for a risk in the platform
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#risk
+- name: available_risks_v2
+  description: Get a list of available risks in the platform
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#available_risks_v2
+- name: identity_breach
+  description: Get the details for an identity breach
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#identity_breach
+- name: breached_identities
+  description: Get a list of breached identities
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#breached_identities
+- name: bulk_list_hostnames
+  description: List hostnames and their risks
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#bulk_list_hostnames
+- name: bulk_register_hostnames
+  description: Register a list of hostnames to be scanned for risks
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#bulk_register_hostnames
+- name: bulk_deregister_hostnames
+  description: Deregister a list of hostnames
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#bulk_deregister_hostnames
+- name: bulk_get_hostnames_stats
+  description: Get statistics around registered bulk hostnames
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#bulk_get_hostnames_stats
+- name: bulk_get_hostname_details
+  description: Get the details for a hostname
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#bulk_get_hostname_details
+- name: bulk_hostname_put_labels
+  description: Assign new labels to a hostname
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#bulk_hostname_put_labels
+- name: dataleaks_disclosures
+  description: Get a list of disclosures
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#dataleaks_disclosures
+- name: dataleaks_disclosures_update_status
+  description: Update the status of a disclosure
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#dataleaks_disclosures_update_status
+- name: domain_details
+  description: Retrieve details for a domain
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#domain_details
+- name: domain_update_labels
+  description: Assign labels to a domain
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#domain_update_labels
+- name: domains
+  description: Get a list of domains
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#domains
+- name: add_custom_domains
+  description: Add custom domains
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#add_custom_domains
+- name: remove_custom_domains
+  description: Remove custom domains
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#remove_custom_domains
+- name: fourth_parties_params
+  description: List fourth party vendors
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#fourth_parties_params
+- name: ip_details
+  description: Retrieve details for an IP address
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#ip_details
+- name: ip_update_labels
+  description: Assign labels to an IP
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#ip_update_labels
+- name: ips
+  description: Get a list of ips
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#ips
+- name: add_custom_ips
+  description: Add custom ips
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#add_custom_ips
+- name: remove_custom_ips
+  description: Remove custom ips
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#remove_custom_ips
+- name: labels
+  description: Get the list of registered labels
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#labels
+- name: get_notifications
+  description: Get a list of notifications for your organization.
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#get_notifications
+- name: onboardingRequestGet
+  description: Get onboarding request details
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#onboardingRequestGet
+- name: onboardingRequestsList
+  description: List onboarding requests
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#onboardingRequestsList
+- name: getOrganisationV1
+  description: Get the current organisation
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getOrganisationV1
+- name: ranges
+  description: Get a list of ip ranges
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#ranges
+- name: custom_reports_list
+  description: Get the list of custom report templates defined for the account
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#custom_reports_list
+- name: queue_report
+  description: Queue a report export
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#queue_report
+- name: report_status
+  description: Get the status of an exported report
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#report_status
+- name: risks
+  description: Get a list of active risks for your account
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#risks
+- name: org_risks_diff
+  description: Get a list of risk changes for your account
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#org_risks_diff
+- name: vendor_risks
+  description: Get a list of active risks for a vendor
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_risks
+- name: vendor_risk_overview_params
+  description: Get portfolio risk profile overview
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_risk_overview_params
+- name: vendor_risks_diff
+  description: Get a list of risk changes for a vendor
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_risks_diff
+- name: vendors_risks_diff
+  description: Get a list of risk changes for monitored vendors
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendors_risks_diff
+- name: get_vendor_hostnames_with_risk_params
+  description: Get vendor hostnames affected by a risk
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#get_vendor_hostnames_with_risk_params
+- name: vendor_questionnaire_risks
+  description: Get a list of questionnaire risks for one or more watched vendors or a specific questionnaire
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_questionnaire_risks
+- name: vendor_questionnaire_risks_v2
+  description: (V2) Get a list of questionnaire risks for one or more watched vendors or a specific questionnaire
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_questionnaire_risks_v2
+- name: get_vendors_with_risk_params
+  description: Get vendors affected by a risk
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#get_vendors_with_risk_params
+- name: subsidiaries
+  description: Get a list of subsidiaries
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#subsidiaries
+- name: subsidiary_domain_details
+  description: Retrieve details for a domain
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#subsidiary_domain_details
+- name: subsidiary_domain_update_labels
+  description: Assign labels to a domain
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#subsidiary_domain_update_labels
+- name: subsidiary_domains
+  description: List subsidiary domains
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#subsidiary_domains
+- name: subsidiary_ip_details
+  description: Retrieve details for an IP address
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#subsidiary_ip_details
+- name: subsidiary_ip_update_labels
+  description: Assign labels to an IP
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#subsidiary_ip_update_labels
+- name: subsidiary_ips
+  description: List subdiary ips
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#subsidiary_ips
+- name: subsidiary_ranges
+  description: List subsidiary ip ranges
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#subsidiary_ranges
+- name: threatmonitoring_details
+  description: Get threat details
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#threatmonitoring_details
+- name: threatmonitoring_close_threat
+  description: Close threat
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#threatmonitoring_close_threat
+- name: threatmonitoring_add_comment
+  description: Add comment to threat
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#threatmonitoring_add_comment
+- name: threatmonitoring_results_count
+  description: Count threats
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#threatmonitoring_results_count
+- name: threatmonitoring_assign_investigator
+  description: Update threat's investigator
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#threatmonitoring_assign_investigator
+- name: threatmonitoring_results
+  description: List threats
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#threatmonitoring_results
+- name: threatmonitoring_remediation
+  description: Add remediation request to threat
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#threatmonitoring_remediation
+- name: threatmonitoring_remediation_close
+  description: Close threat's remediation request
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#threatmonitoring_remediation_close
+- name: threatmonitoring_reopen_threat
+  description: Reopen threat
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#threatmonitoring_reopen_threat
+- name: getContentLibraryDocument
+  description: Get content library document
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getContentLibraryDocument
+- name: createContentLibraryDocument
+  description: Create content library document
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#createContentLibraryDocument
+- name: archiveContentLibraryDocument
+  description: Archive content library document
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#archiveContentLibraryDocument
+- name: deleteContentLibraryDocument
+  description: Delete content library document
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#deleteContentLibraryDocument
+- name: downloadContentLibraryDocument
+  description: Download content library document version
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#downloadContentLibraryDocument
+- name: getContentLibraryDocumentHistory
+  description: Get content library document history
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getContentLibraryDocumentHistory
+- name: listContentLibraryDocuments
+  description: List content library documents
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#listContentLibraryDocuments
+- name: updateContentLibraryDocument
+  description: Update content library document
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#updateContentLibraryDocument
+- name: uploadVersionContentLibraryDocument
+  description: Upload new version of content library document
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#uploadVersionContentLibraryDocument
+- name: getContentLibraryTypes
+  description: List content library document types
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getContentLibraryTypes
+- name: listQuestionnaires
+  description: List inbound questionnaires
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#listQuestionnaires
+- name: getTrustCenter
+  description: Get trust center
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getTrustCenter
+- name: getTrustCenterAccess
+  description: Get trust center access
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getTrustCenterAccess
+- name: getTrustCenterAccessLog
+  description: Get trust center access log
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getTrustCenterAccessLog
+- name: listTrustCenters
+  description: List trust centers
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#listTrustCenters
+- name: getTrustCenterSubscriptions
+  description: Get trust center subscriptions
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getTrustCenterSubscriptions
+- name: listTyposquatDomains
+  description: List typosquat domains
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#listTyposquatDomains
+- name: typosquat_details
+  description: Retrieve typosquat details for a domain.
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#typosquat_details
+- name: getUserRiskAppCategoriesList
+  description: List app categories
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskAppCategoriesList
+- name: getUserRiskAppsList
+  description: List apps
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskAppsList
+- name: getUserRiskAppsPermissionsList
+  description: List app permissions
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskAppsPermissionsList
+- name: getUserRiskAppUsersList
+  description: List app users
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskAppUsersList
+- name: getUserRiskIdentityBreachesList
+  description: List identity breaches
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskIdentityBreachesList
+- name: listIdentityBreachUsers
+  description: List identity breach users
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#listIdentityBreachUsers
+- name: getUserRiskPermissionsAppsList
+  description: List permission apps
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskPermissionsAppsList
+- name: getUserRiskPermissionsList
+  description: List permissions
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskPermissionsList
+- name: getUserRiskPermissionsUsersList
+  description: List permission users
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskPermissionsUsersList
+- name: getUserRiskRolesList
+  description: List roles
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskRolesList
+- name: getUserRiskTeamsList
+  description: List teams
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskTeamsList
+- name: getUserRiskUserAppsList
+  description: List a user apps
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskUserAppsList
+- name: getUserRiskUserIdentityBreachesList
+  description: List a user identity breaches
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskUserIdentityBreachesList
+- name: getUserRiskUsersList
+  description: List users
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskUsersList
+- name: getUserRiskUserPermissionsList
+  description: List a user permissions
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getUserRiskUserPermissionsList
+- name: vendor
+  description: Get vendor details
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor
+- name: additional_evidence
+  description: Retrieve (one or more) vendor additional evidence documents by id
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#additional_evidence
+- name: additional_evidences_list
+  description: List vendor additional evidence instances
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#additional_evidences_list
+- name: vendor_update_attributes
+  description: Assign or update the attributes for a vendor
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_update_attributes
+- name: vendor_contact_get
+  description: Get a vendor contact by ID
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_contact_get
+- name: vendor_contact_list
+  description: List vendor contacts
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_contact_list
+- name: document
+  description: Retrieve (one or more) vendor documents by id
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#document
+- name: documents
+  description: List vendor documents
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#documents
+- name: vendor_domain_details
+  description: Retrieve details for a domain
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_domain_details
+- name: vendor_domain_update_labels
+  description: Assign labels to a domain
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_domain_update_labels
+- name: vendor_domains
+  description: List vendor domains
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_domains
+- name: vendor_ip_details
+  description: Retrieve details for an IP address
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_ip_details
+- name: vendor_ip_update_labels
+  description: Assign labels to an IP
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_ip_update_labels
+- name: vendor_ips
+  description: List vendor ips
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_ips
+- name: vendor_update_labels
+  description: Assign labels to a vendor
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_update_labels
+- name: monitorvendor
+  description: Start monitoring a vendor
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#monitorvendor
+- name: questionnaireGet
+  description: Get questionnaire metadata
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#questionnaireGet
+- name: sendQuestionnaire
+  description: Send a security questionnaire to a vendor
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#sendQuestionnaire
+- name: questionnaireAnswers
+  description: Get questionnaire questions and answers
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#questionnaireAnswers
+- name: attachment
+  description: Retrieve (one or more) vendor questionnaire attachments by id
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#attachment
+- name: questionnaireAttachmentsGet
+  description: List vendor questionnaire attachments
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#questionnaireAttachmentsGet
+- name: questionnaireComments
+  description: Get questionnaire comments
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#questionnaireComments
+- name: getquestionnairetypes
+  description: List available vendor questionnaire types
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#getquestionnairetypes
+- name: questionnaires
+  description: List vendor questionnaires
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#questionnaires
+- name: questionnairesV2
+  description: List vendor questionnaires
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#questionnairesV2
+- name: vendor_ranges
+  description: List vendor ip ranges
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_ranges
+- name: sendrelationshipquestionnaire
+  description: Send a relationship questionnaire about a vendor
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#sendrelationshipquestionnaire
+- name: vendor_update_tier
+  description: Assign tier to a vendor
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_update_tier
+- name: unmonitorvendor
+  description: Stop monitoring a vendor
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#unmonitorvendor
+- name: vendors
+  description: List monitored vendors
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendors
+- name: vip_list
+  description: Get a list of VIPs
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vip_list
+- name: add_vip
+  description: Add a VIP
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#add_vip
+- name: remove_vip
+  description: Remove a VIP
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#remove_vip
+- name: org_vulnerabilities
+  description: List potential vulnerabilities of your domains & IPs
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#org_vulnerabilities
+- name: vendor_vulnerabilities
+  description: List potential vulnerabilities of a vendor
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#vendor_vulnerabilities
+- name: list_webhooks
+  description: List webhooks
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#list_webhooks
+- name: create_webhook
+  description: Create a new webhook
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#create_webhook
+- name: delete_webhook
+  description: Delete a webhook
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#delete_webhook
+- name: webhooks_notification_types
+  description: Webhook notification types
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#webhooks_notification_types
+- name: sample_webhook
+  description: Webhook example data
+  source_operation: openapi/upguard-cyberrisk-openapi-original.json#sample_webhook

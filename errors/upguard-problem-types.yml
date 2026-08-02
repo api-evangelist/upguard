@@ -1,0 +1,49 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/upguard-cyberrisk-openapi-original.json
+format: json-error-envelope
+envelope:
+  media_type: application/json
+  rfc9457: false
+  schema: '#/definitions/endpointError'
+  shape: '{ "error": "<description of the error>" }'
+problems:
+  - status: 400
+    title: Malformed request
+    description: The request was malformed (e.g. invalid JSON body).
+    operations_count: 1
+  - status: 402
+    title: Contract or licensing limit
+    description: >-
+      The requested action would exceed the limits of your contract, or you are
+      not allowed to access / monitor the vendor for licensing reasons.
+    operations_count: 3
+  - status: 403
+    title: Permission denied
+    description: >-
+      Your API key does not have permission to perform this action, or the
+      account does not have access to the requested entities.
+    operations_count: 98
+  - status: 404
+    title: Not found
+    description: >-
+      The requested resource was not found — most commonly the vendor was not
+      found, or the requested domain is not enabled.
+    operations_count: 24
+  - status: 422
+    title: Invalid or missing parameter
+    description: An invalid parameter was supplied or a mandatory parameter was missing.
+    operations_count: 118
+  - status: 429
+    title: Rate limited
+    description: Too many requests have been made to this endpoint.
+    operations_count: 133
+  - status: 500
+    title: Internal system error
+    description: An internal system error occurred.
+    operations_count: 133
+notes: >-
+  Every operation in the CyberRisk API declares 429 and 500; nearly all declare
+  422 and 403. All error responses share the single endpointError envelope — a
+  JSON object with one string field, "error". No application/problem+json (RFC
+  9457) support is declared.

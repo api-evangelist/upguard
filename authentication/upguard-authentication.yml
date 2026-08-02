@@ -1,0 +1,15 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/upguard-cyberrisk-openapi-original.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: API key in header
+  type: apiKey
+  in: header
+  parameter: Authorization
+  sources:
+  - openapi/upguard-cyberrisk-openapi-original.json
