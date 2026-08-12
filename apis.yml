@@ -301,6 +301,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/upguard-cyberrisk-overlay.yaml
 - type: TrustCenter
   url: security/upguard-trust-center.yml
 - type: DomainSecurity
