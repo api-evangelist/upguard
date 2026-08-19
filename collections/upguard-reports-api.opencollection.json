@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches reports API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the list of custom report templates defined for the account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/reports/custom"
+          },
+          "docs": "Use this endpoint to retrieve the list of custom report templates defined for your account.\n\nRequired API key permissions: `Platform` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Queue a report export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/reports/queue",
+            "params": [
+              {
+                "name": "report_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of report to export. Note that each report type may require different parameters to be specified in the request.\n\nWhen *VendorRiskAssessmentPDF* is selected the latest published risk assessment will be used, if no published risk assessment is available for the selected vendor a 422 error will be returned."
+              },
+              {
+                "name": "custom_report_uuid",
+                "value": "",
+                "type": "query",
+                "description": "For an export of type 'CustomPDF', specify the UUID of the custom report to generate. This is a required field for the custom report type."
+              },
+              {
+                "name": "email_addresses",
+                "value": "",
+                "type": "query",
+                "description": "Optionally email the generated report to the specified addresses when it is ready."
+              },
+              {
+                "name": "post_webhook_url",
+                "value": "",
+                "type": "query",
+                "description": "Optionally specify a URL that will receive a POST request when the report is ready.\nThe request will contain a JSON body containing a URL to download the report, in the following format:\n```json\n{\n\"queued_report_id\": \"string\",\n\"download_url\": \"url\"\n\"download_url_expires\": \"string\"\n}\n```"
+              },
+              {
+                "name": "asset_portfolio_names",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset portfolio names. Case-sensitive. Optional. Applicable only when *report_type* is *BreachSightSummaryPDF* or *BreachSightDetailedPDF*."
+              },
+              {
+                "name": "vendor_portfolio_names",
+                "value": "",
+                "type": "query",
+                "description": "Filter by vendor portfolio names. Case-sensitive. Optional. Applicable only when *report_type* is *BoardSummaryPDF*, *BoardSummaryPPTX*, or *VendorRiskExecutiveSummaryPDF*."
+              },
+              {
+                "name": "vendor_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the vendor to generate the report for. Either this, *vendor_primary_hostname* or *filter_by_vendor_hostnames* are required when *report_type* is *VendorSummaryPDF*, *VendorDetailedPDF*, *VendorRiskAssessmentPDF*, *CustomPDF*, *VendorRiskProfileXLSX*, *VendorVulnsOverviewXLSX*, *VendorDomainListPDF*, *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*."
+              },
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "Primary hostname of the vendor to generate the report for. Either this, *vendor_id* or *filter_by_vendor_hostnames* are required when *report_type* is *VendorSummaryPDF*, *VendorDetailedPDF*, *VendorRiskAssessmentPDF*, *CustomPDF*, *VendorRiskProfileXLSX*, *VendorVulnsOverviewXLSX*, *VendorDomainListPDF*, *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*."
+              },
+              {
+                "name": "filter_by_vendor_hostnames",
+                "value": "",
+                "type": "query",
+                "description": "List of hostnames from a single vendor to generate the report for. Either this, *vendor_id* or *vendor_primary_hostname* are required when *report_type* is *VendorSummaryPDF*, *VendorDetailedPDF*, *CustomPDF*, *VendorRiskProfileXLSX*, *VendorVulnsOverviewXLSX* or *VendorDomainListPDF*."
+              },
+              {
+                "name": "filename_prefix",
+                "value": "",
+                "type": "query",
+                "description": "String to use as the first part of the report filename. For vendor reports this will precede the vendor name, and for others the account name.\nA maximum of the first 20 characters (runes) of the supplied string will be used"
+              },
+              {
+                "name": "wait_for_data",
+                "value": "",
+                "type": "query",
+                "description": "When requesting a vendor report, determine if the report should wait for the appropriate data to become available. This is typical of\nreports where the vendor may have only just become known by the system, or the vendor only just been watched by the account. Typically, the report\ngeneration and delivery is delayed by up to 72 hours to allow for the data to become available. This parameter is only valid when *report_type* is\nVendorSummaryPDF*, *VendorDetailedPDF*, *CustomPDF*, *VendorRiskProfileXLSX*, *VendorVulnsOverviewXLSX*, or *VendorDomainListPDF*."
+              },
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the questionnaire to generate the report for. Required when *report_type* is *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*."
+              },
+              {
+                "name": "include_messages",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include correspondence messages in the questionnaire details report. Optional. Applicable only when *report_type* is *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*."
+              },
+              {
+                "name": "include_private_messages",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include private/internal messages in the questionnaire details report. Only available to the questionnaire author organization. Optional. Applicable only when *report_type* is *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*."
+              }
+            ]
+          },
+          "docs": "Asynchronously queues a report for exporting. To use this API, first call this endpoint with the type of report you wish to\ngenerate and any other filtering parameters. You can optionally specify a list of email addresses or a URL\nthat will receive a POST request when the export completes.\n\nWhen a report is queued, you will receive a unique queued_report_id. Use this ID to check the status of the export using the\n`/reports/status` endpoint.\n\nRequired API key permissions: `Platform` (select when "
+        },
+        {
+          "info": {
+            "name": "Get the status of an exported report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/reports/status",
+            "params": [
+              {
+                "name": "queued_report_id",
+                "value": "",
+                "type": "query",
+                "description": "The queued_report_id returned from the /reports/queue endpoint."
+              }
+            ]
+          },
+          "docs": "Poll this endpoint for the status of a report export you have queued. When complete, you will receive a download URL.\n\nRequired API key permissions: `Platform` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

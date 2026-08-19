@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches notifications API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of notifications for your organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/notifications"
+          },
+          "docs": "Returns a list of notifications ordered by their ID. By default, only notifications from the\nlast 7 days are returned.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

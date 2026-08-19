@@ -1,0 +1,4966 @@
+{
+  "item": [
+    {
+      "id": "67dcd225-4fdf-4887-9a5d-7f8abbb97cf8",
+      "name": "trust_exchange",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1327ca56-2ece-43ea-bb18-890bbb52f0f7",
+          "name": "Get content library document",
+          "request": {
+            "name": "Get content library document",
+            "description": {
+              "content": "Returns a single document from the organization's content library by UUID.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "content_library",
+                "document"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "(Required) The UUID of the document."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bc0c442-c781-4d9b-ae0c-d8d2b8925e09",
+              "name": "A single content library document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"created_at\": \"2024-03-20T15:30:00Z\",\n  \"created_by_email\": \"jane@example.com\",\n  \"created_by_name\": \"Jane Smith\",\n  \"description\": \"Our latest SOC 2 Type II report covering the period...\",\n  \"document_type\": \"SOC 2 Report\",\n  \"expires_at\": \"1955-06-11T21:02:58.794Z\",\n  \"internal_notes\": \"Document awaiting update...\",\n  \"name\": \"Q4 2024 SOC 2 Report\",\n  \"published_trust_center_uuids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"unpublished_trust_center_uuids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"updated_at\": \"2024-03-20T15:30:00Z\",\n  \"updated_by_email\": \"john@example.com\",\n  \"updated_by_name\": \"John Doe\",\n  \"usage_count\": 5,\n  \"uuid\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"versions\": [\n    {\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"filename\": \"soc2_report_q4_2024.pdf\",\n      \"version\": 3,\n      \"virus_safe\": true\n    },\n    {\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"filename\": \"soc2_report_q4_2024.pdf\",\n      \"version\": 3,\n      \"virus_safe\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e806a59-06a5-4b79-9606-39af4967b7d0",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a24db86d-fdfd-49da-a62c-aebf088b7936",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "744de543-e1d9-475c-8228-ceffb0008c80",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8051615-03ad-477f-99ff-a8f80483b28c",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96dacdbc-ee14-4fcf-9986-1301f5c8a9c5",
+          "name": "Create content library document",
+          "request": {
+            "name": "Create content library document",
+            "description": {
+              "content": "Creates a new document in the organization's content library via multipart file upload.\n\nRequired API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "content_library",
+                "document"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "document_name",
+                  "value": "<string>",
+                  "description": "(Required) The name of the document."
+                },
+                {
+                  "disabled": false,
+                  "key": "document_type",
+                  "value": "<string>",
+                  "description": "(Required) The document type (e.g. SOC 2 Report, ISO 27001, etc.).\nThis must match an exist document type available for your organization."
+                },
+                {
+                  "disabled": false,
+                  "key": "document_description",
+                  "value": "<string>",
+                  "description": "A description of the document."
+                },
+                {
+                  "disabled": false,
+                  "key": "public_trust_page_access",
+                  "value": "<string>",
+                  "description": "Set whether this document should be accessible without access requests if it is added to a published trust page.\nLeave this param unset to use your organization's default access protection setting."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) The file to upload."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ed1b264f-ecca-4aae-a40e-e8fa4f207e25",
+              "name": "A single content library document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "document_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_trust_page_access",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"created_at\": \"2024-03-20T15:30:00Z\",\n  \"created_by_email\": \"jane@example.com\",\n  \"created_by_name\": \"Jane Smith\",\n  \"description\": \"Our latest SOC 2 Type II report covering the period...\",\n  \"document_type\": \"SOC 2 Report\",\n  \"expires_at\": \"1973-01-26T02:12:37.893Z\",\n  \"internal_notes\": \"Document awaiting update...\",\n  \"name\": \"Q4 2024 SOC 2 Report\",\n  \"published_trust_center_uuids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"unpublished_trust_center_uuids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"updated_at\": \"2024-03-20T15:30:00Z\",\n  \"updated_by_email\": \"john@example.com\",\n  \"updated_by_name\": \"John Doe\",\n  \"usage_count\": 5,\n  \"uuid\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"versions\": [\n    {\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"filename\": \"soc2_report_q4_2024.pdf\",\n      \"version\": 3,\n      \"virus_safe\": true\n    },\n    {\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"filename\": \"soc2_report_q4_2024.pdf\",\n      \"version\": 3,\n      \"virus_safe\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "014b8d2e-0444-434c-9936-6e137acf66d4",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "document_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_trust_page_access",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "446f812c-d5d7-4012-b40e-71fe39c9cb74",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "document_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_trust_page_access",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a463bed9-364b-469d-bd6f-0cf5f63b9d28",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "document_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_trust_page_access",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0835e7d2-458f-4c4f-9c9c-69923f560ad9",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "document_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_trust_page_access",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb0989a9-8466-42ec-b280-8650c03995cc",
+          "name": "Archive content library document",
+          "request": {
+            "name": "Archive content library document",
+            "description": {
+              "content": "Archives or unarchives a document in the organization's content library. If the document is\nincluded in any trust pages, it will be removed from those trust pages before being archived.\n\nRequired API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "content_library",
+                "document",
+                "archive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "(Required) The UUID of the document to archive or unarchive."
+                },
+                {
+                  "disabled": false,
+                  "key": "set_archived",
+                  "value": "<boolean>",
+                  "description": "(Required) Set to true to archive the document, or false to unarchive it."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ef105bd-bdb0-4ded-959e-c32e035ddecb",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "set_archived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "839ee640-fcce-453d-bf1e-c21d971bd619",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "set_archived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c1cad13-5e88-4034-bf09-223fd729c281",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "set_archived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0ec160c-1130-4214-8e4e-4a306aeb3190",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "set_archived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a36f8fdc-9b8b-4a55-b5c8-51d25c6be01d",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "set_archived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4a13b36-374d-4580-b862-6ca2578bd3d1",
+          "name": "Delete content library document",
+          "request": {
+            "name": "Delete content library document",
+            "description": {
+              "content": "Deletes a document from the organization's content library.\nThe document must not be in use by any questionnaires or trust pages.\n\nRequired API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "content_library",
+                "document",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "(Required) The UUID of the document."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33b16be4-19ea-49f5-a1eb-096da50c7583",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1110f5d1-3bd2-49cd-a5ca-cad1ead45fe5",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7114bd02-6737-4e18-b00e-0f3bf0e1e4b7",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9cfd66b-5cbc-4bb4-bc45-0abe07909d11",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb3da478-b890-4fb4-be5c-57e3365e4b8f",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "421f2488-55c5-4f43-8671-9ac95dd8c701",
+          "name": "Download content library document version",
+          "request": {
+            "name": "Download content library document version",
+            "description": {
+              "content": "Downloads the file content of a specific version (or the latest version) of a content library document.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "content_library",
+                "document",
+                "download_version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "(Required) The UUID of the document."
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<long>",
+                  "description": "The version number to download. If omitted, the latest version is returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "181ab7c2-582d-409a-941b-54acf9289316",
+              "name": "Binary file response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "download_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "in: header\nname: Content-Disposition",
+                  "key": "Content-Disposition",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6a5550f7-5af8-425b-beba-936e2fc3087f",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "download_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4a9ae1a6-d1a7-4d20-a91a-ed202bd7460a",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "download_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "647eeac8-94fd-42f3-9de3-ef5279857b91",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "download_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "be3e2c31-2180-4a58-9f39-cd20da6376e3",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "download_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba2f40ee-577e-40e3-903c-73632e7862aa",
+          "name": "Get content library document history",
+          "request": {
+            "name": "Get content library document history",
+            "description": {
+              "content": "Returns the history of changes for a content library document.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "content_library",
+                "document",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "(Required) The UUID of the document."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<long>",
+                  "description": "The number of results to return per page.\nValid values range from 1 to 100.\nDefaults to 50 if not specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Token to retrieve a specific page of results.\nOmit to retrieve the first page.\nUse the `next_page_token` from the previous response to get the next page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90aefa40-fa19-4f61-9e94-3d0a8af69997",
+              "name": "Content library document history response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"history\": [\n    {\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"created_by_email\": \"jane@example.com\",\n      \"created_by_name\": \"Jane Smith\",\n      \"history_data\": {},\n      \"history_type\": \"document_created\"\n    },\n    {\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"created_by_email\": \"jane@example.com\",\n      \"created_by_name\": \"Jane Smith\",\n      \"history_data\": {},\n      \"history_type\": \"document_created\"\n    }\n  ],\n  \"next_page_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0bf08ca-aa9f-40e7-8df2-f1d592ed55f2",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3d9f2e0-4ddd-4841-94e2-f0a68825be6b",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1d684a0-1b9f-49da-923c-9a6dc52f5791",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c96ffc11-4cca-4e19-acaa-c8e35a8979d2",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d828188-983e-4807-b610-905689b03d36",
+          "name": "List content library documents",
+          "request": {
+            "name": "List content library documents",
+            "description": {
+              "content": "Returns a paginated list of documents in the organization's content library.\n\nResults are paginated. Use the `page_size` parameter to control how many results are returned per page.\nUse the `next_page_token` from the response to retrieve subsequent pages.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "content_library",
+                "document",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<long>",
+                  "description": "The number of results to return per page.\nValid values range from 1 to 100.\nDefaults to 10 if not specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Token to retrieve a specific page of results.\nOmit to retrieve the first page.\nUse the `next_page_token` from the previous response to get the next page."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter_name",
+                  "value": "<string>",
+                  "description": "Filter documents by name (substring match, case-insensitive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter_document_types",
+                  "value": "<string>",
+                  "description": "Filter documents by document type names (set this param multiple times to specify multiple types)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter_document_types",
+                  "value": "<string>",
+                  "description": "Filter documents by document type names (set this param multiple times to specify multiple types)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter_added_to_any_trust_center",
+                  "value": "<boolean>",
+                  "description": "Filter to only documents added to any trust center."
+                },
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "<boolean>",
+                  "description": "Set to true to retrieve archived documents. By default, only non-archived documents are returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "971c5eba-3ba3-4088-9a3d-30b812419bf3",
+              "name": "List of content library documents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    },
+                    {
+                      "key": "filter_name",
+                      "value": "SOC"
+                    },
+                    {
+                      "key": "filter_document_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_document_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_added_to_any_trust_center",
+                      "value": "true"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documents\": [\n    {\n      \"archived\": false,\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"created_by_email\": \"jane@example.com\",\n      \"created_by_name\": \"Jane Smith\",\n      \"description\": \"Our latest SOC 2 Type II report covering the period...\",\n      \"document_type\": \"SOC 2 Report\",\n      \"expires_at\": \"1948-02-16T17:33:12.250Z\",\n      \"internal_notes\": \"Document awaiting update...\",\n      \"name\": \"Q4 2024 SOC 2 Report\",\n      \"published_trust_center_uuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"unpublished_trust_center_uuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"updated_at\": \"2024-03-20T15:30:00Z\",\n      \"updated_by_email\": \"john@example.com\",\n      \"updated_by_name\": \"John Doe\",\n      \"usage_count\": 5,\n      \"uuid\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"versions\": [\n        {\n          \"created_at\": \"2024-03-20T15:30:00Z\",\n          \"filename\": \"soc2_report_q4_2024.pdf\",\n          \"version\": 3,\n          \"virus_safe\": true\n        },\n        {\n          \"created_at\": \"2024-03-20T15:30:00Z\",\n          \"filename\": \"soc2_report_q4_2024.pdf\",\n          \"version\": 3,\n          \"virus_safe\": true\n        }\n      ]\n    },\n    {\n      \"archived\": false,\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"created_by_email\": \"jane@example.com\",\n      \"created_by_name\": \"Jane Smith\",\n      \"description\": \"Our latest SOC 2 Type II report covering the period...\",\n      \"document_type\": \"SOC 2 Report\",\n      \"expires_at\": \"1995-09-29T08:08:48.288Z\",\n      \"internal_notes\": \"Document awaiting update...\",\n      \"name\": \"Q4 2024 SOC 2 Report\",\n      \"published_trust_center_uuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"unpublished_trust_center_uuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"updated_at\": \"2024-03-20T15:30:00Z\",\n      \"updated_by_email\": \"john@example.com\",\n      \"updated_by_name\": \"John Doe\",\n      \"usage_count\": 5,\n      \"uuid\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"versions\": [\n        {\n          \"created_at\": \"2024-03-20T15:30:00Z\",\n          \"filename\": \"soc2_report_q4_2024.pdf\",\n          \"version\": 3,\n          \"virus_safe\": true\n        },\n        {\n          \"created_at\": \"2024-03-20T15:30:00Z\",\n          \"filename\": \"soc2_report_q4_2024.pdf\",\n          \"version\": 3,\n          \"virus_safe\": true\n        }\n      ]\n    }\n  ],\n  \"next_page_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e34a2d8b-7b8c-44cd-b64c-d8ddca5b3b5d",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    },
+                    {
+                      "key": "filter_name",
+                      "value": "SOC"
+                    },
+                    {
+                      "key": "filter_document_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_document_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_added_to_any_trust_center",
+                      "value": "true"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e40cf8d2-99d7-4c8b-817c-404c81aaa817",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    },
+                    {
+                      "key": "filter_name",
+                      "value": "SOC"
+                    },
+                    {
+                      "key": "filter_document_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_document_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_added_to_any_trust_center",
+                      "value": "true"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60affb23-a67d-47c4-bb1d-a502b623460b",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    },
+                    {
+                      "key": "filter_name",
+                      "value": "SOC"
+                    },
+                    {
+                      "key": "filter_document_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_document_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_added_to_any_trust_center",
+                      "value": "true"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26a3ea05-3f92-42ad-8a25-36331be135c1",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    },
+                    {
+                      "key": "filter_name",
+                      "value": "SOC"
+                    },
+                    {
+                      "key": "filter_document_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_document_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_added_to_any_trust_center",
+                      "value": "true"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6cf0ea39-a462-4797-b5d0-a2d6b6008800",
+          "name": "Update content library document",
+          "request": {
+            "name": "Update content library document",
+            "description": {
+              "content": "Updates the properties of a document in the organization's content library.\nOnly fields that are provided in the request body are updated; omitted fields are left unchanged.\n\nRequired API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "content_library",
+                "document",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<string>\",\n  \"clear_expires_at\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"document_type\": \"<string>\",\n  \"expires_at\": \"<string>\",\n  \"internal_notes\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "812bf527-9126-40d0-9e74-2a2e3331627f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<string>\",\n  \"clear_expires_at\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"document_type\": \"<string>\",\n  \"expires_at\": \"2025-12-31\",\n  \"internal_notes\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "afe64e16-39f9-4a67-901b-730a29f82006",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<string>\",\n  \"clear_expires_at\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"document_type\": \"<string>\",\n  \"expires_at\": \"2025-12-31\",\n  \"internal_notes\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14db63c1-c0a0-4211-b6e6-16f124bfb446",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<string>\",\n  \"clear_expires_at\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"document_type\": \"<string>\",\n  \"expires_at\": \"2025-12-31\",\n  \"internal_notes\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6046640f-5d71-411e-b89d-a8ce3f4e0518",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<string>\",\n  \"clear_expires_at\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"document_type\": \"<string>\",\n  \"expires_at\": \"2025-12-31\",\n  \"internal_notes\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dad1eac1-12bd-4b23-9281-9ef5e3eee9e6",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<string>\",\n  \"clear_expires_at\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"document_type\": \"<string>\",\n  \"expires_at\": \"2025-12-31\",\n  \"internal_notes\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d0f8104-d9a7-4546-a3ea-7e8419c83949",
+          "name": "Upload new version of content library document",
+          "request": {
+            "name": "Upload new version of content library document",
+            "description": {
+              "content": "Uploads a new version of an existing document in the organization's content library via multipart file upload.\n\nRequired API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "content_library",
+                "document",
+                "upload_version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "(Required) The UUID of the document to upload a new version for."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) The new version file to upload."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "05bbe1f6-c271-47fb-ac0c-81de4183da0b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "upload_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The new version file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d87d3807-9e9a-4eff-a6cf-cfab3af81389",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "upload_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The new version file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a87df34-0c37-4de7-a8d6-d458acebff4f",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "upload_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The new version file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12c97c9d-7ab1-43ac-ae7d-d32e0b4f8ae8",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "upload_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The new version file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c708b5cf-ed48-4566-b803-edc591eaabf2",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "document",
+                    "upload_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The new version file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "258f7ddb-0d99-42fa-9f33-4fdcccc1c797",
+          "name": "List content library document types",
+          "request": {
+            "name": "List content library document types",
+            "description": {
+              "content": "Returns a list of document types available for the organization's content library.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "content_library",
+                "type",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff7bd2f7-ed86-4218-8e2b-6c4a3da3abf8",
+              "name": "List of content library document types.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "type",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"types\": [\n    {\n      \"is_custom\": false,\n      \"name\": \"SOC 2 Report\",\n      \"num_documents\": 3\n    },\n    {\n      \"is_custom\": false,\n      \"name\": \"SOC 2 Report\",\n      \"num_documents\": 3\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec8b6c29-a1ed-4d19-85f4-745766f9dd96",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "type",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c70caa2e-8a38-4e1c-bbc1-b3011fc88be6",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "content_library",
+                    "type",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aee71cf2-c30a-4f3c-bab0-fc01ceb7e935",
+          "name": "List inbound questionnaires",
+          "request": {
+            "name": "List inbound questionnaires",
+            "description": {
+              "content": "Returns a list of inbound security questionnaires that are available to all users in the organisation.\nThis includes all questionnaires where the \"Allow others in my account to reuse answers\" setting is enabled.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "questionnaire",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<long>",
+                  "description": "Number of items per page (1-200, default 50)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Pagination token for the next page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "date_created"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_dir",
+                  "value": "desc"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter_text",
+                  "value": "<string>",
+                  "description": "Filter by text (searches name, sender org, questionnaire type)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31282c7f-9b61-4c10-bd27-752a749445ed",
+              "name": "List of inbound questionnaires.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "questionnaire",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "date_created"
+                    },
+                    {
+                      "key": "sort_dir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "filter_text",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next_page_token\": \"string\",\n  \"questionnaires\": [\n    {\n      \"date_completed\": \"2025-01-25T00:00:00Z\",\n      \"date_created\": \"2025-01-15T00:00:00Z\",\n      \"date_due\": \"2025-02-15T00:00:00Z\",\n      \"date_submitted\": \"2025-01-20T00:00:00Z\",\n      \"id\": 123,\n      \"name\": \"Security Assessment 2025\",\n      \"num_answers\": 25,\n      \"num_questions\": 50,\n      \"questionnaire_type_name\": \"VSAQ\",\n      \"recipients\": [\n        {\n          \"email\": \"alice@example.com\",\n          \"name\": \"Alice Smith\"\n        },\n        {\n          \"email\": \"alice@example.com\",\n          \"name\": \"Alice Smith\"\n        }\n      ],\n      \"sender_org_name\": \"Acme Corp\",\n      \"status\": \"In Progress\"\n    },\n    {\n      \"date_completed\": \"2025-01-25T00:00:00Z\",\n      \"date_created\": \"2025-01-15T00:00:00Z\",\n      \"date_due\": \"2025-02-15T00:00:00Z\",\n      \"date_submitted\": \"2025-01-20T00:00:00Z\",\n      \"id\": 123,\n      \"name\": \"Security Assessment 2025\",\n      \"num_answers\": 25,\n      \"num_questions\": 50,\n      \"questionnaire_type_name\": \"VSAQ\",\n      \"recipients\": [\n        {\n          \"email\": \"alice@example.com\",\n          \"name\": \"Alice Smith\"\n        },\n        {\n          \"email\": \"alice@example.com\",\n          \"name\": \"Alice Smith\"\n        }\n      ],\n      \"sender_org_name\": \"Acme Corp\",\n      \"status\": \"In Progress\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ce05e5a-67fd-474d-b976-be2a1599d5ee",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "questionnaire",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "date_created"
+                    },
+                    {
+                      "key": "sort_dir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "filter_text",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d53ffd18-230a-4e85-8455-2bbc1534b763",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "questionnaire",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "date_created"
+                    },
+                    {
+                      "key": "sort_dir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "filter_text",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1219c5d5-818d-4853-8d38-8ae790a83646",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "questionnaire",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "date_created"
+                    },
+                    {
+                      "key": "sort_dir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "filter_text",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04dcae42-d8be-4dbf-919c-6e7bfbc5fdbf",
+          "name": "Get trust center",
+          "request": {
+            "name": "Get trust center",
+            "description": {
+              "content": "Returns detailed information about a single trust center by UUID.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "trust_center"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "(Required) The UUID of the trust center."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df509046-1183-4b36-96cb-eddcf4414131",
+              "name": "Trust center detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asset_count\": 5,\n  \"company_description\": \"We are a security company.\",\n  \"compliance_badges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"contact_email\": \"jane@example.com\",\n  \"contact_full_name\": \"Jane Smith\",\n  \"contact_role\": \"Security Manager\",\n  \"documents\": [\n    {\n      \"access_protection\": true,\n      \"document_type\": \"SOC 2\",\n      \"filename\": \"soc2-report.pdf\",\n      \"name\": \"SOC 2 Report\",\n      \"uuid\": \"550e8400-e29b-41d4-a716-446655440000\"\n    },\n    {\n      \"access_protection\": true,\n      \"document_type\": \"SOC 2\",\n      \"filename\": \"soc2-report.pdf\",\n      \"name\": \"SOC 2 Report\",\n      \"uuid\": \"550e8400-e29b-41d4-a716-446655440000\"\n    }\n  ],\n  \"include_industry_average\": true,\n  \"include_risk_rating\": true,\n  \"last_updated_at\": \"2024-03-20T15:30:00Z\",\n  \"name\": \"My Trust Center\",\n  \"public_url\": \"https://trust.example.com\",\n  \"published\": true,\n  \"questionnaires\": [\n    {\n      \"access_protection\": true,\n      \"id\": 1234,\n      \"name\": \"SOC 2 Type II\",\n      \"type\": \"SOC 2 Type II\"\n    },\n    {\n      \"access_protection\": true,\n      \"id\": 1234,\n      \"name\": \"SOC 2 Type II\",\n      \"type\": \"SOC 2 Type II\"\n    }\n  ],\n  \"updates\": [\n    {\n      \"body\": \"We have published our latest SOC 2 report.\",\n      \"category\": \"Security\",\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"headline\": \"New SOC 2 Report Available\"\n    },\n    {\n      \"body\": \"We have published our latest SOC 2 report.\",\n      \"category\": \"Security\",\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"headline\": \"New SOC 2 Report Available\"\n    }\n  ],\n  \"uuid\": \"550e8400-e29b-41d4-a716-446655440000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7739459b-2d4d-4f48-a56e-be58bed2988b",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "792f0bec-8418-490d-b6c4-9d5816735477",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a60a460-df73-4f12-a60c-1be4482478f1",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e598a48-6f93-4d3a-8fde-5a7b6d711f10",
+          "name": "Get trust center access",
+          "request": {
+            "name": "Get trust center access",
+            "description": {
+              "content": "Returns information about who has access to trust centers, including users and\norganizations with access, pending access requests, and invited emails.\n\nNOTE: This endpoint is not specific to a single trust center, as access is not specific to a single trust center.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "trust_center",
+                "access"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee10d4a2-0488-4171-a983-bed1b7fcf0ec",
+              "name": "Trust center access detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "access"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_requests\": [\n    {\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"has_signed_nda\": false,\n      \"id\": 456,\n      \"message\": \"Please grant me access to your security documents.\",\n      \"nda_pending_countersign\": false,\n      \"org_name\": \"Acme Corp\",\n      \"requested_resources\": {\n        \"documents\": [\n          {\n            \"uuid\": \"string\"\n          },\n          {\n            \"uuid\": \"string\"\n          }\n        ],\n        \"questionnaires\": [\n          {\n            \"id\": 4818\n          },\n          {\n            \"id\": 701\n          }\n        ]\n      },\n      \"updated_at\": \"2024-03-20T15:30:00Z\",\n      \"user_email\": \"john@example.com\",\n      \"user_name\": \"John Doe\"\n    },\n    {\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"has_signed_nda\": false,\n      \"id\": 456,\n      \"message\": \"Please grant me access to your security documents.\",\n      \"nda_pending_countersign\": false,\n      \"org_name\": \"Acme Corp\",\n      \"requested_resources\": {\n        \"documents\": [\n          {\n            \"uuid\": \"string\"\n          },\n          {\n            \"uuid\": \"string\"\n          }\n        ],\n        \"questionnaires\": [\n          {\n            \"id\": 5625\n          },\n          {\n            \"id\": 426\n          }\n        ]\n      },\n      \"updated_at\": \"2024-03-20T15:30:00Z\",\n      \"user_email\": \"john@example.com\",\n      \"user_name\": \"John Doe\"\n    }\n  ],\n  \"invited_emails\": [\n    \"string\",\n    \"string\"\n  ],\n  \"users_and_orgs_with_access\": [\n    {\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"has_signed_nda\": true,\n      \"nda_exempt\": false,\n      \"nda_manually_approved\": false,\n      \"nda_pending_countersign\": false,\n      \"org_name\": \"Acme Corp\",\n      \"org_primary_hostname\": \"acme.com\",\n      \"resources\": {\n        \"documents\": [\n          {\n            \"expired\": true,\n            \"expires\": \"1980-10-31T12:12:11.083Z\",\n            \"uuid\": \"string\"\n          },\n          {\n            \"expired\": false,\n            \"expires\": \"1958-09-18T05:13:37.887Z\",\n            \"uuid\": \"string\"\n          }\n        ],\n        \"questionnaires\": [\n          {\n            \"expired\": true,\n            \"expires\": \"2001-05-08T04:16:25.415Z\",\n            \"id\": 2126\n          },\n          {\n            \"expired\": true,\n            \"expires\": \"1946-12-05T13:43:40.056Z\",\n            \"id\": 2166\n          }\n        ]\n      },\n      \"updated_at\": \"2024-03-20T15:30:00Z\",\n      \"user_email\": \"jane@example.com\",\n      \"user_name\": \"Jane Smith\"\n    },\n    {\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"has_signed_nda\": true,\n      \"nda_exempt\": false,\n      \"nda_manually_approved\": false,\n      \"nda_pending_countersign\": false,\n      \"org_name\": \"Acme Corp\",\n      \"org_primary_hostname\": \"acme.com\",\n      \"resources\": {\n        \"documents\": [\n          {\n            \"expired\": false,\n            \"expires\": \"2020-02-21T23:57:12.183Z\",\n            \"uuid\": \"string\"\n          },\n          {\n            \"expired\": true,\n            \"expires\": \"1962-10-02T15:00:22.858Z\",\n            \"uuid\": \"string\"\n          }\n        ],\n        \"questionnaires\": [\n          {\n            \"expired\": false,\n            \"expires\": \"1998-07-04T13:41:57.966Z\",\n            \"id\": 9967\n          },\n          {\n            \"expired\": true,\n            \"expires\": \"1988-05-09T08:50:53.206Z\",\n            \"id\": 4358\n          }\n        ]\n      },\n      \"updated_at\": \"2024-03-20T15:30:00Z\",\n      \"user_email\": \"jane@example.com\",\n      \"user_name\": \"Jane Smith\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d68e0626-7931-4039-97fc-472a5551c7a1",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "access"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc8643c8-ed56-40c6-b3a4-025273386b0e",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "access"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0219c4b-565b-473d-90e4-39300762b522",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "access"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c7d95b0-e253-49c5-a386-4ab5a16228c2",
+          "name": "Get trust center access log",
+          "request": {
+            "name": "Get trust center access log",
+            "description": {
+              "content": "Returns the access log for all trust centers, showing who has viewed them or downloaded documents.\n\nResults are paginated. Use the `page_size` parameter to control how many results are returned per page.\nUse the `next_page_token` from the response to retrieve subsequent pages.\n\nNOTE: This endpoint is not specific to a single trust center, as access is not specific to a single trust center.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "trust_center",
+                "access_log"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<long>",
+                  "description": "The number of results to return per page.\nValid values range from 1 to 100.\nDefaults to 50 if not specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Token to retrieve a specific page of results.\nOmit to retrieve the first page.\nUse the `next_page_token` from the previous response to get the next page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ac6c7d2-d1ea-47eb-9261-7d6f273963b2",
+              "name": "Trust center access log.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "access_log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_log\": [\n    {\n      \"action_data\": {},\n      \"action_type\": \"string\",\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"trust_page_uuid\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"user_email\": \"jane@example.com\",\n      \"user_name\": \"Jane Smith\"\n    },\n    {\n      \"action_data\": {},\n      \"action_type\": \"string\",\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"trust_page_uuid\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"user_email\": \"jane@example.com\",\n      \"user_name\": \"Jane Smith\"\n    }\n  ],\n  \"next_page_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8c1f9b0-af77-4f65-8b5b-a0e762abe1fe",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "access_log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7608adb7-3abe-4dbb-8ff4-015670732d3a",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "access_log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90a1b1e0-c4e6-4f42-98c4-3344db926346",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "access_log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93aecb28-0eab-4693-8c4a-a031172dd7e5",
+          "name": "List trust centers",
+          "request": {
+            "name": "List trust centers",
+            "description": {
+              "content": "Returns a list of trust centers for the authenticated organization.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "trust_center",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb4699cd-870b-4eb8-a4ef-d6cfa19a9494",
+              "name": "List of trust centers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trust_centers\": [\n    {\n      \"asset_count\": 5,\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"last_updated_at\": \"2024-03-20T15:30:00Z\",\n      \"name\": \"My Trust Center\",\n      \"public_url\": \"https://trust.example.com\",\n      \"published\": true,\n      \"uuid\": \"550e8400-e29b-41d4-a716-446655440000\"\n    },\n    {\n      \"asset_count\": 5,\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"last_updated_at\": \"2024-03-20T15:30:00Z\",\n      \"name\": \"My Trust Center\",\n      \"public_url\": \"https://trust.example.com\",\n      \"published\": true,\n      \"uuid\": \"550e8400-e29b-41d4-a716-446655440000\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42d6a9a5-b891-4397-84a2-487109660982",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8de6dc1-a823-4c97-97cf-aa04c2ce1502",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72280d50-f4aa-4590-83d2-8b5e11697a60",
+          "name": "Get trust center subscriptions",
+          "request": {
+            "name": "Get trust center subscriptions",
+            "description": {
+              "content": "Returns email subscriptions for trust center updates.\n\nResults are paginated. Use the `page_size` parameter to control how many results are returned per page.\nUse the `next_page_token` from the response to retrieve subsequent pages.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trust_exchange",
+                "trust_center",
+                "subscription",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<long>",
+                  "description": "The number of results to return per page.\nValid values range from 1 to 100.\nDefaults to 100 if not specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Token to retrieve a specific page of results.\nOmit to retrieve the first page.\nUse the `next_page_token` from the previous response to get the next page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3982fb60-3e15-4b4f-aa8d-fda4dfe28321",
+              "name": "Trust center subscriptions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "subscription",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next_page_token\": \"string\",\n  \"subscriptions\": [\n    {\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"email_address\": \"jane@example.com\"\n    },\n    {\n      \"created_at\": \"2024-03-20T15:30:00Z\",\n      \"email_address\": \"jane@example.com\"\n    }\n  ],\n  \"total_results\": 2517\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4bc2964-244a-4572-8ce9-0515e1536be3",
+              "name": "Account does not have access to requested entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "subscription",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cd2ce42-d08b-442d-886b-b3455a5ecef6",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "subscription",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7986684e-a9f9-4155-9772-49a7e4e96965",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "subscription",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da162de1-db56-454a-a18f-0fa45f2d85aa",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trust_exchange",
+                    "trust_center",
+                    "subscription",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ=="
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cyber-risk.upguard.com/api/public",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "94d5c023-bb16-440f-979d-700c79c8ca5b",
+    "name": "UpGuard CyberRisk breaches trust_exchange API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access information from the CyberRisk platform programmatically using this API.\n\nYou can find or generate an API key to access this API in your CyberRisk Account Settings.\nPlease authorize all requests by setting the \"Authorization\" header to your api key.\n\nThe base url for all public endpoints is https://cyber-risk.upguard.com/api/public",
+      "type": "text/plain"
+    }
+  }
+}

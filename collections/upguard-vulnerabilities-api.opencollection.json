@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches vulnerabilities API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "vulnerabilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List potential vulnerabilities of your domains & IPs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vulnerabilities",
+            "params": [
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "A case-insensitive comma separated list of website labels to filter results by"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `next_page_token` from a previous response, use this to get the next page of results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              }
+            ]
+          },
+          "docs": "Returns a list of potential vulnerabilities that have been detected for your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List potential vulnerabilities of a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vulnerabilities/vendor",
+            "params": [
+              {
+                "name": "primary_hostname",
+                "value": "upguard.com",
+                "type": "query",
+                "description": "The primary hostname of the vendor to return vulnerabilities for"
+              }
+            ]
+          },
+          "docs": "Returns a list of potential vulnerabilities that have been detected for a particular vendor.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

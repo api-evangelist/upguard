@@ -1,0 +1,783 @@
+{
+  "item": [
+    {
+      "id": "e036584b-8a4a-4e2b-bd1f-244c4eda13e6",
+      "name": "dataleaks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4bd0120d-c1fd-4875-8e01-c8fea71d19c2",
+          "name": "Get a list of disclosures",
+          "request": {
+            "name": "Get a list of disclosures",
+            "description": {
+              "content": "Returns a list of the disclosures in your account matching the given filters.\n\nRequired API key permissions: `DataLeaks` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataleaks",
+                "disclosures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "min_time",
+                  "value": "<dateTime>",
+                  "description": "The minimum (non-inclusive) timestamp of a disclosure (RFC 3339 format)."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_time",
+                  "value": "<dateTime>",
+                  "description": "The maximum (non-inclusive) timestamp of a disclosure (RFC 3339 format)."
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>",
+                  "description": "A comma-delimited list of statuses that disclosures should match."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "A comma-delimited list of IDs that disclosures should match."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36534bd7-a630-4873-a770-2f5d9beca37b",
+              "name": "Data Leaks disclosed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataleaks",
+                    "disclosures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "min_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "max_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"disclosures\": [\n    {\n      \"date_disclosed\": \"2019-11-09T03:48:57Z\",\n      \"description\": \"Leaked WordPress DB credentials\",\n      \"id\": 3426,\n      \"image\": \"data:image/png;base64,...\",\n      \"implication\": \"Exposed credentials\",\n      \"payload\": \"{}\",\n      \"severity\": 7,\n      \"significance\": \"These credentials are three years old. If they have not been changed, they could provide access to user data.\",\n      \"source\": \"The file's owner is john.doe\",\n      \"status\": \"Disclosed\",\n      \"url\": \"http://wordpresssite.com/wp_config.bak\"\n    },\n    {\n      \"date_disclosed\": \"2019-11-09T03:48:57Z\",\n      \"description\": \"Leaked WordPress DB credentials\",\n      \"id\": 3426,\n      \"image\": \"data:image/png;base64,...\",\n      \"implication\": \"Exposed credentials\",\n      \"payload\": \"{}\",\n      \"severity\": 7,\n      \"significance\": \"These credentials are three years old. If they have not been changed, they could provide access to user data.\",\n      \"source\": \"The file's owner is john.doe\",\n      \"status\": \"Disclosed\",\n      \"url\": \"http://wordpresssite.com/wp_config.bak\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48cdb4e3-47cf-4017-b314-787d1bd3f302",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataleaks",
+                    "disclosures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "min_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "max_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00515285-6fbe-448f-a320-89d0bc453742",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataleaks",
+                    "disclosures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "min_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "max_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "defc534f-a8d9-41f0-9221-f1fce1f79efa",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataleaks",
+                    "disclosures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "min_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "max_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a86d831-fdd3-4c78-9d7d-55a1d52d7056",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataleaks",
+                    "disclosures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "min_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "max_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0071d031-6957-4015-aaac-e0c8f79a09dd",
+          "name": "Update the status of a disclosure",
+          "request": {
+            "name": "Update the status of a disclosure",
+            "description": {
+              "content": "Required API key permissions: `DataLeaks` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataleaks",
+                "disclosures",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "disclosure_id",
+                  "value": "<long>",
+                  "description": "(Required) The ID of the disclosure"
+                },
+                {
+                  "disabled": false,
+                  "key": "new_status",
+                  "value": "<string>",
+                  "description": "(Required) The new status for the disclosure"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_email",
+                  "value": "<string>",
+                  "description": "The email address of the user changing the status (must have a Cyber Risk account with the \"Data Leaks\" role)."
+                },
+                {
+                  "disabled": false,
+                  "key": "comment",
+                  "value": "<string>",
+                  "description": "A comment to accompany the status change, if required"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01d64d2b-5e58-4c52-a0b6-ed151548ef83",
+              "name": " Successful response is empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataleaks",
+                    "disclosures",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "disclosure_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "new_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "63fb5d6d-05e4-4ba7-9f4c-b05738bc816b",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataleaks",
+                    "disclosures",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "disclosure_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "new_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ac8cfe7-6804-4d0d-a944-f337dc32663f",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataleaks",
+                    "disclosures",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "disclosure_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "new_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f123c66-1214-4dbd-9eef-7b59a899fe86",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataleaks",
+                    "disclosures",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "disclosure_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "new_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "854f13a2-95b9-4a6a-909b-c4549052e097",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataleaks",
+                    "disclosures",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "disclosure_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "new_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comment",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cyber-risk.upguard.com/api/public",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "92e9887b-5680-4e2b-90c2-c275b0564c13",
+    "name": "UpGuard CyberRisk breaches dataleaks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access information from the CyberRisk platform programmatically using this API.\n\nYou can find or generate an API key to access this API in your CyberRisk Account Settings.\nPlease authorize all requests by setting the \"Authorization\" header to your api key.\n\nThe base url for all public endpoints is https://cyber-risk.upguard.com/api/public",
+      "type": "text/plain"
+    }
+  }
+}

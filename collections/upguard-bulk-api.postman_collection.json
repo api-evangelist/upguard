@@ -1,0 +1,2191 @@
+{
+  "item": [
+    {
+      "id": "190d3ce2-0241-4da1-9586-a881e573a939",
+      "name": "bulk",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1c770bde-9969-436c-9c5b-19cb43d33446",
+          "name": "List hostnames and their risks",
+          "request": {
+            "name": "List hostnames and their risks",
+            "description": {
+              "content": "Get the list of registered hostnames and their risks. You can use the omit_risks,\nomit_vendor, omit_score and omit_labels query parameter to turn off these information\nfrom the response and quickly get a list of registered hostnames.\n\nThis is an add-on endpoint not available to all accounts. Please contact support for information about bulk endpoints and how to upgrade your account.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bulk",
+                "hostnames"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "The `page_token` from a previous request, use this to get the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "200",
+                  "description": "The number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_desc",
+                  "value": "false",
+                  "description": "Whether to sort the results in descending order."
+                },
+                {
+                  "disabled": false,
+                  "key": "omit_scan_info",
+                  "value": "false",
+                  "description": "Omit the scan information, i.e. risks, score and last scanned at."
+                },
+                {
+                  "disabled": false,
+                  "key": "omit_vendor",
+                  "value": "false",
+                  "description": "Omit the vendor information for a hostname in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "omit_labels",
+                  "value": "false",
+                  "description": "Omit the labels for a hostname in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_active",
+                  "value": "false",
+                  "description": "Exclude active hostnames from the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_inactive",
+                  "value": "false",
+                  "description": "Exclude inactive hostnames from the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "false",
+                  "description": "Filter results to only hostnames that have all the provided labels."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90909977-15f9-4650-98c0-032be27dc9d7",
+              "name": "Returns the list of hostnames and their risks.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "200"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_scan_info",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_vendor",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_labels",
+                      "value": "false"
+                    },
+                    {
+                      "key": "exclude_active",
+                      "value": "false"
+                    },
+                    {
+                      "key": "exclude_inactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hostnames\": [\n    {\n      \"active\": true,\n      \"automated_score\": 800,\n      \"hostname\": \"yTdzTIQXRYGlVqkxRcbEDDGRwaQbA.zqi\",\n      \"labels\": [\n        \"network\",\n        \"data\"\n      ],\n      \"last_scanned_at\": \"2026-07-24T17:35:03.146Z\",\n      \"risks\": [\n        {\n          \"category\": \"vulnerability_management\",\n          \"description\": \"Remote code execution exploit chain consisting of 3 vulnerabilities in Microsoft Exchange Server: CVE-2021-34473, CVE-2021-34523 and CVE-2021-31207\",\n          \"finding\": \"Vulnerable to CVE-2021-34473 (ProxyShell)\",\n          \"id\": \"verified_vuln:CVE-2021-34473\",\n          \"risk\": \"Vulnerabilities\",\n          \"riskSubtype\": \"CVE-2021-34473\",\n          \"riskType\": \"verified_vuln\",\n          \"severity\": \"critical\"\n        },\n        {\n          \"category\": \"vulnerability_management\",\n          \"description\": \"Remote code execution exploit chain consisting of 3 vulnerabilities in Microsoft Exchange Server: CVE-2021-34473, CVE-2021-34523 and CVE-2021-31207\",\n          \"finding\": \"Vulnerable to CVE-2021-34473 (ProxyShell)\",\n          \"id\": \"verified_vuln:CVE-2021-34473\",\n          \"risk\": \"Vulnerabilities\",\n          \"riskSubtype\": \"CVE-2021-34473\",\n          \"riskType\": \"verified_vuln\",\n          \"severity\": \"critical\"\n        }\n      ],\n      \"vendor\": {\n        \"id\": 123456789,\n        \"name\": \"Example Industries\",\n        \"primary_hostname\": \"example.com\"\n      }\n    },\n    {\n      \"active\": true,\n      \"automated_score\": 800,\n      \"hostname\": \"lsTehzmUMIKRCPVoAFGJf.kib\",\n      \"labels\": [\n        \"network\",\n        \"data\"\n      ],\n      \"last_scanned_at\": \"1955-01-21T16:56:34.392Z\",\n      \"risks\": [\n        {\n          \"category\": \"vulnerability_management\",\n          \"description\": \"Remote code execution exploit chain consisting of 3 vulnerabilities in Microsoft Exchange Server: CVE-2021-34473, CVE-2021-34523 and CVE-2021-31207\",\n          \"finding\": \"Vulnerable to CVE-2021-34473 (ProxyShell)\",\n          \"id\": \"verified_vuln:CVE-2021-34473\",\n          \"risk\": \"Vulnerabilities\",\n          \"riskSubtype\": \"CVE-2021-34473\",\n          \"riskType\": \"verified_vuln\",\n          \"severity\": \"critical\"\n        },\n        {\n          \"category\": \"vulnerability_management\",\n          \"description\": \"Remote code execution exploit chain consisting of 3 vulnerabilities in Microsoft Exchange Server: CVE-2021-34473, CVE-2021-34523 and CVE-2021-31207\",\n          \"finding\": \"Vulnerable to CVE-2021-34473 (ProxyShell)\",\n          \"id\": \"verified_vuln:CVE-2021-34473\",\n          \"risk\": \"Vulnerabilities\",\n          \"riskSubtype\": \"CVE-2021-34473\",\n          \"riskType\": \"verified_vuln\",\n          \"severity\": \"critical\"\n        }\n      ],\n      \"vendor\": {\n        \"id\": 123456789,\n        \"name\": \"Example Industries\",\n        \"primary_hostname\": \"example.com\"\n      }\n    }\n  ],\n  \"next_page_token\": \"123456789\",\n  \"total_results\": 1000\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c80b293-5466-4032-b3d8-4ce3ba0b8b5a",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "200"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_scan_info",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_vendor",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_labels",
+                      "value": "false"
+                    },
+                    {
+                      "key": "exclude_active",
+                      "value": "false"
+                    },
+                    {
+                      "key": "exclude_inactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a84d0f5a-aa1d-48d1-94e8-3305b1b47be1",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "200"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_scan_info",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_vendor",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_labels",
+                      "value": "false"
+                    },
+                    {
+                      "key": "exclude_active",
+                      "value": "false"
+                    },
+                    {
+                      "key": "exclude_inactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d842082-f783-4d7e-91d7-8fe0cae33299",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "200"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_scan_info",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_vendor",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_labels",
+                      "value": "false"
+                    },
+                    {
+                      "key": "exclude_active",
+                      "value": "false"
+                    },
+                    {
+                      "key": "exclude_inactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d0569c6-33e6-42ff-b96e-85f878414f57",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "200"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_scan_info",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_vendor",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_labels",
+                      "value": "false"
+                    },
+                    {
+                      "key": "exclude_active",
+                      "value": "false"
+                    },
+                    {
+                      "key": "exclude_inactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "deb740c4-e15d-4a67-83e9-9190d149d14d",
+          "name": "Register a list of hostnames to be scanned for risks",
+          "request": {
+            "name": "Register a list of hostnames to be scanned for risks",
+            "description": {
+              "content": "Register a list of hostnames to be scanned for risks. The provided hostnames must be fully qualified domain names\nor IPv4 addresses. Currently, a maximum of 1000 hostnames in a single request is supported. This will always replace\nthe labels of currently registered hostnames and if the request has empty labels they will all be removed.\n\nThis is an add-on endpoint not available to all accounts. Please contact support for information about bulk endpoints and how to upgrade your account.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bulk",
+                "hostnames"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hostnames\": [\n    \"<hostname>\",\n    \"<hostname>\"\n  ],\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b9eb1ef-02bc-4288-b7c4-9c19ae29a7c6",
+              "name": "Returns the number of newly registered hostnames as well as the number of remaining slots.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hostnames\": [\n    \"8.8.8.8\",\n    \"example.com\"\n  ],\n  \"labels\": [\n    \"network\",\n    \"data\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"registered\": 4,\n  \"remaining\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f65851a-18e0-46b6-95ce-baa0e20292f0",
+              "name": "The requested action would exceed the limits of your contract.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hostnames\": [\n    \"8.8.8.8\",\n    \"example.com\"\n  ],\n  \"labels\": [\n    \"network\",\n    \"data\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60d11749-48a2-41d2-a287-3545631c116a",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hostnames\": [\n    \"8.8.8.8\",\n    \"example.com\"\n  ],\n  \"labels\": [\n    \"network\",\n    \"data\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ca81338-4562-4063-801f-acc050ddcb80",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hostnames\": [\n    \"8.8.8.8\",\n    \"example.com\"\n  ],\n  \"labels\": [\n    \"network\",\n    \"data\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22459687-93b0-42d9-a493-c62600f6f998",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hostnames\": [\n    \"8.8.8.8\",\n    \"example.com\"\n  ],\n  \"labels\": [\n    \"network\",\n    \"data\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a75d8202-700d-43e6-9b82-519fa760ba74",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hostnames\": [\n    \"8.8.8.8\",\n    \"example.com\"\n  ],\n  \"labels\": [\n    \"network\",\n    \"data\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87bfc149-af5a-4fb5-8970-8f155228ce81",
+          "name": "Deregister a list of hostnames",
+          "request": {
+            "name": "Deregister a list of hostnames",
+            "description": {
+              "content": "Deregister a list of hostnames. The provided hostnames must be fully qualified domain names\nor IPv4 addresses. Currently, a maximum of 1000 hostnames in a single request is supported.\n\nThis is an add-on endpoint not available to all accounts. Please contact support for information about bulk endpoints and how to upgrade your account.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bulk",
+                "hostnames"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hostnames\": [\n    \"<hostname>\",\n    \"<hostname>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c3c3fb1-2479-4909-9738-f38d774782ee",
+              "name": "Returns the number of deregistered hostnames as well as the number of remaining slots.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hostnames\": [\n    \"8.8.8.8\",\n    \"example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deregistered\": 4,\n  \"remaining\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c2bb773-486a-42e3-94cd-c5906594ad2a",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hostnames\": [\n    \"8.8.8.8\",\n    \"example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59f1f6ea-8d34-4e0b-b046-1950fcf9b7f6",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hostnames\": [\n    \"8.8.8.8\",\n    \"example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24f3051d-fe35-4790-98da-155620eb12ba",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hostnames\": [\n    \"8.8.8.8\",\n    \"example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "541933b8-3eb8-474d-8477-32e7b4f34a62",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hostnames\": [\n    \"8.8.8.8\",\n    \"example.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a78d3e1-3130-42ee-a855-2803d3a60e2f",
+          "name": "Get statistics around registered bulk hostnames",
+          "request": {
+            "name": "Get statistics around registered bulk hostnames",
+            "description": {
+              "content": "Get statistics for the registered hostnames. This will return the number of registered hostnames, the number of\nremaining slots and the number of active and inactive hostnames\n\nThis is an add-on endpoint not available to all accounts. Please contact support for information about bulk endpoints and how to upgrade your account.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bulk",
+                "hostnames",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "135cddbb-1a4e-4eee-8fef-4d4c56c6cfd3",
+              "name": "Returns the statistics for the registered hostnames.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": 900,\n  \"inactive\": 100,\n  \"registered\": 1000,\n  \"remaining\": 9000\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2754ed95-8cba-479f-9c0a-13b67cf5cf8d",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc909ea5-767c-4a66-a003-c34f76e396fc",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6297b0e0-66b1-49ec-993d-13273a1fb656",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "025499b0-c89c-493c-b11f-5881026b934f",
+          "name": "Get the details for a hostname",
+          "request": {
+            "name": "Get the details for a hostname",
+            "description": {
+              "content": "Get the details for a hostname. The provided hostname must be a fully\nqualified domain name or an IPv4 address.\n\nThis is an add-on endpoint not available to all accounts. Please contact support for information about bulk endpoints and how to upgrade your account.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bulk",
+                "hostnames",
+                ":hostname"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "omit_scan_info",
+                  "value": "false",
+                  "description": "Omit the scan information, i.e. risks, score and last scanned at."
+                },
+                {
+                  "disabled": false,
+                  "key": "omit_vendor",
+                  "value": "false",
+                  "description": "Omit the vendor information for a hostname in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "omit_labels",
+                  "value": "false",
+                  "description": "Omit the labels for a hostname in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<hostname>",
+                  "key": "hostname",
+                  "description": "(Required) The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa244ffa-1b42-4eca-b893-3d654cf706b8",
+              "name": "Returns the details of the hostname.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    ":hostname"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "omit_scan_info",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_vendor",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_labels",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hostname>",
+                      "key": "hostname",
+                      "description": "(Required) The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": true,\n  \"automated_score\": 800,\n  \"hostname\": \"kGaYMjbcAIRyH.gr\",\n  \"labels\": [\n    \"network\",\n    \"data\"\n  ],\n  \"last_scanned_at\": \"1998-09-28T15:28:41.807Z\",\n  \"risks\": [\n    {\n      \"category\": \"vulnerability_management\",\n      \"description\": \"Remote code execution exploit chain consisting of 3 vulnerabilities in Microsoft Exchange Server: CVE-2021-34473, CVE-2021-34523 and CVE-2021-31207\",\n      \"finding\": \"Vulnerable to CVE-2021-34473 (ProxyShell)\",\n      \"id\": \"verified_vuln:CVE-2021-34473\",\n      \"risk\": \"Vulnerabilities\",\n      \"riskSubtype\": \"CVE-2021-34473\",\n      \"riskType\": \"verified_vuln\",\n      \"severity\": \"critical\"\n    },\n    {\n      \"category\": \"vulnerability_management\",\n      \"description\": \"Remote code execution exploit chain consisting of 3 vulnerabilities in Microsoft Exchange Server: CVE-2021-34473, CVE-2021-34523 and CVE-2021-31207\",\n      \"finding\": \"Vulnerable to CVE-2021-34473 (ProxyShell)\",\n      \"id\": \"verified_vuln:CVE-2021-34473\",\n      \"risk\": \"Vulnerabilities\",\n      \"riskSubtype\": \"CVE-2021-34473\",\n      \"riskType\": \"verified_vuln\",\n      \"severity\": \"critical\"\n    }\n  ],\n  \"vendor\": {\n    \"id\": 123456789,\n    \"name\": \"Example Industries\",\n    \"primary_hostname\": \"example.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc901c7e-aef3-483e-a308-ffc5787bdca2",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    ":hostname"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "omit_scan_info",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_vendor",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_labels",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hostname>",
+                      "key": "hostname",
+                      "description": "(Required) The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cab03de-8049-4dc2-b0ef-664c3584db14",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    ":hostname"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "omit_scan_info",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_vendor",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_labels",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hostname>",
+                      "key": "hostname",
+                      "description": "(Required) The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f2dd27a-2a3e-42c1-a7a2-93713af5401a",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    ":hostname"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "omit_scan_info",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_vendor",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_labels",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hostname>",
+                      "key": "hostname",
+                      "description": "(Required) The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1ffbd2c-2502-445e-beda-79df7e292ad8",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    ":hostname"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "omit_scan_info",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_vendor",
+                      "value": "false"
+                    },
+                    {
+                      "key": "omit_labels",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hostname>",
+                      "key": "hostname",
+                      "description": "(Required) The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ccde77dc-d43e-4115-ac86-bfa10d691138",
+          "name": "Assign new labels to a hostname",
+          "request": {
+            "name": "Assign new labels to a hostname",
+            "description": {
+              "content": "Assign labels to a hostname replacing the existing ones if any. To remove all labels use an empty array in the request.\n\nThis is an add-on endpoint not available to all accounts. Please contact support for information about bulk endpoints and how to upgrade your account.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bulk",
+                "hostnames",
+                ":hostname",
+                "labels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<hostname>",
+                  "key": "hostname",
+                  "description": "(Required) The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e5b974d8-a77f-480b-b0bf-100e794832a5",
+              "name": " Successful response is empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    ":hostname",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hostname>",
+                      "key": "hostname",
+                      "description": "(Required) The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e7720271-3138-4765-92ae-548a59df62d7",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    ":hostname",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hostname>",
+                      "key": "hostname",
+                      "description": "(Required) The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b5ced0a-84f6-47e9-8be9-b0fa8a3d11a6",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    ":hostname",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hostname>",
+                      "key": "hostname",
+                      "description": "(Required) The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4561e778-6c0a-485c-81a1-851e29aaf800",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    ":hostname",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hostname>",
+                      "key": "hostname",
+                      "description": "(Required) The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26e9ccdd-7a70-44ce-8875-e69d9ed3f25b",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "hostnames",
+                    ":hostname",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hostname>",
+                      "key": "hostname",
+                      "description": "(Required) The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cyber-risk.upguard.com/api/public",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "15462f6c-c0d2-4f86-8a82-efca4516760a",
+    "name": "UpGuard CyberRisk breaches bulk API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access information from the CyberRisk platform programmatically using this API.\n\nYou can find or generate an API key to access this API in your CyberRisk Account Settings.\nPlease authorize all requests by setting the \"Authorization\" header to your api key.\n\nThe base url for all public endpoints is https://cyber-risk.upguard.com/api/public",
+      "type": "text/plain"
+    }
+  }
+}

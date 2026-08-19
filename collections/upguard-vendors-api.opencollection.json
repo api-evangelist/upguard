@@ -1,0 +1,1027 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches vendors API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "vendors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List fourth party vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fourth_party/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page.\nValid values range from 10 to 2000.\nDefaults to 500 if unset."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The token of the page to be returned.\nWill return the first page if left blank."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label names. Only vendors with all of the provided labels will be returned. If a label does not exist, 422 will be returned."
+              },
+              {
+                "name": "tier",
+                "value": "",
+                "type": "query",
+                "description": "Filter by vendor tier. Only vendors in the specified tiers will be returned."
+              },
+              {
+                "name": "min_score",
+                "value": "",
+                "type": "query",
+                "description": "Filter by watched vendor score. Only fourth party vendors used by watched vendors with a\nscore greater than or equal to this value will be returned.\nValid range: 0-950."
+              },
+              {
+                "name": "max_score",
+                "value": "",
+                "type": "query",
+                "description": "Filter by watched vendor score. Only fourth party vendors used by watched vendors with a\nscore less than or equal to this value will be returned.\nValid range: 0-950."
+              },
+              {
+                "name": "portfolios",
+                "value": "",
+                "type": "query",
+                "description": "Filter by portfolio names. Only vendors in these portfolios will be returned. If a portfolio does not exist, 422 will be returned."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of fourth party (supply chain / concentration risk) vendors and their products\nfor the watched vendors in your organisation.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get onboarding request details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/onboarding_request",
+            "params": [
+              {
+                "name": "id",
+                "value": "12345",
+                "type": "query",
+                "description": "The ID of the onboarding request (survey ID)"
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific vendor onboarding request, including vendor data and assessment links.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List onboarding requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/onboarding_request/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "100",
+                "type": "query",
+                "description": "Number of results per page (1-2000)"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Token for the next page of results"
+              },
+              {
+                "name": "sort_by",
+                "value": "created_at",
+                "type": "query",
+                "description": "Field to sort by\n\nSort order for status is: Complete, Sent, In Progress, In Review, Assessment Underway, Awaiting Review\n\nSort by submitted_by sorts by the name of the submitter"
+              },
+              {
+                "name": "sort_desc",
+                "value": "true",
+                "type": "query",
+                "description": "Sort in descending order, sorts in ascending order if unset"
+              },
+              {
+                "name": "status",
+                "value": "Assessment Underway,Complete",
+                "type": "query",
+                "description": "Comma-separated list of statuses to filter by\n\nValid values: Complete,Sent,In Progress,In Review,Assessment Underway,Awaiting Review"
+              },
+              {
+                "name": "archived",
+                "value": "false",
+                "type": "query",
+                "description": "Filter by archived status"
+              },
+              {
+                "name": "filter_text",
+                "value": "acme",
+                "type": "query",
+                "description": "Text to search for in vendor name or submitter name"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of vendor onboarding requests for the organization.\n\nNote: The id of the onboarding request is also the survey_id of the corresponding onboarding request questionnaire.\nYou can download the question and answers of the onboarding request questionnaire using Get questionnaire questions and answers\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get vendor details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor",
+            "params": [
+              {
+                "name": "id",
+                "value": "123456789",
+                "type": "query",
+                "description": "The ID of the vendor for which to return vendor data. e.g. 123456789"
+              },
+              {
+                "name": "hostname",
+                "value": "upguard.com",
+                "type": "query",
+                "description": "The hostname for which to return vendor data. e.g. \"upguard.com\".\nRequired when id is not specified. When id is specified this field will be ignored."
+              },
+              {
+                "name": "generate_ad_hoc_report",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, if you haven't already used your monthly allocation of ad-hoc reports,\ngenerate an ad-hoc report for the given vendor, and return the vendor data."
+              },
+              {
+                "name": "start_monitoring",
+                "value": "",
+                "type": "query",
+                "description": "NOTE: deprecated (use vendor/monitor instead).\nWhen set to true, if the vendor is not already being monitored,\nand if you are not already monitoring all the vendors your are licensed for,\nstart monitoring the vendor, and return the vendor data."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "NOTE: deprecated (use vendor/monitor instead).\nThe labels to assign to the vendor if start monitoring set to true.\nIf you want to update the labels for an already monitored vendor use the /vendor/labels endpoint."
+              },
+              {
+                "name": "tier",
+                "value": "",
+                "type": "query",
+                "description": "NOTE: deprecated (use vendor/monitor instead).\nThe tier to assign to the vendor if start monitoring is set to true."
+              },
+              {
+                "name": "wait_for_scan",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating whether the request should wait for scan results on new unknown vendors"
+              }
+            ]
+          },
+          "docs": "The following assertions are evaluated (in order) to determine whether you are licensed to view the vendor data (as soon as one assertion returns \"true\", the vendor data will be returned):\n1. You are currently monitoring the vendor in CyberRisk\n2. You have set \"start_monitoring\" to \"true\" AND are not currently monitoring all the vendors you are licensed for in CyberRisk\n3. You have set \"generate_ad_hoc_report\" to \"true\" and have not currently used your monthly allocation of ad-hoc reports in Cyb"
+        },
+        {
+          "info": {
+            "name": "Retrieve (one or more) vendor additional evidence documents by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/additionalevidence",
+            "params": [
+              {
+                "name": "evidence_ids",
+                "value": "",
+                "type": "query",
+                "description": "a comma-separated list of one or more additional evidence instances (by unique id)"
+              },
+              {
+                "name": "zip",
+                "value": "",
+                "type": "query",
+                "description": "indicates that for multiple additional evidence requests, the files should be returned as a multi-file zip"
+              }
+            ]
+          },
+          "docs": "Returns the body of one or more additional evidence documents that have been attached to a specific vendor.\nIf multiple additional evidence documents are requested, then by default the files are returned as a multi-part mime response.\nAlternately, the zip option can be used to return multiple files as a single zip archive"
+        },
+        {
+          "info": {
+            "name": "List vendor additional evidence instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/additionalevidence/list",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to show additional evidence for."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The token of the page to be returned.\nWill return the first page if left blank."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page.\nValid values range from 10 to 2000.\nDefaults to 1000 if unset."
+              }
+            ]
+          },
+          "docs": "Returns a list of additional evidence instances that have been uploaded against this vendor in chronological order of when they were uploaded.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Assign or update the attributes for a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/vendor/attributes"
+          },
+          "docs": "Assign or update the attributes for a vendor. To remove an attribute use null as its value in the payload.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get a vendor contact by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/contact",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The id of the vendor contact to retrieve."
+              }
+            ]
+          },
+          "docs": "Returns the vendor contact details for the given contact ID.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List vendor contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/contact/list",
+            "params": [
+              {
+                "name": "vendor_id",
+                "value": "",
+                "type": "query",
+                "description": "The id of the vendor to retrieve contacts for."
+              },
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to retrieve contacts for."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              }
+            ]
+          },
+          "docs": "Returns a list of vendor contacts for a given vendor.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Retrieve (one or more) vendor documents by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/document",
+            "params": [
+              {
+                "name": "document_ids",
+                "value": "",
+                "type": "query",
+                "description": "a comma-separated list of one or more documents (by unique id)"
+              },
+              {
+                "name": "zip",
+                "value": "",
+                "type": "query",
+                "description": "indicates that for multiple document requests, the files should be returned as a multi-file zip"
+              }
+            ]
+          },
+          "docs": "Returns the body of one or more documents that have been attached to a specific vendor.\nIf multiple documents are requested, then by default the files are returned as a multi-part mime response.\nAlternately, the zip option can be used to return multiple files as a single zip archive"
+        },
+        {
+          "info": {
+            "name": "List vendor documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/documents",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to show documents for."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The token of the page to be returned.\nWill return the first page if left blank."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page.\nValid values range from 10 to 2000.\nDefaults to 1000 if unset."
+              }
+            ]
+          },
+          "docs": "Returns a list of documents that have been uploaded against this vendor in chronological order of when they were uploaded.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Retrieve details for a domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/domain",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to show the domain detail for."
+              },
+              {
+                "name": "hostname",
+                "value": "",
+                "type": "query",
+                "description": "The hostname for which to return the details, e.g. \"upguard.com\""
+              }
+            ]
+          },
+          "docs": "Returns the details for a domain. It will return 422 when requesting details of an inactive domain.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Assign labels to a domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/vendor/domain/labels",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to update the domain labels for."
+              },
+              {
+                "name": "hostname",
+                "value": "",
+                "type": "query",
+                "description": "The hostname to update labels for"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "The labels to assign to the domain. You can pass an empty array to remove all labels."
+              }
+            ]
+          },
+          "docs": "Assign labels to a domain. To remove all labels pass an empty list.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List vendor domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/domains",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to show domains for."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve active domains"
+              },
+              {
+                "name": "inactive",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve inactive domains"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter result by the provided labels"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The value to sort the domains by\n\nIf not specified will default to `domain` and set `sort_desc` to `true`"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to sort the results in descending order"
+              }
+            ]
+          },
+          "docs": "Returns a list of domains for a vendor.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Retrieve details for an IP address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/ip",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to show the IP detail for."
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "The IP address to get details for"
+              }
+            ]
+          },
+          "docs": "Returns the details of the IP address. It will return 422 when requesting details of an inactive IP address.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Assign labels to an IP",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/vendor/ip/labels",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to update the IP labels for."
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "The IP to update labels for"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "The labels to assign to the IP. You can pass an empty array to remove all labels."
+              }
+            ]
+          },
+          "docs": "Assign labels to an IP. To remove all labels pass an empty list.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List vendor ips",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/ips",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to show ips for."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter result by the provided labels"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The value to sort the IPs by\n\nIf not specified will default to `ip` and set `sort_desc` to `true`"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to sort the results in descending order"
+              }
+            ]
+          },
+          "docs": "Returns a list of ips for a vendor.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Assign labels to a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/vendor/labels",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to update labels for."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "The labels to assign to the vendor. You can pass an empty array to remove all labels."
+              }
+            ]
+          },
+          "docs": "Assign labels to a vendor. To remove all labels pass an empty list.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Start monitoring a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/vendor/monitor",
+            "params": [
+              {
+                "name": "id",
+                "value": "123456789",
+                "type": "query",
+                "description": "The ID of the vendor to begin monitoring. e.g. 123456789"
+              },
+              {
+                "name": "hostname",
+                "value": "upguard.com",
+                "type": "query",
+                "description": "The hostname of the vendor to be monitored. e.g. \"upguard.com\".\nRequired when id is not specified. When id is specified this field will be ignored."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "The labels to assign to the vendor.\nIf you want to update the labels for an already monitored vendor use the /vendor/labels endpoint."
+              },
+              {
+                "name": "tier",
+                "value": "",
+                "type": "query",
+                "description": "The tier to assign to the vendor."
+              },
+              {
+                "name": "wait_for_scan",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating whether the request should wait for scan results on new unknown vendors."
+              }
+            ]
+          },
+          "docs": "Request will fail if you are currently monitoring all the vendors you are licensed for in CyberRisk."
+        },
+        {
+          "info": {
+            "name": "Get questionnaire metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/questionnaire",
+            "params": [
+              {
+                "name": "id",
+                "value": "12345",
+                "type": "query",
+                "description": "The ID of the questionnaire"
+              }
+            ]
+          },
+          "docs": "Returns metadata about a specific questionnaire including recipients, completion status, and score.\nNote: This endpoint only supports private questionnaires, not public questionnaires.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Send a security questionnaire to a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/vendor/questionnaire"
+          },
+          "docs": "Request a vendor questionnaire to be sent to one or more nominated email addresses.\nVendor must be already monitored in UpGuard.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)\n\nThe following merge tags are supported for email_title and email_subject text:\n+ Vendor name {{VendorName}}\n+ Account name {{AccountName}}\n+ Questionnaire type {{QuestionnaireType}}\n+ Due date {{DueDate}}\n\nThe following merge tags are supported for email_message text:\n+ Vend"
+        },
+        {
+          "info": {
+            "name": "Get questionnaire questions and answers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/questionnaire/answers",
+            "params": [
+              {
+                "name": "id",
+                "value": "12345",
+                "type": "query",
+                "description": "The ID of the questionnaire"
+              }
+            ]
+          },
+          "docs": "Returns a list of all visible questions in the questionnaire with their answers.\nNote: This endpoint only supports private questionnaires, not public questionnaires.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Retrieve (one or more) vendor questionnaire attachments by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/questionnaire/attachment",
+            "params": [
+              {
+                "name": "attachment_ids",
+                "value": "",
+                "type": "query",
+                "description": "a comma-separated list of one or more attachments (by unique id)"
+              },
+              {
+                "name": "zip",
+                "value": "",
+                "type": "query",
+                "description": "indicates that for multiple attachment requests, the files should be returned as a multi-file zip"
+              }
+            ]
+          },
+          "docs": "Returns the body of one or more questionnaire attachments that have been attached to a one or more vendor questionnaire instances.\nIf multiple attachments are requested, then by default the files are returned as a multi-part mime response.\nAlternately, the zip option can be used to return multiple files as a single zip archive"
+        },
+        {
+          "info": {
+            "name": "List vendor questionnaire attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/questionnaire/attachment/list",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "query",
+                "description": "The id of the specific questionnaire of whose attachments are of interest"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The token of the page to be returned.\nWill return the first page if left blank."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page.\nValid values range from 10 to 2000.\nDefaults to 1000 if unset."
+              }
+            ]
+          },
+          "docs": "Returns a list of questionnaire attachments that have been attached to a specific questionnaire instance in chronological order of when they were uploaded.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get questionnaire comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/questionnaire/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "12345",
+                "type": "query",
+                "description": "The ID of the questionnaire"
+              }
+            ]
+          },
+          "docs": "Returns all comments for a questionnaire grouped by question ID with threaded replies.\nComments are organized in a map where keys are question IDs (or \"top_level\" for comments not associated with a question).\nWithin each group, comments are sorted by creation date in descending order (oldest first).\nEach comment may have nested replies.\nNote: Comments are only available for private questionnaires, not public questionnaires.\n\nRequired API key permissions: `VendorRisk` (select when creating API ke"
+        },
+        {
+          "info": {
+            "name": "List available vendor questionnaire types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/questionnaire_types"
+          },
+          "docs": "Required API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List vendor questionnaires",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/questionnaires",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to which the questionnaires were sent."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The token of the page to be returned.\nWill return the first page if left blank."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page.\nValid values range from 10 to 2000.\nDefaults to 1000 if unset."
+              },
+              {
+                "name": "usage_type",
+                "value": "",
+                "type": "query",
+                "description": "The usage type of questionnaires to return\nValid values: security, relationship\nDefaults to 'security' if not set"
+              }
+            ]
+          },
+          "docs": "Returns a list of questionnaires that have been sent to this vendor in chronological order of when they were sent.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List vendor questionnaires",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/questionnaires/v2",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to which the questionnaires were sent."
+              },
+              {
+                "name": "vendor_id",
+                "value": "",
+                "type": "query",
+                "description": "The id of the vendor to which the questionnaires were sent."
+              },
+              {
+                "name": "usage_type",
+                "value": "",
+                "type": "query",
+                "description": "The usage type of questionnaires to return\nValid values: security, relationship\nDefaults to 'security' if not set"
+              },
+              {
+                "name": "exclude_archived",
+                "value": "",
+                "type": "query",
+                "description": "Optionally exclude archived questionnaires"
+              }
+            ]
+          },
+          "docs": "Returns a list of questionnaires that have been sent to this vendor in chronological order of when they were sent.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List vendor ip ranges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendor/ranges",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to show ips for."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter result by the provided labels"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The value to sort the IP ranges by\n\nIf not specified will default to `num_ips` and set `sort_desc` to `true`"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to sort the results in descending order"
+              }
+            ]
+          },
+          "docs": "Returns a list of ip ranges for a vendor.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Send a relationship questionnaire about a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/vendor/relationship_questionnaire"
+          },
+          "docs": "Request a vendor relationship questionnaire to be sent to a nominated email address.\nVendor must be already monitored in UpGuard\n\nA relationship questionnaire must be set up (in UpGuard) prior to the request.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Assign tier to a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/vendor/tier",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The primary hostname of the vendor to update tier for."
+              },
+              {
+                "name": "tier",
+                "value": "",
+                "type": "query",
+                "description": "The tier to assign to the vendor. You can pass a value of zero to remove a tier"
+              }
+            ]
+          },
+          "docs": "Assign tier to a vendor. To remove a tier pass a value of zero.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Stop monitoring a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/vendor/unmonitor",
+            "params": [
+              {
+                "name": "id",
+                "value": "123456789",
+                "type": "query",
+                "description": "The ID of the vendor to stop monitoring. e.g. 123456789"
+              },
+              {
+                "name": "hostname",
+                "value": "upguard.com",
+                "type": "query",
+                "description": "The hostname of the vendor to stop monitoring. e.g. \"upguard.com\"\nRequired when id is not specified. When id is specified this field will be ignored."
+              }
+            ]
+          },
+          "docs": "A vendor will be removed from the monitored vendors list of the account."
+        },
+        {
+          "info": {
+            "name": "List monitored vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendors",
+            "params": [
+              {
+                "name": "include_ad_hoc_reports",
+                "value": "",
+                "type": "query",
+                "description": "Include vendors with an existing ad hoc report in the results."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The token of the page to be returned.\nWill return the first page if left blank."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page.\nValid values range from 10 to 2000.\nDefaults to 1000 if unset."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter result by the provided labels"
+              },
+              {
+                "name": "include_risks",
+                "value": "",
+                "type": "query",
+                "description": "Include risks"
+              }
+            ]
+          },
+          "docs": "If the include_ad_hoc_reports parameter is set to true then vendors with ad hoc reports available will also be returned.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

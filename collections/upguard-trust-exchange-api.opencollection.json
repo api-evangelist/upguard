@@ -1,0 +1,396 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches trust_exchange API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "trust_exchange",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get content library document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/trust_exchange/content_library/document",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The UUID of the document."
+              }
+            ]
+          },
+          "docs": "Returns a single document from the organization's content library by UUID.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Create content library document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/trust_exchange/content_library/document",
+            "params": [
+              {
+                "name": "document_name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the document."
+              },
+              {
+                "name": "document_type",
+                "value": "",
+                "type": "query",
+                "description": "The document type (e.g. SOC 2 Report, ISO 27001, etc.).\nThis must match an exist document type available for your organization."
+              },
+              {
+                "name": "document_description",
+                "value": "",
+                "type": "query",
+                "description": "A description of the document."
+              },
+              {
+                "name": "public_trust_page_access",
+                "value": "",
+                "type": "query",
+                "description": "Set whether this document should be accessible without access requests if it is added to a published trust page.\nLeave this param unset to use your organization's default access protection setting."
+              }
+            ]
+          },
+          "docs": "Creates a new document in the organization's content library via multipart file upload.\n\nRequired API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Archive content library document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/trust_exchange/content_library/document/archive",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The UUID of the document to archive or unarchive."
+              },
+              {
+                "name": "set_archived",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to archive the document, or false to unarchive it."
+              }
+            ]
+          },
+          "docs": "Archives or unarchives a document in the organization's content library. If the document is\nincluded in any trust pages, it will be removed from those trust pages before being archived.\n\nRequired API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Delete content library document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/trust_exchange/content_library/document/delete",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The UUID of the document."
+              }
+            ]
+          },
+          "docs": "Deletes a document from the organization's content library.\nThe document must not be in use by any questionnaires or trust pages.\n\nRequired API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Download content library document version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/trust_exchange/content_library/document/download_version",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The UUID of the document."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "The version number to download. If omitted, the latest version is returned."
+              }
+            ]
+          },
+          "docs": "Downloads the file content of a specific version (or the latest version) of a content library document.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get content library document history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/trust_exchange/content_library/document/history",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The UUID of the document."
+              },
+              {
+                "name": "page_size",
+                "value": "100",
+                "type": "query",
+                "description": "The number of results to return per page.\nValid values range from 1 to 100.\nDefaults to 50 if not specified."
+              },
+              {
+                "name": "page_token",
+                "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ==",
+                "type": "query",
+                "description": "Token to retrieve a specific page of results.\nOmit to retrieve the first page.\nUse the `next_page_token` from the previous response to get the next page."
+              }
+            ]
+          },
+          "docs": "Returns the history of changes for a content library document.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List content library documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/trust_exchange/content_library/document/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "10",
+                "type": "query",
+                "description": "The number of results to return per page.\nValid values range from 1 to 100.\nDefaults to 10 if not specified."
+              },
+              {
+                "name": "page_token",
+                "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ==",
+                "type": "query",
+                "description": "Token to retrieve a specific page of results.\nOmit to retrieve the first page.\nUse the `next_page_token` from the previous response to get the next page."
+              },
+              {
+                "name": "filter_name",
+                "value": "SOC",
+                "type": "query",
+                "description": "Filter documents by name (substring match, case-insensitive)."
+              },
+              {
+                "name": "filter_document_types",
+                "value": "SOC 2 Report",
+                "type": "query",
+                "description": "Filter documents by document type names (set this param multiple times to specify multiple types)."
+              },
+              {
+                "name": "filter_added_to_any_trust_center",
+                "value": "true",
+                "type": "query",
+                "description": "Filter to only documents added to any trust center."
+              },
+              {
+                "name": "archived",
+                "value": "false",
+                "type": "query",
+                "description": "Set to true to retrieve archived documents. By default, only non-archived documents are returned."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of documents in the organization's content library.\n\nResults are paginated. Use the `page_size` parameter to control how many results are returned per page.\nUse the `next_page_token` from the response to retrieve subsequent pages.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Update content library document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/trust_exchange/content_library/document/update"
+          },
+          "docs": "Updates the properties of a document in the organization's content library.\nOnly fields that are provided in the request body are updated; omitted fields are left unchanged.\n\nRequired API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Upload new version of content library document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/trust_exchange/content_library/document/upload_version",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The UUID of the document to upload a new version for."
+              }
+            ]
+          },
+          "docs": "Uploads a new version of an existing document in the organization's content library via multipart file upload.\n\nRequired API key permissions: `TrustExchange` and `ReadWrite` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List content library document types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/trust_exchange/content_library/type/list"
+          },
+          "docs": "Returns a list of document types available for the organization's content library.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List inbound questionnaires",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/trust_exchange/questionnaire/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page (1-200, default 50)"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token for the next page of results"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter_text",
+                "value": "",
+                "type": "query",
+                "description": "Filter by text (searches name, sender org, questionnaire type)"
+              }
+            ]
+          },
+          "docs": "Returns a list of inbound security questionnaires that are available to all users in the organisation.\nThis includes all questionnaires where the \"Allow others in my account to reuse answers\" setting is enabled.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get trust center",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/trust_exchange/trust_center",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The UUID of the trust center."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a single trust center by UUID.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get trust center access",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/trust_exchange/trust_center/access"
+          },
+          "docs": "Returns information about who has access to trust centers, including users and\norganizations with access, pending access requests, and invited emails.\n\nNOTE: This endpoint is not specific to a single trust center, as access is not specific to a single trust center.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get trust center access log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/trust_exchange/trust_center/access_log",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "100",
+                "type": "query",
+                "description": "The number of results to return per page.\nValid values range from 1 to 100.\nDefaults to 50 if not specified."
+              },
+              {
+                "name": "page_token",
+                "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ==",
+                "type": "query",
+                "description": "Token to retrieve a specific page of results.\nOmit to retrieve the first page.\nUse the `next_page_token` from the previous response to get the next page."
+              }
+            ]
+          },
+          "docs": "Returns the access log for all trust centers, showing who has viewed them or downloaded documents.\n\nResults are paginated. Use the `page_size` parameter to control how many results are returned per page.\nUse the `next_page_token` from the response to retrieve subsequent pages.\n\nNOTE: This endpoint is not specific to a single trust center, as access is not specific to a single trust center.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List trust centers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/trust_exchange/trust_center/list"
+          },
+          "docs": "Returns a list of trust centers for the authenticated organization.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get trust center subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/trust_exchange/trust_center/subscription/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "100",
+                "type": "query",
+                "description": "The number of results to return per page.\nValid values range from 1 to 100.\nDefaults to 100 if not specified."
+              },
+              {
+                "name": "page_token",
+                "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ==",
+                "type": "query",
+                "description": "Token to retrieve a specific page of results.\nOmit to retrieve the first page.\nUse the `next_page_token` from the previous response to get the next page."
+              }
+            ]
+          },
+          "docs": "Returns email subscriptions for trust center updates.\n\nResults are paginated. Use the `page_size` parameter to control how many results are returned per page.\nUse the `next_page_token` from the response to retrieve subsequent pages.\n\nRequired API key permissions: `TrustExchange` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

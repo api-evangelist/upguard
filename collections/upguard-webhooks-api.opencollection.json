@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches webhooks API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/webhooks"
+          },
+          "docs": "List all registered webhooks.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Create a new webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/webhooks",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name given to the webhook"
+              },
+              {
+                "name": "hook_url",
+                "value": "",
+                "type": "query",
+                "description": "The URL used for sending notifications"
+              },
+              {
+                "name": "notification_type_ids",
+                "value": "",
+                "type": "query",
+                "description": "The list of notifications to subscribe to. For a list of supported notification\ntypes and their IDs use the /api/public/webhooks/notification_types endpoint."
+              },
+              {
+                "name": "webhook_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of webhook to create"
+              }
+            ]
+          },
+          "docs": "Create a new webhook subscribing to the provided list of notifications.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Delete a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/webhooks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The id of the webhook to delete"
+              }
+            ]
+          },
+          "docs": "Delete a webhook by ID.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Webhook notification types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/webhooks/notification_types"
+          },
+          "docs": "Get a list of available webhook notification types and their descriptions for your organisation.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Webhook example data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/webhooks/sample",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a webhook. If specified sample data for all the\nnotification types registered for that webhook will be returned."
+              },
+              {
+                "name": "notification_type_ids",
+                "value": "",
+                "type": "query",
+                "description": "A list of notification type IDs you need sample data for.\nIf a webhook ID is provided this parameter is ignored."
+              }
+            ]
+          },
+          "docs": "Get the example data for one or more notification types.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

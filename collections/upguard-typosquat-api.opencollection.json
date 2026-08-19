@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches typosquat API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "typosquat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List typosquat domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/typosquat"
+          },
+          "docs": "Returns the list of enabled typosquatting domains.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Retrieve typosquat details for a domain.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/typosquat/details",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "The domain for which to return typosquat details. e.g. \"upguard.com\""
+              }
+            ]
+          },
+          "docs": "If the requested domain is not enabled a 404 will be returned.\nUse the /typosquat to retrieve the list of enabled domains first.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

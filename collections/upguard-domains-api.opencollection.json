@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches domains API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "domains",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve details for a domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/domain",
+            "params": [
+              {
+                "name": "hostname",
+                "value": "",
+                "type": "query",
+                "description": "The hostname for which to return the details, e.g. \"upguard.com\""
+              }
+            ]
+          },
+          "docs": "Returns the details for a domain. It will return 422 when requesting details of an inactive domain.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Assign labels to a domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/domain/labels",
+            "params": [
+              {
+                "name": "hostname",
+                "value": "",
+                "type": "query",
+                "description": "The hostname to update labels for"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "The labels to assign to the domain. You can pass an empty array to remove all labels."
+              }
+            ]
+          },
+          "docs": "Assign labels to a domain. To remove all labels pass an empty list.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get a list of domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/domains",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve active domains"
+              },
+              {
+                "name": "inactive",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve inactive domains"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter result by the provided labels"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The value to sort the domains by\n\nIf not specified will default to `domain` and set `sort_desc` to `true`"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to sort the results in descending order"
+              }
+            ]
+          },
+          "docs": "Returns a list of domains for your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Add custom domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/domains",
+            "params": [
+              {
+                "name": "hostnames",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of hostnames to add"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "The labels to add to the hostnames"
+              }
+            ]
+          },
+          "docs": "Add a list of custom domains to your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Remove custom domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/domains",
+            "params": [
+              {
+                "name": "hostnames",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of hostnames to remove. Only hostnames or labels can be specified not both"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "A list of labels whose hostnames will be removed. All custom domains with at least one of the provided labels will be removed. Only hostnames or labels can be specified not both"
+              }
+            ]
+          },
+          "docs": "Remove custom domains from your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

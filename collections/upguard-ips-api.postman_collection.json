@@ -1,0 +1,2021 @@
+{
+  "item": [
+    {
+      "id": "e367f9fa-b83d-44ce-b570-5ca17ccc4cd6",
+      "name": "ips",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a9c2212-5bd3-4b41-a73e-ad8638dd681c",
+          "name": "Retrieve details for an IP address",
+          "request": {
+            "name": "Retrieve details for an IP address",
+            "description": {
+              "content": "Returns the details of the IP address. It will return 422 when requesting details of an inactive IP address.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ip"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ip",
+                  "value": "<string>",
+                  "description": "(Required) The IP address to get details for"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e31220d8-9150-44bd-9187-43c886f95e48",
+              "name": "IP details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"as_name\": \"string\",\n  \"asn\": 6681,\n  \"automated_score\": 1866,\n  \"check_results\": [\n    {\n      \"actual\": [\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"category\": \"string\",\n      \"checked_at\": \"1992-12-08T02:51:29.704Z\",\n      \"description\": \"string\",\n      \"expected\": [\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"pass\": false,\n      \"riskSubtype\": \"CVE-2021-34473\",\n      \"riskType\": \"verified_vuln\",\n      \"severity\": 6735,\n      \"severityName\": \"critical\",\n      \"sources\": [\n        \"string\",\n        \"string\"\n      ],\n      \"title\": \"string\"\n    },\n    {\n      \"actual\": [\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"category\": \"string\",\n      \"checked_at\": \"1958-08-15T21:33:45.617Z\",\n      \"description\": \"string\",\n      \"expected\": [\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"pass\": false,\n      \"riskSubtype\": \"CVE-2021-34473\",\n      \"riskType\": \"verified_vuln\",\n      \"severity\": 9275,\n      \"severityName\": \"high\",\n      \"sources\": [\n        \"string\",\n        \"string\"\n      ],\n      \"title\": \"string\"\n    }\n  ],\n  \"country\": \"string\",\n  \"domains\": [\n    {\n      \"automated_score\": 3887,\n      \"hostname\": \"string\"\n    },\n    {\n      \"automated_score\": 7794,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"ip\": \"string\",\n  \"labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"owner\": \"string\",\n  \"services\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sources\": [\n    \"string\",\n    \"string\"\n  ],\n  \"waived_check_results\": [\n    {\n      \"actual\": [\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"category\": \"string\",\n      \"checked_at\": \"1999-09-09T18:26:45.756Z\",\n      \"description\": \"string\",\n      \"expected\": [\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"pass\": false,\n      \"riskSubtype\": \"CVE-2021-34473\",\n      \"riskType\": \"verified_vuln\",\n      \"severity\": 4936,\n      \"severityName\": \"low\",\n      \"sources\": [\n        \"string\",\n        \"string\"\n      ],\n      \"title\": \"string\"\n    },\n    {\n      \"actual\": [\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"category\": \"string\",\n      \"checked_at\": \"1992-03-05T11:25:36.243Z\",\n      \"description\": \"string\",\n      \"expected\": [\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"property\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"pass\": false,\n      \"riskSubtype\": \"CVE-2021-34473\",\n      \"riskType\": \"verified_vuln\",\n      \"severity\": 2292,\n      \"severityName\": \"medium\",\n      \"sources\": [\n        \"string\",\n        \"string\"\n      ],\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe3a3d53-f4ff-43a4-b368-e8b663df5c60",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed4e3f49-4b4f-4f2f-8503-f8665f6da4bf",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c08c9ffa-ead1-44c2-8156-1aaca0dc34f0",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f042643-e180-4c31-80ef-f09aee7cfde2",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5de2b202-0fd2-4828-b82f-e8a1504cda59",
+          "name": "Assign labels to an IP",
+          "request": {
+            "name": "Assign labels to an IP",
+            "description": {
+              "content": "Assign labels to an IP. To remove all labels pass an empty list.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ip",
+                "labels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ip",
+                  "value": "<long>",
+                  "description": "(Required) The IP to update labels for"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>,<string>",
+                  "description": "(Required) The labels to assign to the IP. You can pass an empty array to remove all labels."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b0a5e54-7a3e-4f58-bdfc-f10ad101858a",
+              "name": " Successful response is empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ip",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ip",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "acb19786-b57a-4068-98bc-616d71b0dfa2",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ip",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ip",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0c45ca5-fb5d-4a0e-948f-56f538034087",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ip",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ip",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c0a1b28-7a3a-4897-8654-c22b7284f27c",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ip",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ip",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d09e2fa7-dee6-4e80-bb06-d62e004928c4",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ip",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ip",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de480155-f909-4629-b06d-eafd8d5d29fb",
+          "name": "Get a list of ips",
+          "request": {
+            "name": "Get a list of ips",
+            "description": {
+              "content": "Returns a list of ips for your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ips"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>,<string>",
+                  "description": "Filter result by the provided labels"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "The `page_token` from a previous request, use this to get the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "1000",
+                  "description": "The number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "ip",
+                  "description": "The value to sort the IPs by\n\nIf not specified will default to `ip` and set `sort_desc` to `true`"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_desc",
+                  "value": "false",
+                  "description": "Whether or not to sort the results in descending order"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "926f24e9-7e34-48bb-bbe8-cd0551f1bdad",
+              "name": "A list of ips",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "ip"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ips\": [\n    {\n      \"as_name\": \"string\",\n      \"asn\": 5083,\n      \"automated_score\": 8209,\n      \"country\": \"string\",\n      \"ip\": \"string\",\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"owner\": \"string\",\n      \"services\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sources\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"as_name\": \"string\",\n      \"asn\": 9763,\n      \"automated_score\": 6990,\n      \"country\": \"string\",\n      \"ip\": \"string\",\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"owner\": \"string\",\n      \"services\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sources\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"next_page_token\": \"string\",\n  \"total_results\": 3592\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6b986bd-d165-4732-a063-d1628966ceb0",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "ip"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17e81d90-c4e3-41b1-9f12-386e7b5ed430",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "ip"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d94735f-ad75-4806-a66b-32c10c707694",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "ip"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e1197ba-87cc-4230-adfc-7708c51084e2",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "ip"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1d0af3d-ba9e-4071-8d3b-b054c3b327c6",
+          "name": "Add custom ips",
+          "request": {
+            "name": "Add custom ips",
+            "description": {
+              "content": "Add a list of custom ips to your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ips"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ips",
+                  "value": "<string>,<string>",
+                  "description": "(Required) The list of ips to add"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>,<string>",
+                  "description": "The labels to assign to the ips when added."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b3a48b4-9728-4379-8be3-c2eb1df7748c",
+              "name": " Successful response is empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ips",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f4cc5bcb-1131-4600-837d-16b7518df8df",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ips",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91968b7e-250d-4c8b-a468-3487d75defaa",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ips",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f46b320-d911-43f6-bccd-4a9aaab8ca60",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ips",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19953e13-600e-4f54-a3be-daeaa150361d",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ips",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a29d6011-4e7b-4a75-862a-9c2debc3c47d",
+          "name": "Remove custom ips",
+          "request": {
+            "name": "Remove custom ips",
+            "description": {
+              "content": "Remove custom ips from your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ips"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ips",
+                  "value": "<string>,<string>",
+                  "description": "A comma separated list of ips to remove. Only ips or labels can be specified not both"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>,<string>",
+                  "description": "A list of labels whose domains will be removed. All custom IPs with at least one of the provided labels will be removed. Only ips or labels can be specified not both"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b92ff5c2-23b1-4897-a65a-c4030bc8307f",
+              "name": " Successful response is empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ips",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "49490641-5399-49f5-8304-023e62203bd9",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ips",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "979a9d2c-6b7b-4d92-8e3e-042a65dc93ab",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ips",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdae3adc-c430-45d8-acf9-5abec0282e66",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ips",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce4ab789-5ec2-4c0a-9e43-07031226416c",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ips",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e26c7e9f-ee82-416f-b6ba-a827cac951ea",
+          "name": "Get a list of ip ranges",
+          "request": {
+            "name": "Get a list of ip ranges",
+            "description": {
+              "content": "Returns a list of ip ranges for your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ranges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>,<string>",
+                  "description": "Filter result by the provided labels"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "The `page_token` from a previous request, use this to get the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "1000",
+                  "description": "The number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "num_ips",
+                  "description": "The value to sort the IP ranges by\n\nIf not specified will default to `num_ips` and set `sort_desc` to `true`"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_desc",
+                  "value": "false",
+                  "description": "Whether or not to sort the results in descending order"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87b6f120-b258-4046-aa91-f652d5d5f660",
+              "name": "A list of ranges",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ranges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "num_ips"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next_page_token\": \"string\",\n  \"ranges\": [\n    {\n      \"as_name\": \"string\",\n      \"asn\": 9768,\n      \"country\": \"string\",\n      \"end\": \"string\",\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"num_ips\": 5816,\n      \"owner\": \"string\",\n      \"sources\": [\n        \"string\",\n        \"string\"\n      ],\n      \"start\": \"string\"\n    },\n    {\n      \"as_name\": \"string\",\n      \"asn\": 7291,\n      \"country\": \"string\",\n      \"end\": \"string\",\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"num_ips\": 2099,\n      \"owner\": \"string\",\n      \"sources\": [\n        \"string\",\n        \"string\"\n      ],\n      \"start\": \"string\"\n    }\n  ],\n  \"total_results\": 6990\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0514d0f2-7d27-4edc-b69d-4ee8f5f19fab",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ranges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "num_ips"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df23cfd7-14e6-4c4b-8472-e509d66c7a8b",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ranges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "num_ips"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5975dbc-95e0-4aef-b273-e582a4265136",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ranges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "num_ips"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36e07706-757c-4bfd-a5e0-9630b3b12c9c",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ranges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labels",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "num_ips"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cyber-risk.upguard.com/api/public",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "54434f37-647d-40ce-b183-5b211574b9a0",
+    "name": "UpGuard CyberRisk breaches ips API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access information from the CyberRisk platform programmatically using this API.\n\nYou can find or generate an API key to access this API in your CyberRisk Account Settings.\nPlease authorize all requests by setting the \"Authorization\" header to your api key.\n\nThe base url for all public endpoints is https://cyber-risk.upguard.com/api/public",
+      "type": "text/plain"
+    }
+  }
+}

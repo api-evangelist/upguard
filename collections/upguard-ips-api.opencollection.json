@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches ips API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ips",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve details for an IP address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ip",
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "The IP address to get details for"
+              }
+            ]
+          },
+          "docs": "Returns the details of the IP address. It will return 422 when requesting details of an inactive IP address.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Assign labels to an IP",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/ip/labels",
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "The IP to update labels for"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "The labels to assign to the IP. You can pass an empty array to remove all labels."
+              }
+            ]
+          },
+          "docs": "Assign labels to an IP. To remove all labels pass an empty list.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get a list of ips",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ips",
+            "params": [
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter result by the provided labels"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The value to sort the IPs by\n\nIf not specified will default to `ip` and set `sort_desc` to `true`"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to sort the results in descending order"
+              }
+            ]
+          },
+          "docs": "Returns a list of ips for your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Add custom ips",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/ips",
+            "params": [
+              {
+                "name": "ips",
+                "value": "",
+                "type": "query",
+                "description": "The list of ips to add"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "The labels to assign to the ips when added."
+              }
+            ]
+          },
+          "docs": "Add a list of custom ips to your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Remove custom ips",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/ips",
+            "params": [
+              {
+                "name": "ips",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of ips to remove. Only ips or labels can be specified not both"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "A list of labels whose domains will be removed. All custom IPs with at least one of the provided labels will be removed. Only ips or labels can be specified not both"
+              }
+            ]
+          },
+          "docs": "Remove custom ips from your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get a list of ip ranges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ranges",
+            "params": [
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter result by the provided labels"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The value to sort the IP ranges by\n\nIf not specified will default to `num_ips` and set `sort_desc` to `true`"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to sort the results in descending order"
+              }
+            ]
+          },
+          "docs": "Returns a list of ip ranges for your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

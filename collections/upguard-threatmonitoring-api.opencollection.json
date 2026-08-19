@@ -1,0 +1,411 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches threatmonitoring API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "threatmonitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get threat details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/threatmonitoring/threat",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "UUID of the result whose details we require"
+              }
+            ]
+          },
+          "docs": "Retrieve the detailed data for a specific threat, identified by UUID.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Close threat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/threatmonitoring/threat/close",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the threat to close"
+              },
+              {
+                "name": "reason",
+                "value": "",
+                "type": "query",
+                "description": "The reason for closing the threat. Must be one of: false_positive, risk_accepted, remediated"
+              },
+              {
+                "name": "justification",
+                "value": "",
+                "type": "query",
+                "description": "The justification for accepting the risk (required if reason is 'risk_accepted')"
+              },
+              {
+                "name": "remediation_reason",
+                "value": "",
+                "type": "query",
+                "description": "The remediation reason. Must be one of: content_removed_or_privatised, affected_users_credentials_reset, system_patched, requested_takedown, compensating_controls, other (required if reason is 'remediated')"
+              },
+              {
+                "name": "remediation_description",
+                "value": "",
+                "type": "query",
+                "description": "Additional details for the remediation reason (required if remediation_reason is 'other')"
+              }
+            ]
+          },
+          "docs": "Closes a specific threat, identified by UUID, with the given reason. The reason must be one of: false_positive, risk_accepted, remediated.\n\nFor reason 'false_positive': No additional parameters are required.\nFor reason 'risk_accepted': The 'justification' parameter is required and must contain a free-form text explaining why the risk is accepted.\nFor reason 'remediated': The 'remediation_reason' parameter is required and must be one of: content_removed_or_privatised, affected_users_credentials_r"
+        },
+        {
+          "info": {
+            "name": "Add comment to threat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/threatmonitoring/threat/comment/add",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the threat to add a comment to"
+              },
+              {
+                "name": "parent_id",
+                "value": "100000000000000",
+                "type": "query",
+                "description": "Optional parent comment ID if this is a reply to another comment"
+              },
+              {
+                "name": "private",
+                "value": "",
+                "type": "query",
+                "description": "Optional flag to mark the comment as private. Only valid for threats under remediation."
+              }
+            ]
+          },
+          "docs": "Adds a comment to a specific threat, identified by UUID. Comments can only be added to threats in 'investigating' or 'remediating' state.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Count threats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/threatmonitoring/threat/count",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query",
+                "description": "Limit findings to this threat monitoring module."
+              },
+              {
+                "name": "date_period",
+                "value": "",
+                "type": "query",
+                "description": "The period within which results have been detected."
+              },
+              {
+                "name": "date_period_timezone",
+                "value": "",
+                "type": "query",
+                "description": "The timezone for DatePeriod as per the IANA Time Zone database. Default is UTC."
+              },
+              {
+                "name": "transforms",
+                "value": "mydomain.com",
+                "type": "query",
+                "description": "A list of matching transforms to filter results by. Repeat the parameter to supply multiple values."
+              },
+              {
+                "name": "severities",
+                "value": "",
+                "type": "query",
+                "description": "A list of matching severities to filter results by. Repeat the parameter to supply multiple values."
+              },
+              {
+                "name": "threat_types",
+                "value": "",
+                "type": "query",
+                "description": "A list of matching threat types to filter results by. Repeat the parameter to supply multiple values."
+              },
+              {
+                "name": "source_types",
+                "value": "",
+                "type": "query",
+                "description": "A list of matching source types to filter results by. Repeat the parameter to supply multiple values."
+              },
+              {
+                "name": "auto_dismissed",
+                "value": "",
+                "type": "query",
+                "description": "Limits threats to those auto-dismissed by an AI analyst"
+              },
+              {
+                "name": "closed_status",
+                "value": "",
+                "type": "query",
+                "description": "Limits the set of threat results to those with a remediation status matching at least one entry provided. Repeat the parameter to supply multiple values."
+              },
+              {
+                "name": "threat_status",
+                "value": "",
+                "type": "query",
+                "description": "Limits the set of threat results based on their current status"
+              }
+            ]
+          },
+          "docs": "Returns the total count of Threat Monitoring threats for an organization matching the given filter.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Update threat's investigator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/threatmonitoring/threat/investigator/update",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the threat to assign an investigator to"
+              },
+              {
+                "name": "investigator_email",
+                "value": "user@yourcompany.com",
+                "type": "query",
+                "description": "The email address of the investigator to assign"
+              }
+            ]
+          },
+          "docs": "Assigns an investigator to a specific threat, identified by UUID, and places the threat into the investigating state.\nThe investigator is identified by their email address and must be a member of the organization with ThreatMonitoringWrite permission.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List threats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/threatmonitoring/threat/list",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query",
+                "description": "Limit findings to this threat monitoring module."
+              },
+              {
+                "name": "date_period",
+                "value": "",
+                "type": "query",
+                "description": "The period within which results have been detected."
+              },
+              {
+                "name": "date_period_timezone",
+                "value": "",
+                "type": "query",
+                "description": "The timezone for DatePeriod as per the IANA Time Zone database. Default is UTC."
+              },
+              {
+                "name": "transforms",
+                "value": "mydomain.com",
+                "type": "query",
+                "description": "A list of matching transforms to filter results by. Repeat the parameter to supply multiple values."
+              },
+              {
+                "name": "severities",
+                "value": "",
+                "type": "query",
+                "description": "A list of matching severities to filter results by. Repeat the parameter to supply multiple values."
+              },
+              {
+                "name": "threat_types",
+                "value": "",
+                "type": "query",
+                "description": "A list of matching threat types to filter results by. Repeat the parameter to supply multiple values."
+              },
+              {
+                "name": "source_types",
+                "value": "",
+                "type": "query",
+                "description": "A list of matching source types to filter results by. Repeat the parameter to supply multiple values."
+              },
+              {
+                "name": "auto_dismissed",
+                "value": "",
+                "type": "query",
+                "description": "Limits threats to those auto-dismissed by an AI analyst"
+              },
+              {
+                "name": "closed_status",
+                "value": "",
+                "type": "query",
+                "description": "Limits the set of threat results to those with a remediation status matching at least one entry provided. Repeat the parameter to supply multiple values."
+              },
+              {
+                "name": "threat_status",
+                "value": "",
+                "type": "query",
+                "description": "Limits the set of threat results based on their current status"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 50."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `next_page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "include_snippets",
+                "value": "",
+                "type": "query",
+                "description": "Include the text snippet in results. Defaults to false."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "List of fields to sort threats by, with optional :asc or :desc suffix per field.\nAllowed fields: date_alerted.\nDefault direction is descending."
+              }
+            ]
+          },
+          "docs": "Retrieve Threat Monitoring threats for an organization.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Add remediation request to threat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/threatmonitoring/threat/remediation_request/add",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the threat to place into remediation"
+              },
+              {
+                "name": "email",
+                "value": "user@yourcompany.com",
+                "type": "query",
+                "description": "The email address to assign the remediation request to"
+              },
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "The title for the remediation request. If not provided, will use the threat title"
+              },
+              {
+                "name": "due_date",
+                "value": "",
+                "type": "query",
+                "description": "Optional due date for the remediation request. Accepts YYYY-MM-DD (interpreted as UTC midnight) or RFC3339. Must not be in the past"
+              },
+              {
+                "name": "reminder_date",
+                "value": "",
+                "type": "query",
+                "description": "Optional reminder date for the remediation request. Requires due_date to be set. Accepts YYYY-MM-DD (interpreted as UTC midnight) or RFC3339. Must not be in the past"
+              },
+              {
+                "name": "copy_threat_comments",
+                "value": "",
+                "type": "query",
+                "description": "If true, copies all threat comments to the remediation request"
+              }
+            ]
+          },
+          "docs": "Creates a remediation request for a specific threat, identified by UUID, and places the threat into the remediation state. The remediation request is assigned to the specified email address.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Close threat's remediation request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/threatmonitoring/threat/remediation_request/close",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The UUID of the threat whose remediation request should be closed"
+              },
+              {
+                "name": "reason",
+                "value": "",
+                "type": "query",
+                "description": "The reason for closing the remediation request. Must be one of: remediated, waived"
+              },
+              {
+                "name": "reason_description",
+                "value": "",
+                "type": "query",
+                "description": "The description of the reason (required if reason is 'waived')"
+              }
+            ]
+          },
+          "docs": "Closes the remediation request for a specific threat, identified by UUID, by setting its status to 'Closed'. The threat must currently be in remediation.\nThe reason must be one of: remediated, waived. For a reason of 'waived' a description is required.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Reopen threat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/threatmonitoring/threat/reopen",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the threat to reopen"
+              },
+              {
+                "name": "investigator_email",
+                "value": "user@yourcompany.com",
+                "type": "query",
+                "description": "The email address of the user to assign as the investigator on reopen.\nThe user must belong to your organization and have write permission for Threat Monitoring."
+              }
+            ]
+          },
+          "docs": "Reopens a closed threat, identified by UUID, and places it back into the investigating state.\nThe user identified by `investigator_email` is assigned as the investigator; they must belong\nto your organization and have write permission for Threat Monitoring.\n\nThe threat can only be reopened if:\nit is currently closed; and\nit is not linked to a remediation request.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

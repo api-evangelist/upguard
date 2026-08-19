@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches bulk API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "bulk",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List hostnames and their risks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/bulk/hostnames",
+            "params": [
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "Whether to sort the results in descending order."
+              },
+              {
+                "name": "omit_scan_info",
+                "value": "",
+                "type": "query",
+                "description": "Omit the scan information, i.e. risks, score and last scanned at."
+              },
+              {
+                "name": "omit_vendor",
+                "value": "",
+                "type": "query",
+                "description": "Omit the vendor information for a hostname in the response."
+              },
+              {
+                "name": "omit_labels",
+                "value": "",
+                "type": "query",
+                "description": "Omit the labels for a hostname in the response."
+              },
+              {
+                "name": "exclude_active",
+                "value": "",
+                "type": "query",
+                "description": "Exclude active hostnames from the results."
+              },
+              {
+                "name": "exclude_inactive",
+                "value": "",
+                "type": "query",
+                "description": "Exclude inactive hostnames from the results."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to only hostnames that have all the provided labels."
+              }
+            ]
+          },
+          "docs": "Get the list of registered hostnames and their risks. You can use the omit_risks,\nomit_vendor, omit_score and omit_labels query parameter to turn off these information\nfrom the response and quickly get a list of registered hostnames.\n\nThis is an add-on endpoint not available to all accounts. Please contact support for information about bulk endpoints and how to upgrade your account.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Register a list of hostnames to be scanned for risks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/bulk/hostnames"
+          },
+          "docs": "Register a list of hostnames to be scanned for risks. The provided hostnames must be fully qualified domain names\nor IPv4 addresses. Currently, a maximum of 1000 hostnames in a single request is supported. This will always replace\nthe labels of currently registered hostnames and if the request has empty labels they will all be removed.\n\nThis is an add-on endpoint not available to all accounts. Please contact support for information about bulk endpoints and how to upgrade your account.\n\nRequired "
+        },
+        {
+          "info": {
+            "name": "Deregister a list of hostnames",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/bulk/hostnames"
+          },
+          "docs": "Deregister a list of hostnames. The provided hostnames must be fully qualified domain names\nor IPv4 addresses. Currently, a maximum of 1000 hostnames in a single request is supported.\n\nThis is an add-on endpoint not available to all accounts. Please contact support for information about bulk endpoints and how to upgrade your account.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get statistics around registered bulk hostnames",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/bulk/hostnames/stats"
+          },
+          "docs": "Get statistics for the registered hostnames. This will return the number of registered hostnames, the number of\nremaining slots and the number of active and inactive hostnames\n\nThis is an add-on endpoint not available to all accounts. Please contact support for information about bulk endpoints and how to upgrade your account.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get the details for a hostname",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/bulk/hostnames/:hostname",
+            "params": [
+              {
+                "name": "hostname",
+                "value": "",
+                "type": "path",
+                "description": "The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+              },
+              {
+                "name": "omit_scan_info",
+                "value": "",
+                "type": "query",
+                "description": "Omit the scan information, i.e. risks, score and last scanned at."
+              },
+              {
+                "name": "omit_vendor",
+                "value": "",
+                "type": "query",
+                "description": "Omit the vendor information for a hostname in the response."
+              },
+              {
+                "name": "omit_labels",
+                "value": "",
+                "type": "query",
+                "description": "Omit the labels for a hostname in the response."
+              }
+            ]
+          },
+          "docs": "Get the details for a hostname. The provided hostname must be a fully\nqualified domain name or an IPv4 address.\n\nThis is an add-on endpoint not available to all accounts. Please contact support for information about bulk endpoints and how to upgrade your account.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Assign new labels to a hostname",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/bulk/hostnames/:hostname/labels",
+            "params": [
+              {
+                "name": "hostname",
+                "value": "",
+                "type": "path",
+                "description": "The hostname to fetch details for. It must be a fully qualified domain name or an IPv4 address."
+              }
+            ]
+          },
+          "docs": "Assign labels to a hostname replacing the existing ones if any. To remove all labels use an empty array in the request.\n\nThis is an add-on endpoint not available to all accounts. Please contact support for information about bulk endpoints and how to upgrade your account.\n\nRequired API key permissions: `Admin` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

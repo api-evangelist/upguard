@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "breaches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the details for an identity breach",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/breach",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the breach to fetch"
+              }
+            ]
+          },
+          "docs": "Returns the details of an identity breach.\n\nRequired API key permissions: `IdentityBreaches` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get a list of breached identities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/breaches",
+            "params": [
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The value to sort the breached identities by\n\nIf not specified will default to `date_last_breach` and set `sort_desc` to `true`"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to sort the results in descending order"
+              },
+              {
+                "name": "breach_id",
+                "value": "",
+                "type": "query",
+                "description": "The breach ID to filter on"
+              }
+            ]
+          },
+          "docs": "Returns a list of identities ordered by last breached date.\n\nRequired API key permissions: `IdentityBreaches` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get a list of VIPs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vips",
+            "params": [
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "sort_by=num_breaches:desc&sort_by=date_last_breach:asc",
+                "type": "query",
+                "description": "List of fields to sort VIPs by, with optional :asc or :desc suffix per field.\nAllowed fields: name, domain, num_breaches, date_last_breach."
+              }
+            ]
+          },
+          "docs": "Returns a list of VIPs for your account.\n\nRequired API key permissions: `IdentityBreaches` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Add a VIP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/vips/add",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "The email of the VIP to add. Must be an authorized company domain for your account."
+              }
+            ]
+          },
+          "docs": "Add a VIP to your account.\n\nRequired API key permissions: `IdentityBreaches` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Remove a VIP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/vips/delete",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "The email of the VIP to remove."
+              }
+            ]
+          },
+          "docs": "Remove a VIP from your account.\n\nRequired API key permissions: `IdentityBreaches` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

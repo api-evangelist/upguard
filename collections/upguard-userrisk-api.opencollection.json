@@ -1,0 +1,747 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches userrisk API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "userrisk",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List app categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/app_categories/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `name`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of app categories for your organization.\n\nRequired API key permissions: `User Risk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/apps/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `name`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              },
+              {
+                "name": "usage_policy_outcomes",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by usage policy outcome. Matches the policy base rule or any custom rule."
+              },
+              {
+                "name": "usage_policy_sources",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by where their usage policy is derived from."
+              },
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by category."
+              },
+              {
+                "name": "sources",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by source."
+              },
+              {
+                "name": "shadow_ai",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by Shadow AI status."
+              },
+              {
+                "name": "vendor_using_ai",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by AI usage."
+              },
+              {
+                "name": "vendor_monitored",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by vendor monitoring status."
+              },
+              {
+                "name": "first_detected_min",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications first detected after or at this date-time."
+              },
+              {
+                "name": "first_detected_max",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications first detected before or at this date-time."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of apps for your organization.\n\nRequired API key permissions: `User Risk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List app permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/apps/permissions/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `name`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the application."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of permissions granted to a specific application.\n\nRequired API key permissions: `User Risk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List app users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/apps/users/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `id`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              },
+              {
+                "name": "app_name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the application."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of users using a specific application.\n\nRequired API key permissions: `UserRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List identity breaches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/identity_breaches/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `title`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Filter identity breaches by status."
+              },
+              {
+                "name": "breach_date_min",
+                "value": "",
+                "type": "query",
+                "description": "Filter identity breaches that occurred after or at this date-time."
+              },
+              {
+                "name": "breach_date_max",
+                "value": "",
+                "type": "query",
+                "description": "Filter identity breaches that occurred before or at this date-time."
+              },
+              {
+                "name": "published_date_min",
+                "value": "",
+                "type": "query",
+                "description": "Filter identity breaches published after or at this date-time."
+              },
+              {
+                "name": "published_date_max",
+                "value": "",
+                "type": "query",
+                "description": "Filter identity breaches published before or at this date-time."
+              },
+              {
+                "name": "data_classes",
+                "value": "",
+                "type": "query",
+                "description": "Filter identity breaches by exposed data classes."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of identity breaches for your organization.\n\nRequired API key permissions: `User Risk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List identity breach users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/identity_breaches/users/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `id`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the identity breach."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of users involved in a specific identity breach.\n\nRequired API key permissions: `User Risk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List permission apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/permissions/apps/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `name`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the permission."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of applications that were granted a specific permission.\n\nRequired API key permissions: `User Risk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/permissions/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `name`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              },
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query",
+                "description": "Filter permissions by category."
+              },
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "query",
+                "description": "Filter permissions by access level."
+              },
+              {
+                "name": "exposure_level",
+                "value": "",
+                "type": "query",
+                "description": "Filter permissions by exposure level."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of permissions for your organization.\n\nRequired API key permissions: `User Risk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List permission users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/permissions/users/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `id`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the permission."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of users who granted a specific permission.\n\nRequired API key permissions: `User Risk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/roles/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `name`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of roles for your organization.\n\nRequired API key permissions: `User Risk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/teams/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `name`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of teams for your organization.\n\nRequired API key permissions: `User Risk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List a user apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/users/apps/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `name`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the user to retrieve the apps for"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of apps used by a specific user.\n\nRequired API key permissions: `UserRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List a user identity breaches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/users/identity_breaches/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `title`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the user to retrieve the identity breaches for"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of identity breaches a user was involved in.\n\nRequired API key permissions: `UserRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/users/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `id`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              },
+              {
+                "name": "teams",
+                "value": "",
+                "type": "query",
+                "description": "Limit the users to the ones belonging to the provided teams."
+              },
+              {
+                "name": "roles",
+                "value": "",
+                "type": "query",
+                "description": "Limit the users to the ones with the provided roles."
+              },
+              {
+                "name": "app_names",
+                "value": "",
+                "type": "query",
+                "description": "Limit the users to the ones using the provided apps."
+              }
+            ]
+          },
+          "docs": "Retrieve the list of users for your organization.\n\nRequired API key permissions: `UserRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "List a user permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user_risk/users/permissions/list",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to return. If not supplied, default is 100."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The `page_token` from a previous request, use this to get the next page of results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results by. Default is `name`."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "The direction to sort results. Default is `asc`."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the user to retrieve the permissions for"
+              }
+            ]
+          },
+          "docs": "Retrieve the list of permissions granted by a specific user.\n\nRequired API key permissions: `UserRisk` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

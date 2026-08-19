@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches dataleaks API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "dataleaks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of disclosures",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/dataleaks/disclosures",
+            "params": [
+              {
+                "name": "min_time",
+                "value": "",
+                "type": "query",
+                "description": "The minimum (non-inclusive) timestamp of a disclosure (RFC 3339 format)."
+              },
+              {
+                "name": "max_time",
+                "value": "",
+                "type": "query",
+                "description": "The maximum (non-inclusive) timestamp of a disclosure (RFC 3339 format)."
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "A comma-delimited list of statuses that disclosures should match."
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-delimited list of IDs that disclosures should match."
+              }
+            ]
+          },
+          "docs": "Returns a list of the disclosures in your account matching the given filters.\n\nRequired API key permissions: `DataLeaks` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Update the status of a disclosure",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/dataleaks/disclosures/status",
+            "params": [
+              {
+                "name": "disclosure_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the disclosure"
+              },
+              {
+                "name": "new_status",
+                "value": "",
+                "type": "query",
+                "description": "The new status for the disclosure"
+              },
+              {
+                "name": "user_email",
+                "value": "",
+                "type": "query",
+                "description": "The email address of the user changing the status (must have a Cyber Risk account with the \"Data Leaks\" role)."
+              },
+              {
+                "name": "comment",
+                "value": "",
+                "type": "query",
+                "description": "A comment to accompany the status change, if required"
+              }
+            ]
+          },
+          "docs": "Required API key permissions: `DataLeaks` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

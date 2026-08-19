@@ -411,3 +411,9 @@ tools:
 - name: sample_webhook
   description: Webhook example data
   source_operation: openapi/upguard-cyberrisk-openapi-original.json#sample_webhook
+deployment:
+  mode: none
+  verified: derived
+  tools: 133
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,611 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UpGuard CyberRisk breaches risks API",
+    "version": "1.13.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "risks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of available risks in the platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/available_risks"
+          },
+          "docs": "Returns a list of available risks in the UpGuard platform with detailed info. Please note this version of the endpoint has been deprecated, and v2 should be used instead.\n\nRequired API key permissions: `Platform` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get details for a risk in the platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/available_risks/risk",
+            "params": [
+              {
+                "name": "risk_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the risk to fetch details for"
+              }
+            ]
+          },
+          "docs": "Returns the details for a risk.\n\nRequired API key permissions: `Platform` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get a list of available risks in the platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/available_risks/v2",
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filter by risk category"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by risk severity"
+              }
+            ]
+          },
+          "docs": "Returns a list of available risks in the UpGuard platform with detailed info.\n\nSome risks in the platform are generic risks like \"exposed_service:*\". The values of some of the fields for these risks\ndepends on the details of the risk, e.g. which particular service is exposed. As such these fields are omitted from the response.\n\nTo get the full details for a specific risk, e.g. \"exposed_service:FTP\", use the risk details endpoint which will return\nthe full information for the particular service.\n"
+        },
+        {
+          "info": {
+            "name": "Get a list of active risks for your account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks",
+            "params": [
+              {
+                "name": "min_severity",
+                "value": "",
+                "type": "query",
+                "description": "Minimum severity for the risks"
+              },
+              {
+                "name": "include_meta",
+                "value": "",
+                "type": "query",
+                "description": "Include metadata for risks"
+              },
+              {
+                "name": "include_sources",
+                "value": "",
+                "type": "query",
+                "description": "Include sources for risks, e.g. the hostname and/or IP addresses the risk was detected on, including ports\nwhen available"
+              }
+            ]
+          },
+          "docs": "Returns a list of risks that have been detected for your account.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get a list of risk changes for your account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks/diff",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "The date to use as the starting point for determining risks introduced/resolved (RFC 3339 format). Must be in the last 2 years."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "The date to use as the final state for determining risks introduced/resolved (RFC 3339 format). If not provided, the latest risks will be used."
+              },
+              {
+                "name": "include_sources",
+                "value": "",
+                "type": "query",
+                "description": "Include sources for risks, e.g. the hostname and/or IP addresses the risk was detected on, including ports"
+              }
+            ]
+          },
+          "docs": "Returns a list of the risks introduced and risks resolved for domains or IPs between two dates.\n\nThe start_date must be in the last 2 years.\n\nPreviously provisional risks that are now scored will appear in the list of risks introduced.\n\nRequired API key permissions: `BreachRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get a list of active risks for a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks/vendors",
+            "params": [
+              {
+                "name": "primary_hostname",
+                "value": "upguard.com",
+                "type": "query",
+                "description": "The primary hostname of the vendor to return risks for"
+              },
+              {
+                "name": "min_severity",
+                "value": "",
+                "type": "query",
+                "description": "Minimum severity for the risks"
+              },
+              {
+                "name": "include_meta",
+                "value": "",
+                "type": "query",
+                "description": "Include metadata for risks,\n`include_meta` and 'exclude_hostnames' cannot both be true"
+              },
+              {
+                "name": "exclude_hostnames",
+                "value": "",
+                "type": "query",
+                "description": "Exclude hostnames for risks,\n`include_meta` and 'exclude_hostnames' cannot both be true"
+              },
+              {
+                "name": "include_sources",
+                "value": "",
+                "type": "query",
+                "description": "Include sources for risks, e.g. the hostname and/or IP addresses the risk was detected on, including ports\nwhen available"
+              }
+            ]
+          },
+          "docs": "Returns a list of risks that have been detected for a particular vendor.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get portfolio risk profile overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks/vendors/all",
+            "params": [
+              {
+                "name": "vendor_labels",
+                "value": "label1,label2,label3",
+                "type": "query",
+                "description": "Filter on vendor labels using the label’s name. By default, any matching vendor will be\nreturned. Use vendor_label_ids_match_all to require all labels to be present. If the label\ndoes not exist, 422 will be returned."
+              },
+              {
+                "name": "vendor_label_ids_match_all",
+                "value": "true",
+                "type": "query",
+                "description": "If true, will only return vendors that match ALL of the provided label IDs.\nIf false or omitted, vendors matching ANY of the provided labels will be returned."
+              },
+              {
+                "name": "include_unlabeled",
+                "value": "false",
+                "type": "query",
+                "description": "If true, will include vendors that have no labels applied when vendor_label_ids is provided."
+              },
+              {
+                "name": "min_score",
+                "value": "300",
+                "type": "query",
+                "description": "Filter vendors to those with a score greater than or equal to this value.\nValid range: 0-950."
+              },
+              {
+                "name": "max_score",
+                "value": "700",
+                "type": "query",
+                "description": "Filter vendors to those with a score less than or equal to this value.\nValid range: 0-950."
+              },
+              {
+                "name": "name_prefix",
+                "value": "Acme",
+                "type": "query",
+                "description": "Filter vendors whose name starts with the given prefix (case-insensitive)."
+              },
+              {
+                "name": "vendor_ids",
+                "value": "123,456",
+                "type": "query",
+                "description": "Filter to only return vendors with the specified vendor IDs."
+              },
+              {
+                "name": "vendor_label_ids_do_not_match",
+                "value": "false",
+                "type": "query",
+                "description": "If true, will only return vendors that DO NOT match ANY of the provided label IDs.\nThis is mutually exclusive with vendor_label_ids_match_all."
+              },
+              {
+                "name": "vendor_tiers",
+                "value": "1,2",
+                "type": "query",
+                "description": "Filter watched vendors to those in the specified tiers.\nValid values: 1-5."
+              },
+              {
+                "name": "portfolios",
+                "value": "portfolio1,portfolio2",
+                "type": "query",
+                "description": "Filter by portfolio IDs. Only vendors in these portfolios will be returned.\nIf the portofilo does not exist, 422 will be returned."
+              },
+              {
+                "name": "assessed_vendors_only",
+                "value": "false",
+                "type": "query",
+                "description": "If true, will return only vendors with a published assessment."
+              },
+              {
+                "name": "questionnaire_type_ids",
+                "value": "1,2",
+                "type": "query",
+                "description": "Filter by questionnaire type IDs. Only vendors with these questionnaire types will be returned.\nAvailable questionnaire types can be found at /api/public/vendor/questionnaire_types."
+              },
+              {
+                "name": "vendor_date_added_start",
+                "value": "2024-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Start of date added range filter (RFC3339 format).\nFilters vendors added on or after this date."
+              },
+              {
+                "name": "vendor_date_added_end",
+                "value": "2024-12-31T23:59:59Z",
+                "type": "query",
+                "description": "End of date added range filter (RFC3339 format).\nFilters vendors added on or before this date."
+              },
+              {
+                "name": "vendor_date_added_before",
+                "value": "false",
+                "type": "query",
+                "description": "If true, filter to vendors added before vendor_date_added_end."
+              },
+              {
+                "name": "vendor_date_added_between",
+                "value": "true",
+                "type": "query",
+                "description": "If true, filter to vendors added between start and end dates."
+              },
+              {
+                "name": "page_size",
+                "value": "100",
+                "type": "query",
+                "description": "The number of results to return per page.\nValid values range from 10 to 2000.\nDefaults to 100 if not specified."
+              },
+              {
+                "name": "page_token",
+                "value": "eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ==",
+                "type": "query",
+                "description": "Token to retrieve a specific page of results.\nOmit to retrieve the first page.\nUse the `next_page_token` from the previous response to get the next page."
+              }
+            ]
+          },
+          "docs": "Returns an overview of all risks affecting vendors that match the specified filter criteria or all vendors.\nThis endpoint provides a consolidated view of cybersecurity risks.\n\nThe response includes the total number of vendors matching your filter and a list of all risks found,\nwith details about how many vendors are affected by each risk.\n\nResults are paginated. Use the `page_size` parameter to control how many results are returned per page\n(default: 100, max: 2000). Use the `next_page_token` fr"
+        },
+        {
+          "info": {
+            "name": "Get a list of risk changes for a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks/vendors/diff",
+            "params": [
+              {
+                "name": "vendor_primary_hostname",
+                "value": "upguard.com",
+                "type": "query",
+                "description": "The primary hostname for a vendor"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "The date to use as the starting point for determining risks introduced/resolved (RFC 3339 format). Must be in the last 2 years."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "The date to use as the final state for determining risks introduced/resolved (RFC 3339 format). If not provided, the latest risks will be used."
+              },
+              {
+                "name": "include_sources",
+                "value": "",
+                "type": "query",
+                "description": "Include sources for risks, e.g. the hostname and/or IP addresses the risk was detected on, including ports\nwhen available"
+              }
+            ]
+          },
+          "docs": "Returns a list of the risks introduced and risks resolved for domains or IPs between two dates.\n\nThe maximum allowed interval is 30 days.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get a list of risk changes for monitored vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks/vendors/diffs",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "The date to use as the starting point for determining risks introduced/resolved (RFC 3339 format)."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "The date to use as the final state for determining risks introduced/resolved (RFC 3339 format). If not provided, the latest risks will be used."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The token of the page to be returned.\nWill return the first page if left blank."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page.\nValid values range from 10 to 200.\nDefaults to 20 if unset."
+              }
+            ]
+          },
+          "docs": "Returns a list of the risks introduced and risks resolved for domains or IPs between two dates across your monitored vendors.\n\nThe maximum allowed interval is 30 days.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get vendor hostnames affected by a risk",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks/vendors/hostnames",
+            "params": [
+              {
+                "name": "risk_id",
+                "value": "",
+                "type": "query",
+                "description": "The risk_id to filter by"
+              },
+              {
+                "name": "vendor_id",
+                "value": "",
+                "type": "query",
+                "description": "The vendor's internal ID."
+              },
+              {
+                "name": "vendor_primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "The vendor's primary hostname"
+              }
+            ]
+          },
+          "docs": "Returns a list of hostnames for a specific vendor that are affected by a specific risk.\nThis endpoint provides detailed information about which hostnames have failed a particular\nrisk check including the detection date and last scan date.\n\nThe vendor can be identified either by `vendor_id` (for webless vendors) or `vendor_primary_hostname` (for vendors with or without a web presence).\nExactly one identifier must be provided.\n\nRequired API key permissions: `VendorRisk` (select when creating API k"
+        },
+        {
+          "info": {
+            "name": "Get a list of questionnaire risks for one or more watched vendors or a specific questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks/vendors/questionnaires",
+            "params": [
+              {
+                "name": "vendor_id",
+                "value": "",
+                "type": "query",
+                "description": "Restricts the questionnaire risks returned to a specific watched vendor by ID"
+              },
+              {
+                "name": "primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "Restricts the questionnaire risks returned to a specific watched vendor by vendor primary hostname"
+              },
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "query",
+                "description": "Restricts the questionnaire risks returned to a specific questionnaire by ID"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The token of the page to be returned.\nWill return the first page if left blank."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of risks to return per page.\nThis Integer between 10 and 2000 defaults to 1000 if not supplied."
+              }
+            ]
+          },
+          "docs": "Returns a list of currently open questionnaire risks for one or more of an account's watched vendors. Please note this version of the endpoint has been deprecated, and v2 should be used instead.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "(V2) Get a list of questionnaire risks for one or more watched vendors or a specific questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks/vendors/questionnaires/v2",
+            "params": [
+              {
+                "name": "vendor_id",
+                "value": "",
+                "type": "query",
+                "description": "Restricts the questionnaire risks returned to a specific watched vendor by ID"
+              },
+              {
+                "name": "primary_hostname",
+                "value": "",
+                "type": "query",
+                "description": "Restricts the questionnaire risks returned to a specific watched vendor by vendor primary hostname"
+              },
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "query",
+                "description": "Restricts the questionnaire risks returned to a specific questionnaire by ID"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The token of the page to be returned.\nWill return the first page if left blank."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of risks to return per page.\nThis Integer between 10 and 2000 defaults to 1000 if not supplied."
+              },
+              {
+                "name": "ignore_waived_risks",
+                "value": "",
+                "type": "query",
+                "description": "Indicates that waived risks should not be returned in the risk set"
+              }
+            ]
+          },
+          "docs": "Returns a list of currently open questionnaire risks for one or more of an account's watched vendors, including information on whether waivers exist for each risk.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        },
+        {
+          "info": {
+            "name": "Get vendors affected by a risk",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/risks/vendors_with_risk",
+            "params": [
+              {
+                "name": "vendor_labels",
+                "value": "label1,label2,label3",
+                "type": "query",
+                "description": "Filter on vendor labels using the label’s name. By default, any matching vendor will be\nreturned. Use vendor_label_ids_match_all to require all labels to be present. If the label\ndoes not exist, 422 will be returned."
+              },
+              {
+                "name": "vendor_label_ids_match_all",
+                "value": "true",
+                "type": "query",
+                "description": "If true, will only return vendors that match ALL of the provided label IDs.\nIf false or omitted, vendors matching ANY of the provided labels will be returned."
+              },
+              {
+                "name": "include_unlabeled",
+                "value": "false",
+                "type": "query",
+                "description": "If true, will include vendors that have no labels applied when vendor_label_ids is provided."
+              },
+              {
+                "name": "min_score",
+                "value": "300",
+                "type": "query",
+                "description": "Filter vendors to those with a score greater than or equal to this value.\nValid range: 0-950."
+              },
+              {
+                "name": "max_score",
+                "value": "700",
+                "type": "query",
+                "description": "Filter vendors to those with a score less than or equal to this value.\nValid range: 0-950."
+              },
+              {
+                "name": "name_prefix",
+                "value": "Acme",
+                "type": "query",
+                "description": "Filter vendors whose name starts with the given prefix (case-insensitive)."
+              },
+              {
+                "name": "vendor_ids",
+                "value": "123,456",
+                "type": "query",
+                "description": "Filter to only return vendors with the specified vendor IDs."
+              },
+              {
+                "name": "vendor_label_ids_do_not_match",
+                "value": "false",
+                "type": "query",
+                "description": "If true, will only return vendors that DO NOT match ANY of the provided label IDs.\nThis is mutually exclusive with vendor_label_ids_match_all."
+              },
+              {
+                "name": "vendor_tiers",
+                "value": "1,2",
+                "type": "query",
+                "description": "Filter watched vendors to those in the specified tiers.\nValid values: 1-5."
+              },
+              {
+                "name": "portfolios",
+                "value": "portfolio1,portfolio2",
+                "type": "query",
+                "description": "Filter by portfolio IDs. Only vendors in these portfolios will be returned.\nIf the portofilo does not exist, 422 will be returned."
+              },
+              {
+                "name": "assessed_vendors_only",
+                "value": "false",
+                "type": "query",
+                "description": "If true, will return only vendors with a published assessment."
+              },
+              {
+                "name": "questionnaire_type_ids",
+                "value": "1,2",
+                "type": "query",
+                "description": "Filter by questionnaire type IDs. Only vendors with these questionnaire types will be returned.\nAvailable questionnaire types can be found at /api/public/vendor/questionnaire_types."
+              },
+              {
+                "name": "vendor_date_added_start",
+                "value": "2024-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Start of date added range filter (RFC3339 format).\nFilters vendors added on or after this date."
+              },
+              {
+                "name": "vendor_date_added_end",
+                "value": "2024-12-31T23:59:59Z",
+                "type": "query",
+                "description": "End of date added range filter (RFC3339 format).\nFilters vendors added on or before this date."
+              },
+              {
+                "name": "vendor_date_added_before",
+                "value": "false",
+                "type": "query",
+                "description": "If true, filter to vendors added before vendor_date_added_end."
+              },
+              {
+                "name": "vendor_date_added_between",
+                "value": "true",
+                "type": "query",
+                "description": "If true, filter to vendors added between start and end dates."
+              },
+              {
+                "name": "risk_id",
+                "value": "",
+                "type": "query",
+                "description": "The risk_id to filter by"
+              }
+            ]
+          },
+          "docs": "Returns a list of vendors that are affected by a specific risk.\nThis endpoint provides detailed information about vendors that have failed a particular risk,\nincluding vendor details, risk information, and waiver status.\n\nRequired API key permissions: `VendorRisk` (select when creating API key in Account Settings)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

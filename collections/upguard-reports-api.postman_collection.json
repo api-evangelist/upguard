@@ -1,0 +1,1175 @@
+{
+  "item": [
+    {
+      "id": "db089732-e5d1-4400-9f7b-2cff6f49c94c",
+      "name": "reports",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3efd0efa-ae0e-456a-9c10-29a152d8b8d1",
+          "name": "Get the list of custom report templates defined for the account",
+          "request": {
+            "name": "Get the list of custom report templates defined for the account",
+            "description": {
+              "content": "Use this endpoint to retrieve the list of custom report templates defined for your account.\n\nRequired API key permissions: `Platform` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reports",
+                "custom"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbfd177a-5110-4371-9736-eb0ce7e216ad",
+              "name": "List of custom report definitions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"custom_reports\": [\n    {\n      \"name\": \"string\",\n      \"uuid\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"uuid\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "415a844b-df39-445f-b340-27ebd732fee2",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d5bad3f-d950-43bf-9660-6410f2d4d6ee",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30445e01-aad3-456b-bf76-105b586e212f",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72db4b27-b090-4bde-aa48-46e73ff7fd6d",
+          "name": "Queue a report export",
+          "request": {
+            "name": "Queue a report export",
+            "description": {
+              "content": "Asynchronously queues a report for exporting. To use this API, first call this endpoint with the type of report you wish to\ngenerate and any other filtering parameters. You can optionally specify a list of email addresses or a URL\nthat will receive a POST request when the export completes.\n\nWhen a report is queued, you will receive a unique queued_report_id. Use this ID to check the status of the export using the\n`/reports/status` endpoint.\n\nRequired API key permissions: `Platform` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reports",
+                "queue"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "report_type",
+                  "value": "<string>",
+                  "description": "(Required) The type of report to export. Note that each report type may require different parameters to be specified in the request.\n\nWhen *VendorRiskAssessmentPDF* is selected the latest published risk assessment will be used, if no published risk assessment is available for the selected vendor a 422 error will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_report_uuid",
+                  "value": "<string>",
+                  "description": "For an export of type 'CustomPDF', specify the UUID of the custom report to generate. This is a required field for the custom report type."
+                },
+                {
+                  "disabled": false,
+                  "key": "email_addresses",
+                  "value": "<email>,<email>",
+                  "description": "Optionally email the generated report to the specified addresses when it is ready."
+                },
+                {
+                  "disabled": false,
+                  "key": "post_webhook_url",
+                  "value": "<uri>",
+                  "description": "Optionally specify a URL that will receive a POST request when the report is ready.\nThe request will contain a JSON body containing a URL to download the report, in the following format:\n```json\n{\n\"queued_report_id\": \"string\",\n\"download_url\": \"url\"\n\"download_url_expires\": \"string\"\n}\n```"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset_portfolio_names",
+                  "value": "<string>,<string>",
+                  "description": "Filter by asset portfolio names. Case-sensitive. Optional. Applicable only when *report_type* is *BreachSightSummaryPDF* or *BreachSightDetailedPDF*."
+                },
+                {
+                  "disabled": false,
+                  "key": "vendor_portfolio_names",
+                  "value": "<string>,<string>",
+                  "description": "Filter by vendor portfolio names. Case-sensitive. Optional. Applicable only when *report_type* is *BoardSummaryPDF*, *BoardSummaryPPTX*, or *VendorRiskExecutiveSummaryPDF*."
+                },
+                {
+                  "disabled": false,
+                  "key": "vendor_id",
+                  "value": "<long>",
+                  "description": "ID of the vendor to generate the report for. Either this, *vendor_primary_hostname* or *filter_by_vendor_hostnames* are required when *report_type* is *VendorSummaryPDF*, *VendorDetailedPDF*, *VendorRiskAssessmentPDF*, *CustomPDF*, *VendorRiskProfileXLSX*, *VendorVulnsOverviewXLSX*, *VendorDomainListPDF*, *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*."
+                },
+                {
+                  "disabled": false,
+                  "key": "vendor_primary_hostname",
+                  "value": "<string>",
+                  "description": "Primary hostname of the vendor to generate the report for. Either this, *vendor_id* or *filter_by_vendor_hostnames* are required when *report_type* is *VendorSummaryPDF*, *VendorDetailedPDF*, *VendorRiskAssessmentPDF*, *CustomPDF*, *VendorRiskProfileXLSX*, *VendorVulnsOverviewXLSX*, *VendorDomainListPDF*, *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter_by_vendor_hostnames",
+                  "value": "<string>",
+                  "description": "List of hostnames from a single vendor to generate the report for. Either this, *vendor_id* or *vendor_primary_hostname* are required when *report_type* is *VendorSummaryPDF*, *VendorDetailedPDF*, *CustomPDF*, *VendorRiskProfileXLSX*, *VendorVulnsOverviewXLSX* or *VendorDomainListPDF*."
+                },
+                {
+                  "disabled": false,
+                  "key": "filename_prefix",
+                  "value": "<string>",
+                  "description": "String to use as the first part of the report filename. For vendor reports this will precede the vendor name, and for others the account name.\nA maximum of the first 20 characters (runes) of the supplied string will be used"
+                },
+                {
+                  "disabled": false,
+                  "key": "wait_for_data",
+                  "value": "<boolean>",
+                  "description": "When requesting a vendor report, determine if the report should wait for the appropriate data to become available. This is typical of\nreports where the vendor may have only just become known by the system, or the vendor only just been watched by the account. Typically, the report\ngeneration and delivery is delayed by up to 72 hours to allow for the data to become available. This parameter is only valid when *report_type* is\nVendorSummaryPDF*, *VendorDetailedPDF*, *CustomPDF*, *VendorRiskProfileXLSX*, *VendorVulnsOverviewXLSX*, or *VendorDomainListPDF*."
+                },
+                {
+                  "disabled": false,
+                  "key": "questionnaire_id",
+                  "value": "<long>",
+                  "description": "The ID of the questionnaire to generate the report for. Required when *report_type* is *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_messages",
+                  "value": "<boolean>",
+                  "description": "Whether to include correspondence messages in the questionnaire details report. Optional. Applicable only when *report_type* is *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_private_messages",
+                  "value": "<boolean>",
+                  "description": "Whether to include private/internal messages in the questionnaire details report. Only available to the questionnaire author organization. Optional. Applicable only when *report_type* is *QuestionnaireDetailsPDF* or *QuestionnaireDetailsXLSX*."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a28915c9-b85f-44fe-a4d6-71825be5f13c",
+              "name": "Report queued for export",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "queue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "report_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_report_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email_addresses",
+                      "value": "<email>,<email>"
+                    },
+                    {
+                      "key": "post_webhook_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "asset_portfolio_names",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "vendor_portfolio_names",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "vendor_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "vendor_primary_hostname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_by_vendor_hostnames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename_prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wait_for_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "questionnaire_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_messages",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_private_messages",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queued_report_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39e99169-6b27-41de-a75e-da21f37c8b8b",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "queue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "report_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_report_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email_addresses",
+                      "value": "<email>,<email>"
+                    },
+                    {
+                      "key": "post_webhook_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "asset_portfolio_names",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "vendor_portfolio_names",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "vendor_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "vendor_primary_hostname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_by_vendor_hostnames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename_prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wait_for_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "questionnaire_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_messages",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_private_messages",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10f57db1-8a7c-4b80-83cc-3bce9fa09c55",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "queue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "report_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_report_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email_addresses",
+                      "value": "<email>,<email>"
+                    },
+                    {
+                      "key": "post_webhook_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "asset_portfolio_names",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "vendor_portfolio_names",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "vendor_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "vendor_primary_hostname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_by_vendor_hostnames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename_prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wait_for_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "questionnaire_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_messages",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_private_messages",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10a42325-68cb-405b-aa88-60d5aea5b2fc",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "queue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "report_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_report_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email_addresses",
+                      "value": "<email>,<email>"
+                    },
+                    {
+                      "key": "post_webhook_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "asset_portfolio_names",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "vendor_portfolio_names",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "vendor_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "vendor_primary_hostname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_by_vendor_hostnames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename_prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wait_for_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "questionnaire_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_messages",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_private_messages",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "522a4d31-910a-4ec7-8f1f-0b4c6d35da6e",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "queue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "report_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_report_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email_addresses",
+                      "value": "<email>,<email>"
+                    },
+                    {
+                      "key": "post_webhook_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "asset_portfolio_names",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "vendor_portfolio_names",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "vendor_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "vendor_primary_hostname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_by_vendor_hostnames",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename_prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wait_for_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "questionnaire_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_messages",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_private_messages",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99492756-82d8-4125-9efd-9a4b6c1f4536",
+          "name": "Get the status of an exported report",
+          "request": {
+            "name": "Get the status of an exported report",
+            "description": {
+              "content": "Poll this endpoint for the status of a report export you have queued. When complete, you will receive a download URL.\n\nRequired API key permissions: `Platform` (select when creating API key in Account Settings)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reports",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "queued_report_id",
+                  "value": "<string>",
+                  "description": "(Required) The queued_report_id returned from the /reports/queue endpoint."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "99e4c732-fd71-4e68-b681-9ec800c68125",
+              "name": "Queued report status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "queued_report_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"download_url\": \"string\",\n  \"download_url_expires\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f6114e8-b285-4ffc-9ebf-56ae2fea2208",
+              "name": "Your API key does not have permission to perform this action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "queued_report_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2114b47f-a9c2-4001-8c51-febeb0d8e5b3",
+              "name": "An invalid parameter was supplied or a mandatory parameter was missing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "queued_report_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68fcd9a0-b3ad-4bc8-ae7c-7620f7733d2f",
+              "name": "Too many requests have been made to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "queued_report_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4def95ce-894d-4eb8-ab93-18b347cc59dc",
+              "name": "An internal system error occurred",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "queued_report_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cyber-risk.upguard.com/api/public",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2c3bcfbe-f1b6-4934-8f4d-fb5fe4f9dfdd",
+    "name": "UpGuard CyberRisk breaches reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access information from the CyberRisk platform programmatically using this API.\n\nYou can find or generate an API key to access this API in your CyberRisk Account Settings.\nPlease authorize all requests by setting the \"Authorization\" header to your api key.\n\nThe base url for all public endpoints is https://cyber-risk.upguard.com/api/public",
+      "type": "text/plain"
+    }
+  }
+}
