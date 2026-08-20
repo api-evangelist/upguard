@@ -49,6 +49,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Breaches
+  tags_raw:
   - breaches
   properties:
   - type: OpenAPI
@@ -63,6 +65,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Bulk
+  tags_raw:
   - bulk
   properties:
   - type: OpenAPI
@@ -77,6 +81,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Data Leaks
+  tags_raw:
   - dataleaks
   properties:
   - type: OpenAPI
@@ -91,6 +97,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Domains
+  tags_raw:
   - domains
   properties:
   - type: OpenAPI
@@ -105,6 +113,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - IPs
+  tags_raw:
   - ips
   properties:
   - type: OpenAPI
@@ -119,6 +129,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Labels
+  tags_raw:
   - labels
   properties:
   - type: OpenAPI
@@ -133,6 +145,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Notification
+  tags_raw:
   - notifications
   properties:
   - type: OpenAPI
@@ -147,6 +161,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Organisation
+  tags_raw:
   - organisation
   properties:
   - type: OpenAPI
@@ -161,6 +177,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Reports
+  tags_raw:
   - reports
   properties:
   - type: OpenAPI
@@ -175,6 +193,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Risks
+  tags_raw:
   - risks
   properties:
   - type: OpenAPI
@@ -189,6 +209,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Subsidiaries
+  tags_raw:
   - subsidiaries
   properties:
   - type: OpenAPI
@@ -203,6 +225,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Threat Monitoring
+  tags_raw:
   - threatmonitoring
   properties:
   - type: OpenAPI
@@ -216,7 +240,8 @@ apis:
   description: The trust_exchange API from UpGuard — 15 operation(s) for trust_exchange.
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
-  tags:
+  tags: []
+  tags_raw:
   - trust_exchange
   properties:
   - type: OpenAPI
@@ -259,6 +284,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Vendors
+  tags_raw:
   - vendors
   properties:
   - type: OpenAPI
@@ -273,6 +300,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Vulnerabilities
+  tags_raw:
   - vulnerabilities
   properties:
   - type: OpenAPI
@@ -287,6 +316,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - Webhook
+  tags_raw:
   - webhooks
   properties:
   - type: OpenAPI
