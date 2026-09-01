@@ -61,7 +61,7 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
-  - breaches
+  - Breaches
   tags_raw:
   - breaches
   properties:
@@ -93,7 +93,7 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
-  - dataleaks
+  - Data Leaks
   tags_raw:
   - dataleaks
   properties:
@@ -125,7 +125,7 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
-  - ips
+  - IPs
   tags_raw:
   - ips
   properties:
@@ -221,7 +221,7 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
-  - subsidiaries
+  - Subsidiaries
   tags_raw:
   - subsidiaries
   properties:
@@ -237,7 +237,7 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
-  - threatmonitoring
+  - Threat Monitoring
   tags_raw:
   - threatmonitoring
   properties:
@@ -312,7 +312,7 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
-  - vulnerabilities
+  - Vulnerabilities
   tags_raw:
   - vulnerabilities
   properties:
