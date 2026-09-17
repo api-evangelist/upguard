@@ -323,16 +323,16 @@ apis:
     url: https://cyber-risk.upguard.com/api/docs
   - type: APIReference
     url: https://cyber-risk.upguard.com/api/docs
-- aid: upguard:upguard-i-ps-api
-  name: UpGuard I Ps API
-  description: The I Ps API from UpGuard — 4 operation(s) for i ps.
+- aid: upguard:upguard-ips-api
+  name: UpGuard Ips API
+  description: The ips API from UpGuard — 4 operation(s) for ips.
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
-  - I Ps
+  - ips
   properties:
   - type: OpenAPI
-    url: openapi/upguard-i-ps-api-openapi.yml
+    url: openapi/upguard-ips-api-openapi.yml
   - type: Documentation
     url: https://cyber-risk.upguard.com/api/docs
   - type: APIReference
