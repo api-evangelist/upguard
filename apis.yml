@@ -329,6 +329,8 @@ apis:
   humanURL: https://cyber-risk.upguard.com/api/docs
   baseURL: https://cyber-risk.upguard.com/api/public
   tags:
+  - IP
+  tags_raw:
   - ips
   properties:
   - type: OpenAPI
