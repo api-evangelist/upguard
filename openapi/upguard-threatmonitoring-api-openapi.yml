@@ -1,4 +1,4 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
   description: 'Access information from the CyberRisk platform programmatically using this API.
 
@@ -9,16 +9,10 @@ info:
 
 
     The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
-  title: UpGuard CyberRisk breaches threatmonitoring API
+  title: UpGuard CyberRisk Threatmonitoring API
   version: 1.13.2
-host: cyber-risk.upguard.com
-basePath: /api/public
-schemes:
-- https
-consumes:
-- application/json
-produces:
-- application/json
+servers:
+- url: https://cyber-risk.upguard.com/api/public
 security:
 - API key in header: []
 tags:
@@ -35,33 +29,44 @@ paths:
       summary: Get threat details
       operationId: threatmonitoring_details
       parameters:
-      - type: string
-        format: uuid
-        description: UUID of the result whose details we require
+      - description: UUID of the result whose details we require
         name: uuid
         in: query
         required: true
+        schema:
+          type: string
+          format: uuid
       responses:
         '200':
           description: A detailed threat response
-          schema:
-            $ref: '#/definitions/GetThreatDetailsResponsePayloadBody'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetThreatDetailsResponsePayloadBody'
         '404':
           description: There was a problem with the request
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '422':
           description: An invalid parameter was supplied or a mandatory parameter was missing
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '429':
           description: Too many requests have been made to this endpoint.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '500':
           description: An internal system error occurred
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
   /threatmonitoring/threat/close:
     post:
       description: 'Closes a specific threat, identified by UUID, with the given reason. The reason must be one of: false_positive, risk_accepted, remediated.
@@ -80,61 +85,76 @@ paths:
       summary: Close threat
       operationId: threatmonitoring_close_threat
       parameters:
-      - type: string
-        format: uuid
-        description: The unique identifier of the threat to close
+      - description: The unique identifier of the threat to close
         name: uuid
         in: query
         required: true
-      - enum:
-        - false_positive
-        - risk_accepted
-        - remediated
-        type: string
-        description: 'The reason for closing the threat. Must be one of: false_positive, risk_accepted, remediated'
+        schema:
+          type: string
+          format: uuid
+      - description: 'The reason for closing the threat. Must be one of: false_positive, risk_accepted, remediated'
         name: reason
         in: query
         required: true
-      - type: string
-        description: The justification for accepting the risk (required if reason is 'risk_accepted')
+        schema:
+          type: string
+          enum:
+          - false_positive
+          - risk_accepted
+          - remediated
+      - description: The justification for accepting the risk (required if reason is 'risk_accepted')
         name: justification
         in: query
-      - enum:
-        - content_removed_or_privatised
-        - affected_users_credentials_reset
-        - system_patched
-        - requested_takedown
-        - compensating_controls
-        - other
-        type: string
-        description: 'The remediation reason. Must be one of: content_removed_or_privatised, affected_users_credentials_reset, system_patched, requested_takedown, compensating_controls, other (required if reason is ''remediated'')'
+        schema:
+          type: string
+      - description: 'The remediation reason. Must be one of: content_removed_or_privatised, affected_users_credentials_reset, system_patched, requested_takedown, compensating_controls, other (required if reason is ''remediated'')'
         name: remediation_reason
         in: query
-      - type: string
-        description: Additional details for the remediation reason (required if remediation_reason is 'other')
+        schema:
+          type: string
+          enum:
+          - content_removed_or_privatised
+          - affected_users_credentials_reset
+          - system_patched
+          - requested_takedown
+          - compensating_controls
+          - other
+      - description: Additional details for the remediation reason (required if remediation_reason is 'other')
         name: remediation_description
         in: query
+        schema:
+          type: string
       responses:
         '200':
           description: The closed threat
-          schema:
-            $ref: '#/definitions/CloseThreatV1ResponsePayloadBody'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloseThreatV1ResponsePayloadBody'
         '404':
           description: There was a problem with the request
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '422':
           description: An invalid parameter was supplied or a mandatory parameter was missing
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '429':
           description: Too many requests have been made to this endpoint.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '500':
           description: An internal system error occurred
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
   /threatmonitoring/threat/comment/add:
     post:
       description: 'Adds a comment to a specific threat, identified by UUID. Comments can only be added to threats in ''investigating'' or ''remediating'' state.
@@ -146,48 +166,62 @@ paths:
       summary: Add comment to threat
       operationId: threatmonitoring_add_comment
       parameters:
-      - name: Body
-        in: body
-        schema:
-          $ref: '#/definitions/AddThreatCommentV1RequestBody'
-      - type: string
-        format: uuid
-        description: The unique identifier of the threat to add a comment to
+      - description: The unique identifier of the threat to add a comment to
         name: uuid
         in: query
         required: true
-      - type: integer
-        format: int64
-        example: 100000000000000
+        schema:
+          type: string
+          format: uuid
+      - example: 100000000000000
         description: Optional parent comment ID if this is a reply to another comment
         name: parent_id
         in: query
-      - type: boolean
-        default: false
-        description: Optional flag to mark the comment as private. Only valid for threats under remediation.
+        schema:
+          type: integer
+          format: int64
+      - description: Optional flag to mark the comment as private. Only valid for threats under remediation.
         name: private
         in: query
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: The comment that was created.
-          schema:
-            $ref: '#/definitions/ThreatComment'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreatComment'
         '404':
           description: There was a problem with the request
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '422':
           description: An invalid parameter was supplied or a mandatory parameter was missing
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '429':
           description: Too many requests have been made to this endpoint.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '500':
           description: An internal system error occurred
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddThreatCommentV1RequestBody'
   /threatmonitoring/threat/count:
     get:
       description: 'Returns the total count of Threat Monitoring threats for an organization matching the given filter.
@@ -199,181 +233,208 @@ paths:
       summary: Count threats
       operationId: threatmonitoring_results_count
       parameters:
-      - enum:
-        - dark_web
-        - open_web
-        - social_media
-        type: string
-        description: Limit findings to this threat monitoring module.
+      - description: Limit findings to this threat monitoring module.
         name: module
         in: query
-      - enum:
-        - last_twenty_four_hours
-        - last_seven_days
-        - last_thirty_days
-        - last_three_months
-        - last_six_months
-        - last_twelve_months
-        - all_time
-        type: string
-        default: all_time
-        description: The period within which results have been detected.
+        schema:
+          type: string
+          enum:
+          - dark_web
+          - open_web
+          - social_media
+      - description: The period within which results have been detected.
         name: date_period
         in: query
-      - type: string
-        default: UTC
-        description: The timezone for DatePeriod as per the IANA Time Zone database. Default is UTC.
+        schema:
+          type: string
+          enum:
+          - last_twenty_four_hours
+          - last_seven_days
+          - last_thirty_days
+          - last_three_months
+          - last_six_months
+          - last_twelve_months
+          - all_time
+          default: all_time
+      - description: The timezone for DatePeriod as per the IANA Time Zone database. Default is UTC.
         name: date_period_timezone
         in: query
-      - type: array
-        items:
+        schema:
           type: string
-        collectionFormat: multi
-        example: mydomain.com
+          default: UTC
+      - example: mydomain.com
         description: A list of matching transforms to filter results by. Repeat the parameter to supply multiple values.
         name: transforms
         in: query
-      - type: array
-        items:
-          enum:
-          - critical
-          - high
-          - medium
-          - low
-          - info
-          type: string
-        collectionFormat: multi
-        description: A list of matching severities to filter results by. Repeat the parameter to supply multiple values.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - description: A list of matching severities to filter results by. Repeat the parameter to supply multiple values.
         name: severities
         in: query
-      - type: array
-        items:
-          enum:
-          - exposed_credentials
-          - exposed_credentials_site
-          - exposed_credentials_user
-          - exposed_pii
-          - malware
-          - keyword_mention
-          - confidential_business
-          - brand_impersonation
-          - denial_of_service
-          - planned_intrusion
-          - network_access_for_sale
-          - data_for_sale
-          - possible_data_breach
-          - planned_attack
-          - planned_violent_threat
-          - planned_protest_activism
-          - account_compromise
-          - fraud_or_loss
-          - complaint
-          type: string
-        collectionFormat: multi
-        description: A list of matching threat types to filter results by. Repeat the parameter to supply multiple values.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            enum:
+            - critical
+            - high
+            - medium
+            - low
+            - info
+            type: string
+      - description: A list of matching threat types to filter results by. Repeat the parameter to supply multiple values.
         name: threat_types
         in: query
-      - type: array
-        items:
-          enum:
-          - stealer_logs
-          - forum
-          - marketplace
-          - ransomware_blog
-          - icq
-          - openbazaar
-          - paste
-          - blogs
-          - news
-          - social_media
-          - code_repository
-          - issue_tracker
-          - package_repository
-          - messaging
-          - owned_domain
-          - education_research
-          - business_commercial
-          - cloud_storage
-          - cloud_services
-          - community
-          - conferences_events
-          - cms
-          - documentation
-          - domain_tools
-          - fin_services
-          - govt_legal
-          - healthcare
-          - industrial_manufacture
-          - job_board
-          - media_entertainment
-          - network_tool
-          - personal_web
-          - search_engine
-          - sec_tools
-          - software
-          - sports
-          - tech
-          - vibe_coding_tool
-          - mcp_registries
-          - data_dump
-          - exposed_service
-          type: string
-        collectionFormat: multi
-        description: A list of matching source types to filter results by. Repeat the parameter to supply multiple values.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            enum:
+            - exposed_credentials
+            - exposed_credentials_site
+            - exposed_credentials_user
+            - exposed_pii
+            - malware
+            - keyword_mention
+            - confidential_business
+            - brand_impersonation
+            - denial_of_service
+            - planned_intrusion
+            - network_access_for_sale
+            - data_for_sale
+            - possible_data_breach
+            - planned_attack
+            - planned_violent_threat
+            - planned_protest_activism
+            - account_compromise
+            - fraud_or_loss
+            - complaint
+            type: string
+      - description: A list of matching source types to filter results by. Repeat the parameter to supply multiple values.
         name: source_types
         in: query
-      - type: boolean
-        default: false
-        description: Limits threats to those auto-dismissed by an AI analyst
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            enum:
+            - stealer_logs
+            - forum
+            - marketplace
+            - ransomware_blog
+            - icq
+            - openbazaar
+            - paste
+            - blogs
+            - news
+            - social_media
+            - code_repository
+            - issue_tracker
+            - package_repository
+            - messaging
+            - owned_domain
+            - education_research
+            - business_commercial
+            - cloud_storage
+            - cloud_services
+            - community
+            - conferences_events
+            - cms
+            - documentation
+            - domain_tools
+            - fin_services
+            - govt_legal
+            - healthcare
+            - industrial_manufacture
+            - job_board
+            - media_entertainment
+            - network_tool
+            - personal_web
+            - search_engine
+            - sec_tools
+            - software
+            - sports
+            - tech
+            - vibe_coding_tool
+            - mcp_registries
+            - data_dump
+            - exposed_service
+            type: string
+      - description: Limits threats to those auto-dismissed by an AI analyst
         name: auto_dismissed
         in: query
-      - type: array
-        items:
-          enum:
-          - dismissed
-          - dismissed_by_rule
-          - smart_filtered
-          - remediated
-          - waived
-          type: string
-        collectionFormat: multi
-        description: Limits the set of threat results to those with a remediation status matching at least one entry provided. Repeat the parameter to supply multiple values.
+        schema:
+          type: boolean
+          default: false
+      - description: Limits the set of threat results to those with a remediation status matching at least one entry provided. Repeat the parameter to supply multiple values.
         name: closed_status
         in: query
-      - enum:
-        - open
-        - investigating
-        - remediating
-        - closed
-        type: string
-        description: Limits the set of threat results based on their current status
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            enum:
+            - dismissed
+            - dismissed_by_rule
+            - smart_filtered
+            - remediated
+            - waived
+            type: string
+      - description: Limits the set of threat results based on their current status
         name: threat_status
         in: query
+        schema:
+          type: string
+          enum:
+          - open
+          - investigating
+          - remediating
+          - closed
       responses:
         '200':
           description: A count of threats
-          schema:
-            $ref: '#/definitions/GetThreatMonitoringResultsCountResponsePayloadBody'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetThreatMonitoringResultsCountResponsePayloadBody'
         '403':
           description: Account does not have access to requested entities
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '404':
           description: There was a problem with the request
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '422':
           description: An invalid parameter was supplied or a mandatory parameter was missing
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '429':
           description: Too many requests have been made to this endpoint.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '500':
           description: An internal system error occurred
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
   /threatmonitoring/threat/investigator/update:
     post:
       description: 'Assigns an investigator to a specific threat, identified by UUID, and places the threat into the investigating state.
@@ -387,39 +448,51 @@ paths:
       summary: Update threat's investigator
       operationId: threatmonitoring_assign_investigator
       parameters:
-      - type: string
-        format: uuid
-        description: The unique identifier of the threat to assign an investigator to
+      - description: The unique identifier of the threat to assign an investigator to
         name: uuid
         in: query
         required: true
-      - type: string
-        example: user@yourcompany.com
+        schema:
+          type: string
+          format: uuid
+      - example: user@yourcompany.com
         description: The email address of the investigator to assign
         name: investigator_email
         in: query
         required: true
+        schema:
+          type: string
       responses:
         '200':
           description: The threat with its assigned investigator
-          schema:
-            $ref: '#/definitions/AssignThreatInvestigatorV1ResponsePayloadBody'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssignThreatInvestigatorV1ResponsePayloadBody'
         '404':
           description: There was a problem with the request
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '422':
           description: An invalid parameter was supplied or a mandatory parameter was missing
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '429':
           description: Too many requests have been made to this endpoint.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '500':
           description: An internal system error occurred
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
   /threatmonitoring/threat/list:
     get:
       description: 'Retrieve Threat Monitoring threats for an organization.
@@ -431,206 +504,237 @@ paths:
       summary: List threats
       operationId: threatmonitoring_results
       parameters:
-      - enum:
-        - dark_web
-        - open_web
-        - social_media
-        type: string
-        description: Limit findings to this threat monitoring module.
+      - description: Limit findings to this threat monitoring module.
         name: module
         in: query
-      - enum:
-        - last_twenty_four_hours
-        - last_seven_days
-        - last_thirty_days
-        - last_three_months
-        - last_six_months
-        - last_twelve_months
-        - all_time
-        type: string
-        default: all_time
-        description: The period within which results have been detected.
+        schema:
+          type: string
+          enum:
+          - dark_web
+          - open_web
+          - social_media
+      - description: The period within which results have been detected.
         name: date_period
         in: query
-      - type: string
-        default: UTC
-        description: The timezone for DatePeriod as per the IANA Time Zone database. Default is UTC.
+        schema:
+          type: string
+          enum:
+          - last_twenty_four_hours
+          - last_seven_days
+          - last_thirty_days
+          - last_three_months
+          - last_six_months
+          - last_twelve_months
+          - all_time
+          default: all_time
+      - description: The timezone for DatePeriod as per the IANA Time Zone database. Default is UTC.
         name: date_period_timezone
         in: query
-      - type: array
-        items:
+        schema:
           type: string
-        collectionFormat: multi
-        example: mydomain.com
+          default: UTC
+      - example: mydomain.com
         description: A list of matching transforms to filter results by. Repeat the parameter to supply multiple values.
         name: transforms
         in: query
-      - type: array
-        items:
-          enum:
-          - critical
-          - high
-          - medium
-          - low
-          - info
-          type: string
-        collectionFormat: multi
-        description: A list of matching severities to filter results by. Repeat the parameter to supply multiple values.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - description: A list of matching severities to filter results by. Repeat the parameter to supply multiple values.
         name: severities
         in: query
-      - type: array
-        items:
-          enum:
-          - exposed_credentials
-          - exposed_credentials_site
-          - exposed_credentials_user
-          - exposed_pii
-          - malware
-          - keyword_mention
-          - confidential_business
-          - brand_impersonation
-          - denial_of_service
-          - planned_intrusion
-          - network_access_for_sale
-          - data_for_sale
-          - possible_data_breach
-          - planned_attack
-          - planned_violent_threat
-          - planned_protest_activism
-          - account_compromise
-          - fraud_or_loss
-          - complaint
-          type: string
-        collectionFormat: multi
-        description: A list of matching threat types to filter results by. Repeat the parameter to supply multiple values.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            enum:
+            - critical
+            - high
+            - medium
+            - low
+            - info
+            type: string
+      - description: A list of matching threat types to filter results by. Repeat the parameter to supply multiple values.
         name: threat_types
         in: query
-      - type: array
-        items:
-          enum:
-          - stealer_logs
-          - forum
-          - marketplace
-          - ransomware_blog
-          - icq
-          - openbazaar
-          - paste
-          - blogs
-          - news
-          - social_media
-          - code_repository
-          - issue_tracker
-          - package_repository
-          - messaging
-          - owned_domain
-          - education_research
-          - business_commercial
-          - cloud_storage
-          - cloud_services
-          - community
-          - conferences_events
-          - cms
-          - documentation
-          - domain_tools
-          - fin_services
-          - govt_legal
-          - healthcare
-          - industrial_manufacture
-          - job_board
-          - media_entertainment
-          - network_tool
-          - personal_web
-          - search_engine
-          - sec_tools
-          - software
-          - sports
-          - tech
-          - vibe_coding_tool
-          - mcp_registries
-          - data_dump
-          - exposed_service
-          type: string
-        collectionFormat: multi
-        description: A list of matching source types to filter results by. Repeat the parameter to supply multiple values.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            enum:
+            - exposed_credentials
+            - exposed_credentials_site
+            - exposed_credentials_user
+            - exposed_pii
+            - malware
+            - keyword_mention
+            - confidential_business
+            - brand_impersonation
+            - denial_of_service
+            - planned_intrusion
+            - network_access_for_sale
+            - data_for_sale
+            - possible_data_breach
+            - planned_attack
+            - planned_violent_threat
+            - planned_protest_activism
+            - account_compromise
+            - fraud_or_loss
+            - complaint
+            type: string
+      - description: A list of matching source types to filter results by. Repeat the parameter to supply multiple values.
         name: source_types
         in: query
-      - type: boolean
-        default: false
-        description: Limits threats to those auto-dismissed by an AI analyst
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            enum:
+            - stealer_logs
+            - forum
+            - marketplace
+            - ransomware_blog
+            - icq
+            - openbazaar
+            - paste
+            - blogs
+            - news
+            - social_media
+            - code_repository
+            - issue_tracker
+            - package_repository
+            - messaging
+            - owned_domain
+            - education_research
+            - business_commercial
+            - cloud_storage
+            - cloud_services
+            - community
+            - conferences_events
+            - cms
+            - documentation
+            - domain_tools
+            - fin_services
+            - govt_legal
+            - healthcare
+            - industrial_manufacture
+            - job_board
+            - media_entertainment
+            - network_tool
+            - personal_web
+            - search_engine
+            - sec_tools
+            - software
+            - sports
+            - tech
+            - vibe_coding_tool
+            - mcp_registries
+            - data_dump
+            - exposed_service
+            type: string
+      - description: Limits threats to those auto-dismissed by an AI analyst
         name: auto_dismissed
         in: query
-      - type: array
-        items:
-          enum:
-          - dismissed
-          - dismissed_by_rule
-          - smart_filtered
-          - remediated
-          - waived
-          type: string
-        collectionFormat: multi
-        description: Limits the set of threat results to those with a remediation status matching at least one entry provided. Repeat the parameter to supply multiple values.
+        schema:
+          type: boolean
+          default: false
+      - description: Limits the set of threat results to those with a remediation status matching at least one entry provided. Repeat the parameter to supply multiple values.
         name: closed_status
         in: query
-      - enum:
-        - open
-        - investigating
-        - remediating
-        - closed
-        type: string
-        description: Limits the set of threat results based on their current status
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            enum:
+            - dismissed
+            - dismissed_by_rule
+            - smart_filtered
+            - remediated
+            - waived
+            type: string
+      - description: Limits the set of threat results based on their current status
         name: threat_status
         in: query
-      - maximum: 2000
-        type: integer
-        format: int64
-        default: 50
-        description: The page size of results to return. If not supplied, default is 50.
+        schema:
+          type: string
+          enum:
+          - open
+          - investigating
+          - remediating
+          - closed
+      - description: The page size of results to return. If not supplied, default is 50.
         name: page_size
         in: query
-      - type: string
-        description: The `next_page_token` from a previous request, use this to get the next page of results.
+        schema:
+          type: integer
+          format: int64
+          default: 50
+          maximum: 2000
+      - description: The `next_page_token` from a previous request, use this to get the next page of results.
         name: page_token
         in: query
-      - type: boolean
-        default: false
-        description: Include the text snippet in results. Defaults to false.
+        schema:
+          type: string
+      - description: Include the text snippet in results. Defaults to false.
         name: include_snippets
         in: query
-      - type: string
-        default: date_alerted:desc
-        description: 'List of fields to sort threats by, with optional :asc or :desc suffix per field.
+        schema:
+          type: boolean
+          default: false
+      - description: 'List of fields to sort threats by, with optional :asc or :desc suffix per field.
 
           Allowed fields: date_alerted.
 
           Default direction is descending.'
         name: sort_by
         in: query
+        schema:
+          type: string
+          default: date_alerted:desc
       responses:
         '200':
           description: A list of threats
-          schema:
-            $ref: '#/definitions/GetThreatMonitoringResultsResponsePayloadBody'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetThreatMonitoringResultsResponsePayloadBody'
         '403':
           description: Account does not have access to requested entities
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '404':
           description: There was a problem with the request
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '422':
           description: An invalid parameter was supplied or a mandatory parameter was missing
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '429':
           description: Too many requests have been made to this endpoint.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '500':
           description: An internal system error occurred
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
   /threatmonitoring/threat/remediation_request/add:
     post:
       description: 'Creates a remediation request for a specific threat, identified by UUID, and places the threat into the remediation state. The remediation request is assigned to the specified email address.
@@ -642,66 +746,85 @@ paths:
       summary: Add remediation request to threat
       operationId: threatmonitoring_remediation
       parameters:
-      - name: Body
-        in: body
-        schema:
-          $ref: '#/definitions/CreateThreatRemediationRequestV1RequestBody'
-      - type: string
-        format: uuid
-        description: The unique identifier of the threat to place into remediation
+      - description: The unique identifier of the threat to place into remediation
         name: uuid
         in: query
         required: true
-      - type: string
-        example: user@yourcompany.com
+        schema:
+          type: string
+          format: uuid
+      - example: user@yourcompany.com
         description: The email address to assign the remediation request to
         name: email
         in: query
         required: true
-      - type: string
-        description: The title for the remediation request. If not provided, will use the threat title
+        schema:
+          type: string
+      - description: The title for the remediation request. If not provided, will use the threat title
         name: title
         in: query
-      - type: string
-        format: date-time
-        description: Optional due date for the remediation request. Accepts YYYY-MM-DD (interpreted as UTC midnight) or RFC3339. Must not be in the past
+        schema:
+          type: string
+      - description: Optional due date for the remediation request. Accepts YYYY-MM-DD (interpreted as UTC midnight) or RFC3339. Must not be in the past
         name: due_date
         in: query
-      - type: string
-        format: date-time
-        description: Optional reminder date for the remediation request. Requires due_date to be set. Accepts YYYY-MM-DD (interpreted as UTC midnight) or RFC3339. Must not be in the past
+        schema:
+          type: string
+          format: date-time
+      - description: Optional reminder date for the remediation request. Requires due_date to be set. Accepts YYYY-MM-DD (interpreted as UTC midnight) or RFC3339. Must not be in the past
         name: reminder_date
         in: query
-      - type: boolean
-        default: false
-        description: If true, copies all threat comments to the remediation request
+        schema:
+          type: string
+          format: date-time
+      - description: If true, copies all threat comments to the remediation request
         name: copy_threat_comments
         in: query
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: The remediation request that was created
-          schema:
-            $ref: '#/definitions/CreateThreatRemediationRequestV1ResponsePayloadBody'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateThreatRemediationRequestV1ResponsePayloadBody'
         '400':
           description: The request was malformed (e.g. invalid JSON body)
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '404':
           description: There was a problem with the request
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '422':
           description: An invalid parameter was supplied or a mandatory parameter was missing
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '429':
           description: Too many requests have been made to this endpoint.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '500':
           description: An internal system error occurred
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateThreatRemediationRequestV1RequestBody'
   /threatmonitoring/threat/remediation_request/close:
     post:
       description: 'Closes the remediation request for a specific threat, identified by UUID, by setting its status to ''Closed''. The threat must currently be in remediation.
@@ -715,49 +838,64 @@ paths:
       summary: Close threat's remediation request
       operationId: threatmonitoring_remediation_close
       parameters:
-      - type: string
-        format: uuid
-        description: The UUID of the threat whose remediation request should be closed
+      - description: The UUID of the threat whose remediation request should be closed
         name: uuid
         in: query
         required: true
-      - enum:
-        - remediated
-        - waived
-        type: string
-        description: 'The reason for closing the remediation request. Must be one of: remediated, waived'
+        schema:
+          type: string
+          format: uuid
+      - description: 'The reason for closing the remediation request. Must be one of: remediated, waived'
         name: reason
         in: query
         required: true
-      - type: string
-        description: The description of the reason (required if reason is 'waived')
+        schema:
+          type: string
+          enum:
+          - remediated
+          - waived
+      - description: The description of the reason (required if reason is 'waived')
         name: reason_description
         in: query
+        schema:
+          type: string
       responses:
         '200':
           description: The closed remediation request
-          schema:
-            $ref: '#/definitions/CloseThreatRemediationRequestV1ResponsePayloadBody'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloseThreatRemediationRequestV1ResponsePayloadBody'
         '403':
           description: Your API key does not have permission to perform this action.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '404':
           description: There was a problem with the request
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '422':
           description: An invalid parameter was supplied or a mandatory parameter was missing
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '429':
           description: Too many requests have been made to this endpoint.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '500':
           description: An internal system error occurred
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
   /threatmonitoring/threat/reopen:
     post:
       description: 'Reopens a closed threat, identified by UUID, and places it back into the investigating state.
@@ -780,1354 +918,1367 @@ paths:
       summary: Reopen threat
       operationId: threatmonitoring_reopen_threat
       parameters:
-      - type: string
-        format: uuid
-        description: The unique identifier of the threat to reopen
+      - description: The unique identifier of the threat to reopen
         name: uuid
         in: query
         required: true
-      - type: string
-        example: user@yourcompany.com
+        schema:
+          type: string
+          format: uuid
+      - example: user@yourcompany.com
         description: 'The email address of the user to assign as the investigator on reopen.
 
           The user must belong to your organization and have write permission for Threat Monitoring.'
         name: investigator_email
         in: query
         required: true
+        schema:
+          type: string
       responses:
         '200':
           description: The reopened threat
-          schema:
-            $ref: '#/definitions/ReopenThreatV1ResponsePayloadBody'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReopenThreatV1ResponsePayloadBody'
         '404':
           description: There was a problem with the request
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '422':
           description: An invalid parameter was supplied or a mandatory parameter was missing
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '429':
           description: Too many requests have been made to this endpoint.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '500':
           description: An internal system error occurred
-          schema:
-            $ref: '#/definitions/endpointError'
-definitions:
-  DataLeakExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      has_password:
-        type: boolean
-      leak_discover_date:
-        type: string
-        format: date-time
-      leak_name:
-        type: string
-      leak_publish_date:
-        type: string
-        format: date-time
-      leak_size:
-        type: integer
-        format: int64
-      leak_tags:
-        type: array
-        items:
-          $ref: '#/definitions/DataLeakTag'
-      login:
-        type: string
-      masked_password:
-        $ref: '#/definitions/MaskedPassword'
-      website:
-        type: string
-  RedditPostExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      author_id:
-        type: string
-      author_is_blocked:
-        type: boolean
-      author_username:
-        type: string
-      comments_count:
-        type: integer
-        format: int64
-      created_time:
-        type: string
-      is_gallery:
-        type: boolean
-      is_original_content:
-        type: boolean
-      is_video:
-        type: boolean
-      post_id:
-        type: string
-      post_url:
-        type: string
-      score:
-        type: integer
-        format: int64
-      subreddit:
-        type: string
-      subreddit_id:
-        type: string
-      subreddit_subscribers:
-        type: integer
-        format: int64
-      subreddit_type:
-        type: string
-      text:
-        type: string
-      timestamp:
-        type: string
-      title:
-        type: string
-      total_awards_received:
-        type: integer
-        format: int64
-      upvote_ratio:
-        type: number
-        format: double
-      whitelist_status:
-        type: integer
-        format: int64
-  TwitterProfileExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      created_time:
-        type: string
-      description:
-        type: string
-      external_url:
-        type: string
-      favorites_count:
-        type: integer
-        format: int64
-      followers_count:
-        type: integer
-        format: int64
-      friends_count:
-        type: integer
-        format: int64
-      full_name:
-        type: string
-      is_verified:
-        type: boolean
-      listed_count:
-        type: integer
-        format: int64
-      location:
-        type: string
-      media_count:
-        type: integer
-        format: int64
-      profile_id:
-        type: string
-      statuses_count:
-        type: integer
-        format: int64
-      username:
-        type: string
-  InstagramProfileExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      age_group:
-        type: string
-      biography:
-        type: string
-      business_category:
-        type: array
-        items:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
+components:
+  schemas:
+    AddThreatCommentV1RequestBody:
+      type: object
+      required:
+      - content
+      properties:
+        content:
+          description: The content of the comment. Must not be empty and must not exceed 4000 characters.
           type: string
-      external_url:
-        type: string
-      followers_count:
-        type: integer
-        format: int64
-      followings_count:
-        type: integer
-        format: int64
-      full_name:
-        type: string
-      gender:
-        type: string
-      highlight_reels_count:
-        type: integer
-        format: int64
-      is_business_account:
-        type: boolean
-      is_joined_recently:
-        type: boolean
-      is_private:
-        type: boolean
-      is_verified:
-        type: boolean
-      langs:
-        type: array
-        items:
+    CookieExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        asn:
+          type: integer
+          format: int64
+        asn_text:
           type: string
-      last_update:
-        type: string
-      latest_location_id:
-        type: string
-      posts_count:
-        type: integer
-        format: int64
-      profile_id:
-        type: string
-      public_email:
-        type: string
-      public_phone_country_code:
-        type: string
-      public_phone_number:
-        type: string
-      username:
-        type: string
-  LinkedInUserProfileExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      city:
-        type: string
-      connections_count:
-        type: integer
-        format: int64
-      country:
-        type: string
-      country_full_name:
-        type: string
-      facebook_profile_id:
-        type: string
-      first_name:
-        type: string
-      follower_count:
-        type: integer
-        format: int64
-      full_name:
-        type: string
-      github_profile_id:
-        type: string
-      headline:
-        type: string
-      last_fetched_at:
-        type: string
-      last_name:
-        type: string
-      linkedin_profile_url:
-        type: string
-      location_str:
-        type: string
-      occupation:
-        type: string
-      personal_emails:
-        type: array
-        items:
+        cookie_name:
           type: string
-      personal_phone_numbers:
-        type: array
-        items:
+        cookie_value:
           type: string
-      public_identifier:
-        type: string
-      state:
-        type: string
-      summary:
-        type: string
-      twitter_profile_id:
-        type: string
-      website:
-        type: string
-  AddThreatCommentV1RequestBody:
-    type: object
-    required:
-    - content
-    properties:
-      content:
-        description: The content of the comment. Must not be empty and must not exceed 4000 characters.
-        type: string
-  CreateThreatRemediationRequestV1RequestBody:
-    description: CreateThreatRemediationRequestV1RequestBody represents the request body for creating a remediation request
-    type: object
-    properties:
-      email_message:
-        description: Optional email message to include when inviting the user. Must not exceed 4000 characters.
-        type: string
-        example: Please review and remediate this threat
-  endpointError:
-    description: Error details coming from an endpoint
-    type: object
-    properties:
-      error:
-        description: A description of the error
-        type: string
-  ReopenThreatV1ResponsePayloadBody:
-    type: object
-    title: ReopenThreatV1ResponsePayloadBody is the response body for a reopened threat.
-    properties:
-      status:
-        description: The status of the threat after reopening
-        type: string
-      uuid:
-        description: The UUID of the threat that was reopened
-        type: string
-  TiktokProfileExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      biography_link:
-        type: string
-      created_time:
-        type: string
-      digg_count:
-        type: integer
-        format: int64
-      follower_count:
-        type: integer
-        format: int64
-      following_count:
-        type: integer
-        format: int64
-      friend_count:
-        type: integer
-        format: int64
-      full_name:
-        type: string
-      full_name_modify_time:
-        type: string
-      heart_count:
-        type: integer
-        format: int64
-      is_private:
-        type: boolean
-      is_verified:
-        type: boolean
-      langs:
-        type: array
-        items:
+        device_account:
           type: string
-      profile_id:
-        type: string
-      region:
-        type: string
-      signature:
-        type: string
-      username:
-        type: string
-      username_modify_time:
-        type: string
-      video_count:
-        type: integer
-        format: int64
-  GetThreatMonitoringResultsResponsePayloadBody:
-    type: object
-    properties:
-      next_page_token:
-        type: string
-      results:
-        type: array
-        items:
-          $ref: '#/definitions/ThreatMonitoringResultSummary'
-  TelegramExternalAPIAddAttributes:
-    type: object
-    properties:
-      author:
-        type: string
-      language:
-        type: string
-      name:
-        type: string
-      parsed_thread:
-        type: array
-        items:
-          $ref: '#/definitions/ExternalAPIThreadEntry'
-      participants:
-        type: array
-        items:
+        device_location:
           type: string
-  PasswordExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      asn:
-        type: integer
-        format: int64
-      asn_text:
-        type: string
-      device_account:
-        type: string
-      device_location:
-        type: string
-      device_name:
-        type: string
-      device_os:
-        type: string
-      device_serial_number:
-        type: string
-      device_user_agent:
-        type: string
-      ip:
-        type: string
-      malware_path:
-        type: string
-      malware_ref_url:
-        type: string
-      malware_type:
-        type: string
-      malware_version:
-        type: string
-      password:
-        type: string
-      reverse_dns:
-        type: string
-      url:
-        type: string
-      username:
-        type: string
-  ThreatComment:
-    type: object
-    properties:
-      children:
-        description: The thread of replies and additional comments leading from this one
-        type: array
-        items:
-          $ref: '#/definitions/ThreatComment'
-      comment_id:
-        description: unique identifier for the comment
-        type: integer
-        format: int64
-      content:
-        description: The body (text) of the comment
-        type: string
-      created_at:
-        description: Time when the comment was made
-        type: string
-        format: date-time
-        example: '2006-01-02T15:04:05.999999Z'
-      user:
-        $ref: '#/definitions/ThreatActor'
-  ThreatLabel:
-    type: object
-    properties:
-      name:
-        type: string
-  FacebookPostExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      attached_image_content:
-        type: string
-      attached_link:
-        type: string
-      attached_link_description:
-        type: string
-      attached_post_id:
-        type: string
-      comments_count:
-        type: integer
-        format: int64
-      created_time:
-        type: string
-      fact_checks:
-        type: array
-        items:
+        device_name:
           type: string
-      group_id:
-        type: string
-      language:
-        type: string
-      overlay_warning:
-        type: string
-      owner_full_name:
-        type: string
-      owner_id:
-        type: string
-      owner_user_name:
-        type: string
-      post_id:
-        type: string
-      post_type:
-        type: string
-      reactions_angry_count:
-        type: integer
-        format: int64
-      reactions_haha_count:
-        type: integer
-        format: int64
-      reactions_like_count:
-        type: integer
-        format: int64
-      reactions_love_count:
-        type: integer
-        format: int64
-      reactions_sad_count:
-        type: integer
-        format: int64
-      reactions_support_count:
-        type: integer
-        format: int64
-      reactions_total_count:
-        type: integer
-        format: int64
-      reactions_wow_count:
-        type: integer
-        format: int64
-      shares_count:
-        type: integer
-        format: int64
-      text:
-        type: string
-      text_lang:
-        type: string
-      text_tagged_users:
-        type: array
-        items:
+        device_os:
           type: string
-      text_tags:
-        type: array
-        items:
+        device_serial_number:
           type: string
-      timestamp:
-        type: string
-  DataLeakTag:
-    type: string
-  GetThreatDetailsResponsePayloadBody:
-    type: object
-    properties:
-      threat_details:
-        $ref: '#/definitions/ThreatMonitoringResultDetailed'
-  ChatExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      discord:
-        $ref: '#/definitions/DiscordExternalAPIAddAttributes'
-      telegram_channel:
-        $ref: '#/definitions/TelegramExternalAPIAddAttributes'
-      telegram_group:
-        $ref: '#/definitions/TelegramExternalAPIAddAttributes'
-  ExternalAPIThreadEntry:
-    type: object
-    properties:
-      date:
-        type: string
-        format: date-time
-      text:
-        type: string
-      user:
-        type: string
-  MCPRegistryExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      packages:
-        type: array
-        items:
+        device_user_agent:
           type: string
-      published_at:
-        type: string
-      repository_url:
-        type: string
-      server_name:
-        type: string
-      version:
-        type: string
-      website_url:
-        type: string
-  MonitoredThreatModule:
-    description: 'MonitoredThreatModule
+        ip:
+          type: string
+        malware_path:
+          type: string
+        malware_ref_url:
+          type: string
+        malware_type:
+          type: string
+        malware_version:
+          type: string
+        reverse_dns:
+          type: string
+        url:
+          type: string
+    GetThreatMonitoringResultsResponsePayloadBody:
+      type: object
+      properties:
+        next_page_token:
+          type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreatMonitoringResultSummary'
+    GetThreatDetailsResponsePayloadBody:
+      type: object
+      properties:
+        threat_details:
+          $ref: '#/components/schemas/ThreatMonitoringResultDetailed'
+    DiscordExternalAPIAddAttributes:
+      type: object
+      properties:
+        author:
+          type: string
+        channel:
+          type: string
+        language:
+          type: string
+        parsed_thread:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalAPIThreadEntry'
+        participants:
+          type: array
+          items:
+            type: string
+        server:
+          type: string
+    LinkedInCompanyProfileHeadquartersExternal:
+      type: object
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        line1:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
+    CreateThreatRemediationRequestV1RequestBody:
+      description: CreateThreatRemediationRequestV1RequestBody represents the request body for creating a remediation request
+      type: object
+      properties:
+        email_message:
+          description: Optional email message to include when inviting the user. Must not exceed 4000 characters.
+          type: string
+          example: Please review and remediate this threat
+    TwitterProfileExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        created_time:
+          type: string
+        description:
+          type: string
+        external_url:
+          type: string
+        favorites_count:
+          type: integer
+          format: int64
+        followers_count:
+          type: integer
+          format: int64
+        friends_count:
+          type: integer
+          format: int64
+        full_name:
+          type: string
+        is_verified:
+          type: boolean
+        listed_count:
+          type: integer
+          format: int64
+        location:
+          type: string
+        media_count:
+          type: integer
+          format: int64
+        profile_id:
+          type: string
+        statuses_count:
+          type: integer
+          format: int64
+        username:
+          type: string
+    TiktokProfileExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        biography_link:
+          type: string
+        created_time:
+          type: string
+        digg_count:
+          type: integer
+          format: int64
+        follower_count:
+          type: integer
+          format: int64
+        following_count:
+          type: integer
+          format: int64
+        friend_count:
+          type: integer
+          format: int64
+        full_name:
+          type: string
+        full_name_modify_time:
+          type: string
+        heart_count:
+          type: integer
+          format: int64
+        is_private:
+          type: boolean
+        is_verified:
+          type: boolean
+        langs:
+          type: array
+          items:
+            type: string
+        profile_id:
+          type: string
+        region:
+          type: string
+        signature:
+          type: string
+        username:
+          type: string
+        username_modify_time:
+          type: string
+        video_count:
+          type: integer
+          format: int64
+    DataLeakTag:
+      type: string
+    MonitoredThreatSourceType:
+      description: 'MonitoredThreatSourceType
 
-      Is used to indicate the threat monitoring module for which the data has been collected'
-    type: string
-  LinkedInCompanyProfileHeadquartersExternal:
-    type: object
-    properties:
-      city:
-        type: string
-      country:
-        type: string
-      line1:
-        type: string
-      postal_code:
-        type: string
-      state:
-        type: string
-  GithubExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      branch:
-        type: string
-      commit:
-        type: string
-      committer_email:
-        type: string
-      owner:
-        type: string
-      repository:
-        type: string
-      tag:
-        type: string
-      target_file:
-        type: string
-  StealerLogsExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      asn:
-        type: integer
-        format: int64
-      asn_text:
-        type: string
-      autocompletes:
-        type: array
-        items:
-          $ref: '#/definitions/GenericStealerLogExternalAPIThreatAdditionalAttributes'
-      cookies:
-        type: array
-        items:
-          $ref: '#/definitions/CookieExternalAPIThreatAdditionalAttributes'
-      device_account:
-        type: string
-      device_location:
-        type: string
-      device_name:
-        type: string
-      device_os:
-        type: string
-      device_serial_number:
-        type: string
-      device_user_agent:
-        type: string
-      histories:
-        type: array
-        items:
-          $ref: '#/definitions/GenericStealerLogExternalAPIThreatAdditionalAttributes'
-      ip:
-        type: string
-      malware_path:
-        type: string
-      malware_ref_url:
-        type: string
-      malware_type:
-        type: string
-      malware_version:
-        type: string
-      passwords:
-        type: array
-        items:
-          $ref: '#/definitions/PasswordExternalAPIThreatAdditionalAttributes'
-      reverse_dns:
-        type: string
-  ExposedServiceKeywordExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      attribution_identifiers:
-        type: array
-        items:
-          $ref: '#/definitions/ExposedServiceAttributionIdentifierExternalAPI'
-      host:
-        type: string
-      port:
-        type: integer
-        format: int64
-      record_name:
-        type: string
-      service_type:
-        type: string
-  ThreatMonitoringResultSummary:
-    description: a threat finding
-    type: object
-    properties:
-      archived:
-        description: Indicates that the threat finding has been archived through the deactivation of its transform
-        type: boolean
-      auto_dismissed:
-        description: Indicates whether a closed threat finding was closed automatically by the ai analyst
-        type: boolean
-      closed:
-        description: Indicates if the threat finding has been closed
-        type: boolean
-      closed_status:
-        $ref: '#/definitions/ThreatMonitoringResultStatus'
-      date_detected:
-        description: The date that the threat was originally detected in RFC3339 format. If missing this field will be omitted.
-        type: string
-        format: date-time
-        example: '2006-01-02T15:04:05.999999Z'
-      dismissed_at:
-        description: The date on which the threat finding was closed in RFC3339 format. Will be omitted if threat is still open.
-        type: string
-        format: date-time
-        example: '2006-01-02T15:04:05.999999Z'
-      dismissed_by:
-        $ref: '#/definitions/ThreatActor'
-      indicators_of_risk:
-        description: Indicates the reason that the ai analyst applied the given severity. Omitted if not supplied.
-        type: string
-      investigating:
-        description: Indicates whether a threat finding is currently being investigated by a human analyst
-        type: boolean
-      investigator:
-        $ref: '#/definitions/ThreatActor'
-      module:
-        $ref: '#/definitions/MonitoredThreatModule'
-      number_of_comments:
-        description: The number of comments attached to the threat finding
-        type: integer
-        format: int64
-      recommended_remediation:
-        description: Remediation guidance provided by the ai analyst for this threat finding. Omitted if not supplied.
-        type: string
-      remediated_at:
-        description: The date on which the threat finding was remediated in RFC3339 format. Will be omitted if not applicable.
-        type: string
-        format: date-time
-        example: '2006-01-02T15:04:05.999999Z'
-      remediated_by:
-        $ref: '#/definitions/ThreatActor'
-      remediation_outcome:
-        $ref: '#/definitions/ThreatOutcome'
-      remediation_outcome_notes:
-        description: Notes made by the remediator. Will be omitted if not applicable or empty.
-        type: string
-      remediation_request_last_updated_at:
-        description: The date on which the remediation request for this threat finding was last updated in RFC3339 format. Will be omitted if not applicable.
-        type: string
-        format: date-time
-        example: '2006-01-02T15:04:05.999999Z'
-      severity:
-        description: The severity of the threat
-        type: string
-      snippet:
-        description: The text snippet associated with the threat finding. If not applicable, this field will be omitted.
-        type: string
-      source:
-        $ref: '#/definitions/MonitoredThreatSourceType'
-      source_domain:
-        description: The source domain (eg facebook.com) for the threat. If unknown, this field will be omitted.
-        type: string
-      source_site:
-        description: A common name source domain (eg facebook.com) for the threat. If unknown, this field will be omitted.
-        type: string
-      threat_context:
-        description: Context of the threat conditions as given by the ai analyst for this threat finding. Omitted if not supplied.
-        type: string
-      threat_status:
-        description: The current status of the threat
-        type: string
-      threat_types:
-        description: One or more threat types associated with the threat finding
-        type: array
-        items:
-          $ref: '#/definitions/MonitoredThreatType'
-      title:
-        description: The title of the threat finding
-        type: string
-      transforms:
-        description: The list of matching transforms that identified this threat finding
-        type: array
-        items:
-          type: string
-      url:
-        description: The URL associated with the threat finding. If unknown or not applicable, this field will be omitted.
-        type: string
-      uuid:
-        description: The unique identifier for the finding
-        type: string
-        format: uuid
-  LinkedInCompanyProfileExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      company_size:
-        type: string
-      company_size_on_linkedin:
-        type: integer
-        format: int64
-      company_type:
-        type: string
-      description:
-        type: string
-      follower_count:
-        type: integer
-        format: int64
-      founded_year:
-        type: integer
-        format: int64
-      headquarters:
-        $ref: '#/definitions/LinkedInCompanyProfileHeadquartersExternal'
-      industry:
-        type: string
-      last_fetched_at:
-        type: string
-      linkedin_internal_id:
-        type: string
-      linkedin_profile_url:
-        type: string
-      name:
-        type: string
-      search_id:
-        type: string
-      tagline:
-        type: string
-      universal_name_id:
-        type: string
-      website:
-        type: string
-  FacebookProfileExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      address:
-        type: string
-      biography:
-        type: string
-      categories:
-        type: array
-        items:
-          type: string
-      created_time:
-        type: string
-      current_city:
-        type: array
-        items:
-          type: string
-      education:
-        type: array
-        items:
-          type: string
-      email:
-        type: string
-      external_url:
-        type: string
-      followers_count:
-        type: integer
-        format: int64
-      following_count:
-        type: integer
-        format: int64
-      friends_count:
-        type: integer
-        format: int64
-      gender:
-        type: string
-      hometown:
-        type: array
-        items:
-          type: string
-      is_owned:
-        type: boolean
-      is_verified:
-        type: boolean
-      langs:
-        type: array
-        items:
-          type: string
-      last_post_created_time:
-        type: string
-      likes_count:
-        type: integer
-        format: int64
-      members_count:
-        type: integer
-        format: int64
-      phone:
-        type: string
-      profile_id:
-        type: string
-      profile_name:
-        type: string
-      profile_type:
-        type: string
-      social_media_urls:
-        type: array
-        items:
-          type: string
-      username:
-        type: string
-      workplace:
-        type: array
-        items:
-          type: string
-  OpenWebExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      resource_content_length:
-        type: integer
-        format: int64
-      resource_content_type:
-        type: string
-      resource_title:
-        type: string
-  GenericStealerLogExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      name:
-        type: string
-      url:
-        type: string
-      value:
-        type: string
-  ThreatMonitoringResultDetailed:
-    type: object
-    properties:
-      additional_attributes:
-        $ref: '#/definitions/ExternalAPIThreatAdditionalAttributes'
-      archived:
-        description: Indicates that the threat finding has been archived through the deactivation of its transform
-        type: boolean
-      auto_dismissed:
-        description: Indicates whether a closed threat finding was closed automatically by the ai analyst
-        type: boolean
-      closed:
-        description: Indicates if the threat finding has been closed
-        type: boolean
-      closed_status:
-        $ref: '#/definitions/ThreatMonitoringResultStatus'
-      comments:
-        description: comments made on the threat finding
-        type: array
-        items:
-          $ref: '#/definitions/ThreatComment'
-      date_detected:
-        description: The date that the threat was originally detected in RFC3339 format. If missing this field will be omitted.
-        type: string
-        format: date-time
-        example: '2006-01-02T15:04:05.999999Z'
-      dismissed_at:
-        description: The date on which the threat finding was closed in RFC3339 format. Will be omitted if threat is still open.
-        type: string
-        format: date-time
-        example: '2006-01-02T15:04:05.999999Z'
-      dismissed_by:
-        $ref: '#/definitions/ThreatActor'
-      indicators_of_risk:
-        description: Indicates the reason that the ai analyst applied the given severity. Omitted if not supplied.
-        type: string
-      investigating:
-        description: Indicates whether a threat finding is currently being investigated by a human analyst
-        type: boolean
-      investigator:
-        $ref: '#/definitions/ThreatActor'
-      labels:
-        description: labels applied to the threat finding
-        type: array
-        items:
-          $ref: '#/definitions/ThreatLabel'
-      module:
-        $ref: '#/definitions/MonitoredThreatModule'
-      number_of_comments:
-        description: The number of comments attached to the threat finding
-        type: integer
-        format: int64
-      recommended_remediation:
-        description: Remediation guidance provided by the ai analyst for this threat finding. Omitted if not supplied.
-        type: string
-      remediated_at:
-        description: The date on which the threat finding was remediated in RFC3339 format. Will be omitted if not applicable.
-        type: string
-        format: date-time
-        example: '2006-01-02T15:04:05.999999Z'
-      remediated_by:
-        $ref: '#/definitions/ThreatActor'
-      remediation_outcome:
-        $ref: '#/definitions/ThreatOutcome'
-      remediation_outcome_notes:
-        description: Notes made by the remediator. Will be omitted if not applicable or empty.
-        type: string
-      remediation_request_last_updated_at:
-        description: The date on which the remediation request for this threat finding was last updated in RFC3339 format. Will be omitted if not applicable.
-        type: string
-        format: date-time
-        example: '2006-01-02T15:04:05.999999Z'
-      remediation_risk_details:
-        description: Details of the threat remediation as supplied by the ai analyst for this threat finding. Omitted if not supplied.
-        type: string
-      remediation_risk_summary:
-        description: Summary of the threat remediation as supplied by the ai analyst for this threat finding. Omitted if not supplied.
-        type: string
-      severity:
-        description: The severity of the threat
-        type: string
-      snippet:
-        description: The text snippet associated with the threat finding. If not applicable, this field will be omitted.
-        type: string
-      source:
-        $ref: '#/definitions/MonitoredThreatSourceType'
-      source_domain:
-        description: The source domain (eg facebook.com) for the threat. If unknown, this field will be omitted.
-        type: string
-      source_site:
-        description: A common name source domain (eg facebook.com) for the threat. If unknown, this field will be omitted.
-        type: string
-      threat_context:
-        description: Context of the threat conditions as given by the ai analyst for this threat finding. Omitted if not supplied.
-        type: string
-      threat_status:
-        description: The current status of the threat
-        type: string
-      threat_types:
-        description: One or more threat types associated with the threat finding
-        type: array
-        items:
-          $ref: '#/definitions/MonitoredThreatType'
-      title:
-        description: The title of the threat finding
-        type: string
-      transforms:
-        description: The list of matching transforms that identified this threat finding
-        type: array
-        items:
-          type: string
-      url:
-        description: The URL associated with the threat finding. If unknown or not applicable, this field will be omitted.
-        type: string
-      uuid:
-        description: The unique identifier for the finding
-        type: string
-        format: uuid
-  ExposedServiceIdentifierExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      host:
-        type: string
-      matched_identifier:
-        $ref: '#/definitions/ExposedServiceAttributionIdentifierExternalAPI'
-      other_attribution_identifiers:
-        type: array
-        items:
-          $ref: '#/definitions/ExposedServiceAttributionIdentifierExternalAPI'
-      port:
-        type: integer
-        format: int64
-      service_type:
-        type: string
-  ThreatMonitoringResultStatus:
-    type: string
-  MonitoredThreatSourceType:
-    description: 'MonitoredThreatSourceType
+        Is used to indicate the type of source from which our data vendor discovered the dark web data.  This is used to partially
 
-      Is used to indicate the type of source from which our data vendor discovered the dark web data.  This is used to partially
+        categorize the result and is derived from the content of the result itself. @see ThreatMonitoringRawResult.DetermineDerivedMeta()'
+      type: string
+    InstagramProfileExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        age_group:
+          type: string
+        biography:
+          type: string
+        business_category:
+          type: array
+          items:
+            type: string
+        external_url:
+          type: string
+        followers_count:
+          type: integer
+          format: int64
+        followings_count:
+          type: integer
+          format: int64
+        full_name:
+          type: string
+        gender:
+          type: string
+        highlight_reels_count:
+          type: integer
+          format: int64
+        is_business_account:
+          type: boolean
+        is_joined_recently:
+          type: boolean
+        is_private:
+          type: boolean
+        is_verified:
+          type: boolean
+        langs:
+          type: array
+          items:
+            type: string
+        last_update:
+          type: string
+        latest_location_id:
+          type: string
+        posts_count:
+          type: integer
+          format: int64
+        profile_id:
+          type: string
+        public_email:
+          type: string
+        public_phone_country_code:
+          type: string
+        public_phone_number:
+          type: string
+        username:
+          type: string
+    DataLeakExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        has_password:
+          type: boolean
+        leak_discover_date:
+          type: string
+          format: date-time
+        leak_name:
+          type: string
+        leak_publish_date:
+          type: string
+          format: date-time
+        leak_size:
+          type: integer
+          format: int64
+        leak_tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataLeakTag'
+        login:
+          type: string
+        masked_password:
+          $ref: '#/components/schemas/MaskedPassword'
+        website:
+          type: string
+    ExposedServiceAttributionIdentifierExternalAPI:
+      type: object
+      properties:
+        data_type:
+          type: string
+        data_value:
+          type: string
+    PostExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        author:
+          type: string
+        language:
+          type: string
+        network_type:
+          type: string
+        post_replies:
+          type: integer
+          format: int64
+        post_title:
+          type: string
+        site_name:
+          type: string
+        thread_participants:
+          type: integer
+          format: int64
+        type:
+          type: string
+    ThreatActor:
+      description: an actor for a threat finding (multiple contexts)
+      type: object
+      properties:
+        email:
+          description: the email address of the actor
+          type: string
+        name:
+          description: The full name of the actor
+          type: string
+    LinkedInCompanyProfileExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        company_size:
+          type: string
+        company_size_on_linkedin:
+          type: integer
+          format: int64
+        company_type:
+          type: string
+        description:
+          type: string
+        follower_count:
+          type: integer
+          format: int64
+        founded_year:
+          type: integer
+          format: int64
+        headquarters:
+          $ref: '#/components/schemas/LinkedInCompanyProfileHeadquartersExternal'
+        industry:
+          type: string
+        last_fetched_at:
+          type: string
+        linkedin_internal_id:
+          type: string
+        linkedin_profile_url:
+          type: string
+        name:
+          type: string
+        search_id:
+          type: string
+        tagline:
+          type: string
+        universal_name_id:
+          type: string
+        website:
+          type: string
+    ExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        chat:
+          $ref: '#/components/schemas/ChatExternalAPIThreatAdditionalAttributes'
+        cookie:
+          $ref: '#/components/schemas/CookieExternalAPIThreatAdditionalAttributes'
+        data_dump:
+          $ref: '#/components/schemas/DataLeakExternalAPIThreatAdditionalAttributes'
+        exposed_service_identifier:
+          $ref: '#/components/schemas/ExposedServiceIdentifierExternalAPIThreatAdditionalAttributes'
+        exposed_service_keyword:
+          $ref: '#/components/schemas/ExposedServiceKeywordExternalAPIThreatAdditionalAttributes'
+        facebook_post:
+          $ref: '#/components/schemas/FacebookPostExternalAPIThreatAdditionalAttributes'
+        facebook_profile:
+          $ref: '#/components/schemas/FacebookProfileExternalAPIThreatAdditionalAttributes'
+        github:
+          $ref: '#/components/schemas/GithubExternalAPIThreatAdditionalAttributes'
+        instagram_post:
+          $ref: '#/components/schemas/InstagramPostExternalAPIThreatAdditionalAttributes'
+        instagram_profile:
+          $ref: '#/components/schemas/InstagramProfileExternalAPIThreatAdditionalAttributes'
+        linkedin_company_profile:
+          $ref: '#/components/schemas/LinkedInCompanyProfileExternalAPIThreatAdditionalAttributes'
+        linkedin_user_profile:
+          $ref: '#/components/schemas/LinkedInUserProfileExternalAPIThreatAdditionalAttributes'
+        mcp_registry:
+          $ref: '#/components/schemas/MCPRegistryExternalAPIThreatAdditionalAttributes'
+        open_web:
+          $ref: '#/components/schemas/OpenWebExternalAPIThreatAdditionalAttributes'
+        password:
+          $ref: '#/components/schemas/PasswordExternalAPIThreatAdditionalAttributes'
+        post:
+          $ref: '#/components/schemas/PostExternalAPIThreatAdditionalAttributes'
+        reddit_post:
+          $ref: '#/components/schemas/RedditPostExternalAPIThreatAdditionalAttributes'
+        scribd:
+          $ref: '#/components/schemas/OpenWebExternalAPIThreatAdditionalAttributes'
+        stealer_logs:
+          $ref: '#/components/schemas/StealerLogsExternalAPIThreatAdditionalAttributes'
+        tiktok_profile:
+          $ref: '#/components/schemas/TiktokProfileExternalAPIThreatAdditionalAttributes'
+        twitter_post:
+          $ref: '#/components/schemas/TwitterPostExternalAPIThreatAdditionalAttributes'
+        twitter_profile:
+          $ref: '#/components/schemas/TwitterProfileExternalAPIThreatAdditionalAttributes'
+    ThreatMonitoringResultSummary:
+      description: a threat finding
+      type: object
+      properties:
+        archived:
+          description: Indicates that the threat finding has been archived through the deactivation of its transform
+          type: boolean
+        auto_dismissed:
+          description: Indicates whether a closed threat finding was closed automatically by the ai analyst
+          type: boolean
+        closed:
+          description: Indicates if the threat finding has been closed
+          type: boolean
+        closed_status:
+          $ref: '#/components/schemas/ThreatMonitoringResultStatus'
+        date_detected:
+          description: The date that the threat was originally detected in RFC3339 format. If missing this field will be omitted.
+          type: string
+          format: date-time
+          example: '2006-01-02T15:04:05.999999Z'
+        dismissed_at:
+          description: The date on which the threat finding was closed in RFC3339 format. Will be omitted if threat is still open.
+          type: string
+          format: date-time
+          example: '2006-01-02T15:04:05.999999Z'
+        dismissed_by:
+          $ref: '#/components/schemas/ThreatActor'
+        indicators_of_risk:
+          description: Indicates the reason that the ai analyst applied the given severity. Omitted if not supplied.
+          type: string
+        investigating:
+          description: Indicates whether a threat finding is currently being investigated by a human analyst
+          type: boolean
+        investigator:
+          $ref: '#/components/schemas/ThreatActor'
+        module:
+          $ref: '#/components/schemas/MonitoredThreatModule'
+        number_of_comments:
+          description: The number of comments attached to the threat finding
+          type: integer
+          format: int64
+        recommended_remediation:
+          description: Remediation guidance provided by the ai analyst for this threat finding. Omitted if not supplied.
+          type: string
+        remediated_at:
+          description: The date on which the threat finding was remediated in RFC3339 format. Will be omitted if not applicable.
+          type: string
+          format: date-time
+          example: '2006-01-02T15:04:05.999999Z'
+        remediated_by:
+          $ref: '#/components/schemas/ThreatActor'
+        remediation_outcome:
+          $ref: '#/components/schemas/ThreatOutcome'
+        remediation_outcome_notes:
+          description: Notes made by the remediator. Will be omitted if not applicable or empty.
+          type: string
+        remediation_request_last_updated_at:
+          description: The date on which the remediation request for this threat finding was last updated in RFC3339 format. Will be omitted if not applicable.
+          type: string
+          format: date-time
+          example: '2006-01-02T15:04:05.999999Z'
+        severity:
+          description: The severity of the threat
+          type: string
+        snippet:
+          description: The text snippet associated with the threat finding. If not applicable, this field will be omitted.
+          type: string
+        source:
+          $ref: '#/components/schemas/MonitoredThreatSourceType'
+        source_domain:
+          description: The source domain (eg facebook.com) for the threat. If unknown, this field will be omitted.
+          type: string
+        source_site:
+          description: A common name source domain (eg facebook.com) for the threat. If unknown, this field will be omitted.
+          type: string
+        threat_context:
+          description: Context of the threat conditions as given by the ai analyst for this threat finding. Omitted if not supplied.
+          type: string
+        threat_status:
+          description: The current status of the threat
+          type: string
+        threat_types:
+          description: One or more threat types associated with the threat finding
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitoredThreatType'
+        title:
+          description: The title of the threat finding
+          type: string
+        transforms:
+          description: The list of matching transforms that identified this threat finding
+          type: array
+          items:
+            type: string
+        url:
+          description: The URL associated with the threat finding. If unknown or not applicable, this field will be omitted.
+          type: string
+        uuid:
+          description: The unique identifier for the finding
+          type: string
+          format: uuid
+    AssignThreatInvestigatorV1ResponsePayloadBody:
+      type: object
+      properties:
+        investigator:
+          $ref: '#/components/schemas/ThreatActor'
+        status:
+          description: The status of the threat after assignment
+          type: string
+        uuid:
+          description: The UUID of the threat that was assigned an investigator
+          type: string
+    ThreatOutcome:
+      type: string
+    MonitoredThreatModule:
+      description: 'MonitoredThreatModule
 
-      categorize the result and is derived from the content of the result itself. @see ThreatMonitoringRawResult.DetermineDerivedMeta()'
-    type: string
-  InstagramPostExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      clickable_urls:
-        type: array
-        items:
+        Is used to indicate the threat monitoring module for which the data has been collected'
+      type: string
+    CreateThreatRemediationRequestV1ResponsePayloadBody:
+      type: object
+      properties:
+        remediation_request_id:
+          description: The ID of the created remediation request
+          type: integer
+          format: int64
+        status:
+          description: The status of the threat after being placed into remediation
           type: string
-      coauthor_producers:
-        type: array
-        items:
+        threat_uuid:
+          description: The UUID of the threat that was placed into remediation
           type: string
-      comments_count:
-        type: integer
-        format: int64
-      created_time:
-        type: string
-      is_comments_disabled:
-        type: boolean
-      is_video:
-        type: boolean
-      like_and_view_counts_disabled:
-        type: boolean
-      likes_count:
-        type: integer
-        format: int64
-      owner_id:
-        type: string
-      owner_username:
-        type: string
-      post_id:
-        type: string
-      product_type:
-        type: string
-      related_posts:
-        type: array
-        items:
+    PasswordExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        asn:
+          type: integer
+          format: int64
+        asn_text:
           type: string
-      shortcode:
-        type: string
-      sponsors:
-        type: array
-        items:
+        device_account:
           type: string
-      text:
-        type: string
-      text_lang:
-        type: string
-      text_tagged_users:
-        type: array
-        items:
+        device_location:
           type: string
-      text_tags:
-        type: array
-        items:
+        device_name:
           type: string
-      timestamp:
-        type: string
-      video_plays_count:
-        type: integer
-        format: int64
-      video_views_count:
-        type: integer
-        format: int64
-  MonitoredThreatType:
-    description: 'MonitoredThreatType
+        device_os:
+          type: string
+        device_serial_number:
+          type: string
+        device_user_agent:
+          type: string
+        ip:
+          type: string
+        malware_path:
+          type: string
+        malware_ref_url:
+          type: string
+        malware_type:
+          type: string
+        malware_version:
+          type: string
+        password:
+          type: string
+        reverse_dns:
+          type: string
+        url:
+          type: string
+        username:
+          type: string
+    OpenWebExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        resource_content_length:
+          type: integer
+          format: int64
+        resource_content_type:
+          type: string
+        resource_title:
+          type: string
+    FacebookPostExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        attached_image_content:
+          type: string
+        attached_link:
+          type: string
+        attached_link_description:
+          type: string
+        attached_post_id:
+          type: string
+        comments_count:
+          type: integer
+          format: int64
+        created_time:
+          type: string
+        fact_checks:
+          type: array
+          items:
+            type: string
+        group_id:
+          type: string
+        language:
+          type: string
+        overlay_warning:
+          type: string
+        owner_full_name:
+          type: string
+        owner_id:
+          type: string
+        owner_user_name:
+          type: string
+        post_id:
+          type: string
+        post_type:
+          type: string
+        reactions_angry_count:
+          type: integer
+          format: int64
+        reactions_haha_count:
+          type: integer
+          format: int64
+        reactions_like_count:
+          type: integer
+          format: int64
+        reactions_love_count:
+          type: integer
+          format: int64
+        reactions_sad_count:
+          type: integer
+          format: int64
+        reactions_support_count:
+          type: integer
+          format: int64
+        reactions_total_count:
+          type: integer
+          format: int64
+        reactions_wow_count:
+          type: integer
+          format: int64
+        shares_count:
+          type: integer
+          format: int64
+        text:
+          type: string
+        text_lang:
+          type: string
+        text_tagged_users:
+          type: array
+          items:
+            type: string
+        text_tags:
+          type: array
+          items:
+            type: string
+        timestamp:
+          type: string
+    ThreatMonitoringResultStatus:
+      type: string
+    GenericStealerLogExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+        value:
+          type: string
+    ExposedServiceIdentifierExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        host:
+          type: string
+        matched_identifier:
+          $ref: '#/components/schemas/ExposedServiceAttributionIdentifierExternalAPI'
+        other_attribution_identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExposedServiceAttributionIdentifierExternalAPI'
+        port:
+          type: integer
+          format: int64
+        service_type:
+          type: string
+    StealerLogsExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        asn:
+          type: integer
+          format: int64
+        asn_text:
+          type: string
+        autocompletes:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenericStealerLogExternalAPIThreatAdditionalAttributes'
+        cookies:
+          type: array
+          items:
+            $ref: '#/components/schemas/CookieExternalAPIThreatAdditionalAttributes'
+        device_account:
+          type: string
+        device_location:
+          type: string
+        device_name:
+          type: string
+        device_os:
+          type: string
+        device_serial_number:
+          type: string
+        device_user_agent:
+          type: string
+        histories:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenericStealerLogExternalAPIThreatAdditionalAttributes'
+        ip:
+          type: string
+        malware_path:
+          type: string
+        malware_ref_url:
+          type: string
+        malware_type:
+          type: string
+        malware_version:
+          type: string
+        passwords:
+          type: array
+          items:
+            $ref: '#/components/schemas/PasswordExternalAPIThreatAdditionalAttributes'
+        reverse_dns:
+          type: string
+    TelegramExternalAPIAddAttributes:
+      type: object
+      properties:
+        author:
+          type: string
+        language:
+          type: string
+        name:
+          type: string
+        parsed_thread:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalAPIThreadEntry'
+        participants:
+          type: array
+          items:
+            type: string
+    ReopenThreatV1ResponsePayloadBody:
+      type: object
+      title: ReopenThreatV1ResponsePayloadBody is the response body for a reopened threat.
+      properties:
+        status:
+          description: The status of the threat after reopening
+          type: string
+        uuid:
+          description: The UUID of the threat that was reopened
+          type: string
+    TwitterPostExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        author_id:
+          type: string
+        author_username:
+          type: string
+        favorite_count:
+          type: integer
+          format: int64
+        in_reply_to_post_id:
+          type: string
+        in_reply_to_profile_id:
+          type: string
+        in_reply_to_profile_username:
+          type: string
+        post_id:
+          type: string
+        post_type:
+          type: string
+        quote_count:
+          type: integer
+          format: int64
+        reply_count:
+          type: integer
+          format: int64
+        retweet_count:
+          type: integer
+          format: int64
+        text:
+          type: string
+        text_lang:
+          type: string
+        text_tagged_users:
+          type: array
+          items:
+            type: string
+        text_tags:
+          type: array
+          items:
+            type: string
+        timestamp:
+          type: integer
+          format: int64
+        view_count:
+          type: integer
+          format: int64
+    ThreatMonitoringResultDetailed:
+      type: object
+      properties:
+        additional_attributes:
+          $ref: '#/components/schemas/ExternalAPIThreatAdditionalAttributes'
+        archived:
+          description: Indicates that the threat finding has been archived through the deactivation of its transform
+          type: boolean
+        auto_dismissed:
+          description: Indicates whether a closed threat finding was closed automatically by the ai analyst
+          type: boolean
+        closed:
+          description: Indicates if the threat finding has been closed
+          type: boolean
+        closed_status:
+          $ref: '#/components/schemas/ThreatMonitoringResultStatus'
+        comments:
+          description: comments made on the threat finding
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreatComment'
+        date_detected:
+          description: The date that the threat was originally detected in RFC3339 format. If missing this field will be omitted.
+          type: string
+          format: date-time
+          example: '2006-01-02T15:04:05.999999Z'
+        dismissed_at:
+          description: The date on which the threat finding was closed in RFC3339 format. Will be omitted if threat is still open.
+          type: string
+          format: date-time
+          example: '2006-01-02T15:04:05.999999Z'
+        dismissed_by:
+          $ref: '#/components/schemas/ThreatActor'
+        indicators_of_risk:
+          description: Indicates the reason that the ai analyst applied the given severity. Omitted if not supplied.
+          type: string
+        investigating:
+          description: Indicates whether a threat finding is currently being investigated by a human analyst
+          type: boolean
+        investigator:
+          $ref: '#/components/schemas/ThreatActor'
+        labels:
+          description: labels applied to the threat finding
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreatLabel'
+        module:
+          $ref: '#/components/schemas/MonitoredThreatModule'
+        number_of_comments:
+          description: The number of comments attached to the threat finding
+          type: integer
+          format: int64
+        recommended_remediation:
+          description: Remediation guidance provided by the ai analyst for this threat finding. Omitted if not supplied.
+          type: string
+        remediated_at:
+          description: The date on which the threat finding was remediated in RFC3339 format. Will be omitted if not applicable.
+          type: string
+          format: date-time
+          example: '2006-01-02T15:04:05.999999Z'
+        remediated_by:
+          $ref: '#/components/schemas/ThreatActor'
+        remediation_outcome:
+          $ref: '#/components/schemas/ThreatOutcome'
+        remediation_outcome_notes:
+          description: Notes made by the remediator. Will be omitted if not applicable or empty.
+          type: string
+        remediation_request_last_updated_at:
+          description: The date on which the remediation request for this threat finding was last updated in RFC3339 format. Will be omitted if not applicable.
+          type: string
+          format: date-time
+          example: '2006-01-02T15:04:05.999999Z'
+        remediation_risk_details:
+          description: Details of the threat remediation as supplied by the ai analyst for this threat finding. Omitted if not supplied.
+          type: string
+        remediation_risk_summary:
+          description: Summary of the threat remediation as supplied by the ai analyst for this threat finding. Omitted if not supplied.
+          type: string
+        severity:
+          description: The severity of the threat
+          type: string
+        snippet:
+          description: The text snippet associated with the threat finding. If not applicable, this field will be omitted.
+          type: string
+        source:
+          $ref: '#/components/schemas/MonitoredThreatSourceType'
+        source_domain:
+          description: The source domain (eg facebook.com) for the threat. If unknown, this field will be omitted.
+          type: string
+        source_site:
+          description: A common name source domain (eg facebook.com) for the threat. If unknown, this field will be omitted.
+          type: string
+        threat_context:
+          description: Context of the threat conditions as given by the ai analyst for this threat finding. Omitted if not supplied.
+          type: string
+        threat_status:
+          description: The current status of the threat
+          type: string
+        threat_types:
+          description: One or more threat types associated with the threat finding
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitoredThreatType'
+        title:
+          description: The title of the threat finding
+          type: string
+        transforms:
+          description: The list of matching transforms that identified this threat finding
+          type: array
+          items:
+            type: string
+        url:
+          description: The URL associated with the threat finding. If unknown or not applicable, this field will be omitted.
+          type: string
+        uuid:
+          description: The unique identifier for the finding
+          type: string
+          format: uuid
+    FacebookProfileExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        address:
+          type: string
+        biography:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+        created_time:
+          type: string
+        current_city:
+          type: array
+          items:
+            type: string
+        education:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+        external_url:
+          type: string
+        followers_count:
+          type: integer
+          format: int64
+        following_count:
+          type: integer
+          format: int64
+        friends_count:
+          type: integer
+          format: int64
+        gender:
+          type: string
+        hometown:
+          type: array
+          items:
+            type: string
+        is_owned:
+          type: boolean
+        is_verified:
+          type: boolean
+        langs:
+          type: array
+          items:
+            type: string
+        last_post_created_time:
+          type: string
+        likes_count:
+          type: integer
+          format: int64
+        members_count:
+          type: integer
+          format: int64
+        phone:
+          type: string
+        profile_id:
+          type: string
+        profile_name:
+          type: string
+        profile_type:
+          type: string
+        social_media_urls:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        workplace:
+          type: array
+          items:
+            type: string
+    ThreatLabel:
+      type: object
+      properties:
+        name:
+          type: string
+    CloseThreatRemediationRequestV1ResponsePayloadBody:
+      type: object
+      properties:
+        remediation_request_id:
+          description: The ID of the remediation request that was closed
+          type: integer
+          format: int64
+        status:
+          description: The status of the remediation request after closing
+          type: string
+    ThreatComment:
+      type: object
+      properties:
+        children:
+          description: The thread of replies and additional comments leading from this one
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreatComment'
+        comment_id:
+          description: unique identifier for the comment
+          type: integer
+          format: int64
+        content:
+          description: The body (text) of the comment
+          type: string
+        created_at:
+          description: Time when the comment was made
+          type: string
+          format: date-time
+          example: '2006-01-02T15:04:05.999999Z'
+        user:
+          $ref: '#/components/schemas/ThreatActor'
+    CloseThreatV1ResponsePayloadBody:
+      type: object
+      properties:
+        reason:
+          description: The reason the threat was closed
+          type: string
+        status:
+          description: The status of the threat after closing
+          type: string
+        uuid:
+          description: The UUID of the threat that was closed
+          type: string
+    LinkedInUserProfileExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        city:
+          type: string
+        connections_count:
+          type: integer
+          format: int64
+        country:
+          type: string
+        country_full_name:
+          type: string
+        facebook_profile_id:
+          type: string
+        first_name:
+          type: string
+        follower_count:
+          type: integer
+          format: int64
+        full_name:
+          type: string
+        github_profile_id:
+          type: string
+        headline:
+          type: string
+        last_fetched_at:
+          type: string
+        last_name:
+          type: string
+        linkedin_profile_url:
+          type: string
+        location_str:
+          type: string
+        occupation:
+          type: string
+        personal_emails:
+          type: array
+          items:
+            type: string
+        personal_phone_numbers:
+          type: array
+          items:
+            type: string
+        public_identifier:
+          type: string
+        state:
+          type: string
+        summary:
+          type: string
+        twitter_profile_id:
+          type: string
+        website:
+          type: string
+    RedditPostExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        author_id:
+          type: string
+        author_is_blocked:
+          type: boolean
+        author_username:
+          type: string
+        comments_count:
+          type: integer
+          format: int64
+        created_time:
+          type: string
+        is_gallery:
+          type: boolean
+        is_original_content:
+          type: boolean
+        is_video:
+          type: boolean
+        post_id:
+          type: string
+        post_url:
+          type: string
+        score:
+          type: integer
+          format: int64
+        subreddit:
+          type: string
+        subreddit_id:
+          type: string
+        subreddit_subscribers:
+          type: integer
+          format: int64
+        subreddit_type:
+          type: string
+        text:
+          type: string
+        timestamp:
+          type: string
+        title:
+          type: string
+        total_awards_received:
+          type: integer
+          format: int64
+        upvote_ratio:
+          type: number
+          format: double
+        whitelist_status:
+          type: integer
+          format: int64
+    ExposedServiceKeywordExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        attribution_identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExposedServiceAttributionIdentifierExternalAPI'
+        host:
+          type: string
+        port:
+          type: integer
+          format: int64
+        record_name:
+          type: string
+        service_type:
+          type: string
+    ExternalAPIThreadEntry:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        text:
+          type: string
+        user:
+          type: string
+    MCPRegistryExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+        published_at:
+          type: string
+        repository_url:
+          type: string
+        server_name:
+          type: string
+        version:
+          type: string
+        website_url:
+          type: string
+    GetThreatMonitoringResultsCountResponsePayloadBody:
+      type: object
+      properties:
+        total_results:
+          description: The total number of threats matching the filter
+          type: integer
+          format: int64
+    MaskedPassword:
+      type: object
+      title: MaskedPassword is a struct that represents a masked password.
+      properties:
+        len:
+          type: integer
+          format: int64
+        suffix:
+          type: string
+    InstagramPostExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        clickable_urls:
+          type: array
+          items:
+            type: string
+        coauthor_producers:
+          type: array
+          items:
+            type: string
+        comments_count:
+          type: integer
+          format: int64
+        created_time:
+          type: string
+        is_comments_disabled:
+          type: boolean
+        is_video:
+          type: boolean
+        like_and_view_counts_disabled:
+          type: boolean
+        likes_count:
+          type: integer
+          format: int64
+        owner_id:
+          type: string
+        owner_username:
+          type: string
+        post_id:
+          type: string
+        product_type:
+          type: string
+        related_posts:
+          type: array
+          items:
+            type: string
+        shortcode:
+          type: string
+        sponsors:
+          type: array
+          items:
+            type: string
+        text:
+          type: string
+        text_lang:
+          type: string
+        text_tagged_users:
+          type: array
+          items:
+            type: string
+        text_tags:
+          type: array
+          items:
+            type: string
+        timestamp:
+          type: string
+        video_plays_count:
+          type: integer
+          format: int64
+        video_views_count:
+          type: integer
+          format: int64
+    MonitoredThreatType:
+      description: 'MonitoredThreatType
 
-      Is used to indicate the type of threat that a result represents. This is used to partially categorize the result
+        Is used to indicate the type of threat that a result represents. This is used to partially categorize the result
 
-      and is derived from the content of the result itself. @see ThreatMonitoringRawResult.DetermineDerivedMeta()'
-    type: string
-  CloseThreatRemediationRequestV1ResponsePayloadBody:
-    type: object
-    properties:
-      remediation_request_id:
-        description: The ID of the remediation request that was closed
-        type: integer
-        format: int64
-      status:
-        description: The status of the remediation request after closing
-        type: string
-  ThreatActor:
-    description: an actor for a threat finding (multiple contexts)
-    type: object
-    properties:
-      email:
-        description: the email address of the actor
-        type: string
-      name:
-        description: The full name of the actor
-        type: string
-  AssignThreatInvestigatorV1ResponsePayloadBody:
-    type: object
-    properties:
-      investigator:
-        $ref: '#/definitions/ThreatActor'
-      status:
-        description: The status of the threat after assignment
-        type: string
-      uuid:
-        description: The UUID of the threat that was assigned an investigator
-        type: string
-  MaskedPassword:
-    type: object
-    title: MaskedPassword is a struct that represents a masked password.
-    properties:
-      len:
-        type: integer
-        format: int64
-      suffix:
-        type: string
-  CreateThreatRemediationRequestV1ResponsePayloadBody:
-    type: object
-    properties:
-      remediation_request_id:
-        description: The ID of the created remediation request
-        type: integer
-        format: int64
-      status:
-        description: The status of the threat after being placed into remediation
-        type: string
-      threat_uuid:
-        description: The UUID of the threat that was placed into remediation
-        type: string
-  GetThreatMonitoringResultsCountResponsePayloadBody:
-    type: object
-    properties:
-      total_results:
-        description: The total number of threats matching the filter
-        type: integer
-        format: int64
-  CookieExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      asn:
-        type: integer
-        format: int64
-      asn_text:
-        type: string
-      cookie_name:
-        type: string
-      cookie_value:
-        type: string
-      device_account:
-        type: string
-      device_location:
-        type: string
-      device_name:
-        type: string
-      device_os:
-        type: string
-      device_serial_number:
-        type: string
-      device_user_agent:
-        type: string
-      ip:
-        type: string
-      malware_path:
-        type: string
-      malware_ref_url:
-        type: string
-      malware_type:
-        type: string
-      malware_version:
-        type: string
-      reverse_dns:
-        type: string
-      url:
-        type: string
-  DiscordExternalAPIAddAttributes:
-    type: object
-    properties:
-      author:
-        type: string
-      channel:
-        type: string
-      language:
-        type: string
-      parsed_thread:
-        type: array
-        items:
-          $ref: '#/definitions/ExternalAPIThreadEntry'
-      participants:
-        type: array
-        items:
+        and is derived from the content of the result itself. @see ThreatMonitoringRawResult.DetermineDerivedMeta()'
+      type: string
+    ChatExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        discord:
+          $ref: '#/components/schemas/DiscordExternalAPIAddAttributes'
+        telegram_channel:
+          $ref: '#/components/schemas/TelegramExternalAPIAddAttributes'
+        telegram_group:
+          $ref: '#/components/schemas/TelegramExternalAPIAddAttributes'
+    GithubExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        branch:
           type: string
-      server:
-        type: string
-  TwitterPostExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      author_id:
-        type: string
-      author_username:
-        type: string
-      favorite_count:
-        type: integer
-        format: int64
-      in_reply_to_post_id:
-        type: string
-      in_reply_to_profile_id:
-        type: string
-      in_reply_to_profile_username:
-        type: string
-      post_id:
-        type: string
-      post_type:
-        type: string
-      quote_count:
-        type: integer
-        format: int64
-      reply_count:
-        type: integer
-        format: int64
-      retweet_count:
-        type: integer
-        format: int64
-      text:
-        type: string
-      text_lang:
-        type: string
-      text_tagged_users:
-        type: array
-        items:
+        commit:
           type: string
-      text_tags:
-        type: array
-        items:
+        committer_email:
           type: string
-      timestamp:
-        type: integer
-        format: int64
-      view_count:
-        type: integer
-        format: int64
-  ExposedServiceAttributionIdentifierExternalAPI:
-    type: object
-    properties:
-      data_type:
-        type: string
-      data_value:
-        type: string
-  CloseThreatV1ResponsePayloadBody:
-    type: object
-    properties:
-      reason:
-        description: The reason the threat was closed
-        type: string
-      status:
-        description: The status of the threat after closing
-        type: string
-      uuid:
-        description: The UUID of the threat that was closed
-        type: string
-  ExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      chat:
-        $ref: '#/definitions/ChatExternalAPIThreatAdditionalAttributes'
-      cookie:
-        $ref: '#/definitions/CookieExternalAPIThreatAdditionalAttributes'
-      data_dump:
-        $ref: '#/definitions/DataLeakExternalAPIThreatAdditionalAttributes'
-      exposed_service_identifier:
-        $ref: '#/definitions/ExposedServiceIdentifierExternalAPIThreatAdditionalAttributes'
-      exposed_service_keyword:
-        $ref: '#/definitions/ExposedServiceKeywordExternalAPIThreatAdditionalAttributes'
-      facebook_post:
-        $ref: '#/definitions/FacebookPostExternalAPIThreatAdditionalAttributes'
-      facebook_profile:
-        $ref: '#/definitions/FacebookProfileExternalAPIThreatAdditionalAttributes'
-      github:
-        $ref: '#/definitions/GithubExternalAPIThreatAdditionalAttributes'
-      instagram_post:
-        $ref: '#/definitions/InstagramPostExternalAPIThreatAdditionalAttributes'
-      instagram_profile:
-        $ref: '#/definitions/InstagramProfileExternalAPIThreatAdditionalAttributes'
-      linkedin_company_profile:
-        $ref: '#/definitions/LinkedInCompanyProfileExternalAPIThreatAdditionalAttributes'
-      linkedin_user_profile:
-        $ref: '#/definitions/LinkedInUserProfileExternalAPIThreatAdditionalAttributes'
-      mcp_registry:
-        $ref: '#/definitions/MCPRegistryExternalAPIThreatAdditionalAttributes'
-      open_web:
-        $ref: '#/definitions/OpenWebExternalAPIThreatAdditionalAttributes'
-      password:
-        $ref: '#/definitions/PasswordExternalAPIThreatAdditionalAttributes'
-      post:
-        $ref: '#/definitions/PostExternalAPIThreatAdditionalAttributes'
-      reddit_post:
-        $ref: '#/definitions/RedditPostExternalAPIThreatAdditionalAttributes'
-      scribd:
-        $ref: '#/definitions/OpenWebExternalAPIThreatAdditionalAttributes'
-      stealer_logs:
-        $ref: '#/definitions/StealerLogsExternalAPIThreatAdditionalAttributes'
-      tiktok_profile:
-        $ref: '#/definitions/TiktokProfileExternalAPIThreatAdditionalAttributes'
-      twitter_post:
-        $ref: '#/definitions/TwitterPostExternalAPIThreatAdditionalAttributes'
-      twitter_profile:
-        $ref: '#/definitions/TwitterProfileExternalAPIThreatAdditionalAttributes'
-  ThreatOutcome:
-    type: string
-  PostExternalAPIThreatAdditionalAttributes:
-    type: object
-    properties:
-      author:
-        type: string
-      language:
-        type: string
-      network_type:
-        type: string
-      post_replies:
-        type: integer
-        format: int64
-      post_title:
-        type: string
-      site_name:
-        type: string
-      thread_participants:
-        type: integer
-        format: int64
-      type:
-        type: string
-securityDefinitions:
-  API key in header:
-    type: apiKey
-    in: header
-    name: Authorization
+        owner:
+          type: string
+        repository:
+          type: string
+        tag:
+          type: string
+        target_file:
+          type: string
+  securitySchemes:
+    API_key_in_header:
+      type: apiKey
+      in: header
+      name: Authorization

@@ -1,0 +1,26 @@
+# Front Door AI Index — upguard — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: upguard
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.upguard.com
+  final_host: www.upguard.com
+  ownership: own
+  owner: upguard
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 25
+  host_score: 25
+  density: 22.18
+  words: 1127
+  tiers:
+    agentic: 0
+    core: 25
+    model: 0
+  ambiguous: 2
+  top_terms:
+    AI: 25
+    automation: 2

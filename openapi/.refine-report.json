@@ -1,24 +1,7 @@
 {
   "provider": "upguard",
   "sources": [
-    "upguard-breaches-api-openapi.yml",
-    "upguard-bulk-api-openapi.yml",
-    "upguard-dataleaks-api-openapi.yml",
-    "upguard-domains-api-openapi.yml",
-    "upguard-ips-api-openapi.yml",
-    "upguard-labels-api-openapi.yml",
-    "upguard-notifications-api-openapi.yml",
-    "upguard-organisation-api-openapi.yml",
-    "upguard-reports-api-openapi.yml",
-    "upguard-risks-api-openapi.yml",
-    "upguard-subsidiaries-api-openapi.yml",
-    "upguard-threatmonitoring-api-openapi.yml",
-    "upguard-trust-exchange-api-openapi.yml",
-    "upguard-typosquat-api-openapi.yml",
-    "upguard-userrisk-api-openapi.yml",
-    "upguard-vendors-api-openapi.yml",
-    "upguard-vulnerabilities-api-openapi.yml",
-    "upguard-webhooks-api-openapi.yml"
+    "_original/upguard-cyberrisk-openapi-original.json"
   ],
   "outputs": [
     "upguard-breaches-api-openapi.yml",
@@ -40,9 +23,53 @@
     "upguard-vulnerabilities-api-openapi.yml",
     "upguard-webhooks-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "upguard-cyberrisk-openapi-original.json: upgraded swagger 2.0 -> OpenAPI 3.2.0; renamed 1 component key(s) illegal in 3.x (e.g. API key in header)",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: breaches",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: bulk",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: dataleaks",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: domains",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: ips",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: labels",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: notifications",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: organisation",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: reports",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: risks",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: subsidiaries",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: threatmonitoring",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: trust_exchange",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: typosquat",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: userrisk",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: vendors",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: vulnerabilities",
+    "upguard-cyberrisk-openapi-original.json: declared missing tag: webhooks",
+    "superseded outputs removed: upguard-i-ps-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 18 total)"
+  ],
+  "skipped": [
+    "upguard-breaches-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-bulk-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-dataleaks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-domains-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-i-ps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-labels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-organisation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-risks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-subsidiaries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-threatmonitoring-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-trust-exchange-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-typosquat-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-userrisk-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-vendors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-vulnerabilities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

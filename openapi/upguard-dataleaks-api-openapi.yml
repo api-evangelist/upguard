@@ -1,4 +1,4 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
   description: 'Access information from the CyberRisk platform programmatically using this API.
 
@@ -9,16 +9,10 @@ info:
 
 
     The base url for all public endpoints is https://cyber-risk.upguard.com/api/public'
-  title: UpGuard CyberRisk breaches dataleaks API
+  title: UpGuard CyberRisk Dataleaks API
   version: 1.13.2
-host: cyber-risk.upguard.com
-basePath: /api/public
-schemes:
-- https
-consumes:
-- application/json
-produces:
-- application/json
+servers:
+- url: https://cyber-risk.upguard.com/api/public
 security:
 - API key in header: []
 tags:
@@ -35,54 +29,68 @@ paths:
       summary: Get a list of disclosures
       operationId: dataleaks_disclosures
       parameters:
-      - type: string
-        format: date-time
-        description: The minimum (non-inclusive) timestamp of a disclosure (RFC 3339 format).
+      - description: The minimum (non-inclusive) timestamp of a disclosure (RFC 3339 format).
         name: min_time
         in: query
-      - type: string
-        format: date-time
-        description: The maximum (non-inclusive) timestamp of a disclosure (RFC 3339 format).
+        schema:
+          type: string
+          format: date-time
+      - description: The maximum (non-inclusive) timestamp of a disclosure (RFC 3339 format).
         name: max_time
         in: query
-      - enum:
-        - Disclosed
-        - Acknowledged
-        - Investigating
-        - Remediating
-        - ClosedNoIssue
-        - ClosedRiskAccepted
-        - ClosedFixedUnverified
-        - ClosedFixedVerified
-        type: string
-        description: A comma-delimited list of statuses that disclosures should match.
+        schema:
+          type: string
+          format: date-time
+      - description: A comma-delimited list of statuses that disclosures should match.
         name: statuses
         in: query
-      - type: string
-        description: A comma-delimited list of IDs that disclosures should match.
+        schema:
+          type: string
+          enum:
+          - Disclosed
+          - Acknowledged
+          - Investigating
+          - Remediating
+          - ClosedNoIssue
+          - ClosedRiskAccepted
+          - ClosedFixedUnverified
+          - ClosedFixedVerified
+      - description: A comma-delimited list of IDs that disclosures should match.
         name: ids
         in: query
+        schema:
+          type: string
       responses:
         '200':
           description: Data Leaks disclosed
-          schema:
-            $ref: '#/definitions/DataLeaksDisclosuresResponsePayloadBody'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLeaksDisclosuresResponsePayloadBody'
         '403':
           description: Your API key does not have permission to perform this action.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '422':
           description: An invalid parameter was supplied or a mandatory parameter was missing
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '429':
           description: Too many requests have been made to this endpoint.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '500':
           description: An internal system error occurred
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
   /dataleaks/disclosures/status:
     put:
       description: 'Required API key permissions: `DataLeaks` (select when creating API key in Account Settings)'
@@ -91,118 +99,131 @@ paths:
       summary: Update the status of a disclosure
       operationId: dataleaks_disclosures_update_status
       parameters:
-      - type: integer
-        format: int64
-        description: The ID of the disclosure
+      - description: The ID of the disclosure
         name: disclosure_id
         in: query
         required: true
-      - enum:
-        - Acknowledged
-        - Investigating
-        - Remediating
-        - ClosedNoIssue
-        - ClosedRiskAccepted
-        - ClosedFixedUnverified
-        type: string
-        description: The new status for the disclosure
+        schema:
+          type: integer
+          format: int64
+      - description: The new status for the disclosure
         name: new_status
         in: query
         required: true
-      - type: string
-        description: The email address of the user changing the status (must have a Cyber Risk account with the "Data Leaks" role).
+        schema:
+          type: string
+          enum:
+          - Acknowledged
+          - Investigating
+          - Remediating
+          - ClosedNoIssue
+          - ClosedRiskAccepted
+          - ClosedFixedUnverified
+      - description: The email address of the user changing the status (must have a Cyber Risk account with the "Data Leaks" role).
         name: user_email
         in: query
-      - type: string
-        description: A comment to accompany the status change, if required
+        schema:
+          type: string
+      - description: A comment to accompany the status change, if required
         name: comment
         in: query
+        schema:
+          type: string
       responses:
         '204':
           description: ' Successful response is empty'
         '403':
           description: Your API key does not have permission to perform this action.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '422':
           description: An invalid parameter was supplied or a mandatory parameter was missing
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '429':
           description: Too many requests have been made to this endpoint.
-          schema:
-            $ref: '#/definitions/endpointError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
         '500':
           description: An internal system error occurred
-          schema:
-            $ref: '#/definitions/endpointError'
-definitions:
-  endpointError:
-    description: Error details coming from an endpoint
-    type: object
-    properties:
-      error:
-        description: A description of the error
-        type: string
-  DataLeaksDisclosuresResponsePayloadBody:
-    type: object
-    properties:
-      disclosures:
-        type: array
-        items:
-          $ref: '#/definitions/DataLeaksDisclosure'
-  DataLeaksDisclosure:
-    type: object
-    properties:
-      date_disclosed:
-        description: The date this disclosure was created (RFC 3339)
-        type: string
-        format: date-time
-        example: '2019-11-09T03:48:57Z'
-      description:
-        description: Description of the disclosure
-        type: string
-        example: Leaked WordPress DB credentials
-      id:
-        description: The ID of the disclosure
-        type: integer
-        format: int64
-        example: 3426
-      image:
-        description: An image/screenshot of the disclosure
-        type: string
-        example: data:image/png;base64,...
-      implication:
-        description: The nature of the risk
-        type: string
-        example: Exposed credentials
-      payload:
-        description: The JSON payload of the finding, if applicable
-        type: string
-        example: '{}'
-      severity:
-        description: The severity of the disclosure, between 1 and 10
-        type: integer
-        format: int64
-        example: 7
-      significance:
-        description: A more detailed explanation of the significance/severity of the disclosure
-        type: string
-        example: These credentials are three years old. If they have not been changed, they could provide access to user data.
-      source:
-        description: The person or source the finding has been attributed to
-        type: string
-        example: The file's owner is john.doe
-      status:
-        description: Current status of the disclosure
-        type: string
-        example: Disclosed
-      url:
-        description: The URL to the finding
-        type: string
-        example: http://wordpresssite.com/wp_config.bak
-securityDefinitions:
-  API key in header:
-    type: apiKey
-    in: header
-    name: Authorization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpointError'
+components:
+  schemas:
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
+    DataLeaksDisclosure:
+      type: object
+      properties:
+        date_disclosed:
+          description: The date this disclosure was created (RFC 3339)
+          type: string
+          format: date-time
+          example: '2019-11-09T03:48:57Z'
+        description:
+          description: Description of the disclosure
+          type: string
+          example: Leaked WordPress DB credentials
+        id:
+          description: The ID of the disclosure
+          type: integer
+          format: int64
+          example: 3426
+        image:
+          description: An image/screenshot of the disclosure
+          type: string
+          example: data:image/png;base64,...
+        implication:
+          description: The nature of the risk
+          type: string
+          example: Exposed credentials
+        payload:
+          description: The JSON payload of the finding, if applicable
+          type: string
+          example: '{}'
+        severity:
+          description: The severity of the disclosure, between 1 and 10
+          type: integer
+          format: int64
+          example: 7
+        significance:
+          description: A more detailed explanation of the significance/severity of the disclosure
+          type: string
+          example: These credentials are three years old. If they have not been changed, they could provide access to user data.
+        source:
+          description: The person or source the finding has been attributed to
+          type: string
+          example: The file's owner is john.doe
+        status:
+          description: Current status of the disclosure
+          type: string
+          example: Disclosed
+        url:
+          description: The URL to the finding
+          type: string
+          example: http://wordpresssite.com/wp_config.bak
+    DataLeaksDisclosuresResponsePayloadBody:
+      type: object
+      properties:
+        disclosures:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataLeaksDisclosure'
+  securitySchemes:
+    API_key_in_header:
+      type: apiKey
+      in: header
+      name: Authorization
