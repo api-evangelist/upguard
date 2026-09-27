@@ -297,6 +297,45 @@ components:
           description: The email address of the user who added the comment
           type: string
           example: viggo@example.com
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
+    AddVIPRespBody:
+      type: object
+      properties:
+        vip:
+          $ref: '#/components/schemas/VIP'
+    IdentityBreachResponsePayloadBody:
+      type: object
+      properties:
+        breach:
+          $ref: '#/components/schemas/Breach'
+        comments:
+          description: Comments associated with the identity breach
+          type: array
+          items:
+            $ref: '#/components/schemas/BreachComment'
+    GetVIPListRespBody:
+      type: object
+      properties:
+        next_page_token:
+          description: 'The token to be used to retrieve the next page of results.
+
+            Will not be returned if there are no more results.'
+          type: string
+        total_results:
+          description: The total number of VIPs found.
+          type: integer
+          format: int64
+        vips:
+          description: The list of VIPs
+          type: array
+          items:
+            $ref: '#/components/schemas/VIP'
     BreachedIdentitiesResponsePayloadBody:
       type: object
       properties:
@@ -319,6 +358,35 @@ components:
           description: The total number of breached identities found.
           type: integer
           format: int64
+    VIP:
+      type: object
+      properties:
+        breach_ids:
+          description: The IDs of the breaches the VIP appears in
+          type: array
+          items:
+            type: integer
+            format: int64
+        date_last_breach:
+          description: The date of the latest breach the VIP appears in (RFC 3339 format).
+          type: string
+        domain:
+          description: The domain of the VIP
+          type: string
+        id:
+          description: The ID of the VIP
+          type: integer
+          format: int64
+        name:
+          description: The account name of the VIP
+          type: string
+        num_breaches:
+          description: The number of breaches the VIP appears in
+          type: integer
+          format: int64
+        severity:
+          description: The highest severity of the breaches the VIP appears in. Will be one of "Critical", "High", "Medium", or "Low".
+          type: string
     BreachedIdentity:
       type: object
       properties:
@@ -366,74 +434,6 @@ components:
           description: Flag indicating if the identity is a VIP
           type: boolean
           example: false
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
-    IdentityBreachResponsePayloadBody:
-      type: object
-      properties:
-        breach:
-          $ref: '#/components/schemas/Breach'
-        comments:
-          description: Comments associated with the identity breach
-          type: array
-          items:
-            $ref: '#/components/schemas/BreachComment'
-    VIP:
-      type: object
-      properties:
-        breach_ids:
-          description: The IDs of the breaches the VIP appears in
-          type: array
-          items:
-            type: integer
-            format: int64
-        date_last_breach:
-          description: The date of the latest breach the VIP appears in (RFC 3339 format).
-          type: string
-        domain:
-          description: The domain of the VIP
-          type: string
-        id:
-          description: The ID of the VIP
-          type: integer
-          format: int64
-        name:
-          description: The account name of the VIP
-          type: string
-        num_breaches:
-          description: The number of breaches the VIP appears in
-          type: integer
-          format: int64
-        severity:
-          description: The highest severity of the breaches the VIP appears in. Will be one of "Critical", "High", "Medium", or "Low".
-          type: string
-    GetVIPListRespBody:
-      type: object
-      properties:
-        next_page_token:
-          description: 'The token to be used to retrieve the next page of results.
-
-            Will not be returned if there are no more results.'
-          type: string
-        total_results:
-          description: The total number of VIPs found.
-          type: integer
-          format: int64
-        vips:
-          description: The list of VIPs
-          type: array
-          items:
-            $ref: '#/components/schemas/VIP'
-    AddVIPRespBody:
-      type: object
-      properties:
-        vip:
-          $ref: '#/components/schemas/VIP'
     Breach:
       type: object
       properties:

@@ -23,9 +23,7 @@
     "upguard-vulnerabilities-api-openapi.yml",
     "upguard-webhooks-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -49,15 +47,14 @@
     "upguard-cyberrisk-openapi-original.json: declared missing tag: vendors",
     "upguard-cyberrisk-openapi-original.json: declared missing tag: vulnerabilities",
     "upguard-cyberrisk-openapi-original.json: declared missing tag: webhooks",
-    "superseded outputs removed: upguard-i-ps-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 18 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "upguard-breaches-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "upguard-bulk-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "upguard-dataleaks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "upguard-domains-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "upguard-i-ps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "upguard-ips-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "upguard-labels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "upguard-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "upguard-organisation-api-openapi.yml: previously refined output, superseded by openapi/_original/",

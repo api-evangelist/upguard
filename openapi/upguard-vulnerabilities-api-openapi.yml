@@ -120,28 +120,21 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    cve:
-      description: Information about a CVE (Common Vulnerabilities and Exposures) Entry
+    endpointError:
+      description: Error details coming from an endpoint
       type: object
       properties:
-        description:
-          description: The technical description for the vulnerability
+        error:
+          description: A description of the error
           type: string
-          example: An issue was discovered in the EXIF component in PHP before 7.1.27, 7.2.x before 7.2.16, and 7.3.x
-        epss:
-          description: The EPSS (Exploit Prediction Scoring System) score.
-          type: number
-          format: double
-          example: 0.75431
-        id:
-          description: The CVE ID
-          type: string
-          example: CVE-2019-9641
-        severity:
-          description: The CVSS (Common Vulnerability Scoring System)
-          type: number
-          format: double
-          example: 7.5
+    GetVendorVulnerabilitiesV1RespBody:
+      type: object
+      properties:
+        vulnerabilities:
+          description: The list of potential vendor vulnerabilities that have been detected.
+          type: array
+          items:
+            $ref: '#/components/schemas/Vulnerability'
     GetOrgVulnerabilitiesV1RespBody:
       type: object
       properties:
@@ -155,13 +148,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Vulnerability'
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
     Vulnerability:
       type: object
       properties:
@@ -199,14 +185,28 @@ components:
           description: Indicates if the vulnerability has been tested and verified as part of an automated scan
           type: boolean
           example: false
-    GetVendorVulnerabilitiesV1RespBody:
+    cve:
+      description: Information about a CVE (Common Vulnerabilities and Exposures) Entry
       type: object
       properties:
-        vulnerabilities:
-          description: The list of potential vendor vulnerabilities that have been detected.
-          type: array
-          items:
-            $ref: '#/components/schemas/Vulnerability'
+        description:
+          description: The technical description for the vulnerability
+          type: string
+          example: An issue was discovered in the EXIF component in PHP before 7.1.27, 7.2.x before 7.2.16, and 7.3.x
+        epss:
+          description: The EPSS (Exploit Prediction Scoring System) score.
+          type: number
+          format: double
+          example: 0.75431
+        id:
+          description: The CVE ID
+          type: string
+          example: CVE-2019-9641
+        severity:
+          description: The CVSS (Common Vulnerability Scoring System)
+          type: number
+          format: double
+          example: 7.5
   securitySchemes:
     API_key_in_header:
       type: apiKey

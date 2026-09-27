@@ -1174,301 +1174,6 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
-    QuestionnaireRiskWaiver:
-      type: object
-      properties:
-        active_at:
-          type: string
-          format: date-time
-        approved_by:
-          type: string
-        created_by:
-          type: string
-        expires_at:
-          type: string
-          format: date-time
-        justification:
-          type: string
-    externalHostnameRisk:
-      type: object
-      title: ExternalHostnameRisk represents risk details for a hostname in the external API.
-      properties:
-        date_detected:
-          description: When the risk was first detected (RFC3339 format, omitted if not available)
-          type: string
-          format: date-time
-          example: '2024-01-15T10:30:00Z'
-        hostname:
-          description: The hostname
-          type: string
-          example: example.com
-        is_custom:
-          description: Whether this is a custom hostname
-          type: boolean
-          example: false
-        risk_id:
-          description: The risk ID
-          type: string
-          example: dns_spf_not_configured
-        scanned_at:
-          description: When the hostname was last scanned (RFC3339 format)
-          type: string
-          format: date-time
-          example: '2024-01-15T10:30:00Z'
-        score:
-          description: The security score for the hostname (0-950)
-          type: integer
-          format: int64
-          example: 750
-    VendorsRisksDiffResponsePayloadBody:
-      type: object
-      properties:
-        next_page_token:
-          description: 'The token to be used to retrieve the next page of results.
-
-            Will not be returned if there are no more results.'
-          type: string
-        total_results:
-          description: The total number of vendors found.
-          type: integer
-          format: int64
-        vendors:
-          description: The list of vendors found
-          type: array
-          items:
-            $ref: '#/components/schemas/VendorsRiskDiffs'
-    AvailableRisk:
-      type: object
-      properties:
-        category:
-          description: The category of the risk
-          type: string
-        description:
-          description: Description or context surrounding the risk
-          type: string
-        finding:
-          description: Description of the finding
-          type: string
-        group:
-          description: The risk group
-          type: string
-        id:
-          description: The ID of the risk
-          type: string
-        remediation:
-          description: Remediation recommendation
-          type: string
-        risk:
-          description: The risk title
-          type: string
-        riskDetails:
-          description: Detailed description of the risk
-          type: string
-        severity:
-          description: The severity of the risk
-          type: string
-          enum:
-          - pass
-          - info
-          - low
-          - medium
-          - high
-          - critical
-    ScanDiff:
-      type: object
-      properties:
-        expected:
-          description: The expected status
-          type: string
-        hostname:
-          description: The domain name or IP address experiencing the risk diff
-          type: string
-        property:
-          description: The property checked
-          type: string
-        scanA:
-          $ref: '#/components/schemas/ScanResult'
-        scanB:
-          $ref: '#/components/schemas/ScanResult'
-    externalLabel:
-      type: object
-      title: ExternalLabel represents a vendor label in the external API.
-      properties:
-        id:
-          description: Label ID
-          type: integer
-          format: int64
-        name:
-          description: Label name
-          type: string
-    Diff:
-      type: object
-      properties:
-        dateA:
-          description: The date of the first scan (RFC 3339 format)
-          type: string
-          format: date-time
-        dateB:
-          description: The date of the second scan (RFC 3339 format)
-          type: string
-          format: date-time
-        expected:
-          description: The expected status
-          type: string
-        hostname:
-          description: The domain name or IP address experiencing the risk diff
-          type: string
-        metaValueA:
-          description: Metadata for the result of the first check
-          type: string
-        metaValueB:
-          description: Metadata for the result of the second check
-          type: string
-        prevProvisionalID:
-          description: Previous provisional ID if the last scan contained it
-          type: string
-        property:
-          description: The property checked
-          type: string
-        statusA:
-          $ref: '#/components/schemas/DiffStatus'
-        statusB:
-          $ref: '#/components/schemas/DiffStatus'
-        valueMetadataA:
-          $ref: '#/components/schemas/ValueMetadata'
-        valueMetadataB:
-          $ref: '#/components/schemas/ValueMetadata'
-    ValueMetadata:
-      type: object
-      properties:
-        description:
-          type: string
-        resolvesAfter:
-          type: string
-          format: date-time
-        resolvesAfterEvent:
-          type: string
-        urls:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueMetadataURL'
-    AvailableRiskV2:
-      type: object
-      properties:
-        category:
-          description: The category of the risk. This field will be omitted for generic risks
-          type: string
-          example: dns
-        description:
-          description: Description or context surrounding the risk. This field will be omitted for generic risks
-          type: string
-          example: Domains must be renewed within specified intervals to maintain ownership of the name. The minimum interval is 1 year and the maximum interval is 10 years. If a domain is not renewed within the appropriate interval, the domain name becomes “expired.” There is a 30 day grace period where the domain owner can still renew the expired domain name. After that, the domain can be purchased by a third party
-        finding:
-          description: Description of the finding. This field will be omitted for generic risks
-          type: string
-          example: Domain expired
-        generic:
-          description: 'Flag indicating whether the risks is a generic risk, i.e. a risk where severity,
-
-            category, finding etc. depend on other parameters'
-          type: boolean
-          example: false
-        group:
-          description: The risk group
-          type: string
-          example: domain
-        id:
-          description: The ID of the risk
-          type: string
-          example: domain_expired
-        remediation:
-          description: Remediation recommendation. This field will be omitted for generic risks
-          type: string
-          example: The domain should be renewed as soon as possible with the registrar. Domains can be configured with auto-renewal to ensure that they are renewed before the expiration date
-        risk:
-          description: The risk title
-          type: string
-          example: Domain at risk of being hijacked
-        riskDetails:
-          description: Detailed description of the risk. This field will be omitted for generic risks
-          type: string
-          example: This domain is expired. An expired domain is no longer functional. Any services relying on the expired domain will become unavailable. In addition to the loss of functionality, expired domains can be snapped up quickly by third parties and used to drive traffic to malicious and fraudulent websites
-        riskSubtype:
-          description: The subtype of the risk, e.g. the subtype of the verified_vuln:CVE-2021-34473 is CVE-2021-34473. This field will be empty if the risk has no subtype, e.g. for wp_version_exposed, or for generic risks like verified_vuln:* where the subtype is only determined when the full risk is specified.
-          type: string
-          example: CVE-2021-34473
-        riskType:
-          description: The type of the risk, e.g. the type of the verified_vuln:CVE-2021-34473 is verified_vuln
-          type: string
-          example: verified_vuln
-        severity:
-          description: The severity of the risk. This field will be omitted for generic risks
-          type: string
-          enum:
-          - pass
-          - info
-          - low
-          - medium
-          - high
-          - critical
-          example: critical
-    Severity:
-      type: integer
-      format: int64
-    DiffStatus:
-      type: string
-    SummaryDiffGroup:
-      type: object
-      properties:
-        diffs:
-          description: The list of risk diffs in this group
-          type: array
-          items:
-            $ref: '#/components/schemas/SummaryDiff'
-        groupID:
-          description: The ID of the risk group
-          type: string
-        highestSeverity:
-          $ref: '#/components/schemas/Severity'
-        highestSeverityName:
-          description: The highest severity of the risks in this group in human-readable form
-          type: string
-          enum:
-          - pass
-          - info
-          - low
-          - medium
-          - high
-          - critical
-        name:
-          description: The name of the risk group
-          type: string
-    QuestionnaireRisksResponsePayloadBodyV2:
-      type: object
-      properties:
-        next_page_token:
-          description: 'The token to be used to retrieve the next page of results.
-
-            Will not be returned if there are no more results.'
-          type: string
-          example: '4'
-        risks:
-          description: The list of questionnaire risks
-          type: array
-          items:
-            $ref: '#/components/schemas/QuestionnaireRiskV2'
-        total_results:
-          description: The total number of risks found.
-          type: integer
-          format: int64
-          example: 10
     RisksDiffResponsePayloadBody:
       type: object
       properties:
@@ -1482,185 +1187,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SummaryDiffGroup'
-    externalVendorRisk:
-      type: object
-      title: ExternalVendorRisk represents a risk that affects one or more vendors.
-      properties:
-        adjusted_severity:
-          description: 'The adjusted severity if the risk severity has been customized.
-
-            If present, this indicates the original severity before adjustment.'
-          type: string
-          example: high
-        category_title:
-          description: The human-readable title of the risk category.
-          type: string
-          example: Email Security
-        classification:
-          description: The classification of the risk (for survey risks only).
-          type: string
-        date_first_detected:
-          description: The date when this risk was first detected (omitted if not available).
-          type: string
-          format: date-time
-          example: '2024-01-15T10:30:00Z'
-        description:
-          description: A detailed description of the risk.
-          type: string
-          example: No SPF record is configured for this domain
-        fact_category:
-          description: The category of the risk fact.
-          type: string
-          example: email_security
-        id:
-          description: The unique identifier for the risk.
-          type: string
-          example: dns_spf_not_configured
-        is_verified_vuln:
-          description: Indicates if this is a verified vulnerability.
-          type: boolean
-          example: false
-        known_exploited_vulnerability:
-          description: Indicates whether the vulnerability is known to be actively exploited.
-          type: boolean
-          example: true
-        num_failed_vendors:
-          description: The number of vendors that have failed this risk.
-          type: integer
-          format: int64
-          example: 5
-        risk_type:
-          description: 'The type of risk: "cloudscan", "survey", or "additional_evidence".'
-          type: string
-          example: cloudscan
-        severity:
-          description: 'The severity of the risk: "info", "low", "medium", "high", or "critical".'
-          type: string
-          example: medium
-        title:
-          description: The title of the risk.
-          type: string
-          example: SPF record not configured
-    StringSlice:
-      type: array
-      items:
-        type: string
-    externalEvidence:
-      type: object
-      title: ExternalEvidence represents evidence in the external API.
-      properties:
-        datastore_vendor_id:
-          description: Vendor ID
-          type: integer
-          format: int64
-        id:
-          description: Evidence ID
-          type: integer
-          format: int64
-        name:
-          description: Evidence name
-          type: string
-    QuestionnaireRiskV2:
-      type: object
-      properties:
-        controls:
-          $ref: '#/components/schemas/StringSlice'
-        createdAt:
-          description: The time the risk was first seen
-          type: string
-          format: date-time
-          example: '2022-03-20T23:25:26.419947Z'
-        inRemediation:
-          description: Flag indicating whether the risk is in remediation
-          type: boolean
-          example: false
-        isSharedQuestionnaire:
-          description: Flag indicating whether the risk arise from a shared questionnaire. This field will be present
-          type: boolean
-          example: true
-        questionnaireId:
-          description: The ID of the questionnaire this risk belongs to
-          type: integer
-          format: int64
-          example: 4
-        riskCategory:
-          description: The category of the risk
-          type: string
-          example: secprog
-        riskExplanation:
-          type: string
-        riskId:
-          description: THe ID of the risk
-          type: string
-          example: warn_secprog_nopolicies
-        riskName:
-          description: The name of the risk
-          type: string
-          example: Inadequate security policies
-        riskSeverity:
-          description: The severity of the risk
-          type: string
-          enum:
-          - pass
-          - info
-          - low
-          - medium
-          - high
-          - critical
-          example: low
-        riskText:
-          description: The description of the risk
-          type: string
-          example: Security policies are an important tool for establishing authoritative security requirements and enforcing them throughout the company. Policies form the basis of any security program.
-        riskWaivers:
-          description: List of risk waivers associated with the risk
-          type: array
-          items:
-            $ref: '#/components/schemas/QuestionnaireRiskWaiver'
-        riskWhy:
-          type: string
-        vendorId:
-          description: The ID of the vendor this risk belongs to
-          type: integer
-          format: int64
-          example: 123456789
-    RiskWaiver:
-      type: object
-      properties:
-        active_at:
-          description: Time the risk waiver was activated (RFC 3339 format)
-          type: string
-          format: date-time
-          example: '"2019-10-12T07:20:50.52Z"'
-        all_hostnames:
-          description: Flag indicating whether the risk has been waived for all hostnames
-          type: boolean
-          example: false
-        approved_by:
-          description: Email address of the user who approved the risk waiver. This field will be omitted if not applicable, e.g. self approved risk waivers.
-          type: string
-          example: '"john@example.com"'
-        created_by:
-          description: Email address of the user who created the risk waiver
-          type: string
-          example: '"john@example.com"'
-        expires_at:
-          description: Time the risk waiver will expire (RFC 3339 format). If the risk waiver is set not to expire this field will be omitted.
-          type: string
-          format: date-time
-          example: '"2019-10-12T07:20:50.52Z"'
-        hostnames:
-          description: The list of hostnames the risk has been waived for. The field will be omitted if all_hostnames is true.
-          type: array
-          items:
-            type: string
-          example:
-          - example.com
-          - subdomain.example.com
-        justification:
-          description: Justification for the risk waiver. If not available this field will be omitted.
-          type: string
-          example: '"Loren Ipsum"'
     externalSurveyMini:
       type: object
       title: ExternalQuestionnaireMini represents a questionnaire in the external API.
@@ -1674,144 +1200,6 @@ components:
           type: boolean
         name:
           description: Survey name
-          type: string
-    QuestionnaireRisksResponsePayloadBody:
-      type: object
-      properties:
-        next_page_token:
-          description: 'The token to be used to retrieve the next page of results.
-
-            Will not be returned if there are no more results.'
-          type: string
-          example: '4'
-        risks:
-          description: The list of questionnaire risks
-          type: array
-          items:
-            $ref: '#/components/schemas/QuestionnaireRisk'
-        total_results:
-          description: The total number of risks found.
-          type: integer
-          format: int64
-          example: 10
-    Diffs:
-      type: array
-      items:
-        $ref: '#/components/schemas/Diff'
-    externalVendorWithRisk:
-      type: object
-      title: ExternalVendorWithRisk represents a vendor affected by a risk in the external API.
-      properties:
-        additional_evidence:
-          description: Additional evidence items affected by the risk (for additional evidence risks only)
-          type: array
-          items:
-            $ref: '#/components/schemas/externalEvidence'
-        count_hostnames_failed:
-          description: Number of domains/IPs affected (for automated scanning risks only)
-          type: integer
-          format: int64
-        date_detected:
-          description: When the risk was first detected (RFC3339 format, omitted if not available)
-          type: string
-          format: date-time
-        is_partially_waived:
-          description: Whether risk is partially waived
-          type: boolean
-        is_waived:
-          description: Whether risk is fully waived
-          type: boolean
-        labels:
-          description: Vendor labels
-          type: array
-          items:
-            $ref: '#/components/schemas/externalLabel'
-        name:
-          description: Vendor name
-          type: string
-        primary_hostname:
-          description: Primary hostname
-          type: string
-        questionnaires:
-          description: Questionnaires affected by the risk (for questionnaire risks only)
-          type: array
-          items:
-            $ref: '#/components/schemas/externalSurveyMini'
-        score:
-          description: Latest vendor score (0-950)
-          type: integer
-          format: int64
-        vendor_id:
-          description: Vendor ID
-          type: integer
-          format: int64
-        vendor_tier:
-          description: Vendor tier (if assigned)
-          type: integer
-          format: int64
-        vendor_tier_name:
-          description: Vendor tier name (if assigned)
-          type: string
-    VendorDiff:
-      type: object
-      properties:
-        expected:
-          description: The expected status
-          type: string
-        metaValueA:
-          description: Metadata for the result of the first check
-          type: string
-        metaValueB:
-          description: Metadata for the result of the second check
-          type: string
-        prevProvisionalID:
-          description: Previous provisional ID if the last scan contained it
-          type: string
-        statusA:
-          $ref: '#/components/schemas/DiffStatus'
-        statusB:
-          $ref: '#/components/schemas/DiffStatus'
-    RiskDiffGroup:
-      type: object
-      properties:
-        groupID:
-          description: The ID of the risk group
-          type: string
-        highestSeverity:
-          description: The highest severity of the risks in this group
-          type: integer
-          format: int64
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-        highestSeverityName:
-          description: The highest severity of the risks in this group in human-readable form
-          type: string
-          enum:
-          - pass
-          - info
-          - low
-          - medium
-          - high
-          - critical
-        name:
-          description: The name of the risk group
-          type: string
-        risks:
-          description: The list of risks in this group
-          type: array
-          items:
-            $ref: '#/components/schemas/RiskDiff'
-    ValueMetadataURL:
-      type: object
-      properties:
-        displayText:
-          type: string
-        url:
           type: string
     SummaryDiff:
       type: object
@@ -1891,28 +1279,403 @@ components:
           - example.com:443
         vendorDiff:
           $ref: '#/components/schemas/VendorDiff'
-    ExternalVendorsWithRiskResponse:
+    ValueMetadataURL:
       type: object
-      title: ExternalVendorsWithRiskResponse contains the vendors affected by a risk.
       properties:
-        risk_id:
-          description: The risk ID
+        displayText:
           type: string
-        risk_severity:
-          description: The severity level of the risk (pass, info, low, medium, high, critical)
+        url:
           type: string
-        risk_type:
-          description: The type of risk
+    QuestionnaireRiskV2:
+      type: object
+      properties:
+        controls:
+          $ref: '#/components/schemas/StringSlice'
+        createdAt:
+          description: The time the risk was first seen
           type: string
-        total_vendors_matching_filter:
-          description: Total number of vendors matching the filter criteria
+          format: date-time
+          example: '2022-03-20T23:25:26.419947Z'
+        inRemediation:
+          description: Flag indicating whether the risk is in remediation
+          type: boolean
+          example: false
+        isSharedQuestionnaire:
+          description: Flag indicating whether the risk arise from a shared questionnaire. This field will be present
+          type: boolean
+          example: true
+        questionnaireId:
+          description: The ID of the questionnaire this risk belongs to
           type: integer
           format: int64
-        vendors_with_risk:
-          description: List of vendors affected by the risk
+          example: 4
+        riskCategory:
+          description: The category of the risk
+          type: string
+          example: secprog
+        riskExplanation:
+          type: string
+        riskId:
+          description: THe ID of the risk
+          type: string
+          example: warn_secprog_nopolicies
+        riskName:
+          description: The name of the risk
+          type: string
+          example: Inadequate security policies
+        riskSeverity:
+          description: The severity of the risk
+          type: string
+          enum:
+          - pass
+          - info
+          - low
+          - medium
+          - high
+          - critical
+          example: low
+        riskText:
+          description: The description of the risk
+          type: string
+          example: Security policies are an important tool for establishing authoritative security requirements and enforcing them throughout the company. Policies form the basis of any security program.
+        riskWaivers:
+          description: List of risk waivers associated with the risk
           type: array
           items:
-            $ref: '#/components/schemas/externalVendorWithRisk'
+            $ref: '#/components/schemas/QuestionnaireRiskWaiver'
+        riskWhy:
+          type: string
+        vendorId:
+          description: The ID of the vendor this risk belongs to
+          type: integer
+          format: int64
+          example: 123456789
+    ValueMetadata:
+      type: object
+      properties:
+        description:
+          type: string
+        resolvesAfter:
+          type: string
+          format: date-time
+        resolvesAfterEvent:
+          type: string
+        urls:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueMetadataURL'
+    QuestionnaireRiskWaiver:
+      type: object
+      properties:
+        active_at:
+          type: string
+          format: date-time
+        approved_by:
+          type: string
+        created_by:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        justification:
+          type: string
+    SummaryDiffGroup:
+      type: object
+      properties:
+        diffs:
+          description: The list of risk diffs in this group
+          type: array
+          items:
+            $ref: '#/components/schemas/SummaryDiff'
+        groupID:
+          description: The ID of the risk group
+          type: string
+        highestSeverity:
+          $ref: '#/components/schemas/Severity'
+        highestSeverityName:
+          description: The highest severity of the risks in this group in human-readable form
+          type: string
+          enum:
+          - pass
+          - info
+          - low
+          - medium
+          - high
+          - critical
+        name:
+          description: The name of the risk group
+          type: string
+    Diffs:
+      type: array
+      items:
+        $ref: '#/components/schemas/Diff'
+    Diff:
+      type: object
+      properties:
+        dateA:
+          description: The date of the first scan (RFC 3339 format)
+          type: string
+          format: date-time
+        dateB:
+          description: The date of the second scan (RFC 3339 format)
+          type: string
+          format: date-time
+        expected:
+          description: The expected status
+          type: string
+        hostname:
+          description: The domain name or IP address experiencing the risk diff
+          type: string
+        metaValueA:
+          description: Metadata for the result of the first check
+          type: string
+        metaValueB:
+          description: Metadata for the result of the second check
+          type: string
+        prevProvisionalID:
+          description: Previous provisional ID if the last scan contained it
+          type: string
+        property:
+          description: The property checked
+          type: string
+        statusA:
+          $ref: '#/components/schemas/DiffStatus'
+        statusB:
+          $ref: '#/components/schemas/DiffStatus'
+        valueMetadataA:
+          $ref: '#/components/schemas/ValueMetadata'
+        valueMetadataB:
+          $ref: '#/components/schemas/ValueMetadata'
+    VendorsRiskDiffs:
+      type: object
+      properties:
+        id:
+          description: 'The id of the vendor.
+
+            Its possible for a hostname to change which vendor it belongs to for a number of reasons (eg. Company''s legal entity changes, improved data quality, etc...).
+
+            For this reason, do not assume a hostname will always return the same vendor id.'
+          type: integer
+          format: int64
+        name:
+          description: The name of the vendor
+          type: string
+        primary_hostname:
+          description: The primary hostname of the vendor
+          type: string
+        risksIntroduced:
+          description: The risks introduced between start date and end date grouped by class, including previously provisional risks
+          type: array
+          items:
+            $ref: '#/components/schemas/RiskDiffGroup'
+        risksResolved:
+          description: The risks resolved between start date and end date grouped by class
+          type: array
+          items:
+            $ref: '#/components/schemas/RiskDiffGroup'
+    ScanDiff:
+      type: object
+      properties:
+        expected:
+          description: The expected status
+          type: string
+        hostname:
+          description: The domain name or IP address experiencing the risk diff
+          type: string
+        property:
+          description: The property checked
+          type: string
+        scanA:
+          $ref: '#/components/schemas/ScanResult'
+        scanB:
+          $ref: '#/components/schemas/ScanResult'
+    RiskWaiver:
+      type: object
+      properties:
+        active_at:
+          description: Time the risk waiver was activated (RFC 3339 format)
+          type: string
+          format: date-time
+          example: '"2019-10-12T07:20:50.52Z"'
+        all_hostnames:
+          description: Flag indicating whether the risk has been waived for all hostnames
+          type: boolean
+          example: false
+        approved_by:
+          description: Email address of the user who approved the risk waiver. This field will be omitted if not applicable, e.g. self approved risk waivers.
+          type: string
+          example: '"john@example.com"'
+        created_by:
+          description: Email address of the user who created the risk waiver
+          type: string
+          example: '"john@example.com"'
+        expires_at:
+          description: Time the risk waiver will expire (RFC 3339 format). If the risk waiver is set not to expire this field will be omitted.
+          type: string
+          format: date-time
+          example: '"2019-10-12T07:20:50.52Z"'
+        hostnames:
+          description: The list of hostnames the risk has been waived for. The field will be omitted if all_hostnames is true.
+          type: array
+          items:
+            type: string
+          example:
+          - example.com
+          - subdomain.example.com
+        justification:
+          description: Justification for the risk waiver. If not available this field will be omitted.
+          type: string
+          example: '"Loren Ipsum"'
+    ScanResult:
+      type: object
+      properties:
+        date:
+          description: The date of the scan (RFC 3339 format)
+          type: string
+          format: date-time
+        metaValue:
+          description: Metadata for the result of the check
+          type: string
+        status:
+          description: The check status after the automated scan
+          type: string
+          enum:
+          - PASS
+          - FAIL
+          - UNKNOWN
+          - WAIVED
+    DiffStatus:
+      type: string
+    externalLabel:
+      type: object
+      title: ExternalLabel represents a vendor label in the external API.
+      properties:
+        id:
+          description: Label ID
+          type: integer
+          format: int64
+        name:
+          description: Label name
+          type: string
+    RiskDiffGroup:
+      type: object
+      properties:
+        groupID:
+          description: The ID of the risk group
+          type: string
+        highestSeverity:
+          description: The highest severity of the risks in this group
+          type: integer
+          format: int64
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+        highestSeverityName:
+          description: The highest severity of the risks in this group in human-readable form
+          type: string
+          enum:
+          - pass
+          - info
+          - low
+          - medium
+          - high
+          - critical
+        name:
+          description: The name of the risk group
+          type: string
+        risks:
+          description: The list of risks in this group
+          type: array
+          items:
+            $ref: '#/components/schemas/RiskDiff'
+    QuestionnaireRisksResponsePayloadBodyV2:
+      type: object
+      properties:
+        next_page_token:
+          description: 'The token to be used to retrieve the next page of results.
+
+            Will not be returned if there are no more results.'
+          type: string
+          example: '4'
+        risks:
+          description: The list of questionnaire risks
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionnaireRiskV2'
+        total_results:
+          description: The total number of risks found.
+          type: integer
+          format: int64
+          example: 10
+    externalEvidence:
+      type: object
+      title: ExternalEvidence represents evidence in the external API.
+      properties:
+        datastore_vendor_id:
+          description: Vendor ID
+          type: integer
+          format: int64
+        id:
+          description: Evidence ID
+          type: integer
+          format: int64
+        name:
+          description: Evidence name
+          type: string
+    VendorRiskOverviewV1ResponsePayload:
+      type: object
+      title: VendorRiskOverviewV1ResponsePayload contains the risk overview data for vendors.
+      properties:
+        next_page_token:
+          description: Token to retrieve the next page of results. Omitted if there are no more results.
+          type: string
+          example: eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ==
+        risks:
+          description: The list of risks affecting vendors in the portfolio.
+          type: array
+          items:
+            $ref: '#/components/schemas/externalVendorRisk'
+    StringSlice:
+      type: array
+      items:
+        type: string
+    VendorDiff:
+      type: object
+      properties:
+        expected:
+          description: The expected status
+          type: string
+        metaValueA:
+          description: Metadata for the result of the first check
+          type: string
+        metaValueB:
+          description: Metadata for the result of the second check
+          type: string
+        prevProvisionalID:
+          description: Previous provisional ID if the last scan contained it
+          type: string
+        statusA:
+          $ref: '#/components/schemas/DiffStatus'
+        statusB:
+          $ref: '#/components/schemas/DiffStatus'
+    ExternalVendorHostnamesWithRiskResponse:
+      type: object
+      title: ExternalVendorHostnamesWithRiskResponse contains the hostnames and risk details for a vendor.
+      properties:
+        hostnames_with_risk:
+          description: List of hostnames affected by the risk
+          type: array
+          items:
+            type: string
+        risk_details_by_hostname:
+          description: Risk details keyed by hostname
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/externalHostnameRisk'
     RiskDiff:
       type: object
       properties:
@@ -1996,38 +1759,197 @@ components:
           - critical
         vendorDiff:
           $ref: '#/components/schemas/VendorDiff'
-    ScanResult:
+    externalVendorWithRisk:
       type: object
+      title: ExternalVendorWithRisk represents a vendor affected by a risk in the external API.
       properties:
-        date:
-          description: The date of the scan (RFC 3339 format)
-          type: string
-          format: date-time
-        metaValue:
-          description: Metadata for the result of the check
-          type: string
-        status:
-          description: The check status after the automated scan
-          type: string
-          enum:
-          - PASS
-          - FAIL
-          - UNKNOWN
-          - WAIVED
-    ExternalVendorHostnamesWithRiskResponse:
-      type: object
-      title: ExternalVendorHostnamesWithRiskResponse contains the hostnames and risk details for a vendor.
-      properties:
-        hostnames_with_risk:
-          description: List of hostnames affected by the risk
+        additional_evidence:
+          description: Additional evidence items affected by the risk (for additional evidence risks only)
           type: array
           items:
-            type: string
-        risk_details_by_hostname:
-          description: Risk details keyed by hostname
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/externalHostnameRisk'
+            $ref: '#/components/schemas/externalEvidence'
+        count_hostnames_failed:
+          description: Number of domains/IPs affected (for automated scanning risks only)
+          type: integer
+          format: int64
+        date_detected:
+          description: When the risk was first detected (RFC3339 format, omitted if not available)
+          type: string
+          format: date-time
+        is_partially_waived:
+          description: Whether risk is partially waived
+          type: boolean
+        is_waived:
+          description: Whether risk is fully waived
+          type: boolean
+        labels:
+          description: Vendor labels
+          type: array
+          items:
+            $ref: '#/components/schemas/externalLabel'
+        name:
+          description: Vendor name
+          type: string
+        primary_hostname:
+          description: Primary hostname
+          type: string
+        questionnaires:
+          description: Questionnaires affected by the risk (for questionnaire risks only)
+          type: array
+          items:
+            $ref: '#/components/schemas/externalSurveyMini'
+        score:
+          description: Latest vendor score (0-950)
+          type: integer
+          format: int64
+        vendor_id:
+          description: Vendor ID
+          type: integer
+          format: int64
+        vendor_tier:
+          description: Vendor tier (if assigned)
+          type: integer
+          format: int64
+        vendor_tier_name:
+          description: Vendor tier name (if assigned)
+          type: string
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
+    AvailableRiskV2:
+      type: object
+      properties:
+        category:
+          description: The category of the risk. This field will be omitted for generic risks
+          type: string
+          example: dns
+        description:
+          description: Description or context surrounding the risk. This field will be omitted for generic risks
+          type: string
+          example: Domains must be renewed within specified intervals to maintain ownership of the name. The minimum interval is 1 year and the maximum interval is 10 years. If a domain is not renewed within the appropriate interval, the domain name becomes “expired.” There is a 30 day grace period where the domain owner can still renew the expired domain name. After that, the domain can be purchased by a third party
+        finding:
+          description: Description of the finding. This field will be omitted for generic risks
+          type: string
+          example: Domain expired
+        generic:
+          description: 'Flag indicating whether the risks is a generic risk, i.e. a risk where severity,
+
+            category, finding etc. depend on other parameters'
+          type: boolean
+          example: false
+        group:
+          description: The risk group
+          type: string
+          example: domain
+        id:
+          description: The ID of the risk
+          type: string
+          example: domain_expired
+        remediation:
+          description: Remediation recommendation. This field will be omitted for generic risks
+          type: string
+          example: The domain should be renewed as soon as possible with the registrar. Domains can be configured with auto-renewal to ensure that they are renewed before the expiration date
+        risk:
+          description: The risk title
+          type: string
+          example: Domain at risk of being hijacked
+        riskDetails:
+          description: Detailed description of the risk. This field will be omitted for generic risks
+          type: string
+          example: This domain is expired. An expired domain is no longer functional. Any services relying on the expired domain will become unavailable. In addition to the loss of functionality, expired domains can be snapped up quickly by third parties and used to drive traffic to malicious and fraudulent websites
+        riskSubtype:
+          description: The subtype of the risk, e.g. the subtype of the verified_vuln:CVE-2021-34473 is CVE-2021-34473. This field will be empty if the risk has no subtype, e.g. for wp_version_exposed, or for generic risks like verified_vuln:* where the subtype is only determined when the full risk is specified.
+          type: string
+          example: CVE-2021-34473
+        riskType:
+          description: The type of the risk, e.g. the type of the verified_vuln:CVE-2021-34473 is verified_vuln
+          type: string
+          example: verified_vuln
+        severity:
+          description: The severity of the risk. This field will be omitted for generic risks
+          type: string
+          enum:
+          - pass
+          - info
+          - low
+          - medium
+          - high
+          - critical
+          example: critical
+    VendorsRisksDiffResponsePayloadBody:
+      type: object
+      properties:
+        next_page_token:
+          description: 'The token to be used to retrieve the next page of results.
+
+            Will not be returned if there are no more results.'
+          type: string
+        total_results:
+          description: The total number of vendors found.
+          type: integer
+          format: int64
+        vendors:
+          description: The list of vendors found
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorsRiskDiffs'
+    ExternalVendorsWithRiskResponse:
+      type: object
+      title: ExternalVendorsWithRiskResponse contains the vendors affected by a risk.
+      properties:
+        risk_id:
+          description: The risk ID
+          type: string
+        risk_severity:
+          description: The severity level of the risk (pass, info, low, medium, high, critical)
+          type: string
+        risk_type:
+          description: The type of risk
+          type: string
+        total_vendors_matching_filter:
+          description: Total number of vendors matching the filter criteria
+          type: integer
+          format: int64
+        vendors_with_risk:
+          description: List of vendors affected by the risk
+          type: array
+          items:
+            $ref: '#/components/schemas/externalVendorWithRisk'
+    externalHostnameRisk:
+      type: object
+      title: ExternalHostnameRisk represents risk details for a hostname in the external API.
+      properties:
+        date_detected:
+          description: When the risk was first detected (RFC3339 format, omitted if not available)
+          type: string
+          format: date-time
+          example: '2024-01-15T10:30:00Z'
+        hostname:
+          description: The hostname
+          type: string
+          example: example.com
+        is_custom:
+          description: Whether this is a custom hostname
+          type: boolean
+          example: false
+        risk_id:
+          description: The risk ID
+          type: string
+          example: dns_spf_not_configured
+        scanned_at:
+          description: When the hostname was last scanned (RFC3339 format)
+          type: string
+          format: date-time
+          example: '2024-01-15T10:30:00Z'
+        score:
+          description: The security score for the hostname (0-950)
+          type: integer
+          format: int64
+          example: 750
     QuestionnaireRisk:
       type: object
       properties:
@@ -2088,54 +2010,43 @@ components:
           type: integer
           format: int64
           example: 123456789
-    VendorsRiskDiffs:
+    AvailableRisk:
       type: object
       properties:
+        category:
+          description: The category of the risk
+          type: string
+        description:
+          description: Description or context surrounding the risk
+          type: string
+        finding:
+          description: Description of the finding
+          type: string
+        group:
+          description: The risk group
+          type: string
         id:
-          description: 'The id of the vendor.
-
-            Its possible for a hostname to change which vendor it belongs to for a number of reasons (eg. Company''s legal entity changes, improved data quality, etc...).
-
-            For this reason, do not assume a hostname will always return the same vendor id.'
-          type: integer
-          format: int64
-        name:
-          description: The name of the vendor
+          description: The ID of the risk
           type: string
-        primary_hostname:
-          description: The primary hostname of the vendor
+        remediation:
+          description: Remediation recommendation
           type: string
-        risksIntroduced:
-          description: The risks introduced between start date and end date grouped by class, including previously provisional risks
-          type: array
-          items:
-            $ref: '#/components/schemas/RiskDiffGroup'
-        risksResolved:
-          description: The risks resolved between start date and end date grouped by class
-          type: array
-          items:
-            $ref: '#/components/schemas/RiskDiffGroup'
-    GetRisksV1RespBody:
-      type: object
-      properties:
-        risks:
-          description: The list of vendor risks that have been detected.
-          type: array
-          items:
-            $ref: '#/components/schemas/Risk'
-    VendorRiskOverviewV1ResponsePayload:
-      type: object
-      title: VendorRiskOverviewV1ResponsePayload contains the risk overview data for vendors.
-      properties:
-        next_page_token:
-          description: Token to retrieve the next page of results. Omitted if there are no more results.
+        risk:
+          description: The risk title
           type: string
-          example: eyJ2IjoxMDAsImUiOjE3MDAwMDAwMDAsImgiOiJhYmMxMjMifQ==
-        risks:
-          description: The list of risks affecting vendors in the portfolio.
-          type: array
-          items:
-            $ref: '#/components/schemas/externalVendorRisk'
+        riskDetails:
+          description: Detailed description of the risk
+          type: string
+        severity:
+          description: The severity of the risk
+          type: string
+          enum:
+          - pass
+          - info
+          - low
+          - medium
+          - high
+          - critical
     Risk:
       type: object
       properties:
@@ -2214,6 +2125,95 @@ components:
           - 192.168.1.1
           - subdomain.example.com
           - example.com:443
+    externalVendorRisk:
+      type: object
+      title: ExternalVendorRisk represents a risk that affects one or more vendors.
+      properties:
+        adjusted_severity:
+          description: 'The adjusted severity if the risk severity has been customized.
+
+            If present, this indicates the original severity before adjustment.'
+          type: string
+          example: high
+        category_title:
+          description: The human-readable title of the risk category.
+          type: string
+          example: Email Security
+        classification:
+          description: The classification of the risk (for survey risks only).
+          type: string
+        date_first_detected:
+          description: The date when this risk was first detected (omitted if not available).
+          type: string
+          format: date-time
+          example: '2024-01-15T10:30:00Z'
+        description:
+          description: A detailed description of the risk.
+          type: string
+          example: No SPF record is configured for this domain
+        fact_category:
+          description: The category of the risk fact.
+          type: string
+          example: email_security
+        id:
+          description: The unique identifier for the risk.
+          type: string
+          example: dns_spf_not_configured
+        is_verified_vuln:
+          description: Indicates if this is a verified vulnerability.
+          type: boolean
+          example: false
+        known_exploited_vulnerability:
+          description: Indicates whether the vulnerability is known to be actively exploited.
+          type: boolean
+          example: true
+        num_failed_vendors:
+          description: The number of vendors that have failed this risk.
+          type: integer
+          format: int64
+          example: 5
+        risk_type:
+          description: 'The type of risk: "cloudscan", "survey", or "additional_evidence".'
+          type: string
+          example: cloudscan
+        severity:
+          description: 'The severity of the risk: "info", "low", "medium", "high", or "critical".'
+          type: string
+          example: medium
+        title:
+          description: The title of the risk.
+          type: string
+          example: SPF record not configured
+    QuestionnaireRisksResponsePayloadBody:
+      type: object
+      properties:
+        next_page_token:
+          description: 'The token to be used to retrieve the next page of results.
+
+            Will not be returned if there are no more results.'
+          type: string
+          example: '4'
+        risks:
+          description: The list of questionnaire risks
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionnaireRisk'
+        total_results:
+          description: The total number of risks found.
+          type: integer
+          format: int64
+          example: 10
+    GetRisksV1RespBody:
+      type: object
+      properties:
+        risks:
+          description: The list of vendor risks that have been detected.
+          type: array
+          items:
+            $ref: '#/components/schemas/Risk'
+    Severity:
+      type: integer
+      format: int64
   securitySchemes:
     API_key_in_header:
       type: apiKey

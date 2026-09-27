@@ -261,47 +261,47 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    WebhookSampleData:
+    GetWebhookNotificationTypesResponsePayload:
       type: object
       properties:
-        context:
-          description: Extra metadata available for the notifications
-          type: object
-          additionalProperties: {}
-        description:
-          description: Description of the notifications
-          type: string
-          example: Jane Doe replied to a message by John Smith on questionnaire 'SOC2'
-        occurredAt:
-          description: Timestamp for the event occurrence
-          type: string
-          format: date-time
-          example: '2021-08-17T23:04:02Z'
-        type:
-          description: Human readable type of notification
-          type: string
-          example: QuestionnaireCorrespondence
+        notification_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotificationType'
     ExampleDataWebhookResponsePayload:
       type: array
       items:
         $ref: '#/components/schemas/WebhookSampleData'
-    DeleteWebhookResponsePayload:
-      type: object
-    NotificationType:
+    endpointError:
+      description: Error details coming from an endpoint
       type: object
       properties:
-        description:
-          description: Description for this notification type
+        error:
+          description: A description of the error
           type: string
-          example: When a new data leak is published
+    CreateWebhookResponsePayload:
+      type: object
+      properties:
         id:
-          description: ID of this notification type
+          description: The ID of the created webhook
           type: string
-          example: 10-0000-0000-0000000000000000
-        is_zapier:
-          description: Flag indicating whether the notification type is a zapier notification type
-          type: boolean
-          example: true
+          example: ABCD1234
+        signing_secret:
+          description: 'The HMAC signing secret for webhook authentication (hex-encoded, 64 characters).
+
+            This is only returned once on creation. Webhooks will include an X-UpGuard-Signature header
+
+            using this secret for authentication.'
+          type: string
+          example: a1b2c3d4e5f67890123456789012345678901234567890123456789012345678
+    ListWebhookResponsePayload:
+      type: object
+      properties:
+        webhooks:
+          description: The list of registered webhooks
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
     Webhook:
       type: object
       properties:
@@ -336,43 +336,43 @@ components:
           - webhook
           - workflow_webhook
           example: zapier
-    CreateWebhookResponsePayload:
+    DeleteWebhookResponsePayload:
+      type: object
+    NotificationType:
       type: object
       properties:
+        description:
+          description: Description for this notification type
+          type: string
+          example: When a new data leak is published
         id:
-          description: The ID of the created webhook
+          description: ID of this notification type
           type: string
-          example: ABCD1234
-        signing_secret:
-          description: 'The HMAC signing secret for webhook authentication (hex-encoded, 64 characters).
-
-            This is only returned once on creation. Webhooks will include an X-UpGuard-Signature header
-
-            using this secret for authentication.'
-          type: string
-          example: a1b2c3d4e5f67890123456789012345678901234567890123456789012345678
-    endpointError:
-      description: Error details coming from an endpoint
+          example: 10-0000-0000-0000000000000000
+        is_zapier:
+          description: Flag indicating whether the notification type is a zapier notification type
+          type: boolean
+          example: true
+    WebhookSampleData:
       type: object
       properties:
-        error:
-          description: A description of the error
+        context:
+          description: Extra metadata available for the notifications
+          type: object
+          additionalProperties: {}
+        description:
+          description: Description of the notifications
           type: string
-    ListWebhookResponsePayload:
-      type: object
-      properties:
-        webhooks:
-          description: The list of registered webhooks
-          type: array
-          items:
-            $ref: '#/components/schemas/Webhook'
-    GetWebhookNotificationTypesResponsePayload:
-      type: object
-      properties:
-        notification_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/NotificationType'
+          example: Jane Doe replied to a message by John Smith on questionnaire 'SOC2'
+        occurredAt:
+          description: Timestamp for the event occurrence
+          type: string
+          format: date-time
+          example: '2021-08-17T23:04:02Z'
+        type:
+          description: Human readable type of notification
+          type: string
+          example: QuestionnaireCorrespondence
   securitySchemes:
     API_key_in_header:
       type: apiKey
