@@ -403,13 +403,138 @@ paths:
         description: Labels list
 components:
   schemas:
-    endpointError:
-      description: Error details coming from an endpoint
+    BulkHostname:
       type: object
       properties:
-        error:
-          description: A description of the error
+        active:
+          description: The active state of the hostname. These will be omitted if the omit_scan_info query parameter is true.
+          type: boolean
+          example: true
+        automated_score:
+          description: The automated score of the hostname. This will be omitted if the omit_scan_info query parameter is true.
+          type: integer
+          format: int64
+          maximum: 950
+          minimum: 0
+          example: 800
+        hostname:
+          description: The name of the hostname.
           type: string
+          format: hostname
+        labels:
+          description: The list of labels associated with the hostname. This will be omitted if the omit_labels query parameter is true.
+          type: array
+          items:
+            type: string
+          example:
+          - network
+          - data
+        last_scanned_at:
+          description: The timestamp this hostname was last scanned at.
+          type: string
+          format: date-time
+        risks:
+          description: The list of risks associated with the hostname. These will be omitted if the omit_scan_info query parameter is true.
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkRisk'
+        vendor:
+          $ref: '#/components/schemas/BulkVendor'
+    BulkVendor:
+      type: object
+      properties:
+        id:
+          description: The ID of the vendor.
+          type: integer
+          format: int64
+          example: 123456789
+        name:
+          description: The name of the vendor.
+          type: string
+          example: Example Industries
+        primary_hostname:
+          description: The primary hostname of the vendor.
+          type: string
+          format: hostname
+          example: example.com
+    BulkListHostnamesV1ResponseBody:
+      type: object
+      properties:
+        hostnames:
+          description: The list of hostnames.
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkHostname'
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. It will not be returned if there are no more results.
+          type: string
+          example: '123456789'
+        total_results:
+          description: The total number of hostnames found.
+          type: integer
+          format: int64
+          example: 1000
+    BulkGetHostnamesStatsV1ResponseBody:
+      type: object
+      properties:
+        active:
+          description: The number of active hostnames.
+          type: integer
+          format: int64
+          example: 900
+        inactive:
+          description: The number of inactive hostnames.
+          type: integer
+          format: int64
+          example: 100
+        registered:
+          description: The number of registered hostnames.
+          type: integer
+          format: int64
+          example: 1000
+        remaining:
+          description: The number of remaining available slots.
+          type: integer
+          format: int64
+          example: 9000
+    BulkDeregisterHostnamesV1RequestBody:
+      type: object
+      properties:
+        hostnames:
+          description: The hostnames to deregister. Currently, a maximum of 1000 hostnames in a single request is supported.
+          type: array
+          items:
+            type: string
+            format: hostname
+          example:
+          - 8.8.8.8
+          - example.com
+    BulkDeregisterHostnamesV1ResponseBody:
+      type: object
+      properties:
+        deregistered:
+          description: The number of deregistered hostnames.
+          type: integer
+          format: int64
+          example: 4
+        remaining:
+          description: The number of remaining slots.
+          type: integer
+          format: int64
+          example: 10
+    BulkRegisterHostnamesV1ResponseBody:
+      type: object
+      properties:
+        registered:
+          description: The number of newly registered hostnames.
+          type: integer
+          format: int64
+          example: 4
+        remaining:
+          description: The number of remaining slots.
+          type: integer
+          format: int64
+          example: 10
     BulkRisk:
       type: object
       properties:
@@ -469,138 +594,6 @@ components:
           - high
           - critical
           example: critical
-    BulkRegisterHostnamesV1ResponseBody:
-      type: object
-      properties:
-        registered:
-          description: The number of newly registered hostnames.
-          type: integer
-          format: int64
-          example: 4
-        remaining:
-          description: The number of remaining slots.
-          type: integer
-          format: int64
-          example: 10
-    BulkListHostnamesV1ResponseBody:
-      type: object
-      properties:
-        hostnames:
-          description: The list of hostnames.
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkHostname'
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. It will not be returned if there are no more results.
-          type: string
-          example: '123456789'
-        total_results:
-          description: The total number of hostnames found.
-          type: integer
-          format: int64
-          example: 1000
-    BulkGetHostnamesStatsV1ResponseBody:
-      type: object
-      properties:
-        active:
-          description: The number of active hostnames.
-          type: integer
-          format: int64
-          example: 900
-        inactive:
-          description: The number of inactive hostnames.
-          type: integer
-          format: int64
-          example: 100
-        registered:
-          description: The number of registered hostnames.
-          type: integer
-          format: int64
-          example: 1000
-        remaining:
-          description: The number of remaining available slots.
-          type: integer
-          format: int64
-          example: 9000
-    BulkDeregisterHostnamesV1ResponseBody:
-      type: object
-      properties:
-        deregistered:
-          description: The number of deregistered hostnames.
-          type: integer
-          format: int64
-          example: 4
-        remaining:
-          description: The number of remaining slots.
-          type: integer
-          format: int64
-          example: 10
-    BulkHostname:
-      type: object
-      properties:
-        active:
-          description: The active state of the hostname. These will be omitted if the omit_scan_info query parameter is true.
-          type: boolean
-          example: true
-        automated_score:
-          description: The automated score of the hostname. This will be omitted if the omit_scan_info query parameter is true.
-          type: integer
-          format: int64
-          maximum: 950
-          minimum: 0
-          example: 800
-        hostname:
-          description: The name of the hostname.
-          type: string
-          format: hostname
-        labels:
-          description: The list of labels associated with the hostname. This will be omitted if the omit_labels query parameter is true.
-          type: array
-          items:
-            type: string
-          example:
-          - network
-          - data
-        last_scanned_at:
-          description: The timestamp this hostname was last scanned at.
-          type: string
-          format: date-time
-        risks:
-          description: The list of risks associated with the hostname. These will be omitted if the omit_scan_info query parameter is true.
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkRisk'
-        vendor:
-          $ref: '#/components/schemas/BulkVendor'
-    BulkVendor:
-      type: object
-      properties:
-        id:
-          description: The ID of the vendor.
-          type: integer
-          format: int64
-          example: 123456789
-        name:
-          description: The name of the vendor.
-          type: string
-          example: Example Industries
-        primary_hostname:
-          description: The primary hostname of the vendor.
-          type: string
-          format: hostname
-          example: example.com
-    BulkDeregisterHostnamesV1RequestBody:
-      type: object
-      properties:
-        hostnames:
-          description: The hostnames to deregister. Currently, a maximum of 1000 hostnames in a single request is supported.
-          type: array
-          items:
-            type: string
-            format: hostname
-          example:
-          - 8.8.8.8
-          - example.com
     BulkRegisterHostnamesV1RequestBody:
       type: object
       properties:
@@ -621,6 +614,13 @@ components:
           example:
           - network
           - data
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
   securitySchemes:
     API_key_in_header:
       type: apiKey

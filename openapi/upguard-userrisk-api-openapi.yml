@@ -1301,259 +1301,6 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    UserRiskUserPermissionsListResponse:
-      type: object
-      required:
-      - permissions
-      properties:
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
-          type: string
-          example: acbd18db4cc2f85cedef654fccc4a4d8
-        permissions:
-          description: The list of permissions granted by the user.
-          type: array
-          items:
-            $ref: '#/components/schemas/UserPermission'
-    Team:
-      type: object
-      required:
-      - name
-      - user_count
-      properties:
-        name:
-          description: The name of the team.
-          type: string
-          example: Engineering
-        user_count:
-          description: The number of users assigned to this team.
-          type: integer
-          format: int64
-          example: 50
-    UsagePolicy:
-      description: 'UsagePolicy describes the app usage policy applied to an application, including the
-
-        base rule applied by default and any custom rules that override it for specific
-
-        teams, roles, or users.'
-      type: object
-      required:
-      - base_rule
-      - source
-      properties:
-        base_rule:
-          description: The outcome applied to users by default, unless overridden by a custom rule.
-          type: string
-          format: string
-          enum:
-          - approve
-          - tolerate
-          - nudge
-          - block
-          example: tolerate
-        custom_rules:
-          description: 'Custom rules that override the base rule for specific teams, roles, or users,
-
-            keyed by the outcome they apply.'
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UsagePolicyRule'
-        source:
-          description: Where the application's usage policy is derived from.
-          type: string
-          format: string
-          enum:
-          - org_default
-          - app
-          example: org_default
-    IdentityBreachesListResponse:
-      type: object
-      required:
-      - identity_breaches
-      properties:
-        identity_breaches:
-          description: The list of identity breaches.
-          type: array
-          items:
-            $ref: '#/components/schemas/IdentityBreach'
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
-          type: string
-          example: acbd18db4cc2f85cedef654fccc4a4d8
-    GetUserRiskAppCategoriesListResponse:
-      type: object
-      required:
-      - categories
-      properties:
-        categories:
-          description: The list of app categories.
-          type: array
-          items:
-            type: string
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
-          type: string
-          example: acbd18db4cc2f85cedef654fccc4a4d8
-    UserIdentityBreachesListResponse:
-      type: object
-      title: UserIdentityBreachesListResponse defines the response structure.
-      required:
-      - identity_breaches
-      properties:
-        identity_breaches:
-          description: The list of identity breaches.
-          type: array
-          items:
-            $ref: '#/components/schemas/IdentityBreach'
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
-          type: string
-          example: acbd18db4cc2f85cedef654fccc4a4d8
-    PermissionUser:
-      type: object
-      required:
-      - id
-      - name
-      - email
-      properties:
-        email:
-          description: The email address of the user.
-          type: string
-          example: alex.founder@example.com
-        id:
-          description: The unique identifier of the user.
-          type: string
-          example: 9c22b2c4-9f5b-4547-8e36-64bdbebd7184
-        name:
-          description: The full name of the user.
-          type: string
-          example: Alex Founder
-        risk_rating:
-          description: The security risk rating of the user (0-950).
-          type: integer
-          format: int64
-          example: 750
-        role:
-          description: The role assigned to the user.
-          type: string
-          example: developer
-        team:
-          description: The team the user belongs to.
-          type: string
-          example: product
-    GetUserRiskAppsPermissionsListResponse:
-      type: object
-      required:
-      - permissions
-      properties:
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
-          type: string
-          example: acbd18db4cc2f85cedef654fccc4a4d8
-        permissions:
-          description: The list of permissions granted to the application.
-          type: array
-          items:
-            $ref: '#/components/schemas/AppPermission'
-    GetUserRiskRolesListResponse:
-      type: object
-      required:
-      - roles
-      properties:
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
-          type: string
-          example: acbd18db4cc2f85cedef654fccc4a4d8
-        roles:
-          description: The list of roles.
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-    UserRiskAppUsersListResponse:
-      type: object
-      required:
-      - users
-      properties:
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
-          type: string
-          example: e7cfc445-30a6-416c-8a12-0a988f042d08
-        users:
-          description: The list of users using the application.
-          type: array
-          items:
-            $ref: '#/components/schemas/AppUser'
-    UserAppStats:
-      type: object
-      required:
-      - total_apps
-      properties:
-        total_apps:
-          description: The total number of applications used by the user.
-          type: integer
-          format: int64
-          example: 10
-    UserIdentityBreachesStats:
-      type: object
-      required:
-      - active_breaches
-      properties:
-        active_breaches:
-          description: The number of active identity breaches this user was involved in that have not been remediated yet.
-          type: integer
-          format: int64
-          example: 2
-        total_breaches:
-          description: 'The total number of identity breaches this user was involved in.
-
-
-            required: 10'
-          type: integer
-          format: int64
-          example: 5
-    GetUserRiskPermissionsAppsListResponse:
-      type: object
-      required:
-      - apps
-      properties:
-        apps:
-          description: The list of apps that were granted the permission.
-          type: array
-          items:
-            $ref: '#/components/schemas/App'
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
-          type: string
-          example: acbd18db4cc2f85cedef654fccc4a4d8
-    UsagePolicyRule:
-      type: object
-      title: UsagePolicyRule describes the teams, roles, and users a custom usage policy rule applies to.
-      required:
-      - team_names
-      - role_names
-      - user_emails
-      properties:
-        role_names:
-          description: The names of the roles the rule applies to.
-          type: array
-          items:
-            type: string
-          example:
-          - developer
-        team_names:
-          description: The names of the teams the rule applies to.
-          type: array
-          items:
-            type: string
-          example:
-          - product
-        user_emails:
-          description: The email addresses of the users the rule applies to.
-          type: array
-          items:
-            type: string
-          example:
-          - jane.doe@example.com
     Permission:
       type: object
       required:
@@ -1601,23 +1348,41 @@ components:
           type: integer
           format: int64
           example: 42
-    ApprovedReplacementApp:
+    GetUserRiskTeamsListResponse:
       type: object
       required:
-      - name
+      - teams
       properties:
-        description:
-          description: A description of the replacement application.
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
           type: string
-          example: Lorem ipsum dolor sit amet
-        domain:
-          description: The domain associated with the replacement application.
+          example: acbd18db4cc2f85cedef654fccc4a4d8
+        teams:
+          description: The list of teams.
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+    UserRiskUseAppsListResponse:
+      type: object
+      required:
+      - apps
+      properties:
+        apps:
+          description: The list of apps used by the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserApp'
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
           type: string
-          example: atlassian.com
-        name:
-          description: The name of the replacement application.
+          example: acbd18db4cc2f85cedef654fccc4a4d8
+    AppMetadata:
+      type: object
+      properties:
+        entra_app_id:
+          description: The Microsoft Entra ID (formerly Azure AD) of the application.
           type: string
-          example: Jira
+          example: 12345678-9abc-def0-1234-56789abcdef0
     UserApp:
       type: object
       required:
@@ -1703,122 +1468,25 @@ components:
           description: Indicates whether the vendor is known to use AI.
           type: boolean
           example: true
-    GetUserRiskPermissionsListResponse:
-      type: object
-      required:
-      - permissions
-      properties:
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
-          type: string
-          example: acbd18db4cc2f85cedef654fccc4a4d8
-        permissions:
-          description: The list of permissions.
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-    GetUserRiskTeamsListResponse:
-      type: object
-      required:
-      - teams
-      properties:
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
-          type: string
-          example: acbd18db4cc2f85cedef654fccc4a4d8
-        teams:
-          description: The list of teams.
-          type: array
-          items:
-            $ref: '#/components/schemas/Team'
-    UserRiskUsersListResponse:
-      type: object
-      required:
-      - users
-      properties:
-        next_page_token:
-          description: 'The token to be used to retrieve the next page of results.
-
-            Will not be returned if there are no more results.'
-          type: string
-          example: e7cfc445-30a6-416c-8a12-0a988f042d08
-        users:
-          description: List of users.
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-    IdentityBreachUser:
+    PermissionUser:
       type: object
       required:
       - id
       - name
       - email
-      - status
       properties:
         email:
           description: The email address of the user.
           type: string
-          example: john.doe@example.com
+          example: alex.founder@example.com
         id:
           description: The unique identifier of the user.
           type: string
-          example: e7cfc445-30a6-416c-8a12-0a988f042d08
+          example: 9c22b2c4-9f5b-4547-8e36-64bdbebd7184
         name:
           description: The full name of the user.
           type: string
-          example: John Doe
-        risk_rating:
-          description: The security risk rating of the user (0-950).
-          type: integer
-          format: int64
-          example: 750
-        role:
-          description: The role assigned to the user.
-          type: string
-          example: developer
-        status:
-          description: The status of the user in relation to the breach.
-          type: string
-          format: string
-          example: current
-        team:
-          description: The team the user belongs to.
-          type: string
-          example: product
-    AppUser:
-      type: object
-      required:
-      - id
-      - name
-      - email
-      - first_detected
-      - usage_policy_outcome
-      properties:
-        email:
-          description: The email address of the user.
-          type: string
-          example: john.doe@example.com
-        exposure_level:
-          description: The risk level associated with the application or permission.
-          type: string
-          format: string
-          enum:
-          - basic
-          - elevated
-          example: basic
-        first_detected:
-          description: The date and time the user was first detected using this application.
-          type: string
-          format: date-time
-          example: '2023-09-24T15:30:00Z'
-        id:
-          description: The unique identifier of the user.
-          type: string
-          example: e7cfc445-30a6-416c-8a12-0a988f042d08
-        name:
-          description: The full name of the user.
-          type: string
-          example: John Doe
+          example: Alex Founder
         risk_rating:
           description: The security risk rating of the user (0-950).
           type: integer
@@ -1832,223 +1500,6 @@ components:
           description: The team the user belongs to.
           type: string
           example: product
-        usage_policy_outcome:
-          description: The usage policy outcome resolved for this user on this application.
-          type: string
-          format: string
-          enum:
-          - approve
-          - tolerate
-          - nudge
-          - block
-          example: tolerate
-    GetUserRiskPermissionsUsersListResponse:
-      type: object
-      required:
-      - users
-      properties:
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
-          type: string
-          example: acbd18db4cc2f85cedef654fccc4a4d8
-        users:
-          description: The list of users who granted the permission.
-          type: array
-          items:
-            $ref: '#/components/schemas/PermissionUser'
-    User:
-      type: object
-      required:
-      - id
-      - name
-      - email
-      - risk_rating_trend
-      - app_stats
-      - breach_stats
-      - metadata
-      properties:
-        app_stats:
-          $ref: '#/components/schemas/UserAppStats'
-        breach_stats:
-          $ref: '#/components/schemas/UserIdentityBreachesStats'
-        email:
-          description: The email address of the user.
-          type: string
-          example: john.doe@example.com
-        id:
-          description: The ID of the user.
-          type: string
-          example: e7cfc445-30a6-416c-8a12-0a988f042d08
-        metadata:
-          $ref: '#/components/schemas/UserMetadata'
-        name:
-          description: The full name of the user.
-          type: string
-          example: John Doe
-        risk_rating:
-          description: Risk rating for the user.
-          type: integer
-          format: int64
-          example: 900
-        risk_rating_trend:
-          description: The user risk rating trend for the last 30 days.
-          type: integer
-          format: int64
-          example: 10
-        role:
-          description: The role assigned to the user.
-          type: string
-          example: developer
-        team:
-          description: The team the user belongs to.
-          type: string
-          example: product
-    AppMetadata:
-      type: object
-      properties:
-        entra_app_id:
-          description: The Microsoft Entra ID (formerly Azure AD) of the application.
-          type: string
-          example: 12345678-9abc-def0-1234-56789abcdef0
-    Role:
-      type: object
-      required:
-      - name
-      - user_count
-      properties:
-        name:
-          description: The name of the role.
-          type: string
-          example: Developer
-        user_count:
-          description: The number of users assigned to this role.
-          type: integer
-          format: int64
-          example: 25
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
-    UserMetadata:
-      type: object
-      properties:
-        entra_user_id:
-          description: The Microsoft Entra ID (formerly Azure AD) of the user if any.
-          type: string
-          example: 8fd39fd3-71b2-438e-9709-56fab71ab8d6
-    UserPermission:
-      type: object
-      required:
-      - id
-      - name
-      - description
-      - access_level
-      - app_names
-      properties:
-        access_level:
-          description: The access level granted by the permission.
-          type: string
-          format: string
-          enum:
-          - read_only
-          - read_write
-          example: read_only
-        app_names:
-          description: The list of applications that requested this permission.
-          type: array
-          items:
-            type: string
-          example:
-          - Adobe
-          - Asana
-        category:
-          description: The category of the permission.
-          type: string
-          example: Google User
-        description:
-          description: A description of what the permission allows.
-          type: string
-          example: View your email address
-        exposure_level:
-          description: The risk level associated with the permission.
-          type: string
-          format: string
-          enum:
-          - basic
-          - elevated
-          example: basic
-        id:
-          description: The unique identifier of the permission.
-          type: string
-          example: https://www.googleapis.com/auth/userinfo.email
-        name:
-          description: The name of the permission.
-          type: string
-          example: https://www.googleapis.com/auth/userinfo.email
-    AppPermission:
-      type: object
-      required:
-      - id
-      - name
-      - description
-      - exposure_level
-      - access_level
-      - num_users
-      properties:
-        access_level:
-          description: The access level granted by the permission.
-          type: string
-          format: string
-          enum:
-          - read_only
-          - read_write
-          example: read_only
-        category:
-          description: The category of the permission.
-          type: string
-          example: User Management
-        description:
-          description: A description of what the permission allows.
-          type: string
-          example: Read user profiles
-        exposure_level:
-          description: The risk level associated with the application or permission.
-          type: string
-          format: string
-          enum:
-          - basic
-          - elevated
-          example: basic
-        id:
-          description: The unique identifier of the permission.
-          type: string
-          example: https://www.googleapis.com/auth/userinfo.email
-        name:
-          description: The name of the permission.
-          type: string
-          example: https://www.googleapis.com/auth/userinfo.email
-        num_users:
-          description: The number of users who have granted this permission to the application.
-          type: integer
-          format: int64
-          example: 10
-    UserRiskAppsListResponse:
-      type: object
-      required:
-      - apps
-      properties:
-        apps:
-          description: The list of apps.
-          type: array
-          items:
-            $ref: '#/components/schemas/App'
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
-          type: string
-          example: acbd18db4cc2f85cedef654fccc4a4d8
     App:
       type: object
       required:
@@ -2146,6 +1597,372 @@ components:
           description: Indicates whether the vendor is known to use AI.
           type: boolean
           example: true
+    AppPermission:
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - exposure_level
+      - access_level
+      - num_users
+      properties:
+        access_level:
+          description: The access level granted by the permission.
+          type: string
+          format: string
+          enum:
+          - read_only
+          - read_write
+          example: read_only
+        category:
+          description: The category of the permission.
+          type: string
+          example: User Management
+        description:
+          description: A description of what the permission allows.
+          type: string
+          example: Read user profiles
+        exposure_level:
+          description: The risk level associated with the application or permission.
+          type: string
+          format: string
+          enum:
+          - basic
+          - elevated
+          example: basic
+        id:
+          description: The unique identifier of the permission.
+          type: string
+          example: https://www.googleapis.com/auth/userinfo.email
+        name:
+          description: The name of the permission.
+          type: string
+          example: https://www.googleapis.com/auth/userinfo.email
+        num_users:
+          description: The number of users who have granted this permission to the application.
+          type: integer
+          format: int64
+          example: 10
+    UserIdentityBreachesStats:
+      type: object
+      required:
+      - active_breaches
+      properties:
+        active_breaches:
+          description: The number of active identity breaches this user was involved in that have not been remediated yet.
+          type: integer
+          format: int64
+          example: 2
+        total_breaches:
+          description: 'The total number of identity breaches this user was involved in.
+
+
+            required: 10'
+          type: integer
+          format: int64
+          example: 5
+    UserRiskAppUsersListResponse:
+      type: object
+      required:
+      - users
+      properties:
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+          type: string
+          example: e7cfc445-30a6-416c-8a12-0a988f042d08
+        users:
+          description: The list of users using the application.
+          type: array
+          items:
+            $ref: '#/components/schemas/AppUser'
+    UsagePolicy:
+      description: 'UsagePolicy describes the app usage policy applied to an application, including the
+
+        base rule applied by default and any custom rules that override it for specific
+
+        teams, roles, or users.'
+      type: object
+      required:
+      - base_rule
+      - source
+      properties:
+        base_rule:
+          description: The outcome applied to users by default, unless overridden by a custom rule.
+          type: string
+          format: string
+          enum:
+          - approve
+          - tolerate
+          - nudge
+          - block
+          example: tolerate
+        custom_rules:
+          description: 'Custom rules that override the base rule for specific teams, roles, or users,
+
+            keyed by the outcome they apply.'
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UsagePolicyRule'
+        source:
+          description: Where the application's usage policy is derived from.
+          type: string
+          format: string
+          enum:
+          - org_default
+          - app
+          example: org_default
+    Team:
+      type: object
+      required:
+      - name
+      - user_count
+      properties:
+        name:
+          description: The name of the team.
+          type: string
+          example: Engineering
+        user_count:
+          description: The number of users assigned to this team.
+          type: integer
+          format: int64
+          example: 50
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
+    Role:
+      type: object
+      required:
+      - name
+      - user_count
+      properties:
+        name:
+          description: The name of the role.
+          type: string
+          example: Developer
+        user_count:
+          description: The number of users assigned to this role.
+          type: integer
+          format: int64
+          example: 25
+    AppUser:
+      type: object
+      required:
+      - id
+      - name
+      - email
+      - first_detected
+      - usage_policy_outcome
+      properties:
+        email:
+          description: The email address of the user.
+          type: string
+          example: john.doe@example.com
+        exposure_level:
+          description: The risk level associated with the application or permission.
+          type: string
+          format: string
+          enum:
+          - basic
+          - elevated
+          example: basic
+        first_detected:
+          description: The date and time the user was first detected using this application.
+          type: string
+          format: date-time
+          example: '2023-09-24T15:30:00Z'
+        id:
+          description: The unique identifier of the user.
+          type: string
+          example: e7cfc445-30a6-416c-8a12-0a988f042d08
+        name:
+          description: The full name of the user.
+          type: string
+          example: John Doe
+        risk_rating:
+          description: The security risk rating of the user (0-950).
+          type: integer
+          format: int64
+          example: 750
+        role:
+          description: The role assigned to the user.
+          type: string
+          example: developer
+        team:
+          description: The team the user belongs to.
+          type: string
+          example: product
+        usage_policy_outcome:
+          description: The usage policy outcome resolved for this user on this application.
+          type: string
+          format: string
+          enum:
+          - approve
+          - tolerate
+          - nudge
+          - block
+          example: tolerate
+    UserRiskUsersListResponse:
+      type: object
+      required:
+      - users
+      properties:
+        next_page_token:
+          description: 'The token to be used to retrieve the next page of results.
+
+            Will not be returned if there are no more results.'
+          type: string
+          example: e7cfc445-30a6-416c-8a12-0a988f042d08
+        users:
+          description: List of users.
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    UserRiskUserPermissionsListResponse:
+      type: object
+      required:
+      - permissions
+      properties:
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+          type: string
+          example: acbd18db4cc2f85cedef654fccc4a4d8
+        permissions:
+          description: The list of permissions granted by the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserPermission'
+    GetUserRiskAppCategoriesListResponse:
+      type: object
+      required:
+      - categories
+      properties:
+        categories:
+          description: The list of app categories.
+          type: array
+          items:
+            type: string
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+          type: string
+          example: acbd18db4cc2f85cedef654fccc4a4d8
+    GetUserRiskRolesListResponse:
+      type: object
+      required:
+      - roles
+      properties:
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+          type: string
+          example: acbd18db4cc2f85cedef654fccc4a4d8
+        roles:
+          description: The list of roles.
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+    GetUserRiskAppsPermissionsListResponse:
+      type: object
+      required:
+      - permissions
+      properties:
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+          type: string
+          example: acbd18db4cc2f85cedef654fccc4a4d8
+        permissions:
+          description: The list of permissions granted to the application.
+          type: array
+          items:
+            $ref: '#/components/schemas/AppPermission'
+    User:
+      type: object
+      required:
+      - id
+      - name
+      - email
+      - risk_rating_trend
+      - app_stats
+      - breach_stats
+      - metadata
+      properties:
+        app_stats:
+          $ref: '#/components/schemas/UserAppStats'
+        breach_stats:
+          $ref: '#/components/schemas/UserIdentityBreachesStats'
+        email:
+          description: The email address of the user.
+          type: string
+          example: john.doe@example.com
+        id:
+          description: The ID of the user.
+          type: string
+          example: e7cfc445-30a6-416c-8a12-0a988f042d08
+        metadata:
+          $ref: '#/components/schemas/UserMetadata'
+        name:
+          description: The full name of the user.
+          type: string
+          example: John Doe
+        risk_rating:
+          description: Risk rating for the user.
+          type: integer
+          format: int64
+          example: 900
+        risk_rating_trend:
+          description: The user risk rating trend for the last 30 days.
+          type: integer
+          format: int64
+          example: 10
+        role:
+          description: The role assigned to the user.
+          type: string
+          example: developer
+        team:
+          description: The team the user belongs to.
+          type: string
+          example: product
+    IdentityBreachUser:
+      type: object
+      required:
+      - id
+      - name
+      - email
+      - status
+      properties:
+        email:
+          description: The email address of the user.
+          type: string
+          example: john.doe@example.com
+        id:
+          description: The unique identifier of the user.
+          type: string
+          example: e7cfc445-30a6-416c-8a12-0a988f042d08
+        name:
+          description: The full name of the user.
+          type: string
+          example: John Doe
+        risk_rating:
+          description: The security risk rating of the user (0-950).
+          type: integer
+          format: int64
+          example: 750
+        role:
+          description: The role assigned to the user.
+          type: string
+          example: developer
+        status:
+          description: The status of the user in relation to the breach.
+          type: string
+          format: string
+          example: current
+        team:
+          description: The team the user belongs to.
+          type: string
+          example: product
     IdentityBreachUsersListResponse:
       type: object
       required:
@@ -2160,6 +1977,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IdentityBreachUser'
+    UserRiskAppsListResponse:
+      type: object
+      required:
+      - apps
+      properties:
+        apps:
+          description: The list of apps.
+          type: array
+          items:
+            $ref: '#/components/schemas/App'
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+          type: string
+          example: acbd18db4cc2f85cedef654fccc4a4d8
+    UserAppStats:
+      type: object
+      required:
+      - total_apps
+      properties:
+        total_apps:
+          description: The total number of applications used by the user.
+          type: integer
+          format: int64
+          example: 10
+    UserMetadata:
+      type: object
+      properties:
+        entra_user_id:
+          description: The Microsoft Entra ID (formerly Azure AD) of the user if any.
+          type: string
+          example: 8fd39fd3-71b2-438e-9709-56fab71ab8d6
     IdentityBreach:
       type: object
       title: IdentityBreach represents a single identity breach in the response.
@@ -2221,20 +2069,172 @@ components:
           description: The title of the breach.
           type: string
           example: Lorem ipsum dolor sit amet
-    UserRiskUseAppsListResponse:
+    UsagePolicyRule:
+      type: object
+      title: UsagePolicyRule describes the teams, roles, and users a custom usage policy rule applies to.
+      required:
+      - team_names
+      - role_names
+      - user_emails
+      properties:
+        role_names:
+          description: The names of the roles the rule applies to.
+          type: array
+          items:
+            type: string
+          example:
+          - developer
+        team_names:
+          description: The names of the teams the rule applies to.
+          type: array
+          items:
+            type: string
+          example:
+          - product
+        user_emails:
+          description: The email addresses of the users the rule applies to.
+          type: array
+          items:
+            type: string
+          example:
+          - jane.doe@example.com
+    IdentityBreachesListResponse:
+      type: object
+      required:
+      - identity_breaches
+      properties:
+        identity_breaches:
+          description: The list of identity breaches.
+          type: array
+          items:
+            $ref: '#/components/schemas/IdentityBreach'
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+          type: string
+          example: acbd18db4cc2f85cedef654fccc4a4d8
+    GetUserRiskPermissionsAppsListResponse:
       type: object
       required:
       - apps
       properties:
         apps:
-          description: The list of apps used by the user.
+          description: The list of apps that were granted the permission.
           type: array
           items:
-            $ref: '#/components/schemas/UserApp'
+            $ref: '#/components/schemas/App'
         next_page_token:
           description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
           type: string
           example: acbd18db4cc2f85cedef654fccc4a4d8
+    ApprovedReplacementApp:
+      type: object
+      required:
+      - name
+      properties:
+        description:
+          description: A description of the replacement application.
+          type: string
+          example: Lorem ipsum dolor sit amet
+        domain:
+          description: The domain associated with the replacement application.
+          type: string
+          example: atlassian.com
+        name:
+          description: The name of the replacement application.
+          type: string
+          example: Jira
+    GetUserRiskPermissionsListResponse:
+      type: object
+      required:
+      - permissions
+      properties:
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+          type: string
+          example: acbd18db4cc2f85cedef654fccc4a4d8
+        permissions:
+          description: The list of permissions.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    UserIdentityBreachesListResponse:
+      type: object
+      title: UserIdentityBreachesListResponse defines the response structure.
+      required:
+      - identity_breaches
+      properties:
+        identity_breaches:
+          description: The list of identity breaches.
+          type: array
+          items:
+            $ref: '#/components/schemas/IdentityBreach'
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+          type: string
+          example: acbd18db4cc2f85cedef654fccc4a4d8
+    GetUserRiskPermissionsUsersListResponse:
+      type: object
+      required:
+      - users
+      properties:
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. Will not be returned if there are no more results.
+          type: string
+          example: acbd18db4cc2f85cedef654fccc4a4d8
+        users:
+          description: The list of users who granted the permission.
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionUser'
+    UserPermission:
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - access_level
+      - app_names
+      properties:
+        access_level:
+          description: The access level granted by the permission.
+          type: string
+          format: string
+          enum:
+          - read_only
+          - read_write
+          example: read_only
+        app_names:
+          description: The list of applications that requested this permission.
+          type: array
+          items:
+            type: string
+          example:
+          - Adobe
+          - Asana
+        category:
+          description: The category of the permission.
+          type: string
+          example: Google User
+        description:
+          description: A description of what the permission allows.
+          type: string
+          example: View your email address
+        exposure_level:
+          description: The risk level associated with the permission.
+          type: string
+          format: string
+          enum:
+          - basic
+          - elevated
+          example: basic
+        id:
+          description: The unique identifier of the permission.
+          type: string
+          example: https://www.googleapis.com/auth/userinfo.email
+        name:
+          description: The name of the permission.
+          type: string
+          example: https://www.googleapis.com/auth/userinfo.email
   securitySchemes:
     API_key_in_header:
       type: apiKey

@@ -55,13 +55,28 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    endpointError:
-      description: Error details coming from an endpoint
+    GetOrganisationV1RespBody:
       type: object
       properties:
-        error:
-          description: A description of the error
+        automatedScore:
+          description: The automated score of the organisation. Omitted if no current scanning score.
+          type: integer
+          format: int64
+        categoryScores:
+          $ref: '#/components/schemas/CategoryScores'
+        id:
+          description: The id of the organisation
+          type: integer
+          format: int64
+          example: 12345678
+        name:
+          description: The name of the organisation
           type: string
+          example: UpGuard
+        primary_hostname:
+          description: The primary hostname of the organisation
+          type: string
+          example: upguard.com
     CategoryScores:
       description: A collection of category scores for a vendor
       type: object
@@ -111,28 +126,13 @@ components:
         websiteSecurity:
           type: integer
           format: int64
-    GetOrganisationV1RespBody:
+    endpointError:
+      description: Error details coming from an endpoint
       type: object
       properties:
-        automatedScore:
-          description: The automated score of the organisation. Omitted if no current scanning score.
-          type: integer
-          format: int64
-        categoryScores:
-          $ref: '#/components/schemas/CategoryScores'
-        id:
-          description: The id of the organisation
-          type: integer
-          format: int64
-          example: 12345678
-        name:
-          description: The name of the organisation
+        error:
+          description: A description of the error
           type: string
-          example: UpGuard
-        primary_hostname:
-          description: The primary hostname of the organisation
-          type: string
-          example: upguard.com
   securitySchemes:
     API_key_in_header:
       type: apiKey

@@ -967,43 +967,274 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    CookieExternalAPIThreatAdditionalAttributes:
+    ThreatComment:
       type: object
       properties:
-        asn:
+        children:
+          description: The thread of replies and additional comments leading from this one
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreatComment'
+        comment_id:
+          description: unique identifier for the comment
           type: integer
           format: int64
-        asn_text:
+        content:
+          description: The body (text) of the comment
           type: string
-        cookie_name:
+        created_at:
+          description: Time when the comment was made
           type: string
-        cookie_value:
+          format: date-time
+          example: '2006-01-02T15:04:05.999999Z'
+        user:
+          $ref: '#/components/schemas/ThreatActor'
+    CloseThreatRemediationRequestV1ResponsePayloadBody:
+      type: object
+      properties:
+        remediation_request_id:
+          description: The ID of the remediation request that was closed
+          type: integer
+          format: int64
+        status:
+          description: The status of the remediation request after closing
           type: string
-        device_account:
+    MonitoredThreatType:
+      description: 'MonitoredThreatType
+
+        Is used to indicate the type of threat that a result represents. This is used to partially categorize the result
+
+        and is derived from the content of the result itself. @see ThreatMonitoringRawResult.DetermineDerivedMeta()'
+      type: string
+    ExposedServiceKeywordExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        attribution_identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExposedServiceAttributionIdentifierExternalAPI'
+        host:
           type: string
-        device_location:
+        port:
+          type: integer
+          format: int64
+        record_name:
           type: string
-        device_name:
+        service_type:
           type: string
-        device_os:
+    LinkedInCompanyProfileExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        company_size:
           type: string
-        device_serial_number:
+        company_size_on_linkedin:
+          type: integer
+          format: int64
+        company_type:
           type: string
-        device_user_agent:
+        description:
           type: string
-        ip:
+        follower_count:
+          type: integer
+          format: int64
+        founded_year:
+          type: integer
+          format: int64
+        headquarters:
+          $ref: '#/components/schemas/LinkedInCompanyProfileHeadquartersExternal'
+        industry:
           type: string
-        malware_path:
+        last_fetched_at:
           type: string
-        malware_ref_url:
+        linkedin_internal_id:
           type: string
-        malware_type:
+        linkedin_profile_url:
           type: string
-        malware_version:
+        name:
           type: string
-        reverse_dns:
+        search_id:
           type: string
-        url:
+        tagline:
+          type: string
+        universal_name_id:
+          type: string
+        website:
+          type: string
+    TiktokProfileExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        biography_link:
+          type: string
+        created_time:
+          type: string
+        digg_count:
+          type: integer
+          format: int64
+        follower_count:
+          type: integer
+          format: int64
+        following_count:
+          type: integer
+          format: int64
+        friend_count:
+          type: integer
+          format: int64
+        full_name:
+          type: string
+        full_name_modify_time:
+          type: string
+        heart_count:
+          type: integer
+          format: int64
+        is_private:
+          type: boolean
+        is_verified:
+          type: boolean
+        langs:
+          type: array
+          items:
+            type: string
+        profile_id:
+          type: string
+        region:
+          type: string
+        signature:
+          type: string
+        username:
+          type: string
+        username_modify_time:
+          type: string
+        video_count:
+          type: integer
+          format: int64
+    MonitoredThreatSourceType:
+      description: 'MonitoredThreatSourceType
+
+        Is used to indicate the type of source from which our data vendor discovered the dark web data.  This is used to partially
+
+        categorize the result and is derived from the content of the result itself. @see ThreatMonitoringRawResult.DetermineDerivedMeta()'
+      type: string
+    FacebookProfileExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        address:
+          type: string
+        biography:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+        created_time:
+          type: string
+        current_city:
+          type: array
+          items:
+            type: string
+        education:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+        external_url:
+          type: string
+        followers_count:
+          type: integer
+          format: int64
+        following_count:
+          type: integer
+          format: int64
+        friends_count:
+          type: integer
+          format: int64
+        gender:
+          type: string
+        hometown:
+          type: array
+          items:
+            type: string
+        is_owned:
+          type: boolean
+        is_verified:
+          type: boolean
+        langs:
+          type: array
+          items:
+            type: string
+        last_post_created_time:
+          type: string
+        likes_count:
+          type: integer
+          format: int64
+        members_count:
+          type: integer
+          format: int64
+        phone:
+          type: string
+        profile_id:
+          type: string
+        profile_name:
+          type: string
+        profile_type:
+          type: string
+        social_media_urls:
+          type: array
+          items:
+            type: string
+        username:
+          type: string
+        workplace:
+          type: array
+          items:
+            type: string
+    DiscordExternalAPIAddAttributes:
+      type: object
+      properties:
+        author:
+          type: string
+        channel:
+          type: string
+        language:
+          type: string
+        parsed_thread:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalAPIThreadEntry'
+        participants:
+          type: array
+          items:
+            type: string
+        server:
+          type: string
+    DataLeakTag:
+      type: string
+    MCPRegistryExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+        published_at:
+          type: string
+        repository_url:
+          type: string
+        server_name:
+          type: string
+        version:
+          type: string
+        website_url:
+          type: string
+    ThreatActor:
+      description: an actor for a threat finding (multiple contexts)
+      type: object
+      properties:
+        email:
+          description: the email address of the actor
+          type: string
+        name:
+          description: The full name of the actor
           type: string
     ThreatMonitoringResultSummary:
       description: a threat finding
@@ -1106,6 +1337,41 @@ components:
           description: The unique identifier for the finding
           type: string
           format: uuid
+    CloseThreatV1ResponsePayloadBody:
+      type: object
+      properties:
+        reason:
+          description: The reason the threat was closed
+          type: string
+        status:
+          description: The status of the threat after closing
+          type: string
+        uuid:
+          description: The UUID of the threat that was closed
+          type: string
+    LinkedInCompanyProfileHeadquartersExternal:
+      type: object
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        line1:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+    OpenWebExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        resource_content_length:
+          type: integer
+          format: int64
+        resource_content_type:
+          type: string
+        resource_title:
+          type: string
     ExternalAPIThreatAdditionalAttributes:
       type: object
       properties:
@@ -1153,6 +1419,344 @@ components:
           $ref: '#/components/schemas/TwitterPostExternalAPIThreatAdditionalAttributes'
         twitter_profile:
           $ref: '#/components/schemas/TwitterProfileExternalAPIThreatAdditionalAttributes'
+    PostExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        author:
+          type: string
+        language:
+          type: string
+        network_type:
+          type: string
+        post_replies:
+          type: integer
+          format: int64
+        post_title:
+          type: string
+        site_name:
+          type: string
+        thread_participants:
+          type: integer
+          format: int64
+        type:
+          type: string
+    ThreatLabel:
+      type: object
+      properties:
+        name:
+          type: string
+    TelegramExternalAPIAddAttributes:
+      type: object
+      properties:
+        author:
+          type: string
+        language:
+          type: string
+        name:
+          type: string
+        parsed_thread:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalAPIThreadEntry'
+        participants:
+          type: array
+          items:
+            type: string
+    StealerLogsExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        asn:
+          type: integer
+          format: int64
+        asn_text:
+          type: string
+        autocompletes:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenericStealerLogExternalAPIThreatAdditionalAttributes'
+        cookies:
+          type: array
+          items:
+            $ref: '#/components/schemas/CookieExternalAPIThreatAdditionalAttributes'
+        device_account:
+          type: string
+        device_location:
+          type: string
+        device_name:
+          type: string
+        device_os:
+          type: string
+        device_serial_number:
+          type: string
+        device_user_agent:
+          type: string
+        histories:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenericStealerLogExternalAPIThreatAdditionalAttributes'
+        ip:
+          type: string
+        malware_path:
+          type: string
+        malware_ref_url:
+          type: string
+        malware_type:
+          type: string
+        malware_version:
+          type: string
+        passwords:
+          type: array
+          items:
+            $ref: '#/components/schemas/PasswordExternalAPIThreatAdditionalAttributes'
+        reverse_dns:
+          type: string
+    TwitterPostExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        author_id:
+          type: string
+        author_username:
+          type: string
+        favorite_count:
+          type: integer
+          format: int64
+        in_reply_to_post_id:
+          type: string
+        in_reply_to_profile_id:
+          type: string
+        in_reply_to_profile_username:
+          type: string
+        post_id:
+          type: string
+        post_type:
+          type: string
+        quote_count:
+          type: integer
+          format: int64
+        reply_count:
+          type: integer
+          format: int64
+        retweet_count:
+          type: integer
+          format: int64
+        text:
+          type: string
+        text_lang:
+          type: string
+        text_tagged_users:
+          type: array
+          items:
+            type: string
+        text_tags:
+          type: array
+          items:
+            type: string
+        timestamp:
+          type: integer
+          format: int64
+        view_count:
+          type: integer
+          format: int64
+    LinkedInUserProfileExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        city:
+          type: string
+        connections_count:
+          type: integer
+          format: int64
+        country:
+          type: string
+        country_full_name:
+          type: string
+        facebook_profile_id:
+          type: string
+        first_name:
+          type: string
+        follower_count:
+          type: integer
+          format: int64
+        full_name:
+          type: string
+        github_profile_id:
+          type: string
+        headline:
+          type: string
+        last_fetched_at:
+          type: string
+        last_name:
+          type: string
+        linkedin_profile_url:
+          type: string
+        location_str:
+          type: string
+        occupation:
+          type: string
+        personal_emails:
+          type: array
+          items:
+            type: string
+        personal_phone_numbers:
+          type: array
+          items:
+            type: string
+        public_identifier:
+          type: string
+        state:
+          type: string
+        summary:
+          type: string
+        twitter_profile_id:
+          type: string
+        website:
+          type: string
+    GetThreatDetailsResponsePayloadBody:
+      type: object
+      properties:
+        threat_details:
+          $ref: '#/components/schemas/ThreatMonitoringResultDetailed'
+    CreateThreatRemediationRequestV1RequestBody:
+      description: CreateThreatRemediationRequestV1RequestBody represents the request body for creating a remediation request
+      type: object
+      properties:
+        email_message:
+          description: Optional email message to include when inviting the user. Must not exceed 4000 characters.
+          type: string
+          example: Please review and remediate this threat
+    ExposedServiceAttributionIdentifierExternalAPI:
+      type: object
+      properties:
+        data_type:
+          type: string
+        data_value:
+          type: string
+    RedditPostExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        author_id:
+          type: string
+        author_is_blocked:
+          type: boolean
+        author_username:
+          type: string
+        comments_count:
+          type: integer
+          format: int64
+        created_time:
+          type: string
+        is_gallery:
+          type: boolean
+        is_original_content:
+          type: boolean
+        is_video:
+          type: boolean
+        post_id:
+          type: string
+        post_url:
+          type: string
+        score:
+          type: integer
+          format: int64
+        subreddit:
+          type: string
+        subreddit_id:
+          type: string
+        subreddit_subscribers:
+          type: integer
+          format: int64
+        subreddit_type:
+          type: string
+        text:
+          type: string
+        timestamp:
+          type: string
+        title:
+          type: string
+        total_awards_received:
+          type: integer
+          format: int64
+        upvote_ratio:
+          type: number
+          format: double
+        whitelist_status:
+          type: integer
+          format: int64
+    ThreatMonitoringResultStatus:
+      type: string
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
+    ReopenThreatV1ResponsePayloadBody:
+      type: object
+      title: ReopenThreatV1ResponsePayloadBody is the response body for a reopened threat.
+      properties:
+        status:
+          description: The status of the threat after reopening
+          type: string
+        uuid:
+          description: The UUID of the threat that was reopened
+          type: string
+    InstagramProfileExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        age_group:
+          type: string
+        biography:
+          type: string
+        business_category:
+          type: array
+          items:
+            type: string
+        external_url:
+          type: string
+        followers_count:
+          type: integer
+          format: int64
+        followings_count:
+          type: integer
+          format: int64
+        full_name:
+          type: string
+        gender:
+          type: string
+        highlight_reels_count:
+          type: integer
+          format: int64
+        is_business_account:
+          type: boolean
+        is_joined_recently:
+          type: boolean
+        is_private:
+          type: boolean
+        is_verified:
+          type: boolean
+        langs:
+          type: array
+          items:
+            type: string
+        last_update:
+          type: string
+        latest_location_id:
+          type: string
+        posts_count:
+          type: integer
+          format: int64
+        profile_id:
+          type: string
+        public_email:
+          type: string
+        public_phone_country_code:
+          type: string
+        public_phone_number:
+          type: string
+        username:
+          type: string
+    ThreatOutcome:
+      type: string
     FacebookPostExternalAPIThreatAdditionalAttributes:
       type: object
       properties:
@@ -1230,326 +1834,41 @@ components:
             type: string
         timestamp:
           type: string
-    ThreatLabel:
+    MaskedPassword:
+      type: object
+      title: MaskedPassword is a struct that represents a masked password.
+      properties:
+        len:
+          type: integer
+          format: int64
+        suffix:
+          type: string
+    ChatExternalAPIThreatAdditionalAttributes:
       type: object
       properties:
-        name:
-          type: string
-    CreateThreatRemediationRequestV1RequestBody:
-      description: CreateThreatRemediationRequestV1RequestBody represents the request body for creating a remediation request
-      type: object
-      properties:
-        email_message:
-          description: Optional email message to include when inviting the user. Must not exceed 4000 characters.
-          type: string
-          example: Please review and remediate this threat
-    FacebookProfileExternalAPIThreatAdditionalAttributes:
-      type: object
-      properties:
-        address:
-          type: string
-        biography:
-          type: string
-        categories:
-          type: array
-          items:
-            type: string
-        created_time:
-          type: string
-        current_city:
-          type: array
-          items:
-            type: string
-        education:
-          type: array
-          items:
-            type: string
-        email:
-          type: string
-        external_url:
-          type: string
-        followers_count:
-          type: integer
-          format: int64
-        following_count:
-          type: integer
-          format: int64
-        friends_count:
-          type: integer
-          format: int64
-        gender:
-          type: string
-        hometown:
-          type: array
-          items:
-            type: string
-        is_owned:
-          type: boolean
-        is_verified:
-          type: boolean
-        langs:
-          type: array
-          items:
-            type: string
-        last_post_created_time:
-          type: string
-        likes_count:
-          type: integer
-          format: int64
-        members_count:
-          type: integer
-          format: int64
-        phone:
-          type: string
-        profile_id:
-          type: string
-        profile_name:
-          type: string
-        profile_type:
-          type: string
-        social_media_urls:
-          type: array
-          items:
-            type: string
-        username:
-          type: string
-        workplace:
-          type: array
-          items:
-            type: string
-    DiscordExternalAPIAddAttributes:
-      type: object
-      properties:
-        author:
-          type: string
-        channel:
-          type: string
-        language:
-          type: string
-        parsed_thread:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalAPIThreadEntry'
-        participants:
-          type: array
-          items:
-            type: string
-        server:
-          type: string
-    PasswordExternalAPIThreatAdditionalAttributes:
-      type: object
-      properties:
-        asn:
-          type: integer
-          format: int64
-        asn_text:
-          type: string
-        device_account:
-          type: string
-        device_location:
-          type: string
-        device_name:
-          type: string
-        device_os:
-          type: string
-        device_serial_number:
-          type: string
-        device_user_agent:
-          type: string
-        ip:
-          type: string
-        malware_path:
-          type: string
-        malware_ref_url:
-          type: string
-        malware_type:
-          type: string
-        malware_version:
-          type: string
-        password:
-          type: string
-        reverse_dns:
-          type: string
-        url:
-          type: string
-        username:
-          type: string
-    GetThreatDetailsResponsePayloadBody:
-      type: object
-      properties:
-        threat_details:
-          $ref: '#/components/schemas/ThreatMonitoringResultDetailed'
-    DataLeakTag:
-      type: string
-    LinkedInUserProfileExternalAPIThreatAdditionalAttributes:
-      type: object
-      properties:
-        city:
-          type: string
-        connections_count:
-          type: integer
-          format: int64
-        country:
-          type: string
-        country_full_name:
-          type: string
-        facebook_profile_id:
-          type: string
-        first_name:
-          type: string
-        follower_count:
-          type: integer
-          format: int64
-        full_name:
-          type: string
-        github_profile_id:
-          type: string
-        headline:
-          type: string
-        last_fetched_at:
-          type: string
-        last_name:
-          type: string
-        linkedin_profile_url:
-          type: string
-        location_str:
-          type: string
-        occupation:
-          type: string
-        personal_emails:
-          type: array
-          items:
-            type: string
-        personal_phone_numbers:
-          type: array
-          items:
-            type: string
-        public_identifier:
-          type: string
-        state:
-          type: string
-        summary:
-          type: string
-        twitter_profile_id:
-          type: string
-        website:
-          type: string
-    ExternalAPIThreadEntry:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date-time
-        text:
-          type: string
-        user:
-          type: string
-    ThreatActor:
-      description: an actor for a threat finding (multiple contexts)
-      type: object
-      properties:
-        email:
-          description: the email address of the actor
-          type: string
-        name:
-          description: The full name of the actor
-          type: string
-    TwitterPostExternalAPIThreatAdditionalAttributes:
-      type: object
-      properties:
-        author_id:
-          type: string
-        author_username:
-          type: string
-        favorite_count:
-          type: integer
-          format: int64
-        in_reply_to_post_id:
-          type: string
-        in_reply_to_profile_id:
-          type: string
-        in_reply_to_profile_username:
-          type: string
-        post_id:
-          type: string
-        post_type:
-          type: string
-        quote_count:
-          type: integer
-          format: int64
-        reply_count:
-          type: integer
-          format: int64
-        retweet_count:
-          type: integer
-          format: int64
-        text:
-          type: string
-        text_lang:
-          type: string
-        text_tagged_users:
-          type: array
-          items:
-            type: string
-        text_tags:
-          type: array
-          items:
-            type: string
-        timestamp:
-          type: integer
-          format: int64
-        view_count:
-          type: integer
-          format: int64
-    MonitoredThreatSourceType:
-      description: 'MonitoredThreatSourceType
-
-        Is used to indicate the type of source from which our data vendor discovered the dark web data.  This is used to partially
-
-        categorize the result and is derived from the content of the result itself. @see ThreatMonitoringRawResult.DetermineDerivedMeta()'
-      type: string
+        discord:
+          $ref: '#/components/schemas/DiscordExternalAPIAddAttributes'
+        telegram_channel:
+          $ref: '#/components/schemas/TelegramExternalAPIAddAttributes'
+        telegram_group:
+          $ref: '#/components/schemas/TelegramExternalAPIAddAttributes'
     MonitoredThreatModule:
       description: 'MonitoredThreatModule
 
         Is used to indicate the threat monitoring module for which the data has been collected'
       type: string
-    LinkedInCompanyProfileExternalAPIThreatAdditionalAttributes:
+    CreateThreatRemediationRequestV1ResponsePayloadBody:
       type: object
       properties:
-        company_size:
-          type: string
-        company_size_on_linkedin:
+        remediation_request_id:
+          description: The ID of the created remediation request
           type: integer
           format: int64
-        company_type:
+        status:
+          description: The status of the threat after being placed into remediation
           type: string
-        description:
-          type: string
-        follower_count:
-          type: integer
-          format: int64
-        founded_year:
-          type: integer
-          format: int64
-        headquarters:
-          $ref: '#/components/schemas/LinkedInCompanyProfileHeadquartersExternal'
-        industry:
-          type: string
-        last_fetched_at:
-          type: string
-        linkedin_internal_id:
-          type: string
-        linkedin_profile_url:
-          type: string
-        name:
-          type: string
-        search_id:
-          type: string
-        tagline:
-          type: string
-        universal_name_id:
-          type: string
-        website:
+        threat_uuid:
+          description: The UUID of the threat that was placed into remediation
           type: string
     TwitterProfileExternalAPIThreatAdditionalAttributes:
       type: object
@@ -1588,75 +1907,6 @@ components:
           format: int64
         username:
           type: string
-    StealerLogsExternalAPIThreatAdditionalAttributes:
-      type: object
-      properties:
-        asn:
-          type: integer
-          format: int64
-        asn_text:
-          type: string
-        autocompletes:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenericStealerLogExternalAPIThreatAdditionalAttributes'
-        cookies:
-          type: array
-          items:
-            $ref: '#/components/schemas/CookieExternalAPIThreatAdditionalAttributes'
-        device_account:
-          type: string
-        device_location:
-          type: string
-        device_name:
-          type: string
-        device_os:
-          type: string
-        device_serial_number:
-          type: string
-        device_user_agent:
-          type: string
-        histories:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenericStealerLogExternalAPIThreatAdditionalAttributes'
-        ip:
-          type: string
-        malware_path:
-          type: string
-        malware_ref_url:
-          type: string
-        malware_type:
-          type: string
-        malware_version:
-          type: string
-        passwords:
-          type: array
-          items:
-            $ref: '#/components/schemas/PasswordExternalAPIThreatAdditionalAttributes'
-        reverse_dns:
-          type: string
-    PostExternalAPIThreatAdditionalAttributes:
-      type: object
-      properties:
-        author:
-          type: string
-        language:
-          type: string
-        network_type:
-          type: string
-        post_replies:
-          type: integer
-          format: int64
-        post_title:
-          type: string
-        site_name:
-          type: string
-        thread_participants:
-          type: integer
-          format: int64
-        type:
-          type: string
     DataLeakExternalAPIThreatAdditionalAttributes:
       type: object
       properties:
@@ -1683,77 +1933,77 @@ components:
           $ref: '#/components/schemas/MaskedPassword'
         website:
           type: string
-    ExposedServiceKeywordExternalAPIThreatAdditionalAttributes:
+    CookieExternalAPIThreatAdditionalAttributes:
       type: object
       properties:
-        attribution_identifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExposedServiceAttributionIdentifierExternalAPI'
-        host:
-          type: string
-        port:
+        asn:
           type: integer
           format: int64
-        record_name:
+        asn_text:
           type: string
-        service_type:
+        cookie_name:
           type: string
-    InstagramProfileExternalAPIThreatAdditionalAttributes:
+        cookie_value:
+          type: string
+        device_account:
+          type: string
+        device_location:
+          type: string
+        device_name:
+          type: string
+        device_os:
+          type: string
+        device_serial_number:
+          type: string
+        device_user_agent:
+          type: string
+        ip:
+          type: string
+        malware_path:
+          type: string
+        malware_ref_url:
+          type: string
+        malware_type:
+          type: string
+        malware_version:
+          type: string
+        reverse_dns:
+          type: string
+        url:
+          type: string
+    GenericStealerLogExternalAPIThreatAdditionalAttributes:
       type: object
       properties:
-        age_group:
+        name:
           type: string
-        biography:
+        url:
           type: string
-        business_category:
-          type: array
-          items:
-            type: string
-        external_url:
+        value:
           type: string
-        followers_count:
+    GithubExternalAPIThreatAdditionalAttributes:
+      type: object
+      properties:
+        branch:
+          type: string
+        commit:
+          type: string
+        committer_email:
+          type: string
+        owner:
+          type: string
+        repository:
+          type: string
+        tag:
+          type: string
+        target_file:
+          type: string
+    GetThreatMonitoringResultsCountResponsePayloadBody:
+      type: object
+      properties:
+        total_results:
+          description: The total number of threats matching the filter
           type: integer
           format: int64
-        followings_count:
-          type: integer
-          format: int64
-        full_name:
-          type: string
-        gender:
-          type: string
-        highlight_reels_count:
-          type: integer
-          format: int64
-        is_business_account:
-          type: boolean
-        is_joined_recently:
-          type: boolean
-        is_private:
-          type: boolean
-        is_verified:
-          type: boolean
-        langs:
-          type: array
-          items:
-            type: string
-        last_update:
-          type: string
-        latest_location_id:
-          type: string
-        posts_count:
-          type: integer
-          format: int64
-        profile_id:
-          type: string
-        public_email:
-          type: string
-        public_phone_country_code:
-          type: string
-        public_phone_number:
-          type: string
-        username:
-          type: string
     InstagramPostExternalAPIThreatAdditionalAttributes:
       type: object
       properties:
@@ -1817,36 +2067,32 @@ components:
         video_views_count:
           type: integer
           format: int64
-    GetThreatMonitoringResultsCountResponsePayloadBody:
+    ExternalAPIThreadEntry:
       type: object
       properties:
-        total_results:
-          description: The total number of threats matching the filter
-          type: integer
-          format: int64
-    AssignThreatInvestigatorV1ResponsePayloadBody:
+        date:
+          type: string
+          format: date-time
+        text:
+          type: string
+        user:
+          type: string
+    GetThreatMonitoringResultsResponsePayloadBody:
       type: object
       properties:
-        investigator:
-          $ref: '#/components/schemas/ThreatActor'
-        status:
-          description: The status of the threat after assignment
+        next_page_token:
           type: string
-        uuid:
-          description: The UUID of the threat that was assigned an investigator
-          type: string
-    CreateThreatRemediationRequestV1ResponsePayloadBody:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreatMonitoringResultSummary'
+    AddThreatCommentV1RequestBody:
       type: object
+      required:
+      - content
       properties:
-        remediation_request_id:
-          description: The ID of the created remediation request
-          type: integer
-          format: int64
-        status:
-          description: The status of the threat after being placed into remediation
-          type: string
-        threat_uuid:
-          description: The UUID of the threat that was placed into remediation
+        content:
+          description: The content of the comment. Must not be empty and must not exceed 4000 characters.
           type: string
     ThreatMonitoringResultDetailed:
       type: object
@@ -1966,226 +2212,54 @@ components:
           description: The unique identifier for the finding
           type: string
           format: uuid
-    ThreatOutcome:
-      type: string
-    ExposedServiceAttributionIdentifierExternalAPI:
+    PasswordExternalAPIThreatAdditionalAttributes:
       type: object
       properties:
-        data_type:
-          type: string
-        data_value:
-          type: string
-    ChatExternalAPIThreatAdditionalAttributes:
-      type: object
-      properties:
-        discord:
-          $ref: '#/components/schemas/DiscordExternalAPIAddAttributes'
-        telegram_channel:
-          $ref: '#/components/schemas/TelegramExternalAPIAddAttributes'
-        telegram_group:
-          $ref: '#/components/schemas/TelegramExternalAPIAddAttributes'
-    OpenWebExternalAPIThreatAdditionalAttributes:
-      type: object
-      properties:
-        resource_content_length:
+        asn:
           type: integer
           format: int64
-        resource_content_type:
+        asn_text:
           type: string
-        resource_title:
+        device_account:
           type: string
-    LinkedInCompanyProfileHeadquartersExternal:
-      type: object
-      properties:
-        city:
+        device_location:
           type: string
-        country:
+        device_name:
           type: string
-        line1:
+        device_os:
           type: string
-        postal_code:
+        device_serial_number:
           type: string
-        state:
+        device_user_agent:
           type: string
-    AddThreatCommentV1RequestBody:
-      type: object
-      required:
-      - content
-      properties:
-        content:
-          description: The content of the comment. Must not be empty and must not exceed 4000 characters.
+        ip:
           type: string
-    TelegramExternalAPIAddAttributes:
-      type: object
-      properties:
-        author:
+        malware_path:
           type: string
-        language:
+        malware_ref_url:
           type: string
-        name:
+        malware_type:
           type: string
-        parsed_thread:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalAPIThreadEntry'
-        participants:
-          type: array
-          items:
-            type: string
-    ThreatMonitoringResultStatus:
-      type: string
-    GenericStealerLogExternalAPIThreatAdditionalAttributes:
-      type: object
-      properties:
-        name:
+        malware_version:
+          type: string
+        password:
+          type: string
+        reverse_dns:
           type: string
         url:
           type: string
-        value:
+        username:
           type: string
-    MCPRegistryExternalAPIThreatAdditionalAttributes:
+    AssignThreatInvestigatorV1ResponsePayloadBody:
       type: object
       properties:
-        packages:
-          type: array
-          items:
-            type: string
-        published_at:
-          type: string
-        repository_url:
-          type: string
-        server_name:
-          type: string
-        version:
-          type: string
-        website_url:
-          type: string
-    CloseThreatV1ResponsePayloadBody:
-      type: object
-      properties:
-        reason:
-          description: The reason the threat was closed
-          type: string
+        investigator:
+          $ref: '#/components/schemas/ThreatActor'
         status:
-          description: The status of the threat after closing
+          description: The status of the threat after assignment
           type: string
         uuid:
-          description: The UUID of the threat that was closed
-          type: string
-    GetThreatMonitoringResultsResponsePayloadBody:
-      type: object
-      properties:
-        next_page_token:
-          type: string
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ThreatMonitoringResultSummary'
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
-    ThreatComment:
-      type: object
-      properties:
-        children:
-          description: The thread of replies and additional comments leading from this one
-          type: array
-          items:
-            $ref: '#/components/schemas/ThreatComment'
-        comment_id:
-          description: unique identifier for the comment
-          type: integer
-          format: int64
-        content:
-          description: The body (text) of the comment
-          type: string
-        created_at:
-          description: Time when the comment was made
-          type: string
-          format: date-time
-          example: '2006-01-02T15:04:05.999999Z'
-        user:
-          $ref: '#/components/schemas/ThreatActor'
-    MaskedPassword:
-      type: object
-      title: MaskedPassword is a struct that represents a masked password.
-      properties:
-        len:
-          type: integer
-          format: int64
-        suffix:
-          type: string
-    RedditPostExternalAPIThreatAdditionalAttributes:
-      type: object
-      properties:
-        author_id:
-          type: string
-        author_is_blocked:
-          type: boolean
-        author_username:
-          type: string
-        comments_count:
-          type: integer
-          format: int64
-        created_time:
-          type: string
-        is_gallery:
-          type: boolean
-        is_original_content:
-          type: boolean
-        is_video:
-          type: boolean
-        post_id:
-          type: string
-        post_url:
-          type: string
-        score:
-          type: integer
-          format: int64
-        subreddit:
-          type: string
-        subreddit_id:
-          type: string
-        subreddit_subscribers:
-          type: integer
-          format: int64
-        subreddit_type:
-          type: string
-        text:
-          type: string
-        timestamp:
-          type: string
-        title:
-          type: string
-        total_awards_received:
-          type: integer
-          format: int64
-        upvote_ratio:
-          type: number
-          format: double
-        whitelist_status:
-          type: integer
-          format: int64
-    GithubExternalAPIThreatAdditionalAttributes:
-      type: object
-      properties:
-        branch:
-          type: string
-        commit:
-          type: string
-        committer_email:
-          type: string
-        owner:
-          type: string
-        repository:
-          type: string
-        tag:
-          type: string
-        target_file:
+          description: The UUID of the threat that was assigned an investigator
           type: string
     ExposedServiceIdentifierExternalAPIThreatAdditionalAttributes:
       type: object
@@ -2203,80 +2277,6 @@ components:
           format: int64
         service_type:
           type: string
-    TiktokProfileExternalAPIThreatAdditionalAttributes:
-      type: object
-      properties:
-        biography_link:
-          type: string
-        created_time:
-          type: string
-        digg_count:
-          type: integer
-          format: int64
-        follower_count:
-          type: integer
-          format: int64
-        following_count:
-          type: integer
-          format: int64
-        friend_count:
-          type: integer
-          format: int64
-        full_name:
-          type: string
-        full_name_modify_time:
-          type: string
-        heart_count:
-          type: integer
-          format: int64
-        is_private:
-          type: boolean
-        is_verified:
-          type: boolean
-        langs:
-          type: array
-          items:
-            type: string
-        profile_id:
-          type: string
-        region:
-          type: string
-        signature:
-          type: string
-        username:
-          type: string
-        username_modify_time:
-          type: string
-        video_count:
-          type: integer
-          format: int64
-    CloseThreatRemediationRequestV1ResponsePayloadBody:
-      type: object
-      properties:
-        remediation_request_id:
-          description: The ID of the remediation request that was closed
-          type: integer
-          format: int64
-        status:
-          description: The status of the remediation request after closing
-          type: string
-    ReopenThreatV1ResponsePayloadBody:
-      type: object
-      title: ReopenThreatV1ResponsePayloadBody is the response body for a reopened threat.
-      properties:
-        status:
-          description: The status of the threat after reopening
-          type: string
-        uuid:
-          description: The UUID of the threat that was reopened
-          type: string
-    MonitoredThreatType:
-      description: 'MonitoredThreatType
-
-        Is used to indicate the type of threat that a result represents. This is used to partially categorize the result
-
-        and is derived from the content of the result itself. @see ThreatMonitoringRawResult.DetermineDerivedMeta()'
-      type: string
   securitySchemes:
     API_key_in_header:
       type: apiKey

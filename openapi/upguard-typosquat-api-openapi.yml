@@ -99,24 +99,6 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    TyposquatDNSBlocklist:
-      type: object
-      properties:
-        activity:
-          description: The suspected malicious activity associated with the DNS blocklist
-          type: string
-        name:
-          description: The name of the DNS blocklist
-          type: string
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
-    PermutationType:
-      type: string
     TyposquatPermutationDetail:
       type: object
       properties:
@@ -161,6 +143,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TyposquatDomain'
+    TyposquatDNSBlocklist:
+      type: object
+      properties:
+        activity:
+          description: The suspected malicious activity associated with the DNS blocklist
+          type: string
+        name:
+          description: The name of the DNS blocklist
+          type: string
     TyposquatDomain:
       type: object
       properties:
@@ -216,6 +207,15 @@ components:
             $ref: '#/components/schemas/TyposquatDNSBlocklist'
         hostname:
           description: The hostname associated with the permutation
+          type: string
+    PermutationType:
+      type: string
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
           type: string
   securitySchemes:
     API_key_in_header:

@@ -81,6 +81,13 @@ components:
           description: The type of the notification.
           type: string
           example: RiskAssessmentPublished
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
     GetNotificationsV1ResponsePayloadBody:
       type: object
       properties:
@@ -92,13 +99,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Notification'
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
   securitySchemes:
     API_key_in_header:
       type: apiKey

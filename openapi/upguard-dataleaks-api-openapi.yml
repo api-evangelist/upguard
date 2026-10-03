@@ -158,13 +158,13 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    endpointError:
-      description: Error details coming from an endpoint
+    DataLeaksDisclosuresResponsePayloadBody:
       type: object
       properties:
-        error:
-          description: A description of the error
-          type: string
+        disclosures:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataLeaksDisclosure'
     DataLeaksDisclosure:
       type: object
       properties:
@@ -215,13 +215,13 @@ components:
           description: The URL to the finding
           type: string
           example: http://wordpresssite.com/wp_config.bak
-    DataLeaksDisclosuresResponsePayloadBody:
+    endpointError:
+      description: Error details coming from an endpoint
       type: object
       properties:
-        disclosures:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataLeaksDisclosure'
+        error:
+          description: A description of the error
+          type: string
   securitySchemes:
     API_key_in_header:
       type: apiKey

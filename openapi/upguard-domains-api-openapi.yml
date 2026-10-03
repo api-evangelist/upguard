@@ -318,22 +318,6 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    Property:
-      type: object
-      properties:
-        property:
-          description: The name of the property
-          type: string
-        value:
-          description: The value of the property
-          type: string
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
     Domain:
       type: object
       properties:
@@ -359,6 +343,10 @@ components:
           description: The time the domain was scanned. If the domain is inactive or hasn't been scanned yet this field will be absent
           type: string
           format: date-time
+    Category:
+      description: Category values cannot be changed after first use, as they're referenced in storage.
+      type: string
+      title: Category values represent risk categories.
     CheckResult:
       type: object
       properties:
@@ -417,10 +405,6 @@ components:
         title:
           description: The title of the check
           type: string
-    Category:
-      description: Category values cannot be changed after first use, as they're referenced in storage.
-      type: string
-      title: Category values represent risk categories.
     GetDomainDetailsV1RespBody:
       type: object
       properties:
@@ -455,6 +439,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CheckResult'
+    Property:
+      type: object
+      properties:
+        property:
+          description: The name of the property
+          type: string
+        value:
+          description: The value of the property
+          type: string
     GetDomainsV1RespBody:
       type: object
       properties:
@@ -475,6 +468,13 @@ components:
     Severity:
       type: integer
       format: int64
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
   securitySchemes:
     API_key_in_header:
       type: apiKey

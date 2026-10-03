@@ -281,34 +281,6 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    BreachComment:
-      type: object
-      properties:
-        comment:
-          description: The text of the comment
-          type: string
-          example: My comment text
-        created_at:
-          description: The time the comment was added
-          type: string
-          format: date-time
-          example: '2019-11-09T03:48:57Z'
-        created_by_email:
-          description: The email address of the user who added the comment
-          type: string
-          example: viggo@example.com
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
-    AddVIPRespBody:
-      type: object
-      properties:
-        vip:
-          $ref: '#/components/schemas/VIP'
     IdentityBreachResponsePayloadBody:
       type: object
       properties:
@@ -319,6 +291,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BreachComment'
+    AddVIPRespBody:
+      type: object
+      properties:
+        vip:
+          $ref: '#/components/schemas/VIP'
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
     GetVIPListRespBody:
       type: object
       properties:
@@ -336,28 +320,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VIP'
-    BreachedIdentitiesResponsePayloadBody:
+    BreachComment:
       type: object
       properties:
-        breached_identities:
-          description: The list of breached identities
-          type: array
-          items:
-            $ref: '#/components/schemas/BreachedIdentity'
-        breaches:
-          description: The list of breaches
-          type: array
-          items:
-            $ref: '#/components/schemas/Breach'
-        next_page_token:
-          description: 'The token to be used to retrieve the next page of results.
-
-            Will not be returned if there are no more results.'
+        comment:
+          description: The text of the comment
           type: string
-        total_results:
-          description: The total number of breached identities found.
-          type: integer
-          format: int64
+          example: My comment text
+        created_at:
+          description: The time the comment was added
+          type: string
+          format: date-time
+          example: '2019-11-09T03:48:57Z'
+        created_by_email:
+          description: The email address of the user who added the comment
+          type: string
+          example: viggo@example.com
     VIP:
       type: object
       properties:
@@ -387,53 +365,28 @@ components:
         severity:
           description: The highest severity of the breaches the VIP appears in. Will be one of "Critical", "High", "Medium", or "Low".
           type: string
-    BreachedIdentity:
+    BreachedIdentitiesResponsePayloadBody:
       type: object
       properties:
-        breach_ids:
-          description: The IDs of the breaches the identity is associated with
+        breached_identities:
+          description: The list of breached identities
           type: array
           items:
-            type: integer
-            format: int64
-          example:
-          - 42
-          - 89
-        domain:
-          description: The breached identity domain
+            $ref: '#/components/schemas/BreachedIdentity'
+        breaches:
+          description: The list of breaches
+          type: array
+          items:
+            $ref: '#/components/schemas/Breach'
+        next_page_token:
+          description: 'The token to be used to retrieve the next page of results.
+
+            Will not be returned if there are no more results.'
           type: string
-          example: example.com
-        id:
-          description: The internal id of the identity
+        total_results:
+          description: The total number of breached identities found.
           type: integer
           format: int64
-          example: 101
-        ignored:
-          description: Flag indicating if the identity has been ignored
-          type: boolean
-          example: false
-        last_breach_date:
-          description: The date of the most recent breach (RFC 3339 format)
-          type: string
-          format: date-time
-          example: '2019-11-09T03:48:57Z'
-        name:
-          description: The breached identity name
-          type: string
-          example: jane.smith
-        num_breaches:
-          description: The total number of breaches the identity has been in
-          type: integer
-          format: int64
-          example: 42
-        severity:
-          description: The highest severity of the breaches the identity appears in. Will be one of "Critical", "High", "Medium", or "Low".
-          type: string
-          example: High
-        vip:
-          description: Flag indicating if the identity is a VIP
-          type: boolean
-          example: false
     Breach:
       type: object
       properties:
@@ -510,6 +463,53 @@ components:
           type: integer
           format: int64
           example: 9673824
+    BreachedIdentity:
+      type: object
+      properties:
+        breach_ids:
+          description: The IDs of the breaches the identity is associated with
+          type: array
+          items:
+            type: integer
+            format: int64
+          example:
+          - 42
+          - 89
+        domain:
+          description: The breached identity domain
+          type: string
+          example: example.com
+        id:
+          description: The internal id of the identity
+          type: integer
+          format: int64
+          example: 101
+        ignored:
+          description: Flag indicating if the identity has been ignored
+          type: boolean
+          example: false
+        last_breach_date:
+          description: The date of the most recent breach (RFC 3339 format)
+          type: string
+          format: date-time
+          example: '2019-11-09T03:48:57Z'
+        name:
+          description: The breached identity name
+          type: string
+          example: jane.smith
+        num_breaches:
+          description: The total number of breaches the identity has been in
+          type: integer
+          format: int64
+          example: 42
+        severity:
+          description: The highest severity of the breaches the identity appears in. Will be one of "Critical", "High", "Medium", or "Low".
+          type: string
+          example: High
+        vip:
+          description: Flag indicating if the identity is a VIP
+          type: boolean
+          example: false
   securitySchemes:
     API_key_in_header:
       type: apiKey

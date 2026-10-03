@@ -278,30 +278,6 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    CustomReportData:
-      type: object
-      properties:
-        name:
-          type: string
-        uuid:
-          type: string
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
-    CustomReportsListResponsePayloadBody:
-      type: object
-      required:
-      - custom_reports
-      properties:
-        custom_reports:
-          description: List of custom reports defined for the account
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomReportData'
     ReportStatusResponsePayloadBody:
       type: object
       required:
@@ -320,11 +296,35 @@ components:
           - completed
           - pending
           - failed
+    CustomReportData:
+      type: object
+      properties:
+        name:
+          type: string
+        uuid:
+          type: string
     QueueReportResponsePayloadBody:
       type: object
       properties:
         queued_report_id:
           description: The ID of the queued report. Use this when polling the /reports/status endpoint for a download URL.
+          type: string
+    CustomReportsListResponsePayloadBody:
+      type: object
+      required:
+      - custom_reports
+      properties:
+        custom_reports:
+          description: List of custom reports defined for the account
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomReportData'
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
           type: string
   securitySchemes:
     API_key_in_header:

@@ -120,21 +120,6 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
-    GetVendorVulnerabilitiesV1RespBody:
-      type: object
-      properties:
-        vulnerabilities:
-          description: The list of potential vendor vulnerabilities that have been detected.
-          type: array
-          items:
-            $ref: '#/components/schemas/Vulnerability'
     GetOrgVulnerabilitiesV1RespBody:
       type: object
       properties:
@@ -207,6 +192,21 @@ components:
           type: number
           format: double
           example: 7.5
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
+    GetVendorVulnerabilitiesV1RespBody:
+      type: object
+      properties:
+        vulnerabilities:
+          description: The list of potential vendor vulnerabilities that have been detected.
+          type: array
+          items:
+            $ref: '#/components/schemas/Vulnerability'
   securitySchemes:
     API_key_in_header:
       type: apiKey
