@@ -1,0 +1,99 @@
+slug: upguard
+provider: UpGuard
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 8
+edges:
+- tag: Vulnerabilities
+  spec_file: upguard-vulnerabilities-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.9
+  evidence: 'GET /vulnerabilities  org_vulnerabilities  List potential vulnerabilities of your domains
+    & IPs; schemas: Vulnerability, cve'
+  reason: Operations enumerate CVE-based vulnerabilities for the organisation's domains/IPs and for vendors
+    — squarely vulnerability identification within cybersecurity management.
+- tag: threatmonitoring
+  spec_file: upguard-threatmonitoring-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.9
+  evidence: 'POST /threatmonitoring/threat/investigator/update  threatmonitoring_assign_investigator;
+    POST /threatmonitoring/threat/remediation_request/add; schemas: ThreatActor, MonitoredThreatType'
+  reason: Threat detection, investigation assignment, commenting, closure and remediation requests — a
+    SOC-style threat detection and response workflow.
+- tag: Vendors
+  spec_file: upguard-vendors-api-openapi.yml
+  capability_id: BC-510.30
+  capability_id_l1: BC-510
+  capability_name: Supplier Risk Management
+  confidence: 0.8
+  evidence: GET /onboarding_request/list  onboardingRequestsList  List onboarding requests; GET /vendor/additionalevidence/list;
+    GET /fourth_party/list  List fourth party vendors; schemas LinkedRiskAssessment, RiskCounts
+  reason: Third-party vendor records with contacts, evidence documents, questionnaires, risk assessments
+    and fourth-party exposure — textbook supplier (third-party) risk management, with some overlap into
+    supplier onboarding.
+- tag: Breaches
+  spec_file: upguard-breaches-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.75
+  evidence: GET /breaches  breached_identities  Get a list of breached identities; schemas BreachedIdentity,
+    Breach, VIP
+  reason: Credential/identity breach monitoring with VIP watchlists on a cybersecurity platform — external
+    threat monitoring and detection, i.e. Threat Detection & Response, not any financial-crime or customer-data
+    capability.
+- tag: Risks
+  spec_file: upguard-risks-api-openapi.yml
+  capability_id: BC-510.30
+  capability_id_l1: BC-510
+  capability_name: Supplier Risk Management
+  confidence: 0.7
+  evidence: GET /risks/vendors/all  vendor_risk_overview_params  Get portfolio risk profile overview;
+    GET /risks/vendors/questionnaires  vendor_questionnaire_risks
+  reason: Most operations expose active and changed risks for monitored vendors plus questionnaire-derived
+    vendor risks, which is cyber risk assessment on suppliers (BC-510.30 explicitly includes cyber risk
+    on suppliers). Some endpoints cover the org's own risks, which is why confidence is not higher.
+- tag: dataleaks
+  spec_file: upguard-dataleaks-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.7
+  evidence: GET /dataleaks/disclosures  dataleaks_disclosures  Get a list of disclosures; PUT /dataleaks/disclosures/status
+  reason: Detection and triage/status handling of discovered data-leak disclosures is external exposure
+    detection and response within cybersecurity, not privacy programme management. Sub-capability slightly
+    uncertain hence moderate confidence.
+- tag: trust_exchange
+  spec_file: upguard-trust-exchange-api-openapi.yml
+  capability_id: BC-4290.30
+  capability_id_l1: BC-4290
+  capability_name: Trust Portal & Public Disclosure
+  confidence: 0.7
+  evidence: 'GET /trust_exchange/trust_center  getTrustCenter; GET /trust_exchange/questionnaire/list  listQuestionnaires  List
+    inbound questionnaires; schemas: trustCenterAccessDocumentRequest, trustCenterAccessLogEntry'
+  reason: Operates a customer-facing trust centre with document distribution/access requests plus inbound
+    security questionnaires — trust portal and public disclosure. Mix of questionnaire management and
+    trust portal leaves some sub-capability ambiguity.
+- tag: userrisk
+  spec_file: upguard-userrisk-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: GET /user_risk/apps/permissions/list  getUserRiskAppsPermissionsList  List app permissions;
+    GET /user_risk/roles/list; GET /user_risk/identity_breaches/list
+  reason: Inventory of users, apps, granted permissions, roles and teams plus identity-breach exposure
+    — visibility and governance of identity and access. Partly overlaps threat detection, hence 0.7.
