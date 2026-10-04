@@ -99,6 +99,69 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
+    PermutationType:
+      type: string
+    GetTyposquatDetailsResponsePayloadBody:
+      type: object
+      properties:
+        ignored:
+          description: The list of ignored permutations
+          type: array
+          items:
+            $ref: '#/components/schemas/TyposquatPermutationDetail'
+        registered:
+          description: The list of registered permutations
+          type: array
+          items:
+            $ref: '#/components/schemas/TyposquatPermutationDetail'
+        unregistered:
+          description: The list of unregistered permutations
+          type: array
+          items:
+            $ref: '#/components/schemas/TyposquatPermutationDetail'
+    TyposquatDNSBlocklist:
+      type: object
+      properties:
+        activity:
+          description: The suspected malicious activity associated with the DNS blocklist
+          type: string
+        name:
+          description: The name of the DNS blocklist
+          type: string
+    TyposquatDomain:
+      type: object
+      properties:
+        added_at:
+          description: The date the domain was added to typosquatting in RFC3339 format.
+          type: string
+          format: date-time
+          example: '2006-01-02T15:04:05.999999Z'
+        domain:
+          description: The typosquat domain
+          type: string
+        last_scanned_at:
+          description: The date of last scan for this domain in RFC3339 format. Absent if the domain has never been scanned.
+          type: string
+          format: date-time
+          example: '2006-01-02T15:04:05.999999Z'
+        num_registered:
+          description: The number of registered permutations for this domain
+          type: integer
+          format: int64
+        num_unregistered:
+          description: The number of unregistered permutations for this domain
+          type: integer
+          format: int64
+        primary_domain:
+          description: Flag indicating whether the domain is the primary domain for the account
+          type: boolean
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
     TyposquatPermutationDetail:
       type: object
       properties:
@@ -143,60 +206,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TyposquatDomain'
-    TyposquatDNSBlocklist:
-      type: object
-      properties:
-        activity:
-          description: The suspected malicious activity associated with the DNS blocklist
-          type: string
-        name:
-          description: The name of the DNS blocklist
-          type: string
-    TyposquatDomain:
-      type: object
-      properties:
-        added_at:
-          description: The date the domain was added to typosquatting in RFC3339 format.
-          type: string
-          format: date-time
-          example: '2006-01-02T15:04:05.999999Z'
-        domain:
-          description: The typosquat domain
-          type: string
-        last_scanned_at:
-          description: The date of last scan for this domain in RFC3339 format. Absent if the domain has never been scanned.
-          type: string
-          format: date-time
-          example: '2006-01-02T15:04:05.999999Z'
-        num_registered:
-          description: The number of registered permutations for this domain
-          type: integer
-          format: int64
-        num_unregistered:
-          description: The number of unregistered permutations for this domain
-          type: integer
-          format: int64
-        primary_domain:
-          description: Flag indicating whether the domain is the primary domain for the account
-          type: boolean
-    GetTyposquatDetailsResponsePayloadBody:
-      type: object
-      properties:
-        ignored:
-          description: The list of ignored permutations
-          type: array
-          items:
-            $ref: '#/components/schemas/TyposquatPermutationDetail'
-        registered:
-          description: The list of registered permutations
-          type: array
-          items:
-            $ref: '#/components/schemas/TyposquatPermutationDetail'
-        unregistered:
-          description: The list of unregistered permutations
-          type: array
-          items:
-            $ref: '#/components/schemas/TyposquatPermutationDetail'
     TyposquatHostnameDNSBlocklists:
       type: object
       properties:
@@ -207,15 +216,6 @@ components:
             $ref: '#/components/schemas/TyposquatDNSBlocklist'
         hostname:
           description: The hostname associated with the permutation
-          type: string
-    PermutationType:
-      type: string
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
           type: string
   securitySchemes:
     API_key_in_header:

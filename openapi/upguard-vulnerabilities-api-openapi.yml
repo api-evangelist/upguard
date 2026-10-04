@@ -120,19 +120,6 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    GetOrgVulnerabilitiesV1RespBody:
-      type: object
-      properties:
-        next_page_token:
-          description: 'The token to be used to retrieve the next page of results.
-
-            Will not be returned if there are no more results.'
-          type: string
-        vulnerabilities:
-          description: The list of potential vulnerabilities that have been detected
-          type: array
-          items:
-            $ref: '#/components/schemas/Vulnerability'
     Vulnerability:
       type: object
       properties:
@@ -170,6 +157,26 @@ components:
           description: Indicates if the vulnerability has been tested and verified as part of an automated scan
           type: boolean
           example: false
+    GetOrgVulnerabilitiesV1RespBody:
+      type: object
+      properties:
+        next_page_token:
+          description: 'The token to be used to retrieve the next page of results.
+
+            Will not be returned if there are no more results.'
+          type: string
+        vulnerabilities:
+          description: The list of potential vulnerabilities that have been detected
+          type: array
+          items:
+            $ref: '#/components/schemas/Vulnerability'
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
     cve:
       description: Information about a CVE (Common Vulnerabilities and Exposures) Entry
       type: object
@@ -192,13 +199,6 @@ components:
           type: number
           format: double
           example: 7.5
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
     GetVendorVulnerabilitiesV1RespBody:
       type: object
       properties:

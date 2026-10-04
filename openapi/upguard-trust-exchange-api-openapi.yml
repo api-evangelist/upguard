@@ -918,6 +918,30 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
+    trustCenterAccessLogResponse:
+      type: object
+      properties:
+        access_log:
+          description: The access log entries for the trust center.
+          type: array
+          items:
+            $ref: '#/components/schemas/trustCenterAccessLogEntry'
+        next_page_token:
+          description: The token used to fetch the next page of results, if there are more results.
+          type: string
+    trustCenterAccessQuestionnaireRequest:
+      type: object
+      properties:
+        id:
+          description: ID of the questionnaire.
+          type: integer
+          format: int64
+    trustCenterAccessDocumentRequest:
+      type: object
+      properties:
+        uuid:
+          description: UUID of the Content Library document.
+          type: string
     UpdateContentLibraryDocumentBody:
       type: object
       required:
@@ -949,303 +973,6 @@ components:
         uuid:
           description: The UUID of the document to update.
           type: string
-    trustCenterAccessRequests:
-      type: object
-      properties:
-        documents:
-          description: Content Library document access requests
-          type: array
-          items:
-            $ref: '#/components/schemas/trustCenterAccessDocumentRequest'
-        questionnaires:
-          description: Public questionnaire access requests
-          type: array
-          items:
-            $ref: '#/components/schemas/trustCenterAccessQuestionnaireRequest'
-    trustCenterDetail:
-      type: object
-      properties:
-        asset_count:
-          description: The number of assets on the trust center.
-          type: integer
-          format: int64
-          example: 5
-        company_description:
-          description: A description of the company.
-          type: string
-          example: We are a security company.
-        compliance_badges:
-          description: The compliance badges displayed on the trust center.
-          type: array
-          items:
-            type: string
-        contact_email:
-          description: The email of the trust center contact.
-          type: string
-          example: jane@example.com
-        contact_full_name:
-          description: The full name of the trust center contact.
-          type: string
-          example: Jane Smith
-        contact_role:
-          description: The role of the trust center contact.
-          type: string
-          example: Security Manager
-        documents:
-          description: The documents on the trust center.
-          type: array
-          items:
-            $ref: '#/components/schemas/trustCenterDocument'
-        include_industry_average:
-          description: Whether the industry average is included on the trust center.
-          type: boolean
-          example: true
-        include_risk_rating:
-          description: Whether the risk rating is included on the trust center.
-          type: boolean
-          example: true
-        last_updated_at:
-          description: The date the trust center was last updated.
-          type: string
-          format: date-time
-          example: '2024-03-20T15:30:00Z'
-        name:
-          description: The name of the trust center.
-          type: string
-          example: My Trust Center
-        public_url:
-          description: The public URL of the trust center.
-          type: string
-          example: https://trust.example.com
-        published:
-          description: Whether the trust center is published.
-          type: boolean
-          example: true
-        questionnaires:
-          description: The questionnaires on the trust center.
-          type: array
-          items:
-            $ref: '#/components/schemas/trustCenterQuestionnaire'
-        updates:
-          description: The updates on the trust center.
-          type: array
-          items:
-            $ref: '#/components/schemas/trustCenterUpdate'
-        uuid:
-          description: The unique identifier for the trust center.
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-    trustCenterAccessDocumentResource:
-      type: object
-      properties:
-        expired:
-          description: If access to the document has expired or not.
-          type: boolean
-        expires:
-          description: Access expiry date (null if it will never expire).
-          type: string
-          format: date-time
-        uuid:
-          description: UUID of the Content Library document.
-          type: string
-    contentLibraryDocumentVersion:
-      type: object
-      properties:
-        created_at:
-          description: When this version was created.
-          type: string
-          format: date-time
-          example: '2024-03-20T15:30:00Z'
-        filename:
-          description: The filename of this version.
-          type: string
-          example: soc2_report_q4_2024.pdf
-        version:
-          description: The version number.
-          type: integer
-          format: int64
-          example: 3
-        virus_safe:
-          description: 'Whether this version has been scanned and verified virus safe.
-
-            After uploading a document version, it may take a few minutes for it to be initially scanned.
-
-            Document versions cannot be retrieved until this is true.'
-          type: boolean
-          example: true
-    trustCenterSubscription:
-      type: object
-      properties:
-        created_at:
-          description: The time the subscription was created.
-          type: string
-          format: date-time
-          example: '2024-03-20T15:30:00Z'
-        email_address:
-          description: The email address of the subscriber.
-          type: string
-          example: jane@example.com
-    trustCenterAccessQuestionnaireRequest:
-      type: object
-      properties:
-        id:
-          description: ID of the questionnaire.
-          type: integer
-          format: int64
-    contentLibraryHistoryItem:
-      type: object
-      properties:
-        created_at:
-          description: When the history event occurred.
-          type: string
-          format: date-time
-          example: '2024-03-20T15:30:00Z'
-        created_by_email:
-          description: The email of the user who performed the action.
-          type: string
-          example: jane@example.com
-        created_by_name:
-          description: The name of the user who performed the action.
-          type: string
-          example: Jane Smith
-        history_data:
-          description: Additional data specific to the history type. The structure varies based on the history_type.
-        history_type:
-          description: The type of history event.
-          type: string
-          example: document_created
-    trustCenterAccessDocumentRequest:
-      type: object
-      properties:
-        uuid:
-          description: UUID of the Content Library document.
-          type: string
-    inboundQuestionnaire:
-      type: object
-      properties:
-        date_completed:
-          description: The date the questionnaire was completed.
-          type: string
-          format: date-time
-          example: '2025-01-25T00:00:00Z'
-        date_created:
-          description: The date the questionnaire was created.
-          type: string
-          format: date-time
-          example: '2025-01-15T00:00:00Z'
-        date_due:
-          description: The due date for the questionnaire.
-          type: string
-          format: date-time
-          example: '2025-02-15T00:00:00Z'
-        date_submitted:
-          description: The date the questionnaire was submitted.
-          type: string
-          format: date-time
-          example: '2025-01-20T00:00:00Z'
-        id:
-          description: The unique identifier of the questionnaire.
-          type: integer
-          format: int64
-          example: 123
-        name:
-          description: The name of the questionnaire.
-          type: string
-          example: Security Assessment 2025
-        num_answers:
-          description: The number of questions that have been answered.
-          type: integer
-          format: int64
-          example: 25
-        num_questions:
-          description: The total number of questions in the questionnaire.
-          type: integer
-          format: int64
-          example: 50
-        questionnaire_type_name:
-          description: The name of the questionnaire type.
-          type: string
-          example: VSAQ
-        recipients:
-          description: The list of recipients assigned to the questionnaire.
-          type: array
-          items:
-            $ref: '#/components/schemas/inboundQuestionnaireRecipient'
-        sender_org_name:
-          description: The name of the organization that sent the questionnaire.
-          type: string
-          example: Acme Corp
-        status:
-          description: The current status of the questionnaire.
-          type: string
-          example: In Progress
-    questionnaireListResponse:
-      type: object
-      properties:
-        next_page_token:
-          description: Pagination token for fetching the next page. Empty when there are no more results.
-          type: string
-        questionnaires:
-          description: The list of inbound questionnaires shared with the organization.
-          type: array
-          items:
-            $ref: '#/components/schemas/inboundQuestionnaire'
-    contentLibraryDocumentHistoryResponse:
-      type: object
-      properties:
-        history:
-          description: The list of history items for the document.
-          type: array
-          items:
-            $ref: '#/components/schemas/contentLibraryHistoryItem'
-        next_page_token:
-          description: The token used to fetch the next page of results, if there are more results.
-          type: string
-    contentLibraryDocumentListResponse:
-      type: object
-      properties:
-        documents:
-          description: The list of documents in the content library.
-          type: array
-          items:
-            $ref: '#/components/schemas/contentLibraryDocument'
-        next_page_token:
-          description: The token used to fetch the next page of results, if there are more results.
-          type: string
-    trustCenterSummary:
-      type: object
-      properties:
-        asset_count:
-          description: The number of assets on the trust center.
-          type: integer
-          format: int64
-          example: 5
-        created_at:
-          description: The date the trust center was created.
-          type: string
-          format: date-time
-          example: '2024-03-20T15:30:00Z'
-        last_updated_at:
-          description: The date the trust center was last updated.
-          type: string
-          format: date-time
-          example: '2024-03-20T15:30:00Z'
-        name:
-          description: The name of the trust center.
-          type: string
-          example: My Trust Center
-        public_url:
-          description: The public URL of the trust center.
-          type: string
-          example: https://trust.example.com
-        published:
-          description: Whether the trust center is published.
-          type: boolean
-          example: true
-        uuid:
-          description: The unique identifier for the trust center.
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
     trustCenterAccessRequest:
       type: object
       properties:
@@ -1290,17 +1017,6 @@ components:
           description: The name of the user who requested access.
           type: string
           example: John Doe
-    trustCenterAccessLogResponse:
-      type: object
-      properties:
-        access_log:
-          description: The access log entries for the trust center.
-          type: array
-          items:
-            $ref: '#/components/schemas/trustCenterAccessLogEntry'
-        next_page_token:
-          description: The token used to fetch the next page of results, if there are more results.
-          type: string
     trustCenterAccessLogEntry:
       type: object
       properties:
@@ -1325,234 +1041,17 @@ components:
           description: The name of the user who performed the action.
           type: string
           example: Jane Smith
-    trustCenterQuestionnaire:
+    contentLibraryDocumentHistoryResponse:
       type: object
       properties:
-        access_protection:
-          description: 'Whether access protection is enabled for this questionnaire.
-
-            When true, users must request access to view this questionnaire.'
-          type: boolean
-          example: true
-        id:
-          description: The unique ID of the trust center questionnaire.
-          type: integer
-          format: int64
-          example: 1234
-        name:
-          description: The name of the questionnaire.
-          type: string
-          example: SOC 2 Type II
-        type:
-          description: The type of the questionnaire.
-          type: string
-          example: SOC 2 Type II
-    contentLibraryType:
-      type: object
-      properties:
-        is_custom:
-          description: Whether the document type is a custom type created by the organization.
-          type: boolean
-          example: false
-        name:
-          description: The name of the document type.
-          type: string
-          example: SOC 2 Report
-        num_documents:
-          description: The number of documents of this type.
-          type: integer
-          format: int64
-          example: 3
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
-    trustCenterAccessItem:
-      type: object
-      properties:
-        created_at:
-          description: The date the access was created.
-          type: string
-          format: date-time
-          example: '2024-03-20T15:30:00Z'
-        has_signed_nda:
-          description: Whether the org/user has a current signed NDA.
-          type: boolean
-          example: true
-        nda_exempt:
-          description: Whether the org/user is exempt from NDA requirements.
-          type: boolean
-          example: false
-        nda_manually_approved:
-          description: Whether the NDA was manually approved for this org/user.
-          type: boolean
-          example: false
-        nda_pending_countersign:
-          description: Whether the org/user has signed the NDA but it is pending admin countersign.
-          type: boolean
-          example: false
-        org_name:
-          description: The name of the organization with access. Empty if user-only access.
-          type: string
-          example: Acme Corp
-        org_primary_hostname:
-          description: The primary hostname of the organization with access. Empty if user-only access.
-          type: string
-          example: acme.com
-        resources:
-          $ref: '#/components/schemas/trustCenterAccessResources'
-        updated_at:
-          description: The date the access was last updated.
-          type: string
-          format: date-time
-          example: '2024-03-20T15:30:00Z'
-        user_email:
-          description: The email of the user with access. Empty if org-only access.
-          type: string
-          example: jane@example.com
-        user_name:
-          description: The name of the user with access. Empty if org-only access.
-          type: string
-          example: Jane Smith
-    trustCenterSubscriptionsResponse:
-      type: object
-      properties:
+        history:
+          description: The list of history items for the document.
+          type: array
+          items:
+            $ref: '#/components/schemas/contentLibraryHistoryItem'
         next_page_token:
           description: The token used to fetch the next page of results, if there are more results.
           type: string
-        subscriptions:
-          description: The email subscriptions for the trust center.
-          type: array
-          items:
-            $ref: '#/components/schemas/trustCenterSubscription'
-        total_results:
-          description: The total number of subscriptions.
-          type: integer
-          format: int64
-    trustCenterAccessResponse:
-      type: object
-      properties:
-        access_requests:
-          description: The pending access requests for the trust center.
-          type: array
-          items:
-            $ref: '#/components/schemas/trustCenterAccessRequest'
-        invited_emails:
-          description: The email addresses that have been invited to access the trust center.
-          type: array
-          items:
-            type: string
-        users_and_orgs_with_access:
-          description: The users and organizations with access to the trust center.
-          type: array
-          items:
-            $ref: '#/components/schemas/trustCenterAccessItem'
-    trustCenterUpdate:
-      type: object
-      properties:
-        body:
-          description: The body of the update.
-          type: string
-          example: We have published our latest SOC 2 report.
-        category:
-          description: The category of the update.
-          type: string
-          example: Security
-        created_at:
-          description: The date the update was created.
-          type: string
-          format: date-time
-          example: '2024-03-20T15:30:00Z'
-        headline:
-          description: The headline of the update.
-          type: string
-          example: New SOC 2 Report Available
-    ActionType:
-      type: string
-    ListTrustCentersResponseBody:
-      type: object
-      title: ListTrustCentersResponseBody is the response body for listing trust centers.
-      properties:
-        trust_centers:
-          description: The list of trust centers for this organization.
-          type: array
-          items:
-            $ref: '#/components/schemas/trustCenterSummary'
-    trustCenterAccessResources:
-      type: object
-      properties:
-        documents:
-          description: Content Library documents
-          type: array
-          items:
-            $ref: '#/components/schemas/trustCenterAccessDocumentResource'
-        questionnaires:
-          description: Public questionnaires
-          type: array
-          items:
-            $ref: '#/components/schemas/trustCenterAccessQuestionnaireResource'
-    inboundQuestionnaireRecipient:
-      type: object
-      properties:
-        email:
-          description: The email address of the recipient.
-          type: string
-          example: alice@example.com
-        name:
-          description: The name of the recipient.
-          type: string
-          example: Alice Smith
-    trustCenterAccessQuestionnaireResource:
-      type: object
-      properties:
-        expired:
-          description: If access to the questionnaire has expired or not.
-          type: boolean
-        expires:
-          description: Access expiry date (null if it will never expire).
-          type: string
-          format: date-time
-        id:
-          description: ID of the questionnaire.
-          type: integer
-          format: int64
-    getContentLibraryTypesResponse:
-      type: object
-      title: Response body for listing content library document types.
-      properties:
-        types:
-          description: The list of document types for this organization.
-          type: array
-          items:
-            $ref: '#/components/schemas/contentLibraryType'
-    trustCenterDocument:
-      type: object
-      properties:
-        access_protection:
-          description: 'Whether access protection is enabled for this document.
-
-            When true, users must request access to view this document.'
-          type: boolean
-          example: true
-        document_type:
-          description: The type of the document.
-          type: string
-          example: SOC 2
-        filename:
-          description: The filename of the document.
-          type: string
-          example: soc2-report.pdf
-        name:
-          description: The name of the document.
-          type: string
-          example: SOC 2 Report
-        uuid:
-          description: The unique identifier for the document.
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
     contentLibraryDocument:
       type: object
       properties:
@@ -1630,6 +1129,507 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/contentLibraryDocumentVersion'
+    ListTrustCentersResponseBody:
+      type: object
+      title: ListTrustCentersResponseBody is the response body for listing trust centers.
+      properties:
+        trust_centers:
+          description: The list of trust centers for this organization.
+          type: array
+          items:
+            $ref: '#/components/schemas/trustCenterSummary'
+    inboundQuestionnaire:
+      type: object
+      properties:
+        date_completed:
+          description: The date the questionnaire was completed.
+          type: string
+          format: date-time
+          example: '2025-01-25T00:00:00Z'
+        date_created:
+          description: The date the questionnaire was created.
+          type: string
+          format: date-time
+          example: '2025-01-15T00:00:00Z'
+        date_due:
+          description: The due date for the questionnaire.
+          type: string
+          format: date-time
+          example: '2025-02-15T00:00:00Z'
+        date_submitted:
+          description: The date the questionnaire was submitted.
+          type: string
+          format: date-time
+          example: '2025-01-20T00:00:00Z'
+        id:
+          description: The unique identifier of the questionnaire.
+          type: integer
+          format: int64
+          example: 123
+        name:
+          description: The name of the questionnaire.
+          type: string
+          example: Security Assessment 2025
+        num_answers:
+          description: The number of questions that have been answered.
+          type: integer
+          format: int64
+          example: 25
+        num_questions:
+          description: The total number of questions in the questionnaire.
+          type: integer
+          format: int64
+          example: 50
+        questionnaire_type_name:
+          description: The name of the questionnaire type.
+          type: string
+          example: VSAQ
+        recipients:
+          description: The list of recipients assigned to the questionnaire.
+          type: array
+          items:
+            $ref: '#/components/schemas/inboundQuestionnaireRecipient'
+        sender_org_name:
+          description: The name of the organization that sent the questionnaire.
+          type: string
+          example: Acme Corp
+        status:
+          description: The current status of the questionnaire.
+          type: string
+          example: In Progress
+    trustCenterAccessResponse:
+      type: object
+      properties:
+        access_requests:
+          description: The pending access requests for the trust center.
+          type: array
+          items:
+            $ref: '#/components/schemas/trustCenterAccessRequest'
+        invited_emails:
+          description: The email addresses that have been invited to access the trust center.
+          type: array
+          items:
+            type: string
+        users_and_orgs_with_access:
+          description: The users and organizations with access to the trust center.
+          type: array
+          items:
+            $ref: '#/components/schemas/trustCenterAccessItem'
+    trustCenterAccessItem:
+      type: object
+      properties:
+        created_at:
+          description: The date the access was created.
+          type: string
+          format: date-time
+          example: '2024-03-20T15:30:00Z'
+        has_signed_nda:
+          description: Whether the org/user has a current signed NDA.
+          type: boolean
+          example: true
+        nda_exempt:
+          description: Whether the org/user is exempt from NDA requirements.
+          type: boolean
+          example: false
+        nda_manually_approved:
+          description: Whether the NDA was manually approved for this org/user.
+          type: boolean
+          example: false
+        nda_pending_countersign:
+          description: Whether the org/user has signed the NDA but it is pending admin countersign.
+          type: boolean
+          example: false
+        org_name:
+          description: The name of the organization with access. Empty if user-only access.
+          type: string
+          example: Acme Corp
+        org_primary_hostname:
+          description: The primary hostname of the organization with access. Empty if user-only access.
+          type: string
+          example: acme.com
+        resources:
+          $ref: '#/components/schemas/trustCenterAccessResources'
+        updated_at:
+          description: The date the access was last updated.
+          type: string
+          format: date-time
+          example: '2024-03-20T15:30:00Z'
+        user_email:
+          description: The email of the user with access. Empty if org-only access.
+          type: string
+          example: jane@example.com
+        user_name:
+          description: The name of the user with access. Empty if org-only access.
+          type: string
+          example: Jane Smith
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
+    trustCenterSubscription:
+      type: object
+      properties:
+        created_at:
+          description: The time the subscription was created.
+          type: string
+          format: date-time
+          example: '2024-03-20T15:30:00Z'
+        email_address:
+          description: The email address of the subscriber.
+          type: string
+          example: jane@example.com
+    trustCenterAccessQuestionnaireResource:
+      type: object
+      properties:
+        expired:
+          description: If access to the questionnaire has expired or not.
+          type: boolean
+        expires:
+          description: Access expiry date (null if it will never expire).
+          type: string
+          format: date-time
+        id:
+          description: ID of the questionnaire.
+          type: integer
+          format: int64
+    trustCenterUpdate:
+      type: object
+      properties:
+        body:
+          description: The body of the update.
+          type: string
+          example: We have published our latest SOC 2 report.
+        category:
+          description: The category of the update.
+          type: string
+          example: Security
+        created_at:
+          description: The date the update was created.
+          type: string
+          format: date-time
+          example: '2024-03-20T15:30:00Z'
+        headline:
+          description: The headline of the update.
+          type: string
+          example: New SOC 2 Report Available
+    contentLibraryDocumentListResponse:
+      type: object
+      properties:
+        documents:
+          description: The list of documents in the content library.
+          type: array
+          items:
+            $ref: '#/components/schemas/contentLibraryDocument'
+        next_page_token:
+          description: The token used to fetch the next page of results, if there are more results.
+          type: string
+    trustCenterSummary:
+      type: object
+      properties:
+        asset_count:
+          description: The number of assets on the trust center.
+          type: integer
+          format: int64
+          example: 5
+        created_at:
+          description: The date the trust center was created.
+          type: string
+          format: date-time
+          example: '2024-03-20T15:30:00Z'
+        last_updated_at:
+          description: The date the trust center was last updated.
+          type: string
+          format: date-time
+          example: '2024-03-20T15:30:00Z'
+        name:
+          description: The name of the trust center.
+          type: string
+          example: My Trust Center
+        public_url:
+          description: The public URL of the trust center.
+          type: string
+          example: https://trust.example.com
+        published:
+          description: Whether the trust center is published.
+          type: boolean
+          example: true
+        uuid:
+          description: The unique identifier for the trust center.
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+    contentLibraryType:
+      type: object
+      properties:
+        is_custom:
+          description: Whether the document type is a custom type created by the organization.
+          type: boolean
+          example: false
+        name:
+          description: The name of the document type.
+          type: string
+          example: SOC 2 Report
+        num_documents:
+          description: The number of documents of this type.
+          type: integer
+          format: int64
+          example: 3
+    inboundQuestionnaireRecipient:
+      type: object
+      properties:
+        email:
+          description: The email address of the recipient.
+          type: string
+          example: alice@example.com
+        name:
+          description: The name of the recipient.
+          type: string
+          example: Alice Smith
+    trustCenterQuestionnaire:
+      type: object
+      properties:
+        access_protection:
+          description: 'Whether access protection is enabled for this questionnaire.
+
+            When true, users must request access to view this questionnaire.'
+          type: boolean
+          example: true
+        id:
+          description: The unique ID of the trust center questionnaire.
+          type: integer
+          format: int64
+          example: 1234
+        name:
+          description: The name of the questionnaire.
+          type: string
+          example: SOC 2 Type II
+        type:
+          description: The type of the questionnaire.
+          type: string
+          example: SOC 2 Type II
+    getContentLibraryTypesResponse:
+      type: object
+      title: Response body for listing content library document types.
+      properties:
+        types:
+          description: The list of document types for this organization.
+          type: array
+          items:
+            $ref: '#/components/schemas/contentLibraryType'
+    trustCenterAccessResources:
+      type: object
+      properties:
+        documents:
+          description: Content Library documents
+          type: array
+          items:
+            $ref: '#/components/schemas/trustCenterAccessDocumentResource'
+        questionnaires:
+          description: Public questionnaires
+          type: array
+          items:
+            $ref: '#/components/schemas/trustCenterAccessQuestionnaireResource'
+    ActionType:
+      type: string
+    trustCenterDocument:
+      type: object
+      properties:
+        access_protection:
+          description: 'Whether access protection is enabled for this document.
+
+            When true, users must request access to view this document.'
+          type: boolean
+          example: true
+        document_type:
+          description: The type of the document.
+          type: string
+          example: SOC 2
+        filename:
+          description: The filename of the document.
+          type: string
+          example: soc2-report.pdf
+        name:
+          description: The name of the document.
+          type: string
+          example: SOC 2 Report
+        uuid:
+          description: The unique identifier for the document.
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+    trustCenterAccessDocumentResource:
+      type: object
+      properties:
+        expired:
+          description: If access to the document has expired or not.
+          type: boolean
+        expires:
+          description: Access expiry date (null if it will never expire).
+          type: string
+          format: date-time
+        uuid:
+          description: UUID of the Content Library document.
+          type: string
+    trustCenterAccessRequests:
+      type: object
+      properties:
+        documents:
+          description: Content Library document access requests
+          type: array
+          items:
+            $ref: '#/components/schemas/trustCenterAccessDocumentRequest'
+        questionnaires:
+          description: Public questionnaire access requests
+          type: array
+          items:
+            $ref: '#/components/schemas/trustCenterAccessQuestionnaireRequest'
+    contentLibraryHistoryItem:
+      type: object
+      properties:
+        created_at:
+          description: When the history event occurred.
+          type: string
+          format: date-time
+          example: '2024-03-20T15:30:00Z'
+        created_by_email:
+          description: The email of the user who performed the action.
+          type: string
+          example: jane@example.com
+        created_by_name:
+          description: The name of the user who performed the action.
+          type: string
+          example: Jane Smith
+        history_data:
+          description: Additional data specific to the history type. The structure varies based on the history_type.
+        history_type:
+          description: The type of history event.
+          type: string
+          example: document_created
+    contentLibraryDocumentVersion:
+      type: object
+      properties:
+        created_at:
+          description: When this version was created.
+          type: string
+          format: date-time
+          example: '2024-03-20T15:30:00Z'
+        filename:
+          description: The filename of this version.
+          type: string
+          example: soc2_report_q4_2024.pdf
+        version:
+          description: The version number.
+          type: integer
+          format: int64
+          example: 3
+        virus_safe:
+          description: 'Whether this version has been scanned and verified virus safe.
+
+            After uploading a document version, it may take a few minutes for it to be initially scanned.
+
+            Document versions cannot be retrieved until this is true.'
+          type: boolean
+          example: true
+    trustCenterDetail:
+      type: object
+      properties:
+        asset_count:
+          description: The number of assets on the trust center.
+          type: integer
+          format: int64
+          example: 5
+        company_description:
+          description: A description of the company.
+          type: string
+          example: We are a security company.
+        compliance_badges:
+          description: The compliance badges displayed on the trust center.
+          type: array
+          items:
+            type: string
+        contact_email:
+          description: The email of the trust center contact.
+          type: string
+          example: jane@example.com
+        contact_full_name:
+          description: The full name of the trust center contact.
+          type: string
+          example: Jane Smith
+        contact_role:
+          description: The role of the trust center contact.
+          type: string
+          example: Security Manager
+        documents:
+          description: The documents on the trust center.
+          type: array
+          items:
+            $ref: '#/components/schemas/trustCenterDocument'
+        include_industry_average:
+          description: Whether the industry average is included on the trust center.
+          type: boolean
+          example: true
+        include_risk_rating:
+          description: Whether the risk rating is included on the trust center.
+          type: boolean
+          example: true
+        last_updated_at:
+          description: The date the trust center was last updated.
+          type: string
+          format: date-time
+          example: '2024-03-20T15:30:00Z'
+        name:
+          description: The name of the trust center.
+          type: string
+          example: My Trust Center
+        public_url:
+          description: The public URL of the trust center.
+          type: string
+          example: https://trust.example.com
+        published:
+          description: Whether the trust center is published.
+          type: boolean
+          example: true
+        questionnaires:
+          description: The questionnaires on the trust center.
+          type: array
+          items:
+            $ref: '#/components/schemas/trustCenterQuestionnaire'
+        updates:
+          description: The updates on the trust center.
+          type: array
+          items:
+            $ref: '#/components/schemas/trustCenterUpdate'
+        uuid:
+          description: The unique identifier for the trust center.
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+    trustCenterSubscriptionsResponse:
+      type: object
+      properties:
+        next_page_token:
+          description: The token used to fetch the next page of results, if there are more results.
+          type: string
+        subscriptions:
+          description: The email subscriptions for the trust center.
+          type: array
+          items:
+            $ref: '#/components/schemas/trustCenterSubscription'
+        total_results:
+          description: The total number of subscriptions.
+          type: integer
+          format: int64
+    questionnaireListResponse:
+      type: object
+      properties:
+        next_page_token:
+          description: Pagination token for fetching the next page. Empty when there are no more results.
+          type: string
+        questionnaires:
+          description: The list of inbound questionnaires shared with the organization.
+          type: array
+          items:
+            $ref: '#/components/schemas/inboundQuestionnaire'
   securitySchemes:
     API_key_in_header:
       type: apiKey

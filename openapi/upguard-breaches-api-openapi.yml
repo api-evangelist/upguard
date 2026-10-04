@@ -281,28 +281,6 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    IdentityBreachResponsePayloadBody:
-      type: object
-      properties:
-        breach:
-          $ref: '#/components/schemas/Breach'
-        comments:
-          description: Comments associated with the identity breach
-          type: array
-          items:
-            $ref: '#/components/schemas/BreachComment'
-    AddVIPRespBody:
-      type: object
-      properties:
-        vip:
-          $ref: '#/components/schemas/VIP'
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
     GetVIPListRespBody:
       type: object
       properties:
@@ -320,22 +298,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VIP'
-    BreachComment:
-      type: object
-      properties:
-        comment:
-          description: The text of the comment
-          type: string
-          example: My comment text
-        created_at:
-          description: The time the comment was added
-          type: string
-          format: date-time
-          example: '2019-11-09T03:48:57Z'
-        created_by_email:
-          description: The email address of the user who added the comment
-          type: string
-          example: viggo@example.com
     VIP:
       type: object
       properties:
@@ -364,6 +326,76 @@ components:
           format: int64
         severity:
           description: The highest severity of the breaches the VIP appears in. Will be one of "Critical", "High", "Medium", or "Low".
+          type: string
+    BreachedIdentity:
+      type: object
+      properties:
+        breach_ids:
+          description: The IDs of the breaches the identity is associated with
+          type: array
+          items:
+            type: integer
+            format: int64
+          example:
+          - 42
+          - 89
+        domain:
+          description: The breached identity domain
+          type: string
+          example: example.com
+        id:
+          description: The internal id of the identity
+          type: integer
+          format: int64
+          example: 101
+        ignored:
+          description: Flag indicating if the identity has been ignored
+          type: boolean
+          example: false
+        last_breach_date:
+          description: The date of the most recent breach (RFC 3339 format)
+          type: string
+          format: date-time
+          example: '2019-11-09T03:48:57Z'
+        name:
+          description: The breached identity name
+          type: string
+          example: jane.smith
+        num_breaches:
+          description: The total number of breaches the identity has been in
+          type: integer
+          format: int64
+          example: 42
+        severity:
+          description: The highest severity of the breaches the identity appears in. Will be one of "Critical", "High", "Medium", or "Low".
+          type: string
+          example: High
+        vip:
+          description: Flag indicating if the identity is a VIP
+          type: boolean
+          example: false
+    BreachComment:
+      type: object
+      properties:
+        comment:
+          description: The text of the comment
+          type: string
+          example: My comment text
+        created_at:
+          description: The time the comment was added
+          type: string
+          format: date-time
+          example: '2019-11-09T03:48:57Z'
+        created_by_email:
+          description: The email address of the user who added the comment
+          type: string
+          example: viggo@example.com
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
           type: string
     BreachedIdentitiesResponsePayloadBody:
       type: object
@@ -463,53 +495,21 @@ components:
           type: integer
           format: int64
           example: 9673824
-    BreachedIdentity:
+    AddVIPRespBody:
       type: object
       properties:
-        breach_ids:
-          description: The IDs of the breaches the identity is associated with
+        vip:
+          $ref: '#/components/schemas/VIP'
+    IdentityBreachResponsePayloadBody:
+      type: object
+      properties:
+        breach:
+          $ref: '#/components/schemas/Breach'
+        comments:
+          description: Comments associated with the identity breach
           type: array
           items:
-            type: integer
-            format: int64
-          example:
-          - 42
-          - 89
-        domain:
-          description: The breached identity domain
-          type: string
-          example: example.com
-        id:
-          description: The internal id of the identity
-          type: integer
-          format: int64
-          example: 101
-        ignored:
-          description: Flag indicating if the identity has been ignored
-          type: boolean
-          example: false
-        last_breach_date:
-          description: The date of the most recent breach (RFC 3339 format)
-          type: string
-          format: date-time
-          example: '2019-11-09T03:48:57Z'
-        name:
-          description: The breached identity name
-          type: string
-          example: jane.smith
-        num_breaches:
-          description: The total number of breaches the identity has been in
-          type: integer
-          format: int64
-          example: 42
-        severity:
-          description: The highest severity of the breaches the identity appears in. Will be one of "Critical", "High", "Medium", or "Low".
-          type: string
-          example: High
-        vip:
-          description: Flag indicating if the identity is a VIP
-          type: boolean
-          example: false
+            $ref: '#/components/schemas/BreachComment'
   securitySchemes:
     API_key_in_header:
       type: apiKey

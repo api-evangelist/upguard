@@ -395,10 +395,181 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    Category:
-      description: Category values cannot be changed after first use, as they're referenced in storage.
+    GetIPsV1RespBody:
+      type: object
+      properties:
+        ips:
+          description: The list of ips
+          type: array
+          items:
+            $ref: '#/components/schemas/IP'
+        next_page_token:
+          description: 'The token to be used to retrieve the next page of results.
+
+            Will not be returned if there are no more results.'
+          type: string
+        total_results:
+          description: The total number of ips found.
+          type: integer
+          format: int64
+    DomainScore:
+      type: object
+      properties:
+        automated_score:
+          description: The score of the domain
+          type: integer
+          format: int64
+        hostname:
+          description: The hostname of the domain
+          type: string
+    GetIpDetailsV1RespBody:
+      type: object
+      properties:
+        as_name:
+          description: The name of the AS the IP belongs to. If no AS is available for an IP this field will be omitted.
+          type: string
+        asn:
+          description: The ASN the IP belongs to. If no ASN is available for an IP this field will be omitted.
+          type: integer
+          format: int64
+        automated_score:
+          description: The score of the ip. If the ip is inactive or hasn't been scanned yet this field will be absent
+          type: integer
+          format: int64
+        check_results:
+          description: The results of the IP scan. This field will be omitted if the IP has not been scanned or no results are available, e.g. DNS source IP.
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckResult'
+        country:
+          description: The country the IP belongs to. If no country is available for an IP this field will be omitted.
+          type: string
+        domains:
+          description: The list of domains associated with this IP. This field will be omitted if no domains are associated with the IP.
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainScore'
+        ip:
+          description: The IP.
+          type: string
+        labels:
+          description: The labels associated with the IP.
+          type: array
+          items:
+            type: string
+        owner:
+          description: The owner of the IP.
+          type: string
+        services:
+          description: The list of discovered services IP. If no services were detected for the IP this field will be omitted.
+          type: array
+          items:
+            type: string
+        sources:
+          description: The sources of the IP.
+          type: array
+          items:
+            $ref: '#/components/schemas/IPSource'
+        waived_check_results:
+          description: The waived risks for this IP. This field will be omitted if no waived risks are present.
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckResult'
+    ApiRange:
+      type: object
+      properties:
+        as_name:
+          description: The name of the AS the range belongs to. If no AS is available for a range this field will be omitted.
+          type: string
+        asn:
+          description: The ASN the range belongs to. If no ASN is available for a range this field will be omitted.
+          type: integer
+          format: int64
+        country:
+          description: The country the range belongs to. If no country is available for a range this field will be omitted.
+          type: string
+        end:
+          description: The range end.
+          type: string
+        labels:
+          description: The labels associated with the range.
+          type: array
+          items:
+            type: string
+        num_ips:
+          description: The number of IPs in this range
+          type: integer
+          format: int64
+        owner:
+          description: The owner of the range.
+          type: string
+        sources:
+          description: The sources of the range.
+          type: array
+          items:
+            $ref: '#/components/schemas/IPSource'
+        start:
+          description: The range start.
+          type: string
+    Severity:
+      type: integer
+      format: int64
+    IPSource:
       type: string
-      title: Category values represent risk categories.
+    IP:
+      type: object
+      properties:
+        as_name:
+          description: The name of the AS the IP belongs to. If no AS is available for an IP this field will be omitted.
+          type: string
+        asn:
+          description: The ASN the IP belongs to. If no ASN is available for an IP this field will be omitted.
+          type: integer
+          format: int64
+        automated_score:
+          description: The score of the ip. If the ip is inactive or hasn't been scanned yet this field will be absent
+          type: integer
+          format: int64
+        country:
+          description: The country the IP belongs to. If no country is available for an IP this field will be omitted.
+          type: string
+        ip:
+          description: The IP.
+          type: string
+        labels:
+          description: The labels associated with the IP.
+          type: array
+          items:
+            type: string
+        owner:
+          description: The owner of the IP.
+          type: string
+        services:
+          description: The list of discovered services IP. If no services were detected for the IP this field will be omitted.
+          type: array
+          items:
+            type: string
+        sources:
+          description: The sources of the IP.
+          type: array
+          items:
+            $ref: '#/components/schemas/IPSource'
+    Property:
+      type: object
+      properties:
+        property:
+          description: The name of the property
+          type: string
+        value:
+          description: The value of the property
+          type: string
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
     CheckResult:
       type: object
       properties:
@@ -457,121 +628,6 @@ components:
         title:
           description: The title of the check
           type: string
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
-    GetIpDetailsV1RespBody:
-      type: object
-      properties:
-        as_name:
-          description: The name of the AS the IP belongs to. If no AS is available for an IP this field will be omitted.
-          type: string
-        asn:
-          description: The ASN the IP belongs to. If no ASN is available for an IP this field will be omitted.
-          type: integer
-          format: int64
-        automated_score:
-          description: The score of the ip. If the ip is inactive or hasn't been scanned yet this field will be absent
-          type: integer
-          format: int64
-        check_results:
-          description: The results of the IP scan. This field will be omitted if the IP has not been scanned or no results are available, e.g. DNS source IP.
-          type: array
-          items:
-            $ref: '#/components/schemas/CheckResult'
-        country:
-          description: The country the IP belongs to. If no country is available for an IP this field will be omitted.
-          type: string
-        domains:
-          description: The list of domains associated with this IP. This field will be omitted if no domains are associated with the IP.
-          type: array
-          items:
-            $ref: '#/components/schemas/DomainScore'
-        ip:
-          description: The IP.
-          type: string
-        labels:
-          description: The labels associated with the IP.
-          type: array
-          items:
-            type: string
-        owner:
-          description: The owner of the IP.
-          type: string
-        services:
-          description: The list of discovered services IP. If no services were detected for the IP this field will be omitted.
-          type: array
-          items:
-            type: string
-        sources:
-          description: The sources of the IP.
-          type: array
-          items:
-            $ref: '#/components/schemas/IPSource'
-        waived_check_results:
-          description: The waived risks for this IP. This field will be omitted if no waived risks are present.
-          type: array
-          items:
-            $ref: '#/components/schemas/CheckResult'
-    IP:
-      type: object
-      properties:
-        as_name:
-          description: The name of the AS the IP belongs to. If no AS is available for an IP this field will be omitted.
-          type: string
-        asn:
-          description: The ASN the IP belongs to. If no ASN is available for an IP this field will be omitted.
-          type: integer
-          format: int64
-        automated_score:
-          description: The score of the ip. If the ip is inactive or hasn't been scanned yet this field will be absent
-          type: integer
-          format: int64
-        country:
-          description: The country the IP belongs to. If no country is available for an IP this field will be omitted.
-          type: string
-        ip:
-          description: The IP.
-          type: string
-        labels:
-          description: The labels associated with the IP.
-          type: array
-          items:
-            type: string
-        owner:
-          description: The owner of the IP.
-          type: string
-        services:
-          description: The list of discovered services IP. If no services were detected for the IP this field will be omitted.
-          type: array
-          items:
-            type: string
-        sources:
-          description: The sources of the IP.
-          type: array
-          items:
-            $ref: '#/components/schemas/IPSource'
-    GetIPsV1RespBody:
-      type: object
-      properties:
-        ips:
-          description: The list of ips
-          type: array
-          items:
-            $ref: '#/components/schemas/IP'
-        next_page_token:
-          description: 'The token to be used to retrieve the next page of results.
-
-            Will not be returned if there are no more results.'
-          type: string
-        total_results:
-          description: The total number of ips found.
-          type: integer
-          format: int64
     GetRangesV1RespBody:
       type: object
       properties:
@@ -589,66 +645,10 @@ components:
           description: The total number of ranges found.
           type: integer
           format: int64
-    ApiRange:
-      type: object
-      properties:
-        as_name:
-          description: The name of the AS the range belongs to. If no AS is available for a range this field will be omitted.
-          type: string
-        asn:
-          description: The ASN the range belongs to. If no ASN is available for a range this field will be omitted.
-          type: integer
-          format: int64
-        country:
-          description: The country the range belongs to. If no country is available for a range this field will be omitted.
-          type: string
-        end:
-          description: The range end.
-          type: string
-        labels:
-          description: The labels associated with the range.
-          type: array
-          items:
-            type: string
-        num_ips:
-          description: The number of IPs in this range
-          type: integer
-          format: int64
-        owner:
-          description: The owner of the range.
-          type: string
-        sources:
-          description: The sources of the range.
-          type: array
-          items:
-            $ref: '#/components/schemas/IPSource'
-        start:
-          description: The range start.
-          type: string
-    IPSource:
+    Category:
+      description: Category values cannot be changed after first use, as they're referenced in storage.
       type: string
-    DomainScore:
-      type: object
-      properties:
-        automated_score:
-          description: The score of the domain
-          type: integer
-          format: int64
-        hostname:
-          description: The hostname of the domain
-          type: string
-    Severity:
-      type: integer
-      format: int64
-    Property:
-      type: object
-      properties:
-        property:
-          description: The name of the property
-          type: string
-        value:
-          description: The value of the property
-          type: string
+      title: Category values represent risk categories.
   securitySchemes:
     API_key_in_header:
       type: apiKey
