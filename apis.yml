@@ -45,7 +45,7 @@ x-tier: enriched
 x-tier-reason: cyberrisk-api-provider
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-10-06'
 tags:
 - Company
 - Cybersecurity
@@ -346,6 +346,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- url: https://www.upguard.com/blog/rss.xml
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/upguard-capability-edges.yml
   name: UpGuard Business Capability Map
