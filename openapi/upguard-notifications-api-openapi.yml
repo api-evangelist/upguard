@@ -57,6 +57,24 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
+    GetNotificationsV1ResponsePayloadBody:
+      type: object
+      properties:
+        next_page_token:
+          description: The token to be used to retrieve the next page of results. The field will be missing if there are no results.
+          type: string
+        notifications:
+          description: The list of notifications.
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
     Notification:
       type: object
       properties:
@@ -81,24 +99,6 @@ components:
           description: The type of the notification.
           type: string
           example: RiskAssessmentPublished
-    GetNotificationsV1ResponsePayloadBody:
-      type: object
-      properties:
-        next_page_token:
-          description: The token to be used to retrieve the next page of results. The field will be missing if there are no results.
-          type: string
-        notifications:
-          description: The list of notifications.
-          type: array
-          items:
-            $ref: '#/components/schemas/Notification'
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
-          type: string
   securitySchemes:
     API_key_in_header:
       type: apiKey

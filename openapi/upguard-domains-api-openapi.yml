@@ -318,9 +318,6 @@ paths:
                 $ref: '#/components/schemas/endpointError'
 components:
   schemas:
-    Severity:
-      type: integer
-      format: int64
     GetDomainsV1RespBody:
       type: object
       properties:
@@ -371,13 +368,6 @@ components:
           type: string
         value:
           description: The value of the property
-          type: string
-    endpointError:
-      description: Error details coming from an endpoint
-      type: object
-      properties:
-        error:
-          description: A description of the error
           type: string
     CheckResult:
       type: object
@@ -437,6 +427,9 @@ components:
         title:
           description: The title of the check
           type: string
+    Severity:
+      type: integer
+      format: int64
     Category:
       description: Category values cannot be changed after first use, as they're referenced in storage.
       type: string
@@ -475,6 +468,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CheckResult'
+    endpointError:
+      description: Error details coming from an endpoint
+      type: object
+      properties:
+        error:
+          description: A description of the error
+          type: string
   securitySchemes:
     API_key_in_header:
       type: apiKey
